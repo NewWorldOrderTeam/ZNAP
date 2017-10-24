@@ -1,15 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from rest_framework.fields import CharField, EmailField, SerializerMethodField
+from rest_framework.authtoken.models import Token
+from rest_framework.fields import CharField, EmailField, SerializerMethodField, IntegerField, BooleanField
 
-
+from userapi.models import Rate
 
 User = get_user_model()
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    friends = SerializerMethodField()
-    friends_requests = SerializerMethodField()
     class Meta:
         model = User
         fields = ('url', 'id', 'first_name', 'last_name', 'email')
@@ -65,6 +64,39 @@ class UserLoginSerializer(serializers.ModelSerializer):
         if user_obj:
             if not user_obj.check_password(password):
                 raise serializers.ValidationError("Incorrect password")
-
         return data
 
+class RateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rate
+        fields = ('user_id', 'rate', 'description', 'timeStamp')
+
+class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
+    user_id = IntegerField()
+    rate = IntegerField()
+    description = CharField(allow_blank=True)
+    timestamp = BooleanField()
+    class Meta:
+        model = Rate
+        fields = ('user_id', 'rate', 'description', 'timestamp')
+
+    def validate(self, data):
+        user_id = data['user_id']
+        user_qs = User.objects.filter(id=user_id)
+        if not user_qs.exists():
+            raise serializers.ValidationError("This user has not already registered")
+        return data
+
+    def create(self, validated_data):
+        user_id = validated_data['user_id']
+        rate = validated_data['rate']
+        description = validated_data['description']
+        timestamp = validated_data['timestamp']
+        rate_obj = Rate(
+            user_id=user_id,
+            rate=rate,
+            description=description,
+            timeStamp=timestamp
+        )
+        rate_obj.save()
+        return validated_data

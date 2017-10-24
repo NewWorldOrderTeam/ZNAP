@@ -5,8 +5,10 @@ from django.db import models
 
 # Create your models here
 
+
 class Rate(models.Model):
-    user_id = models.ForeignKey(User)
+    user = models.ForeignKey(User)
     rate = models.IntegerField()
     description = models.CharField(default=None, max_length=228)
     timeStamp = models.BooleanField()
+
