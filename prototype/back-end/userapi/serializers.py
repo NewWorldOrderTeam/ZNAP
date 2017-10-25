@@ -69,16 +69,15 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class RateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rate
-        fields = ('user_id', 'rate', 'description', 'timeStamp')
+        fields = ('user_id', 'rate', 'description')
 
 class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
     user_id = IntegerField()
     rate = IntegerField()
     description = CharField(allow_blank=True)
-    timestamp = BooleanField()
     class Meta:
         model = Rate
-        fields = ('user_id', 'rate', 'description', 'timestamp')
+        fields = ('user_id', 'rate', 'description')
 
     def validate(self, data):
         user_id = data['user_id']
@@ -91,12 +90,10 @@ class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
         user_id = validated_data['user_id']
         rate = validated_data['rate']
         description = validated_data['description']
-        timestamp = validated_data['timestamp']
         rate_obj = Rate(
             user_id=user_id,
             rate=rate,
             description=description,
-            timeStamp=timestamp
         )
         rate_obj.save()
         return validated_data
