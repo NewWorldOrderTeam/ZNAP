@@ -85,12 +85,11 @@ class ChoicesField(serializers.Field):
 
 class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
     user_id = IntegerField()
-    rate = IntegerField()
     description = CharField(allow_blank=True)
     quality = ChoicesField(choices=Rate.QUALITY,default=Rate.QUALITY.Good)
     class Meta:
         model = Rate
-        fields = ('user_id', 'rate', 'description','quality')
+        fields = ('user_id', 'description','quality')
 
     def validate(self, data):
         user_id = data['user_id']
@@ -101,12 +100,10 @@ class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         user_id = validated_data['user_id']
-        rate = validated_data['rate']
         description = validated_data['description']
         quality=validated_data['quality']
         rate_obj = Rate(
             user_id=user_id,
-            rate=rate,
             description=description,
             quality=quality,
         )
