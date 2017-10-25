@@ -71,13 +71,26 @@ class RateSerializer(serializers.ModelSerializer):
         model = Rate
         fields = ('user_id', 'rate', 'description')
 
+class ChoicesField(serializers.Field):
+    def __init__(self, choices, **kwargs):
+        self._choices = choices
+        super(ChoicesField, self).__init__(**kwargs)
+
+    def to_representation(self, obj):
+        return self._choices[obj]
+
+    def to_internal_value(self, data):
+        return getattr(self._choices, data)
+
+
 class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
     user_id = IntegerField()
     rate = IntegerField()
     description = CharField(allow_blank=True)
+    quality = ChoicesField(choices=Rate.QUALITY,default=Rate.QUALITY.Good)
     class Meta:
         model = Rate
-        fields = ('user_id', 'rate', 'description')
+        fields = ('user_id', 'rate', 'description','quality')
 
     def validate(self, data):
         user_id = data['user_id']
@@ -90,10 +103,12 @@ class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
         user_id = validated_data['user_id']
         rate = validated_data['rate']
         description = validated_data['description']
+        quality=validated_data['quality']
         rate_obj = Rate(
             user_id=user_id,
             rate=rate,
             description=description,
+            quality=quality,
         )
         rate_obj.save()
         return validated_data
