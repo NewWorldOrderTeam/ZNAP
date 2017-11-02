@@ -17,8 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
 
-from userapi.views import UserCreateAPIView, UserLoginAPIView, RateCreateAPIView, UserViewSet, RateViewSet
-
+from userapi.views import UserCreateAPIView, UserLoginAPIView, RateCreateAPIView, UserViewSet, RateViewSet, \
+    AdminLoginAPIView
 
 router = routers.DefaultRouter()
 router.register(r'user',UserViewSet)
@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework') ),
     url(r'^api/v1.0/register/', UserCreateAPIView.as_view(), name='register'),
     url(r'^api/v1.0/login/', UserLoginAPIView.as_view(), name='login'),
+    url(r'^api/v1.0/adminlogin/', AdminLoginAPIView.as_view(), name='adminlogin'),
     url(r'^api/v1.0/addrate/', RateCreateAPIView.as_view(), name='create rate'),
 ]

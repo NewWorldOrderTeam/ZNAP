@@ -6,7 +6,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 
 from userapi.models import Rate
-from userapi.serializers import UserSerializer, RateSerializer, RateCreateSerializer
+from userapi.serializers import UserSerializer, RateSerializer, RateCreateSerializer, AdminLoginSerializer
 from .serializers import UserCreateSerializer, UserLoginSerializer
 from rest_framework.generics import CreateAPIView, UpdateAPIView
 from rest_framework.response import Response
@@ -31,6 +31,18 @@ class UserLoginAPIView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
         serializer = UserLoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            new_data = serializer.data
+            return Response(new_data, status=HTTP_200_OK)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+class AdminLoginAPIView(APIView):
+    permission_classes = [AllowAny]
+    serializer_class = AdminLoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = AdminLoginSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             new_data = serializer.data
             return Response(new_data, status=HTTP_200_OK)
