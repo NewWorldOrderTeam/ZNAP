@@ -24,6 +24,7 @@ router = routers.DefaultRouter()
 router.register(r'user',UserViewSet)
 router.register(r'rate', RateViewSet)
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1.0/', include(router.urls)),

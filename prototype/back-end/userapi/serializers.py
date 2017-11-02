@@ -3,10 +3,15 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.fields import CharField, EmailField, SerializerMethodField, IntegerField, BooleanField
+from rest_framework.test import APIRequestFactory
 
-from userapi.models import Rate, Admin
+from userapi.models import Admin, Dialog, Rate
 
 User = get_user_model()
+
+
+factory = APIRequestFactory()
+request = factory.get('/')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -67,9 +72,15 @@ class UserLoginSerializer(serializers.ModelSerializer):
         return data
 
 class RateSerializer(serializers.ModelSerializer):
+    dialog = SerializerMethodField()
     class Meta:
         model = Rate
-        fields = ('user_id', 'rate', 'description')
+        fields = ('user_id', 'admin_id', 'quality', 'description', 'dialog')
+
+    def get_dialog(self, obj):
+        d_qs = Dialog.objects.filter(dialog_id=obj.id)
+        dialog = DialogSerializer(d_qs, many=True, context={'request': request}).data
+        return dialog
 
 class ChoicesField(serializers.Field):
     def __init__(self, choices, **kwargs):
@@ -86,7 +97,7 @@ class ChoicesField(serializers.Field):
 class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
     user_id = IntegerField()
     description = CharField(allow_blank=True)
-    quality = ChoicesField(choices=Rate.QUALITY,default=Rate.QUALITY.Good)
+    quality = IntegerField()
     class Meta:
         model = Rate
         fields = ('user_id', 'description','quality')
@@ -104,10 +115,18 @@ class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
         quality=validated_data['quality']
         rate_obj = Rate(
             user_id=user_id,
-            description=description,
             quality=quality,
+            description=description,
+            is_closed=False
         )
         rate_obj.save()
+
+        chat_obj = Dialog(
+            dialog_id=rate_obj.id,
+            message=description
+        )
+
+        chat_obj.save()
         return validated_data
 
 class AdminLoginSerializer(serializers.ModelSerializer):
@@ -131,3 +150,9 @@ class AdminLoginSerializer(serializers.ModelSerializer):
             if (password!=admin_obj.password):
                 raise serializers.ValidationError("Incorrect password")
         return data
+
+
+class DialogSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Dialog
+        fields = ('message', 'timeStamp')
