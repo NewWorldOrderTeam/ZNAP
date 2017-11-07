@@ -38,7 +38,7 @@
         android:layout_below="@+id/bSignUp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="9dp"
-        android:text="Залогуватися"
+        android:text="Увійти"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp" />
 
