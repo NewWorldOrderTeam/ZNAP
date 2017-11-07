@@ -33,8 +33,8 @@ public class Services {
 
         return null;
     }
-    public Response SignUp(String firstName, String lastName, String email, String password){
-        Call<User> call = service.signUp(firstName, lastName, email, password);
+    public Response SignUp(String firstName, String lastName, String middleName, String telephoneNumber, String email, String password){
+        Call<User> call = service.signUp(firstName, lastName, middleName, telephoneNumber, email, password);
         try {
             Response response = call.execute();
             // call.execute();

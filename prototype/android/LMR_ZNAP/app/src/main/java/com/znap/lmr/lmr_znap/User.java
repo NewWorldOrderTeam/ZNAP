@@ -15,5 +15,9 @@ public class User {
     private String firstName;
     @Expose
     private String lastName;
+    @Expose
+    private String middleName;
+    @Expose
+    private String telephoneNumber;
 }
 

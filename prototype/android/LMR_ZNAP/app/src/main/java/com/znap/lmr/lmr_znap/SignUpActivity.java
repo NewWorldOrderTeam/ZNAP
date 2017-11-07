@@ -25,12 +25,16 @@ public class SignUpActivity extends AppCompatActivity {
     EditText etPassword;
     EditText etFirstName;
     EditText etLastName;
+    EditText etMiddleName;
+    EditText etTelephoneNumber;
     Button bSignUp;
     TextView tSignOnLink;
     String email;
     String password;
     String firstName;
     String lastName;
+    String middleName;
+    String telephoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
+        etMiddleName = (EditText)findViewById(R.id.etMiddleName);
+        etTelephoneNumber =(EditText) findViewById(R.id.etTelephoneNumber);
         bSignUp = (Button) findViewById(R.id.bSignUp);
         tSignOnLink = (TextView) findViewById(R.id.tSignUpLink);
 
@@ -87,7 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.SignUp(firstName, lastName, email, password);
+            Response response = services.SignUp(firstName, lastName, middleName, telephoneNumber, email, password);
             System.out.println(response.toString());
             return response.toString();
         }
