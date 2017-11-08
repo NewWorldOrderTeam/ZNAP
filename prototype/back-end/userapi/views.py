@@ -5,8 +5,8 @@ from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 
-from userapi.models import Rate, UserProfile
-from userapi.serializers import UserSerializer, RateSerializer, RateCreateSerializer, AdminLoginSerializer
+from userapi.models import UserProfile
+from userapi.serializers import UserSerializer
 from .serializers import UserCreateSerializer, UserLoginSerializer
 from rest_framework.generics import CreateAPIView, UpdateAPIView
 from rest_framework.response import Response
@@ -36,23 +36,6 @@ class UserLoginAPIView(APIView):
             return Response(new_data, status=HTTP_200_OK)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
-class AdminLoginAPIView(APIView):
-    permission_classes = [AllowAny]
-    serializer_class = AdminLoginSerializer
-
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        serializer = AdminLoginSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
-            new_data = serializer.data
-            return Response(new_data, status=HTTP_200_OK)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
-class RateViewSet(viewsets.ModelViewSet):
-    queryset = Rate.objects.all()
-    serializer_class = RateSerializer
 
-class RateCreateAPIView(CreateAPIView):
-    serializer_class = RateCreateSerializer
-    queryset = Rate.objects.all()

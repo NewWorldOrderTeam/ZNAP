@@ -6,29 +6,6 @@ import datetime
 
 # Create your models here
 
-class Admin(models.Model):
-    email = models.EmailField()
-    password = models.CharField(max_length=50)
-    def __str__(self):
-        return str(self.email)
-
-
-class Rate(models.Model):
-    user = models.ForeignKey(User)
-    admin = models.ForeignKey(Admin,default=None, null=True)
-    quality = models.IntegerField()
-    TYPE = Choices(
-        ('1', '1')
-    )
-    description = models.CharField(max_length=200)
-    type = models.CharField(max_length=1, choices=TYPE)
-    is_closed = models.BooleanField()
-
-class Dialog(models.Model):
-    dialog = models.ForeignKey(Rate)
-    message = models.CharField(max_length=200)
-    timeStamp = models.DateTimeField(default=datetime.datetime.now())
-
 class UserProfile(User):
     phone = models.CharField(max_length=15)
     middle_name = models.CharField(max_length=50)

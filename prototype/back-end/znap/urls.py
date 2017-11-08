@@ -17,8 +17,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
 
-from userapi.views import UserCreateAPIView, UserLoginAPIView, RateCreateAPIView, UserViewSet, RateViewSet, \
-    AdminLoginAPIView
+from adminapi.views import AdminLoginAPIView
+from rateapi.views import RateViewSet, RateCreateAPIView
+from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'user',UserViewSet)
