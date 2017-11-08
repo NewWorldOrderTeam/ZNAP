@@ -5,9 +5,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework.fields import CharField, EmailField, SerializerMethodField, IntegerField, BooleanField
 from rest_framework.test import APIRequestFactory
 
-from userapi.models import Admin, Dialog, Rate
+from userapi.models import Admin, Dialog, Rate, UserProfile
 
-User = get_user_model()
+
 
 
 factory = APIRequestFactory()
@@ -15,21 +15,23 @@ request = factory.get('/')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ('url', 'id', 'first_name', 'last_name', 'email')
+        model = UserProfile
+        fields = ('url', 'id', 'first_name', 'last_name', 'middle_name', 'email', 'phone')
 
 class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     first_name = CharField()
     last_name = CharField()
+    middle_name = CharField()
     email = EmailField(label='Email')
+    phone = CharField()
     class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'email', 'password']
+        model = UserProfile
+        fields = ['first_name', 'last_name', 'middle_name', 'email', 'password', 'phone']
         extra_kwargs = {"password" : {"write_only": True}}
 
     def validate(self, data):
         email = data['email']
-        user_qs = User.objects.filter(email=email)
+        user_qs = UserProfile.objects.filter(email=email)
         if user_qs.exists():
             raise serializers.ValidationError("This user has already registered")
         return data
@@ -37,13 +39,17 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         first_name = validated_data['first_name']
         last_name = validated_data['last_name']
+        middle_name = validated_data['middle_name']
         email = validated_data['email']
+        phone = validated_data['phone']
         password = validated_data['password']
-        user_obj = User(
+        user_obj = UserProfile(
             username = email,
             first_name = first_name,
             last_name = last_name,
+            middle_name = middle_name,
             email = email,
+            phone=phone
         )
         user_obj.set_password(password)
         user_obj.save()
@@ -52,7 +58,7 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
 class UserLoginSerializer(serializers.ModelSerializer):
     email = EmailField(label= 'Email')
     class Meta:
-        model = User
+        model = UserProfile
         fields = ['email', 'password',]
         extra_kwargs = {"password" : {"write_only": True}}
 
@@ -60,7 +66,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
         user_obj = None
         email = data.get("email", None)
         password = data['password']
-        user = User.objects.filter(email = email)
+        user = UserProfile.objects.filter(email = email)
         user = user.exclude(email__isnull = True).exclude(email__iexact = '')
         if user.exists() and user.count()==1:
             user_obj = user.first()

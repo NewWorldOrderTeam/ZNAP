@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 
-from userapi.models import Rate
+from userapi.models import Rate, UserProfile
 from userapi.serializers import UserSerializer, RateSerializer, RateCreateSerializer, AdminLoginSerializer
 from .serializers import UserCreateSerializer, UserLoginSerializer
 from rest_framework.generics import CreateAPIView, UpdateAPIView
@@ -17,12 +17,12 @@ from rest_framework.views import APIView
 # Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = UserProfile.objects.all()
     serializer_class = UserSerializer
 
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
-    queryset = User.objects.all()
+    queryset = UserProfile.objects.all()
 
 class UserLoginAPIView(APIView):
     permission_classes = [AllowAny]

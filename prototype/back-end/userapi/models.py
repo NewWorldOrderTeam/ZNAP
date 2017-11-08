@@ -29,5 +29,10 @@ class Dialog(models.Model):
     message = models.CharField(max_length=200)
     timeStamp = models.DateTimeField(default=datetime.datetime.now())
 
+class UserProfile(User):
+    phone = models.CharField(max_length=15)
+    middle_name = models.CharField(max_length=50)
+
+
 
 
