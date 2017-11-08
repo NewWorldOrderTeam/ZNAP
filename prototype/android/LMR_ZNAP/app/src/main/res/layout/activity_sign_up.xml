@@ -11,25 +11,25 @@
         android:layout_width="320dp"
         android:layout_height="45dp"
         android:ems="10"
-        android:hint="email"
+        android:hint="Email"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="15dp"
-        android:layout_marginTop="9dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/etTelephoneNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
 
     <Button
         android:id="@+id/bSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etLastName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
-        android:text="Sign Up"
+        android:text="Зареєструватися"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="105dp" />
+        tools:layout_editor_absoluteY="105dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/etPassword"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/tSignUpLink"
@@ -38,7 +38,7 @@
         android:layout_below="@+id/bSignUp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="9dp"
-        android:text="Sign In"
+        android:text="Увійти"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp" />
 
@@ -47,37 +47,63 @@
         android:layout_width="320dp"
         android:layout_height="45dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="Пароль"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp"
-        android:layout_below="@+id/etEmail"
+        android:layout_below="@+id/etTelephoneNumber"
         android:layout_alignLeft="@+id/etEmail"
-        android:layout_alignStart="@+id/etEmail" />
+        android:layout_alignStart="@+id/etEmail"
+        android:layout_marginTop="77dp" />
 
     <EditText
         android:id="@+id/etFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/etPassword"
-        android:layout_alignLeft="@+id/etPassword"
-        android:layout_alignRight="@+id/etPassword"
-        android:layout_alignStart="@+id/etPassword"
-        android:layout_below="@+id/etPassword"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
         android:ems="10"
-        android:hint="first name"
-        android:inputType="textPersonName" />
+        android:hint="Ім'я"
+        android:inputType="textPersonName"
+        android:layout_marginTop="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/etTelephoneNumber"
+        android:layout_alignStart="@+id/etTelephoneNumber" />
 
     <EditText
         android:id="@+id/etLastName"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Прізвище"
+        android:inputType="textPersonName"
+        android:layout_alignTop="@+id/etFirstName"
+        android:layout_alignRight="@+id/etTelephoneNumber"
+        android:layout_alignEnd="@+id/etTelephoneNumber" />
+
+    <EditText
+        android:id="@+id/etMiddleName"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="По-батькові"
+        android:inputType="textPersonName"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/etFirstName"
+        android:layout_alignLeft="@+id/etFirstName"
+        android:layout_alignStart="@+id/etFirstName"
+        android:layout_alignRight="@+id/etLastName"
+        android:layout_alignEnd="@+id/etLastName" />
+
+    <EditText
+        android:id="@+id/etTelephoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/etFirstName"
-        android:layout_alignLeft="@+id/etFirstName"
-        android:layout_alignRight="@+id/etFirstName"
-        android:layout_alignStart="@+id/etFirstName"
-        android:layout_below="@+id/etFirstName"
         android:ems="10"
-        android:hint="last name"
-        android:inputType="textPersonName" />
+        android:hint="Номер телефону"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/etMiddleName"
+        android:layout_alignLeft="@+id/etEmail"
+        android:layout_alignStart="@+id/etEmail"
+        android:layout_marginTop="15dp"
+        android:layout_alignRight="@+id/etEmail"
+        android:layout_alignEnd="@+id/etEmail" />
 </RelativeLayout>

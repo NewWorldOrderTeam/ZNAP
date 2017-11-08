@@ -6,12 +6,24 @@
     android:layout_height="match_parent"
     tools:context="com.znap.lmr.lmr_znap.SignInActivity">
 
+
+    <ImageView
+        android:id="@+id/znap_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src ="@drawable/znap_logo"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="320dp"
         android:layout_height="45dp"
         android:ems="10"
-        android:hint="email"
+        android:hint="Email"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="15dp"
@@ -23,7 +35,7 @@
         android:id="@+id/bSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In"
+        android:text="Увійти"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="105dp"
@@ -36,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:text="Sign Up"
+        android:text="Зареєструватися"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp"
         android:layout_below="@+id/bSignIn"
@@ -47,7 +59,7 @@
         android:layout_width="320dp"
         android:layout_height="45dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="Пароль"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp"
