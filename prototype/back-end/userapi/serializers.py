@@ -75,7 +75,7 @@ class RateSerializer(serializers.ModelSerializer):
     dialog = SerializerMethodField()
     class Meta:
         model = Rate
-        fields = ('user_id', 'admin_id', 'quality', 'description', 'dialog')
+        fields = ('user_id', 'admin_id', 'quality', 'description', 'is_closed', 'dialog' )
 
     def get_dialog(self, obj):
         d_qs = Dialog.objects.filter(dialog_id=obj.id)
