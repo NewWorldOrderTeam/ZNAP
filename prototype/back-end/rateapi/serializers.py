@@ -72,3 +72,29 @@ class DialogSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Dialog
         fields = ('message', 'timeStamp')
+
+
+class AddMessageSerializer(serializers.HyperlinkedModelSerializer):
+    dialog_id = IntegerField()
+    message = CharField(allow_blank=True)
+    class Meta:
+        model = Dialog
+        fields = ('dialog_id', 'message')
+
+    def validate(self, data):
+        dialog_id = data['dialog_id']
+        dialog_qs = Rate.objects.filter(id=dialog_id)
+        if not dialog_qs.exists():
+            raise serializers.ValidationError("This dialog has not already created")
+        return data
+
+    def create(self, validated_data):
+        dialog_id= validated_data['dialog_id']
+        message = validated_data['message']
+        dialog_obj = Dialog(
+            dialog_id=dialog_id,
+            message=message
+        )
+        dialog_obj.save()
+
+        return validated_data
