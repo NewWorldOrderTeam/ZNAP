@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-import userapi.models
 
 
 class infoAboutCnap(models.Model):
@@ -8,12 +7,11 @@ class infoAboutCnap(models.Model):
     adress = models.CharField(max_length=250)
 
 class typeOfCnap(models.Model):
-    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=220)
 
 class cnapWithType(models.Model):
-    znap_id = models.ForeignKey(infoAboutCnap)
-    type_id = models.ForeignKey(typeOfCnap)
+    znap = models.ForeignKey(infoAboutCnap)
+    type = models.ForeignKey(typeOfCnap)
     peopleCounter = models.IntegerField()
 
 class historyOfRecords(models.Model):
