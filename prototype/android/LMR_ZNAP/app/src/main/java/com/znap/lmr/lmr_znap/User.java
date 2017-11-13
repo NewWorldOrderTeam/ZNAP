@@ -19,5 +19,7 @@ public class User {
     private String middleName;
     @Expose
     private String telephoneNumber;
+    @Expose
+    private String leaveReview;
 }
 

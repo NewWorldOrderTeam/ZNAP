@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
+
         android:id="@+id/tvLeaveReview"
         android:layout_width="350dp"
         android:layout_height="30dp"
@@ -15,6 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+
+
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,8 +25,10 @@
         android:layout_alignLeft="@+id/tvLeaveReview"
         android:layout_alignStart="@+id/tvLeaveReview">
 
+
+
         <RadioButton
-            android:id="@+id/znap_sq_runok"
+            android:id="@+id/znapSqRunok"
             android:layout_width="138dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/radioGroup"
@@ -32,62 +37,76 @@
             android:layout_marginTop="72dp"
             android:text="ЦНАП пл. Ринок 1" />
 
-        <RadioButton
-        android:id="@+id/znap_str_levutskogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/znap_sq_runok"
-        android:layout_alignStart="@+id/znap_sq_runok"
-        android:layout_below="@+id/znap_sq_runok"
-        android:text="ЦНАП на вул. К. Левицького, 67" />
-
-    <RadioButton
-        android:id="@+id/znap_str_hvulovogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/znap_str_levutskogo"
-        android:layout_alignStart="@+id/znap_str_levutskogo"
-        android:layout_below="@+id/znap_str_levutskogo"
-        android:text="ЦНАП на вул. М. Хвильового, 14а" />
-
-    <RadioButton
-        android:id="@+id/znap_pr_kalunu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioGroup"
-        android:layout_alignStart="@+id/radioGroup"
-        android:layout_below="@+id/znap_str_hvulovogo"
-        android:text="ЦНАП на пр. Ч. Калини, 72а" />
 
 
         <RadioButton
-        android:id="@+id/znap_str_shevchenka"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioGroup"
+            android:id="@+id/znapStrLevutskogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/znapSqRunok"
+            android:layout_alignStart="@+id/znapSqRunok"
+            android:layout_below="@+id/znapSqRunok"
+            android:text="ЦНАП на вул. К. Левицького, 67" />
+
+
+
+        <RadioButton
+            android:id="@+id/znapStrHvulovogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/znapStrLevutskogo"
+            android:layout_alignStart="@+id/znapStrLevutskogo"
+            android:layout_below="@+id/znapStrLevutskogo"
+            android:text="ЦНАП на вул. М. Хвильового, 14а" />
+
+
+
+        <RadioButton
+            android:id="@+id/znapPrKalunu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radioGroup"
             android:layout_alignStart="@+id/radioGroup"
-        android:layout_below="@+id/radioGroup"
-        android:text="ЦНАП на вул. Т. Шевченка, 374 (Рясне)"/>
+            android:layout_below="@+id/znapStrHvulovogo"
+            android:text="ЦНАП на пр. Ч. Калини, 72а" />
 
-    <RadioButton
-        android:id="@+id/znap_str_chuprunku"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/znap_str_shevchenka"
-        android:layout_alignStart="@+id/znap_str_shevchenka"
-        android:layout_below="@+id/znap_str_shevchenka"
-        android:text="ЦНАП на вул. Ген. Чупринки, 85" />
 
-    <RadioButton
-        android:id="@+id/znap_str_vitovskogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/znap_str_chuprunku"
-        android:layout_alignStart="@+id/znap_str_chuprunku"
-        android:layout_below="@+id/znap_str_chuprunku"
-        android:text="ЦНАП на вул. І. Вітовського, 32" />
 
+
+
+        <RadioButton
+            android:id="@+id/znapStrShevchenka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radioGroup"
+            android:layout_alignStart="@+id/radioGroup"
+            android:layout_below="@+id/radioGroup"
+            android:text="ЦНАП на вул. Т. Шевченка, 374 (Рясне)"/>
+
+
+
+        <RadioButton
+            android:id="@+id/znapStrChuprunku"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/znapStrShevchenka"
+            android:layout_alignStart="@+id/znapStrShevchenka"
+            android:layout_below="@+id/znapStrShevchenka"
+            android:text="ЦНАП на вул. Ген. Чупринки, 85" />
+
+
+
+        <RadioButton
+            android:id="@+id/znapStrVitovskogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/znapStrChuprunku"
+            android:layout_alignStart="@+id/znapStrChuprunku"
+            android:layout_below="@+id/znapStrChuprunku"
+            android:text="ЦНАП на вул. І. Вітовського, 32" />
     </RadioGroup>
+
+
 
     <Button
         android:id="@+id/btGoodReview"
@@ -101,6 +120,8 @@
         android:layout_marginTop="12dp"
         android:text=" : )" />
 
+
+
     <Button
         android:id="@+id/btBadReview"
         android:layout_width="wrap_content"
@@ -109,6 +130,8 @@
         android:layout_alignRight="@+id/radioGroup"
         android:layout_alignTop="@+id/btGoodReview"
         android:text=" : (" />
+
+
 
     <EditText
         android:id="@+id/etLeaveReview"
@@ -122,6 +145,8 @@
         android:layout_below="@+id/btGoodReview"
         android:layout_centerHorizontal="true" />
 
+
+
     <Button
         android:id="@+id/btLeaveReview"
         android:layout_width="300dp"
@@ -132,6 +157,9 @@
         android:layout_below="@+id/etLeaveReview"
         android:layout_alignLeft="@+id/etLeaveReview"
         android:layout_alignStart="@+id/etLeaveReview" />
+
+
+
 
 
 </RelativeLayout>

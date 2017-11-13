@@ -83,7 +83,7 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.SignOn(email, password);
+            Response response = services.SignIn(email, password);
             System.out.println(response.toString());
             return response.toString();
         }

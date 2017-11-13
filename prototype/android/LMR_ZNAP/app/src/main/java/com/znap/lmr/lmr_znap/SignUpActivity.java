@@ -57,7 +57,9 @@ public class SignUpActivity extends AppCompatActivity {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
                 firstName = etFirstName.getText().toString();
+                middleName = etMiddleName.getText().toString();
                 lastName = etLastName.getText().toString();
+                telephoneNumber = etTelephoneNumber.getText().toString();
                 Request request = new Request();
                 request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");

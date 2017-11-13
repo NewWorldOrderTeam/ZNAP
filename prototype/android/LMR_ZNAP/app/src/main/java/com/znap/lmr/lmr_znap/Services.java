@@ -19,7 +19,8 @@ public class Services {
             .build();
 
     Request service = retrofit.create(Request.class);
-    public Response SignOn(String email, String password){
+
+    public Response SignIn(String email, String password) {
         Call<User> call = service.signOn(email, password);
         try {
             Response response = call.execute();
@@ -33,8 +34,23 @@ public class Services {
 
         return null;
     }
-    public Response SignUp(String firstName, String lastName, String middleName, String telephoneNumber, String email, String password){
+
+    public Response SignUp(String firstName, String lastName, String middleName, String telephoneNumber, String email, String password) {
         Call<User> call = service.signUp(firstName, lastName, middleName, telephoneNumber, email, password);
+        try {
+            Response response = call.execute();
+            // call.execute();
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Response Rate(String leaveReview) {
+        Call<User> call = service.rate(leaveReview);
         try {
             Response response = call.execute();
             // call.execute();
