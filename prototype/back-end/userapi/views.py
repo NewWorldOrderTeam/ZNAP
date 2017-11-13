@@ -17,10 +17,12 @@ from rest_framework.views import APIView
 # Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     queryset = UserProfile.objects.all()
     serializer_class = UserSerializer
 
 class UserCreateAPIView(CreateAPIView):
+    permission_classes = [AllowAny]
     serializer_class = UserCreateSerializer
     queryset = UserProfile.objects.all()
 
