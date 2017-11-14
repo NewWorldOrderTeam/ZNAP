@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from rest_framework.fields import CharField, EmailField
+from rest_framework.fields import CharField, EmailField, IntegerField
 
 from userapi.models import UserProfile
 
@@ -19,7 +19,7 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     phone = CharField()
     class Meta:
         model = UserProfile
-        fields = ['first_name', 'last_name', 'middle_name', 'email', 'password', 'phone']
+        fields = ['id','first_name', 'last_name', 'middle_name', 'email', 'password', 'phone']
         extra_kwargs = {"password" : {"write_only": True}}
 
     def validate(self, data):
@@ -49,10 +49,10 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         return validated_data
 
 class UserLoginSerializer(serializers.ModelSerializer):
-    email = EmailField(label= 'Email')
+    email = EmailField(label= 'Email', write_only=True)
     class Meta:
         model = UserProfile
-        fields = ['email', 'password',]
+        fields = ['id', 'email', 'password']
         extra_kwargs = {"password" : {"write_only": True}}
 
     def validate(self, data):
@@ -63,6 +63,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
         user = user.exclude(email__isnull = True).exclude(email__iexact = '')
         if user.exists() and user.count()==1:
             user_obj = user.first()
+            data['id']=user_obj.id
         else:
             raise serializers.ValidationError("This email is not valid")
         if user_obj:
