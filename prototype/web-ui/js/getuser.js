@@ -1,10 +1,12 @@
-function getUser(){
+getRate();
+
+function getUser(id){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/", false);
+    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/"+id+"/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
-    users = JSON.parse(xhr.response);
-    console.log(users);
+    user = JSON.parse(xhr.response);
+    return user;
 }
 
 function getRate() {
@@ -15,9 +17,16 @@ function getRate() {
     rates = JSON.parse(xhr.response);
 
     for (var i in rates){
-        console.log(rates[i].description);
-        $('#list').append("<li><p class='dasd'></p> </li>");
-        $('#list li:last .dasd').append(rates[i].description);
+        $('#list').append("<li class='list-group-item'>" +
+            "<h4 class='user'></h4>" +
+            "<h5 class='rate'></h5> " +
+            "</li>");
+        user = getUser(rates[i].user_id);
+        console.log(user);
+        first_name = user.first_name;
+        last_name = user.last_name;
+        $('#list li:last .user').append(first_name+' '+ last_name);
+        $('#list li:last .rate').append(rates[i].description);
+        console.log(rates[i].dialog[0].timeStamp)
     }
-    console.log(rates);
 }
