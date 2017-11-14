@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 public interface Request {
     @FormUrlEncoded
     @POST("/api/v1.0/register/")
-    Call<User> signUp(@Field("first_name") String first_name, @Field("last_name") String last_name, @Field("middle_name") String middle_name, @Field("telephone_number") String telephone_number, @Field("email") String email, @Field("password") String password);
+    Call<User> signUp(@Field("first_name") String first_name, @Field("last_name") String last_name, @Field("middle_name") String middle_name, @Field("phone") String telephone_number, @Field("email") String email, @Field("password") String password);
     @FormUrlEncoded
     @POST("/api/v1.0/login/")
     Call<User> signOn(@Field("email") String email, @Field("password") String password);

@@ -34,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
     String firstName;
     String lastName;
     String middleName;
-    String telephoneNumber;
+    String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
                 firstName = etFirstName.getText().toString();
                 middleName = etMiddleName.getText().toString();
                 lastName = etLastName.getText().toString();
-                telephoneNumber = etTelephoneNumber.getText().toString();
+                phone = etTelephoneNumber.getText().toString();
                 Request request = new Request();
                 request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");
@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.SignUp(firstName, lastName, middleName, telephoneNumber, email, password);
+            Response response = services.SignUp(firstName, lastName, middleName, phone, email, password);
             System.out.println(response.toString());
             return response.toString();
         }
