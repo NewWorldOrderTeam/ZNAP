@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -7,36 +7,70 @@
     android:background="@color/mainBackground"
     android:fitsSystemWindows="true">
 
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <Button
+        android:id="@+id/bQueueState"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:text="Cтан черги"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="39dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/bRecordToZnap"
+        android:layout_alignStart="@+id/bRecordToZnap" />
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/bRecordToZnap"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:textAlignment="center"
+        android:text="Запис до ЦНАП"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/bQueueState"
+        android:layout_centerHorizontal="true" />
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark"
-                android:background="?attr/colorPrimary" />
+    <Button
+        android:id="@+id/bReceptionToOfficial"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:text="Запис на прийом до посадовця"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_below="@+id/bRecordToZnap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp" />
+
+    <Button
+        android:id="@+id/bLeaveReview"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:text="Відгук"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/bReceptionToOfficial"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/bCheck"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:text="Перевірити стан виконання звернення"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_above="@+id/bOwnCabinet"
+        android:layout_alignRight="@+id/bOwnCabinet"
+        android:layout_alignEnd="@+id/bOwnCabinet"
+        android:layout_marginBottom="45dp" />
+
+    <Button
+        android:id="@+id/bOwnCabinet"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="Особистий кабінет"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/bLeaveReview"
+        android:layout_alignEnd="@+id/bLeaveReview"
+        android:layout_marginBottom="49dp" />
 
 
-        </android.support.design.widget.AppBarLayout>
-
-
-    </android.support.design.widget.CoordinatorLayout>
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start" />
-
-
-    <include layout="@layout/activity_information"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-/>
-</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>

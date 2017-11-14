@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вибір ЦНАПу:"
+        android:textSize="20dp"
+        android:id="@+id/tvSpinnerServices"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/spinnerServices"
+        android:layout_alignLeft="@+id/tvSpinnerZnap"
+        android:layout_alignStart="@+id/tvSpinnerZnap" />
+
+    <Spinner
+        android:id="@+id/spinnerServices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:prompt="@string/spinner_title"
+        android:layout_alignTop="@+id/tvSpinnerZnap"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вибір послуг:"
+        android:textSize="20dp"
+        android:id="@+id/tvSpinnerZnap"
+        android:layout_marginTop="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/spinnerServices"
+        android:layout_toStartOf="@+id/spinnerServices" />
+
+    <Spinner
+        android:id="@+id/spinnerZnap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:prompt="@string/spinner_title"
+        android:layout_alignTop="@+id/tvSpinnerServices"
+        android:layout_toRightOf="@+id/tvSpinnerServices"
+        android:layout_toEndOf="@+id/tvSpinnerServices" />
+
+</RelativeLayout>

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">LMR_ZNAP</string>
     <string name="search_title">Search</string>
+    <string name="spinner_title">Вибір послуг</string>
 </resources>

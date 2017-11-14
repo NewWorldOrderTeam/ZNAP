@@ -9,19 +9,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppDefault);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.bLeaveReview).setOnClickListener(new View.OnClickListener(){
+        findViewById(R.id.bLeaveReview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -31,19 +35,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        initToolbar();
-    }
-
-    private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("ЦНАП");
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        findViewById(R.id.bRecordToZnap).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                return false;
+            public void onClick(View view) {
+
+                Intent openRecordToZnapActivity = new Intent(MainActivity.this, RecordToZnapActivity.class);
+
+                startActivity(openRecordToZnapActivity);
             }
         });
 
-        toolbar.inflateMenu(R.menu.menu);
+        findViewById(R.id.bQueueState).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent openQueueStateActivity = new Intent(MainActivity.this, QueueStateActivity.class);
+
+                startActivity(openQueueStateActivity);
+            }
+        });
+
     }
+
 }
+
