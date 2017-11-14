@@ -17,6 +17,6 @@ public interface Request {
     @POST("/api/v1.0/login/")
     Call<User> signOn(@Field("email") String email, @Field("password") String password);
     @FormUrlEncoded
-    @POST("/api/v1.0/rate/")
-    Call<User> rate(@Field("review") String leaveReview);
+    @POST("/api/v1.0/addrate/")
+    Call<User> addrate(@Field("description") String leaveReview);
 }

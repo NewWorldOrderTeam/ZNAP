@@ -12,11 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="center"
-        android:src ="@drawable/znap_logo"
-        android:layout_marginTop="14dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:src ="@drawable/znap_logo" />
 
     <EditText
         android:id="@+id/etEmail"

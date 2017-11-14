@@ -50,7 +50,7 @@ public class Services {
     }
 
     public Response Rate(String leaveReview) {
-        Call<User> call = service.rate(leaveReview);
+        Call<User> call = service.addrate(leaveReview);
         try {
             Response response = call.execute();
             // call.execute();

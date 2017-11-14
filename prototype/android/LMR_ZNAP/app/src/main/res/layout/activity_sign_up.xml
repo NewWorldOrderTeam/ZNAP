@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.znap.lmr.lmr_znap.SignUpActivity">
 
+    <ImageView
+        android:id="@+id/znap_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src ="@drawable/znap_logo" />
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="320dp"
@@ -63,8 +70,8 @@
         android:ems="10"
         android:hint="Ім'я"
         android:inputType="textPersonName"
-        android:layout_marginTop="43dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/znap_logo"
         android:layout_alignLeft="@+id/etTelephoneNumber"
         android:layout_alignStart="@+id/etTelephoneNumber" />
 
