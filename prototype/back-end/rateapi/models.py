@@ -17,6 +17,7 @@ class Rate(models.Model):
         ('1', '1')
     )
     description = models.CharField(max_length=200)
+    numOfTicket = models.IntegerField(null=True)
     type = models.CharField(max_length=1, choices=TYPE)
     is_closed = models.BooleanField()
 

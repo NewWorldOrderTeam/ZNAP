@@ -1,5 +1,8 @@
+from datetime import date
 from django.contrib.auth.models import User
 from django.db import models
+from django.forms import forms
+from django.utils.dateformat import TimeFormat
 
 
 class infoAboutCnap(models.Model):
@@ -12,6 +15,8 @@ class servicesForCNAP(models.Model):
 class cnapWithService(models.Model):
     znap = models.ForeignKey(infoAboutCnap)
     service = models.ForeignKey(servicesForCNAP)
+    dateForRegistration = models.DateField(default=date.today)
+    timeForRegistration = models.TimeField(format('%H:%M'),null=True)
 
 class historyOfRecords(models.Model):
     history = models.ForeignKey(cnapWithService)
