@@ -39,6 +39,18 @@ function getRate() {
         $('#list tr:last .email').append(email);
         $('#list tr:last .phone').append(phone);
 
+        $('#list2').append('<li class="list-group-item" xmlns="http://www.w3.org/1999/html">' +
+            '<div class="row"> ' +
+            '<div class="col-md-6"><h4 class="name"></h4><h6 class="description"></h6></div>' +
+            '<div class="col-md-6 text-right"><h4 class="quality"></h4><h6 class="time"></h6></div>' +
+            '</div>' +
+            '</li>');
+
+        $('#list2 li:last .name').append(first_name+' '+last_name);
+        $('#list2 li:last .quality').append(rates[i].quality);
+        $('#list2 li:last .time').append(rates[i].dialog[0].timeStamp);
+        $('#list2 li:last .description').append(rates[i].description);
+
         console.log(rates[i].dialog[0].timeStamp)
     }
 } 
