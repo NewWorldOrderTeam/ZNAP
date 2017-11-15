@@ -19,11 +19,11 @@ function getRate() {
     for (var i in rates){
         $('#list').append("<tr>" + 
             "<th class='id' scope='row'></th>" +
-            "<td class='name'></td>" +
-            "<td class='middle_name'></td>" +
-            "<td class='second_name'></td>" +
-            "<td class='email'></td>" +
-            "<td class='phone'></td>" +
+            "<th class='name'></th>" +
+            "<th class='middle_name'></th>" +
+            "<th class='last_name'></th>" +
+            "<th class='email'></th>" +
+            "<th class='phone'></th>" +
             "</tr>");
         user = getUser(rates[i].user_id);
         console.log(user);
@@ -32,12 +32,12 @@ function getRate() {
         middle_name = user.middle_name;
         email = user.email;
         phone = user.phone;
-        $('#list th:last .id').append(i);
-        $('#list th:last .name').append(first_name);
-        $('#list th:last .middle_name').append(middle_name);
-        $('#list th:last .last_name').append(last_name);
-        $('#list th:last .email').append(email);
-        $('#list th:last .phone').append(phone);
+        $('#list tr:last .id').append(i);
+        $('#list tr:last .name').append(first_name);
+        $('#list tr:last .middle_name').append(middle_name);
+        $('#list tr:last .last_name').append(last_name);
+        $('#list tr:last .email').append(email);
+        $('#list tr:last .phone').append(phone);
 
         console.log(rates[i].dialog[0].timeStamp)
     }
