@@ -18,12 +18,14 @@ from django.contrib import admin
 from rest_framework import routers
 
 from adminapi.views import AdminLoginAPIView
+from queueapi.views import QueueViewSet, QueueCreateAPIView
 from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView
 from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'user',UserViewSet)
 router.register(r'rate', RateViewSet)
+router.register(r'queue', QueueViewSet)
 
 
 urlpatterns = [
@@ -34,5 +36,6 @@ urlpatterns = [
     url(r'^api/v1.0/login/', UserLoginAPIView.as_view(), name='login'),
     url(r'^api/v1.0/adminlogin/', AdminLoginAPIView.as_view(), name='adminlogin'),
     url(r'^api/v1.0/addrate/', RateCreateAPIView.as_view(), name='create rate'),
-    url(r'^api/v1.0/addmessage/', AddMessageAPIView.as_view(), name='add message')
+    url(r'^api/v1.0/addmessage/', AddMessageAPIView.as_view(), name='add message'),
+    url(r'^api/v1.0/registerToQueue/',QueueCreateAPIView.as_view(), name='register to queue')
 ]
