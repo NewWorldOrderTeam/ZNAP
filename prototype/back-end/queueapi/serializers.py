@@ -1,12 +1,14 @@
-from django.forms import IntegerField, CharField
+import datetime
+from django.forms import CharField, DateField, DateTimeField, BooleanField
 from rest_framework import serializers
-from queueapi.models import cnapWithService, infoAboutCnap, servicesForCNAP
-from django.contrib.auth.models import User
+from queueapi.models import infoAboutCnap, servicesForCNAP, cnapWithService
+from znap import settings
+
 
 class QueueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = infoAboutCnap,servicesForCNAP
-        fields = ('znap','serviceType')
+        model = infoAboutCnap,servicesForCNAP,cnapWithService
+        fields = ('znap','serviceType','date','status')
 
 class ChoicesField(serializers.Field):
      def __init__(self, choices, **kwargs):
@@ -23,15 +25,22 @@ class ChoicesField(serializers.Field):
 class QueueCreateSerializer(serializers.HyperlinkedModelSerializer):
     name = CharField()
     serviceType = ChoicesField(choices=servicesForCNAP.CHOICES, default=servicesForCNAP.CHOICES.Get)
+    date = DateTimeField()
+    status = BooleanField()
+
     class Meta:
         model = infoAboutCnap
-        fields = ['name','serviceType']
+        fields = ['name','serviceType','date','status']
 
     def create(self, validated_data):
         name = validated_data['name']
+        date = validated_data['date']
+
 
         queueObj = infoAboutCnap(
-            name=name
+            name=name,
+            date = date,
+            status=False
         )
         queueObj.save()
         return validated_data

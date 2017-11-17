@@ -1,4 +1,5 @@
-from datetime import date
+from datetime import datetime, date
+
 from django.contrib.auth.models import User
 from django.db import models
 from model_utils import Choices
@@ -7,6 +8,8 @@ from model_utils import Choices
 class infoAboutCnap(models.Model):
     name = models.CharField(max_length=220)
     adress = models.CharField(max_length=250)
+    date = models.DateTimeField(default=datetime.now(), blank=True)
+    status = models.BooleanField()
 
 class servicesForCNAP(models.Model):
     serviceName = models.CharField(max_length=220)
