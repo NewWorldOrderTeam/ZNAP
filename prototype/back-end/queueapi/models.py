@@ -1,8 +1,7 @@
 from datetime import date
 from django.contrib.auth.models import User
 from django.db import models
-from django.forms import forms
-from django.utils.dateformat import TimeFormat
+from model_utils import Choices
 
 
 class infoAboutCnap(models.Model):
@@ -11,6 +10,13 @@ class infoAboutCnap(models.Model):
 
 class servicesForCNAP(models.Model):
     serviceName = models.CharField(max_length=220)
+    CHOICES = Choices(
+        ('Get', 'Отримати довідку'),
+        ('Post', 'Надіслати довідку'),
+    )
+
+    serviceType = models.CharField(max_length=1, choices=CHOICES,default=CHOICES.Get)
+
 
 class cnapWithService(models.Model):
     znap = models.ForeignKey(infoAboutCnap)
