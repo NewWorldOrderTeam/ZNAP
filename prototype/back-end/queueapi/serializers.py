@@ -7,8 +7,8 @@ from znap import settings
 
 class QueueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = infoAboutCnap,servicesForCNAP,cnapWithService
-        fields = ('znap','serviceType','date','status')
+        model = servicesForCNAP
+        fields = ('znap','serviceType','date','service')
 
 class ChoicesField(serializers.Field):
      def __init__(self, choices, **kwargs):
@@ -22,26 +22,21 @@ class ChoicesField(serializers.Field):
         return getattr(self._choices, data)
 
 
-class QueueCreateSerializer(serializers.HyperlinkedModelSerializer):
-    name = CharField()
-    serviceType = ChoicesField(choices=servicesForCNAP.CHOICES, default=servicesForCNAP.CHOICES.Get)
-    date = DateTimeField()
-    status = BooleanField()
-
+class QueueCreateSerializer(serializers.ModelSerializer):
+    serviceType = ChoicesField(choices=servicesForCNAP.typeForServices, default=servicesForCNAP.typeForServices.Get)
+    serviceName = ChoicesField(choices=servicesForCNAP.namesForServices,default=servicesForCNAP.namesForServices.Ратуша)
     class Meta:
-        model = infoAboutCnap
-        fields = ['name','serviceType','date','status']
+        model = cnapWithService
+        fields = ['znap','serviceType','date','status','serviceName']
 
     def create(self, validated_data):
-        name = validated_data['name']
-        date = validated_data['date']
-
-
-        queueObj = infoAboutCnap(
-            name=name,
-            date = date,
+        znap = validated_data['znap']
+        queueObj = cnapWithService(
+            znap=znap,
             status=False
         )
         queueObj.save()
         return validated_data
+
+
 
