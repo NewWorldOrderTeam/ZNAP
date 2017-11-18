@@ -15,15 +15,16 @@ class servicesForCNAP(models.Model):
         ('Ратуша','Ратуша'),
     )
     typeForServices = Choices(
-        ('Get', 'Отримати довідку'),
-        ('Post', 'Надіслати довідку'),
+        ('Post', 'Подати документи'),
+        ('Get', 'Отримати результат'),
+        ('Registrer','Записатись на прийом'),
     )
     serviceName = models.CharField(max_length=1,choices=namesForServices,default=namesForServices.Виговського7)
-    serviceType = models.CharField(max_length=1, choices=typeForServices,default=typeForServices.Get)
+    serviceType = models.CharField(max_length=1, choices=typeForServices,default=typeForServices.Post)
 
 
 class cnapWithService(models.Model):
-    znap = models.ForeignKey(infoAboutCnap)
+    nameOfZnap = models.ForeignKey(infoAboutCnap)
     service = models.ForeignKey(servicesForCNAP,null=True)
     dateForRegistration = models.DateField(default=date.today)
     timeForRegistration = models.TimeField(format('%H:%M'),null=True)
