@@ -1,24 +1,16 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from rest_framework.fields import CharField, SerializerMethodField, IntegerField
-from rest_framework.test import APIRequestFactory
+from rest_framework.fields import CharField, IntegerField
 
 from rateapi.models import Rate, Dialog
 
-factory = APIRequestFactory()
-request = factory.get('/')
+
 
 class RateSerializer(serializers.ModelSerializer):
-    dialog = SerializerMethodField()
     class Meta:
         model = Rate
-        fields = ('id', 'user_id', 'admin_id', 'quality', 'description', 'is_closed', 'dialog' )
-
-    def get_dialog(self, obj):
-        d_qs = Dialog.objects.filter(dialog_id=obj.id)
-        dialog = DialogSerializer(d_qs, many=True, context={'request': request}).data
-        return dialog
+        fields = ('id', 'user_id', 'admin_id', 'quality', 'description', 'is_closed')
 
 class ChoicesField(serializers.Field):
     def __init__(self, choices, **kwargs):
@@ -98,3 +90,5 @@ class AddMessageSerializer(serializers.HyperlinkedModelSerializer):
         dialog_obj.save()
 
         return validated_data
+
+

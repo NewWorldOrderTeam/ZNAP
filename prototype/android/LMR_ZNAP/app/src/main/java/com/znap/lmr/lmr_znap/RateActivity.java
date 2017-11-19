@@ -36,10 +36,11 @@ public class RateActivity extends AppCompatActivity {
     EditText etLeaveReview;
     Button btLeaveReview;
     String leaveReview;
+    boolean GoodReview;
+    boolean BadReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppDefault);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
 

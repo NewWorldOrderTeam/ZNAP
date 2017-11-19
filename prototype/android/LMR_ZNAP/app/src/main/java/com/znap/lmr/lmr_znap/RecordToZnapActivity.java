@@ -22,23 +22,35 @@ public class RecordToZnapActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_to_znap);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerServices);
+        Spinner spinnerZnap = (Spinner) findViewById(R.id.spinnerZnap);
+        Spinner spinnerServices = (Spinner) findViewById(R.id.spinnerServices);
 
         List<String> categories = new ArrayList<String>();
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
-        spinner.setOnItemSelectedListener(this);
+        categories.add("ЦНАП пл.Ринок 1");
+        categories.add("ЦНАП на вул. К. Левицького, 67");
+        categories.add("ЦНАП на вул. М. Хвильового, 14а");
+        categories.add("ЦНАП на пр. Ч. Калини, 72а");
+        categories.add("ЦНАП на вул. Т. Шевченка, 374 (Рясне)");
+        categories.add("ЦНАП на вул. Ген. Чупринки, 85");
+        categories.add("ЦНАП на вул. І. Вітовського, 32");
+        spinnerZnap.setOnItemSelectedListener(this);
+
+        List<String> categoriesServices = new ArrayList<String>();
+        categoriesServices.add("1");
+        categoriesServices.add("2");
+        categoriesServices.add("3");
+        spinnerServices.setOnItemSelectedListener(this);
 
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter <String>(this, android.R.layout.simple_spinner_item, categories);
 
+        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter <String>(this, android.R.layout.simple_spinner_item, categoriesServices);
+
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner.setAdapter(dataAdapter);
+        spinnerZnap.setAdapter(dataAdapter);
+
+        spinnerServices.setAdapter(dataAdapter1);
     }
 
     @Override

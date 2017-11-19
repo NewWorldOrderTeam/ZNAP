@@ -16,16 +16,26 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
+from rest_framework.routers import DefaultRouter
 
 from adminapi.views import AdminLoginAPIView
 from queueapi.views import QueueViewSet, QueueCreateAPIView
-from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView
+from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView, DialogViewSet
 from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet
 
-router = routers.DefaultRouter()
+from rest_framework_extensions.routers import NestedRouterMixin
+
+class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
+    pass
+
+router = NestedDefaultRouter()
 router.register(r'user',UserViewSet)
-router.register(r'rate', RateViewSet)
 router.register(r'queue', QueueViewSet)
+
+dialog_router = router.register('rate', RateViewSet)
+dialog_router.register('dialog', DialogViewSet,
+                       base_name='rate-dialog',
+                       parents_query_lookups=['dialog'])
 
 
 urlpatterns = [
@@ -37,5 +47,5 @@ urlpatterns = [
     url(r'^api/v1.0/adminlogin/', AdminLoginAPIView.as_view(), name='adminlogin'),
     url(r'^api/v1.0/addrate/', RateCreateAPIView.as_view(), name='create rate'),
     url(r'^api/v1.0/addmessage/', AddMessageAPIView.as_view(), name='add message'),
-    url(r'^api/v1.0/registerToQueue/',QueueCreateAPIView.as_view(), name='register to queue')
+    url(r'^api/v1.0/registerToQueue/',QueueCreateAPIView.as_view(), name='register to queue'),
 ]

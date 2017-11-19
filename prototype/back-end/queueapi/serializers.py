@@ -34,6 +34,3 @@ class QueueCreateSerializer(serializers.ModelSerializer):
         )
         queueObj.save()
         return validated_data
-
-
-
