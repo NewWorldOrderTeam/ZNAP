@@ -21,7 +21,7 @@ class ChoicesField(serializers.Field):
 
 class QueueCreateSerializer(serializers.ModelSerializer):
     serviceType = ChoicesField(choices=servicesForCNAP.typeForServices, default=servicesForCNAP.typeForServices.Post)
-    serviceName = ChoicesField(choices=servicesForCNAP.namesForServices,default=servicesForCNAP.namesForServices.Ратуша)
+    serviceName = ChoicesField(choices=servicesForCNAP.namesForServices,default=servicesForCNAP.namesForServices.ОтриматиПаспорт)
     class Meta:
         model = cnapWithService
         fields = ['nameOfZnap','serviceType','date','status','serviceName']
