@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.znap.lmr.lmr_znap.RateActivity">
 
     <TextView
-
         android:id="@+id/tvLeaveReview"
         android:layout_width="350dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:textSize="29dp"
         android:textStyle="normal"
         android:textAlignment="center"
@@ -29,13 +31,13 @@
 
         <RadioButton
             android:id="@+id/znapSqRunok"
-            android:layout_width="138dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/radioGroup"
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/radioGroup"
             android:layout_marginTop="72dp"
-            android:text="ЦНАП пл. Ринок 1" />
+            android:text="ЦНАП пл.Ринок 1" />
 
 
 
@@ -109,6 +111,7 @@
 
 
     <Button
+        android:background="@color/color"
         android:id="@+id/btGoodReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,6 +126,7 @@
 
 
     <Button
+        android:background="@color/color"
         android:id="@+id/btBadReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -139,7 +143,6 @@
         android:layout_height="120dp"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Залиште відгук"
         android:textSize="20dp"
         android:layout_below="@+id/btGoodReview"
@@ -148,18 +151,15 @@
 
 
     <Button
+        android:background="@color/color"
         android:id="@+id/btLeaveReview"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20dp"
         android:text="Залишити відгук"
         android:layout_below="@+id/etLeaveReview"
         android:layout_alignLeft="@+id/etLeaveReview"
         android:layout_alignStart="@+id/etLeaveReview" />
-
-
-
-
 
 </RelativeLayout>

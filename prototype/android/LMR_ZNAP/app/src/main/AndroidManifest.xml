@@ -24,6 +24,8 @@
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".RateActivity"></activity>
+        <activity android:name=".RecordToZnapActivity"></activity>
+        <activity android:name=".QueueStateActivity"></activity>
 
     </application>
 
