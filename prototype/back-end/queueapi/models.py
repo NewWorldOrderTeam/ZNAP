@@ -27,11 +27,9 @@ class servicesForCNAP(models.Model):
 
 
 class cnapWithService(models.Model):
-    nameOfZnap = models.ForeignKey(infoAboutCnap,blank=True,default='qwe')
+    nameOfZnap = models.ForeignKey(infoAboutCnap,blank=True,default='Виговського7')
     service = models.ForeignKey(servicesForCNAP,null=True)
-    dateForRegistration = models.DateField(default=date.today)
-    timeForRegistration = models.TimeField(format('%H:%M'),null=True)
-    date = models.DateTimeField(default=datetime.now(), blank=True)
+    dateOfRegistration = models.DateField(default=datetime.now())
     status = models.BooleanField()
 
 class historyOfRecords(models.Model):
