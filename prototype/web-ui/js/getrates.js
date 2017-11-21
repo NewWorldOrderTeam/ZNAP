@@ -23,7 +23,10 @@ function getRate() {
             "<th class='middle_name'></th>" +
             "<th class='last_name'></th>" +
             "<th class='email'></th>" +
-            "<th class='phone'></th>" +
+            "<th class='phone'></th>" + 
+            "<th class='description' xmlns='http://www.w3.org/1999/html'></th>" +
+            "<th class='quality' xmlns='http://www.w3.org/1999/html'></th>" +
+            "<th class='time' xmlns='http://www.w3.org/1999/html'></th>" +
             "</tr>");
         user = getUser(rates[i].user_id);
         console.log(user);
@@ -32,14 +35,21 @@ function getRate() {
         middle_name = user.middle_name;
         email = user.email;
         phone = user.phone;
+        description = user.description;
+        quality = user.quality;
+        time = user.time;
+        
         $('#list tr:last .id').append(i);
         $('#list tr:last .name').append(first_name);
         $('#list tr:last .middle_name').append(middle_name);
         $('#list tr:last .last_name').append(last_name);
         $('#list tr:last .email').append(email);
         $('#list tr:last .phone').append(phone);
-
-        $('#list2').append('<li class="list-group-item" xmlns="http://www.w3.org/1999/html">' +
+        $('#list li:last .description').append(rates[i].description);
+        $('#list li:last .quality').append(rates[i].quality);
+        $('#list li:last .time').append(rates[i].dialog[0].timeStamp);
+        
+       /* $('#list2').append('<li class="list-group-item" xmlns="http://www.w3.org/1999/html">' +
             '<div class="row"> ' +
             '<div class="col-md-6"><h4 class="name"></h4><h6 class="description"></h6></div>' +
             '<div class="col-md-6 text-right"><h4 class="quality"></h4><h6 class="time"></h6></div>' +
@@ -50,7 +60,9 @@ function getRate() {
         $('#list2 li:last .quality').append(rates[i].quality);
         $('#list2 li:last .time').append(rates[i].dialog[0].timeStamp);
         $('#list2 li:last .description').append(rates[i].description);
-
+*/
         console.log(rates[i].dialog[0].timeStamp)
+        console.log(rates[i].description)
+        console.log(rates[i].quality)
     }
 } 
