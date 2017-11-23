@@ -1,0 +1,21 @@
+USER API:
+
+http://znap.pythonanywhere.com/api/v1.0/user/ - all users
+http://znap.pythonanywhere.com/api/v1.0/user/{user_id} - specific user
+http://znap.pythonanywhere.com/api/v1.0/register/ - new user registration
+http://znap.pythonanywhere.com/api/v1.0/login/ - user login
+http://znap.pythonanywhere.com/api/v1.0/user/{user_id}/rate/ - all specific user rates
+http://znap.pythonanywhere.com/api/v1.0/user/{user_id}/rate/{rate_id}/ - specific rate for specific user
+
+RATE API:
+
+http://znap.pythonanywhere.com/api/v1.0/rate/ - all rates
+http://znap.pythonanywhere.com/api/v1.0/addrate/ - add new rate
+http://znap.pythonanywhere.com/api/v1.0/addmessage/ - add message for specific rate 
+http://znap.pythonanywhere.com/api/v1.0/rate/{rate_id}/ - specific rate
+http://znap.pythonanywhere.com/api/v1.0/rate/{rate_id}/dialog/ - dialog for specific rate
+http://znap.pythonanywhere.com/api/v1.0/rate/{rate_id}/dialog/{message_id}/ - specific message in dialog for specific rate 
+
+ADMIN API:
+
+http://znap.pythonanywhere.com/api/v1.0/adminlogin/ - login for administrators
