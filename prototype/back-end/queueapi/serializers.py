@@ -1,3 +1,4 @@
+# coding=utf-8
 from datetime import datetime, date
 
 from rest_framework import serializers
@@ -26,7 +27,7 @@ class ChoicesField(serializers.Field):
 class QueueCreateSerializer(serializers.ModelSerializer):
     dateOfRegistration = DateField(default=date.today())
     serviceType = ChoicesField(choices=servicesForCNAP.typeForServices, default=servicesForCNAP.typeForServices.Post)
-    serviceName = ChoicesField(choices=servicesForCNAP.namesForServices,default=servicesForCNAP.namesForServices.ОтриматиПаспорт)
+    #serviceName = ChoicesField(choices=servicesForCNAP.namesForServices,default=servicesForCNAP.namesForServices.ОтриматиПаспорт)
     class Meta:
         model = cnapWithService
 
