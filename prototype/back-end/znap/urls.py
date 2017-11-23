@@ -29,13 +29,16 @@ class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
     pass
 
 router = NestedDefaultRouter()
-router.register(r'user',UserViewSet)
 router.register(r'queue', QueueViewSet)
 
 dialog_router = router.register('rate', RateViewSet)
 dialog_router.register('dialog', DialogViewSet,
                        base_name='rate-dialog',
                        parents_query_lookups=['dialog'])
+user_router = router.register('user', UserViewSet)
+user_router.register('rate', RateViewSet,
+                     base_name='user-rate',
+                     parents_query_lookups=['user'])
 
 
 urlpatterns = [
