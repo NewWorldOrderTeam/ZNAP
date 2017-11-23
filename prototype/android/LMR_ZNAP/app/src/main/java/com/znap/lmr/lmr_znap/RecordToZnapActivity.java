@@ -36,9 +36,9 @@ public class RecordToZnapActivity extends AppCompatActivity implements AdapterVi
         spinnerZnap.setOnItemSelectedListener(this);
 
         List<String> categoriesServices = new ArrayList<String>();
-        categoriesServices.add("1");
-        categoriesServices.add("2");
-        categoriesServices.add("3");
+        categoriesServices.add("Подати документи");
+        categoriesServices.add("Отримати результат");
+        categoriesServices.add("Записатися на прийом");
         spinnerServices.setOnItemSelectedListener(this);
 
 

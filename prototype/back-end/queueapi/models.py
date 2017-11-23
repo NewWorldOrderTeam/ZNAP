@@ -1,4 +1,3 @@
-# coding=utf-8
 from datetime import datetime, date
 
 from django.contrib.auth.models import User
@@ -11,7 +10,7 @@ class infoAboutCnap(models.Model):
         ('Виговського7', 'Виговського 7'),
         ('Ратуша', 'Ратуша'),
     )
-    #znapName = models.CharField(max_length=1, choices=namesForZnaps, default=namesForZnaps.Виговського7)
+    znapName = models.CharField(max_length=1, choices=namesForZnaps, default=namesForZnaps.Виговського7)
 
 class servicesForCNAP(models.Model):
     namesForServices = Choices(
@@ -23,16 +22,14 @@ class servicesForCNAP(models.Model):
         ('Get', 'Отримати результат'),
         ('Registrer','Записатись на прийом'),
     )
-    #serviceName = models.CharField(max_length=1,choices=namesForServices,default=namesForServices.ОтриматиПаспорт)
+    serviceName = models.CharField(max_length=1,choices=namesForServices,default=namesForServices.ОтриматиПаспорт)
     serviceType = models.CharField(max_length=1, choices=typeForServices,default=typeForServices.Post)
 
 
 class cnapWithService(models.Model):
-    nameOfZnap = models.ForeignKey(infoAboutCnap,blank=True)
+    nameOfZnap = models.ForeignKey(infoAboutCnap,blank=True,default='Виговського7')
     service = models.ForeignKey(servicesForCNAP,null=True)
-    dateForRegistration = models.DateField(default=date.today)
-    timeForRegistration = models.TimeField(format('%H:%M'),null=True)
-    date = models.DateTimeField(default=datetime.now(), blank=True)
+    dateOfRegistration = models.DateField(default=datetime.now())
     status = models.BooleanField()
 
 class historyOfRecords(models.Model):

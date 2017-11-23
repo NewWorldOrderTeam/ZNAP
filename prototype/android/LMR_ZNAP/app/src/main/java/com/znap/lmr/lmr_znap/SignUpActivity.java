@@ -4,6 +4,7 @@ package com.znap.lmr.lmr_znap;
  * Created by Andy Blyzniuk on 01.11.2017.
  */
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,13 +57,31 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
+                if(etPassword.getText().toString().length()<8 &&!isValidPassword(etPassword.getText().toString())){
+                    System.out.println("Not Valid");
+
+                }else {
+
+                    System.out.println("Valid");
+                }
+
                 firstName = etFirstName.getText().toString();
+                /*if(etFirstName.getText().toString().length()<3 &&!isValidFirstName(etFirstName.getText().toString())){
+                    System.out.println("Not Valid");
+
+                }else {
+
+                    System.out.println("Valid");
+                }
+                */
                 middleName = etMiddleName.getText().toString();
                 lastName = etLastName.getText().toString();
                 phone = etTelephoneNumber.getText().toString();
                 Request request = new Request();
                 request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");
+                Intent signInIntent = new Intent(SignUpActivity.this, SignInActivity.class);
+                SignUpActivity.this.startActivity(signInIntent);
                 try {
                     Matcher matcher = pattern.matcher(request.get());
                     while (matcher.find()){
@@ -106,4 +125,29 @@ public class SignUpActivity extends AppCompatActivity {
             return ;
         }
     }
+
+    public static boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "[a-zA-Z0-9]{8,24}";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
+/*
+    public static boolean isValidFirstName(final String first_name) {
+
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "[А-Яа-я]";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(first_name);
+
+        return matcher.matches();
+
+    }
+    */
 }
