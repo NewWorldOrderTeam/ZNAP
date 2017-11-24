@@ -110,8 +110,7 @@
 
 
 
-    <Button
-        android:background="@color/color"
+    <ImageButton
         android:id="@+id/btGoodReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -121,19 +120,21 @@
         android:layout_marginLeft="36dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="12dp"
-        android:text=" : )" />
+        android:background="@null"
+        android:src="@drawable/bad" />
 
 
-
-    <Button
-        android:background="@color/color"
+    <ImageButton
         android:id="@+id/btBadReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/radioGroup"
-        android:layout_alignRight="@+id/radioGroup"
-        android:layout_alignTop="@+id/btGoodReview"
-        android:text=" : (" />
+        android:layout_above="@+id/etLeaveReview"
+        android:layout_alignEnd="@+id/etLeaveReview"
+        android:layout_alignRight="@+id/etLeaveReview"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@null"
+        android:src="@drawable/bad" />
 
 
 

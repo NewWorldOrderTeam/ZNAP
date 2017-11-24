@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -32,13 +33,11 @@ public class RateActivity extends AppCompatActivity {
     RadioButton znapPrKalunu;
     RadioButton znapStrChuprunku;
     RadioButton znapStrVitovskogo;
-    Button btGoodReview;
-    Button btBadReview;
+    ImageButton btGoodReview;
+    ImageButton btBadReview;
     EditText etLeaveReview;
     Button btLeaveReview;
     String leaveReview;
-    boolean GoodReview;
-    boolean BadReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,8 @@ public class RateActivity extends AppCompatActivity {
         znapStrHvulovogo = (RadioButton) findViewById(R.id.znapStrHvulovogo);
         znapStrVitovskogo = (RadioButton) findViewById(R.id.znapStrVitovskogo);
         znapStrShevchenka = (RadioButton) findViewById(R.id.znapStrShevchenka);
-        btGoodReview = (Button) findViewById(R.id.btGoodReview);
-        btBadReview = (Button) findViewById(R.id.btBadReview);
+        btGoodReview = (ImageButton) findViewById(R.id.btGoodReview);
+        btBadReview = (ImageButton) findViewById(R.id.btBadReview);
         etLeaveReview = (EditText) findViewById(R.id.etLeaveReview);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
 
