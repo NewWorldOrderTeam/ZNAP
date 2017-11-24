@@ -2,6 +2,7 @@ package com.znap.lmr.lmr_znap;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,8 @@ public class RecordToZnapActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_to_znap);
+        getSupportActionBar().setTitle("Запис у ЦНАП");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Spinner spinnerZnap = (Spinner) findViewById(R.id.spinnerZnap);
         Spinner spinnerServices = (Spinner) findViewById(R.id.spinnerServices);
@@ -60,6 +63,16 @@ public class RecordToZnapActivity extends AppCompatActivity implements AdapterVi
 
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onNothingSelected(AdapterView<?> arg0) {

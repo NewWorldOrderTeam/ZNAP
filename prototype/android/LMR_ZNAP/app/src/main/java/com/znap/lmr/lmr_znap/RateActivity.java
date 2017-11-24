@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,7 +44,8 @@ public class RateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
-
+        getSupportActionBar().setTitle("Відгук");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         znapStrLevutskogo = (RadioButton) findViewById(R.id.znapStrLevutskogo);
         znapSqRunok = (RadioButton) findViewById(R.id.znapSqRunok);
@@ -100,6 +102,15 @@ public class RateActivity extends AppCompatActivity {
             super.onPostExecute(result);
             return ;
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LMR_ZNAP.iml" filepath="$PROJECT_DIR$/LMR_ZNAP.iml" />
+      <module fileurl="file://C:\Users\Zava\Desktop\LABI\ZNAP-GIT\ZNAP\prototype\android\LMR_ZNAP\LMR_ZNAP.iml" filepath="C:\Users\Zava\Desktop\LABI\ZNAP-GIT\ZNAP\prototype\android\LMR_ZNAP\LMR_ZNAP.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Zava\Desktop\LABI\ZNAP-GIT\ZNAP\prototype\android\LMR_ZNAP\app\app.iml" filepath="C:\Users\Zava\Desktop\LABI\ZNAP-GIT\ZNAP\prototype\android\LMR_ZNAP\app\app.iml" />
     </modules>
   </component>
 </project>

@@ -2,6 +2,7 @@ package com.znap.lmr.lmr_znap;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import java.util.List;
 
@@ -18,7 +19,18 @@ public class QueueStateActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue_state);
+        getSupportActionBar().setTitle("Стан черги");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
