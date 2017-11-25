@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,44 +58,38 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
-                if(etPassword.getText().toString().length()<8 &&!isValidPassword(etPassword.getText().toString())){
+                if(etPassword.getText().toString().length()<8 &&!isValidPassword(etPassword.getText().toString())||
+                        etFirstName.getText().toString().length()<3 &&!isValidFirstName(etFirstName.getText().toString())||
+                        etLastName.getText().toString().length()<3 &&!isValidLastName(etLastName.getText().toString())||
+                        etMiddleName.getText().toString().length()<3 &&!isValidMiddleName(etMiddleName.getText().toString())){
                     System.out.println("Not Valid");
-
+                    Toast.makeText(getApplicationContext(), "Some data is not entered correctly", Toast.LENGTH_LONG).show();
                 }else {
-
                     System.out.println("Valid");
+                    middleName = etMiddleName.getText().toString();
+                    lastName = etLastName.getText().toString();
+                    phone = etTelephoneNumber.getText().toString();
+                    Request request = new Request();
+                    request.execute();
+                    Pattern pattern = Pattern.compile("message=.*,");
+                    Intent signInIntent = new Intent(SignUpActivity.this, SignInActivity.class);
+                    SignUpActivity.this.startActivity(signInIntent);
+                    try {
+                        Matcher matcher = pattern.matcher(request.get());
+                        while (matcher.find()){
+                            int start = matcher.start()+8;
+                            int end = matcher.end()-1;
+                            String match = request.get().substring(start, end);
+                            Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 firstName = etFirstName.getText().toString();
-                /*if(etFirstName.getText().toString().length()<3 &&!isValidFirstName(etFirstName.getText().toString())){
-                    System.out.println("Not Valid");
-
-                }else {
-
-                    System.out.println("Valid");
-                }
-                */
-                middleName = etMiddleName.getText().toString();
-                lastName = etLastName.getText().toString();
-                phone = etTelephoneNumber.getText().toString();
-                Request request = new Request();
-                request.execute();
-                Pattern pattern = Pattern.compile("message=.*,");
-                Intent signInIntent = new Intent(SignUpActivity.this, SignInActivity.class);
-                SignUpActivity.this.startActivity(signInIntent);
-                try {
-                    Matcher matcher = pattern.matcher(request.get());
-                    while (matcher.find()){
-                        int start = matcher.start()+8;
-                        int end = matcher.end()-1;
-                        String match = request.get().substring(start, end);
-                        Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
             }
         });
         tSignOnLink.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +98,10 @@ public class SignUpActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
+
+
     class Request extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -127,27 +125,36 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public static boolean isValidPassword(final String password) {
-
         Pattern pattern;
         Matcher matcher;
         final String PASSWORD_PATTERN = "[a-zA-Z0-9]{8,24}";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
-
         return matcher.matches();
-
     }
-/*
     public static boolean isValidFirstName(final String first_name) {
-
         Pattern pattern;
         Matcher matcher;
         final String PASSWORD_PATTERN = "[А-Яа-я]";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(first_name);
-
         return matcher.matches();
-
     }
-    */
+    public static boolean isValidLastName(final String last_name) {
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "[А-Яа-я]";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(last_name);
+        return matcher.matches();
+    }
+    public static boolean isValidMiddleName(final String middle_name) {
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "[А-Яа-я]";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(middle_name);
+        return matcher.matches();
+    }
+
 }

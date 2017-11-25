@@ -30,7 +30,6 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bSignOn = (Button) findViewById(R.id.bSignIn);
@@ -51,7 +50,10 @@ public class SignInActivity extends AppCompatActivity {
                         int start = matcher.start()+8;
                         int end = matcher.end()-1;
                         String match = request.get().substring(start, end);
-                        Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
+                        if(match.equals("Bad Request")){
+                            match = "Неправильно введені дані!";
+                            Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
+                        }
                         if (match.equals("OK")){
                             Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                             SignInActivity.this.startActivity(mainIntent);
