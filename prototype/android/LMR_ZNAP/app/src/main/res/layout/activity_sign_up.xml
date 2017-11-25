@@ -8,36 +8,41 @@
 
     <ImageView
         android:id="@+id/znap_logo"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:scaleType="center"
         android:src ="@drawable/znap_logo" />
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etMiddleName"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="15dp"
-        android:layout_below="@+id/etTelephoneNumber"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
+        tools:layout_editor_absoluteY="15dp" />
 
     <Button
-        android:background="@color/color"
         android:id="@+id/bSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etPassword"
+        android:layout_marginTop="9dp"
+        android:layout_weight="1"
         android:text="Зареєструватися"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:theme="@style/PrimaryButton"
         tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="105dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/etPassword"
-        android:layout_centerHorizontal="true" />
+        tools:layout_editor_absoluteY="105dp" />
 
     <TextView
         android:id="@+id/tSignUpLink"
@@ -45,73 +50,74 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bSignUp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="11dp"
         android:text="Увійти"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp" />
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etTelephoneNumber"
+        android:layout_marginTop="18dp"
+        android:layout_weight="1"
         android:ems="10"
         android:hint="Пароль"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="60dp"
-        android:layout_below="@+id/etTelephoneNumber"
-        android:layout_alignLeft="@+id/etEmail"
-        android:layout_alignStart="@+id/etEmail"
-        android:layout_marginTop="77dp" />
+        tools:layout_editor_absoluteY="60dp" />
 
     <EditText
         android:id="@+id/etFirstName"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/znap_logo"
+        android:layout_weight="1"
         android:ems="10"
         android:hint="Ім'я"
-        android:inputType="textPersonName"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/znap_logo"
-        android:layout_alignLeft="@+id/etTelephoneNumber"
-        android:layout_alignStart="@+id/etTelephoneNumber" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etLastName"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etFirstName"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
         android:ems="10"
         android:hint="Прізвище"
-        android:inputType="textPersonName"
-        android:layout_alignTop="@+id/etFirstName"
-        android:layout_alignRight="@+id/etTelephoneNumber"
-        android:layout_alignEnd="@+id/etTelephoneNumber" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etMiddleName"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etLastName"
+        android:layout_marginTop="23dp"
+        android:layout_weight="1"
         android:ems="10"
         android:hint="По-батькові"
-        android:inputType="textPersonName"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/etFirstName"
-        android:layout_alignLeft="@+id/etFirstName"
-        android:layout_alignStart="@+id/etFirstName"
-        android:layout_alignRight="@+id/etLastName"
-        android:layout_alignEnd="@+id/etLastName" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etTelephoneNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etEmail"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
         android:ems="10"
         android:hint="Номер телефону"
-        android:inputType="textPersonName"
-        android:layout_below="@+id/etMiddleName"
-        android:layout_alignLeft="@+id/etEmail"
-        android:layout_alignStart="@+id/etEmail"
-        android:layout_marginTop="15dp"
-        android:layout_alignRight="@+id/etEmail"
-        android:layout_alignEnd="@+id/etEmail" />
+        android:inputType="textPersonName" />
 </RelativeLayout>

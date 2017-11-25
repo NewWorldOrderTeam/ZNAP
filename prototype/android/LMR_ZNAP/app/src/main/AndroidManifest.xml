@@ -22,6 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".MainActivity"
@@ -29,6 +30,7 @@
         <activity android:name=".RateActivity"></activity>
         <activity android:name=".RecordToZnapActivity"></activity>
         <activity android:name=".QueueStateActivity"></activity>
+
     </application>
 
 </manifest>
