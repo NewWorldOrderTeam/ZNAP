@@ -8,6 +8,8 @@ from rateapi.models import Rate, Dialog
 
 
 class RateSerializer(serializers.ModelSerializer):
+    description = CharField(required=False)
+    quality = CharField(required=False)
     class Meta:
         model = Rate
         fields = ('id', 'user_id', 'admin_id', 'quality', 'description', 'is_closed')

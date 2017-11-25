@@ -6,10 +6,10 @@ from adminapi.models import Admin
 
 
 class AdminLoginSerializer(serializers.ModelSerializer):
-    email = EmailField(label= 'Email')
+    email = EmailField(label= 'Email', write_only=True)
     class Meta:
         model = Admin
-        fields = ['email', 'password',]
+        fields = ['id', 'email', 'password',]
         extra_kwargs = {"password" : {"write_only": True}}
 
     def validate(self, data):
@@ -20,6 +20,7 @@ class AdminLoginSerializer(serializers.ModelSerializer):
         admin = admin.exclude(email__isnull = True).exclude(email__iexact = '')
         if admin.exists() and admin.count()==1:
             admin_obj = admin.first()
+            data['id'] = admin_obj.id
         else:
             raise serializers.ValidationError("This email is not valid")
         if admin_obj:
