@@ -26,3 +26,5 @@ public interface Request {
     @GET("/api/v1.0/user/")
     Response getInfo(@Field("first_name") String first_name, @Field("last_name") String last_name, @Field("middle_name") String middle_name, @Field("phone") String telephone_number, @Field("email") String email, Callback<Response> callback);
 }
+
+
