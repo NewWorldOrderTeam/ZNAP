@@ -61,7 +61,7 @@ public class RecordToZnapActivity extends AppCompatActivity implements AdapterVi
 
         String item = parent.getItemAtPosition(position).toString();
 
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        
 
     }
 
