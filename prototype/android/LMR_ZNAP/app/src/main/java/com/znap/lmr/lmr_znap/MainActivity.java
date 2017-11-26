@@ -50,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.bOwnCabinet).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent openQueueStateActivity = new Intent(MainActivity.this, OwnCabinetActivity.class);
+
+                startActivity(openQueueStateActivity);
+            }
+        });
+
     }
 
 }
