@@ -13,4 +13,5 @@ function adminLogin() {
 
     admin_id = JSON.parse(xhr.response).id;
     console.log(admin_id);
+    window.open('index.html');
 }

@@ -1,5 +1,6 @@
 getRate();
 closeRate(1);
+putAdmin(1,1);
 
 function getUser(id){
     var xhr = new XMLHttpRequest();
@@ -80,5 +81,17 @@ function closeRate(id) {
     xhr.open("PUT", "http://localhost:8000/api/v1.0/rate/"+id+"/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(closeRate));
+
+}
+
+
+function putAdmin(admin_id, rate_id) {
+    adminInRate = {
+        admin: admin_id
+    };
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", "http://localhost:8000/api/v1.0/rate/"+rate_id+"/", false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(adminInRate));
 
 }
