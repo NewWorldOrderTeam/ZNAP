@@ -12,7 +12,7 @@ function getUser(id){
 }
 
 function getRate() {
-    console.log(admin_id);
+  //  console.log(admin_id);
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/rate/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -51,9 +51,9 @@ function getRate() {
         $('#list tr:last .last_name').append(last_name);
         $('#list tr:last .email').append(email);
         $('#list tr:last .phone').append(phone);
-        $('#list li:last .description').append(rates[i].description);
-        $('#list li:last .quality').append(rates[i].quality);
-        $('#list li:last .time').append(rates[i].dialog);
+        $('#list tr:last .description').append(rates[i].description);
+        $('#list tr:last .quality').append(rates[i].quality);
+        $('#list tr:last .time').append(rates[i].dialog);
         
        $('#list2').append('<li class="list-group-item" xmlns="http://www.w3.org/1999/html">' +
             '<div class="row"> ' +

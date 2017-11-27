@@ -62,10 +62,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
             </li>
         </ul>
-        <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" value="Пошук..." onfocus="this.value = '';"
-                   onblur="if (this.value == '') {this.value = 'Search...';}">
-        </form>
+        
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -98,16 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </nav>
     <div id="page-wrapper">
         <div class="graphs">
-            <div class="col_3">
-                <div class="col-md-3 widget widget1">
-                    <div class="r3_counter_box">
-                        <i class="pull-left fa fa-thumbs-up icon-rounded"></i>
-                        <div class="stats">
-                            <h5><strong>45%</strong></h5>
-                            <span>Онлайн</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="col_3"> 
                 <div class="col-md-3 widget widget1">
                     <div class="r3_counter_box">
                         <i class="pull-left fa fa-users user1 icon-rounded"></i>
@@ -135,8 +123,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="content_bottom">
 
                 <div class="bs-example1" data-example-id="contextual-table">
+                  <div class="upper-table">
+                   <h4>Select Number of Users</h4>
+                    <div class="form-group">
+                        <select name="state" id="maxRows" class="form-control" style="width:150px;">
+                            <option value="5000">Show All</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                    <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" id="myInput" value="Пошук по імені..." onkeyup="Search()" onfocus="this.value = '';"
+                   onblur="if (this.value == '') {this.value = 'Search...';}">
+                   </form>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="user_table">
                             <thead>
                             <tr>
                                 <th>id</th>
@@ -154,7 +158,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                             </tbody>
                         </table>
-
+                        <nav style="text-align: center;">
+                          <ul class="pagination">
+                          
+                          </ul>
+                        </nav>
 
                     </div><!-- /.table-responsive -->
                 </div>
@@ -172,5 +180,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/getrates.js"></script>
+<script src="js/pagination.js"></script>
+<script src="js/search.js"></script>
 </body>
 </html>
