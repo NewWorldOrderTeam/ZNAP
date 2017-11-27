@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -63,11 +64,12 @@ class UserLoginSerializer(serializers.ModelSerializer):
         user = user.exclude(email__isnull = True).exclude(email__iexact = '')
         if user.exists() and user.count()==1:
             user_obj = user.first()
-            data['id']=user_obj.id
         else:
             raise serializers.ValidationError("This email is not valid")
         if user_obj:
             if not user_obj.check_password(password):
                 raise serializers.ValidationError("Incorrect password")
+            else:
+                data['id'] = user_obj.id
         return data
 

@@ -27,3 +27,9 @@ class AdminLoginSerializer(serializers.ModelSerializer):
             if (password!=admin_obj.password):
                 raise serializers.ValidationError("Incorrect password")
         return data
+
+
+class AdminSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Admin
+        fields = ('url', 'id', 'email')
