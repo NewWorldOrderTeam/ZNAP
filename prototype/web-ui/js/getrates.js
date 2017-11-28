@@ -23,16 +23,13 @@ function getRate() {
     console.log((rates.user_id));
 
     for (var i =rates.length-1; i>=0; i--){
-        $('#list').append("<tr>" +
+        $('#list').append("<tr class='user'>" +
             "<th class='id' scope='row'></th>" +
             "<th class='name'></th>" +
             "<th class='middle_name'></th>" +
             "<th class='last_name'></th>" +
             "<th class='email'></th>" +
             "<th class='phone'></th>" + 
-            "<th class='description' xmlns='http://www.w3.org/1999/html'></th>" +
-            "<th class='quality' xmlns='http://www.w3.org/1999/html'></th>" +
-            "<th class='time' xmlns='http://www.w3.org/1999/html'></th>" +
             "</tr>");
         user = getUser(rates[i].user_id);
         console.log(user);
@@ -41,9 +38,7 @@ function getRate() {
         middle_name = user.middle_name;
         email = user.email;
         phone = user.phone;
-        description = user.description;
-        quality = user.quality;
-        time = user.time;
+
         
         $('#list tr:last .id').append(i);
         $('#list tr:last .name').append(first_name);
