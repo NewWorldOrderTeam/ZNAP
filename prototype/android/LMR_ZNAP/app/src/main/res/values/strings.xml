@@ -2,4 +2,9 @@
     <string name="app_name">LMR_ZNAP</string>
     <string name="search_title">Search</string>
     <string name="spinner_title">Вибір послуг</string>
+    <string name="country_prompt">Choose a country</string>
+    <integer-array name="country_arrays">
+        <item>1</item>
+
+    </integer-array>
 </resources>

@@ -6,161 +6,56 @@
     android:layout_height="match_parent"
     tools:context="com.znap.lmr.lmr_znap.RateActivity">
 
-    <TextView
-        android:id="@+id/tvLeaveReview"
-        android:layout_width="350dp"
-        android:layout_height="40dp"
-        android:textSize="29dp"
-        android:textStyle="normal"
-        android:textAlignment="center"
-        android:text="Залишити відгук"
-        android:layout_marginTop="15dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioGroup"
-        android:layout_alignLeft="@+id/tvLeaveReview"
-        android:layout_alignStart="@+id/tvLeaveReview">
-
-
-
-        <RadioButton
-            android:id="@+id/znapSqRunok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/radioGroup"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/radioGroup"
-            android:layout_marginTop="72dp"
-            android:text="ЦНАП пл.Ринок 1" />
-
-
-
-        <RadioButton
-            android:id="@+id/znapStrLevutskogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/znapSqRunok"
-            android:layout_alignStart="@+id/znapSqRunok"
-            android:layout_below="@+id/znapSqRunok"
-            android:text="ЦНАП на вул. К. Левицького, 67" />
-
-
-
-        <RadioButton
-            android:id="@+id/znapStrHvulovogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/znapStrLevutskogo"
-            android:layout_alignStart="@+id/znapStrLevutskogo"
-            android:layout_below="@+id/znapStrLevutskogo"
-            android:text="ЦНАП на вул. М. Хвильового, 14а" />
-
-
-
-        <RadioButton
-            android:id="@+id/znapPrKalunu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/radioGroup"
-            android:layout_alignStart="@+id/radioGroup"
-            android:layout_below="@+id/znapStrHvulovogo"
-            android:text="ЦНАП на пр. Ч. Калини, 72а" />
-
-
-
-
-
-        <RadioButton
-            android:id="@+id/znapStrShevchenka"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/radioGroup"
-            android:layout_alignStart="@+id/radioGroup"
-            android:layout_below="@+id/radioGroup"
-            android:text="ЦНАП на вул. Т. Шевченка, 374 (Рясне)"/>
-
-
-
-        <RadioButton
-            android:id="@+id/znapStrChuprunku"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/znapStrShevchenka"
-            android:layout_alignStart="@+id/znapStrShevchenka"
-            android:layout_below="@+id/znapStrShevchenka"
-            android:text="ЦНАП на вул. Ген. Чупринки, 85" />
-
-
-
-        <RadioButton
-            android:id="@+id/znapStrVitovskogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/znapStrChuprunku"
-            android:layout_alignStart="@+id/znapStrChuprunku"
-            android:layout_below="@+id/znapStrChuprunku"
-            android:text="ЦНАП на вул. І. Вітовського, 32" />
-    </RadioGroup>
-
-
-
-    <ImageButton
-        android:id="@+id/btGoodReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioGroup"
-        android:layout_alignStart="@+id/radioGroup"
-        android:layout_below="@+id/radioGroup"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="12dp"
-        android:background="@null"
-        android:src="@drawable/bad" />
-
-
-    <ImageButton
-        android:id="@+id/btBadReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/etLeaveReview"
-        android:layout_alignEnd="@+id/etLeaveReview"
-        android:layout_alignRight="@+id/etLeaveReview"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@null"
-        android:src="@drawable/bad" />
-
-
 
     <EditText
-        android:id="@+id/etLeaveReview"
+        android:id="@+id/etDescription"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+
+        android:layout_alignEnd="@+id/etUser_id"
+        android:layout_alignRight="@+id/etUser_id"
+        android:layout_below="@+id/etUser_id"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Залиште відгук"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/etUser_id"
         android:layout_width="300dp"
         android:layout_height="120dp"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Залиште відгук"
         android:textSize="20dp"
-        android:layout_below="@+id/btGoodReview"
         android:layout_centerHorizontal="true" />
 
+    <EditText
+        android:id="@+id/etQuality"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/btLeaveReview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:hint="Залиште відгук"
+        android:textSize="20dp" />
 
 
     <Button
-        android:background="@color/color"
         android:id="@+id/btLeaveReview"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/etDescription"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="87dp"
+        android:background="@color/color"
         android:text="Залишити відгук"
-        android:layout_below="@+id/etLeaveReview"
-        android:layout_alignLeft="@+id/etLeaveReview"
-        android:layout_alignStart="@+id/etLeaveReview" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="20dp" />
 
 </RelativeLayout>

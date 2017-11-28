@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import com.znap.lmr.lmr_znap.Request;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,12 +14,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,13 +48,9 @@ public class RateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rate);
         getSupportActionBar().setTitle("Відгук");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ArrayAdapter<Integer> arrayAdapterForZnap = new ArrayAdapter<Integer>(this,
-                android.R.layout.simple_dropdown_item_1line, quality);
 
-        MaterialBetterSpinner dropdownForZnap = (MaterialBetterSpinner)
-                findViewById(R.id.quality);
-        dropdownForZnap.setAdapter(arrayAdapterForZnap);
 
+        etQuality = (EditText) findViewById(R.id.etQuality);
         etDescription = (EditText) findViewById(R.id.etDescription);
         etUser_id = (EditText) findViewById(R.id.etUser_id);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
@@ -66,9 +66,9 @@ public class RateActivity extends AppCompatActivity {
                 Pattern pattern = Pattern.compile("message=.*,");
                 try {
                     Matcher matcher = pattern.matcher(request.get());
-                    while (matcher.find()){
-                        int start = matcher.start()+8;
-                        int end = matcher.end()-1;
+                    while (matcher.find()) {
+                        int start = matcher.start() + 8;
+                        int end = matcher.end() - 1;
                         String match = request.get().substring(start, end);
                         Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
                     }
@@ -79,7 +79,9 @@ public class RateActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
+
     class Request extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -91,7 +93,7 @@ public class RateActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             Services services = new Services();
             Response response = services.Rate(description,user_id,quality);
-            System.out.println(response.toString());
+            System.out.println(response);
             return response.toString();
         }
 

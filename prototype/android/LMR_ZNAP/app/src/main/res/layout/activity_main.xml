@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+
+
     <ImageView
         android:id="@+id/znap_logo"
         android:layout_width="fill_parent"
@@ -109,7 +111,6 @@
         android:text="Реєстр послуг"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:theme="@style/PrimaryButton" />
-
 
 
 </RelativeLayout>

@@ -40,7 +40,7 @@
         android:ems="10"
         android:hint="  Email"
         android:inputType="textPersonName"
-        android:textColorHint="#000"
+        android:textColorHint="#BDBDBD"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="15dp" />
 
@@ -49,9 +49,9 @@
         android:id="@+id/bSignIn"
         android:layout_width="fill_parent"
         android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:text="Увійти"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -63,14 +63,15 @@
         android:id="@+id/tSignUpLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/etPassword"
         android:layout_gravity="right"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
         android:text="Зареєструватися"
+        android:textColor="@color/colorAccent"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp" />
 
@@ -87,10 +88,21 @@
         android:ems="10"
         android:hint=" Пароль"
         android:inputType="textPassword"
-        android:textColorHint="#000"
+        android:textColorHint="#BDBDBD"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tSignUpLink"
+        android:layout_alignBottom="@+id/tSignUpLink"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:text="Не маєте облікового запису ?" />
 
 
 </RelativeLayout>
