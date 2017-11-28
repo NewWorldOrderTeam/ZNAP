@@ -1,6 +1,4 @@
-tr {
-    
-}
+
 
 h4, h5, h6,
 h1, h2, h3 {margin-top: 0;}
@@ -20,6 +18,18 @@ body a{
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
+
+.form-group {
+    margin-bottom: 15px;
+    display: block;
+    display: inline-block;
+}
+
+.upper-table{
+    display: inline-block;
+    width: 100%
+}
+
 /*-- header --*/
 .navbar .navbar-nav li a {
   padding: 0 10px;
@@ -226,15 +236,13 @@ i.nav_icon {
 }
 .form-control {
   background: none !important;
-  border: 1px solid #fff !important;
   border-radius: 20px !important;
   box-shadow: none !important;
 }
-.navbar-form.navbar-right input[type="text"] {
-  color: #fff;
-}
+
 form.navbar-form.navbar-right {
-  margin:9px 0 0 0;
+  margin: 0;
+  padding: 0;
 }
 ul.nav.navbar-nav.navbar-right {
   height: 51px;

@@ -10,7 +10,7 @@ from queueapi.models import servicesForCNAP, cnapWithService, infoAboutCnap
 class QueueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = infoAboutCnap
-        fields = ('znapName')
+        fields = ('znapName',)
 
 class ChoicesField(serializers.Field):
      def __init__(self, choices, **kwargs):

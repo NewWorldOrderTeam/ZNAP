@@ -19,3 +19,5 @@ http://znap.pythonanywhere.com/api/v1.0/rate/{rate_id}/dialog/{message_id}/ - sp
 ADMIN API:
 
 http://znap.pythonanywhere.com/api/v1.0/adminlogin/ - login for administrators
+http://znap.pythonanywhere.com/api/v1.0/admin/{admin_id}/rate/ - all specific admin rates
+http://znap.pythonanywhere.com/api/v1.0/admin/{admin_id}/rate/{rate_id} - specific rate for specific admin

@@ -18,7 +18,7 @@ from django.contrib import admin
 from rest_framework import routers
 from rest_framework.routers import DefaultRouter
 
-from adminapi.views import AdminLoginAPIView
+from adminapi.views import AdminLoginAPIView, AdminViewSet
 from queueapi.views import QueueViewSet, QueueCreateAPIView
 from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView, DialogViewSet
 from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet
@@ -39,6 +39,10 @@ user_router = router.register('user', UserViewSet)
 user_router.register('rate', RateViewSet,
                      base_name='user-rate',
                      parents_query_lookups=['user'])
+admin_router= router.register('admin', AdminViewSet)
+admin_router.register('rate', RateViewSet,
+                      base_name='admin-rate',
+                      parents_query_lookups=['admin'])
 
 
 urlpatterns = [
