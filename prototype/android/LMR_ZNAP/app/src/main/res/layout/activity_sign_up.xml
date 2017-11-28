@@ -21,10 +21,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etMiddleName"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="17dp"
         android:layout_weight="1"
+        android:background="#E0E0E0"
         android:ems="10"
-        android:hint="Email"
+        android:hint="  Email"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="15dp" />
@@ -65,7 +66,8 @@
         android:layout_marginTop="18dp"
         android:layout_weight="1"
         android:ems="10"
-        android:hint="Пароль"
+        android:background="#E0E0E0"
+        android:hint="  Пароль"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp" />
@@ -78,8 +80,9 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/znap_logo"
         android:layout_weight="1"
+        android:background="#E0E0E0"
         android:ems="10"
-        android:hint="Ім'я"
+        android:hint="  Ім'я"
         android:inputType="textPersonName" />
 
     <EditText
@@ -89,10 +92,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etFirstName"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_weight="1"
+        android:background="#E0E0E0"
         android:ems="10"
-        android:hint="Прізвище"
+        android:hint="  Прізвище"
         android:inputType="textPersonName" />
 
     <EditText
@@ -102,10 +106,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etLastName"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="19dp"
         android:layout_weight="1"
+        android:background="#E0E0E0"
         android:ems="10"
-        android:hint="По-батькові"
+        android:hint="  По-батькові"
         android:inputType="textPersonName" />
 
     <EditText
@@ -115,9 +120,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etEmail"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="14dp"
         android:layout_weight="1"
+        android:background="#E0E0E0"
         android:ems="10"
-        android:hint="Номер телефону"
+        android:hint="  Номер телефону"
         android:inputType="textPersonName" />
 </RelativeLayout>

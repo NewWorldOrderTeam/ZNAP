@@ -60,7 +60,6 @@ public class RateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 description = etDescription.getText().toString();
-                user_id = Integer.parseInt(etUser_id.getText().toString());
                 RateActivity.Request request = new RateActivity.Request();
                 request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");

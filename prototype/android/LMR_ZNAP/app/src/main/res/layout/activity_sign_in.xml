@@ -40,6 +40,7 @@
         android:ems="10"
         android:hint="  Email"
         android:inputType="textPersonName"
+        android:background="#E0E0E0"
         android:textColorHint="#BDBDBD"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="15dp" />
@@ -89,6 +90,7 @@
         android:hint=" Пароль"
         android:inputType="textPassword"
         android:textColorHint="#BDBDBD"
+        android:background="#E0E0E0"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp" />
 
