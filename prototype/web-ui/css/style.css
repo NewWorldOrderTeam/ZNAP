@@ -25,6 +25,10 @@ body a{
     display: inline-block;
 }
 
+.pagination:hover {
+    cursor: pointer;
+}
+
 .upper-table{
     display: inline-block;
     width: 100%
