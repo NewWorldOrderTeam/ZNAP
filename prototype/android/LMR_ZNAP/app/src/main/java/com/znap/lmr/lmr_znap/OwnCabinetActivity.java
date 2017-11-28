@@ -23,7 +23,6 @@ public class OwnCabinetActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private ListView lv;
 
-    // URL to get contacts JSON
     private static String url = "http://znap.pythonanywhere.com/api/v1.0/user/?format=json";
 
     ArrayList<HashMap<String, String>> contactList;
@@ -48,7 +47,6 @@ public class OwnCabinetActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // Showing progress dialog
             pDialog = new ProgressDialog(OwnCabinetActivity.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);

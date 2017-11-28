@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import retrofit2.Call;
 import retrofit2.Response;
 
 public class SignInActivity extends AppCompatActivity {
@@ -90,7 +92,7 @@ public class SignInActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             Services services = new Services();
             Response response = services.SignIn(email, password);
-            System.out.println(response.toString());
+            System.out.println(response);
             return response.toString();
         }
 
@@ -99,5 +101,8 @@ public class SignInActivity extends AppCompatActivity {
             super.onPostExecute(result);
             return ;
         }
+
+
     }
+
 }

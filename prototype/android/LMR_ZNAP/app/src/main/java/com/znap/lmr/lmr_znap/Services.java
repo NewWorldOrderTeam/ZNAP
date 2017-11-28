@@ -24,6 +24,7 @@ public class Services {
         Call<User> call = service.signOn(email, password);
         try {
             Response response = call.execute();
+            System.out.println();
             // call.execute();
             return response;
         } catch (IOException e) {
@@ -49,8 +50,8 @@ public class Services {
         return null;
     }
 
-    public Response Rate(String leaveReview) {
-        Call<User> call = service.addrate(leaveReview);
+    public Response Rate(String leaveReview, int user_id, Integer[] quality) {
+        Call<User> call = service.addrate(leaveReview,user_id,quality);
         try {
             Response response = call.execute();
             // call.execute();

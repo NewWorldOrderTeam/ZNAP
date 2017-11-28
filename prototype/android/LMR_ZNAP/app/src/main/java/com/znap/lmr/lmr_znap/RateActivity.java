@@ -4,8 +4,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,6 +16,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
+import java.sql.SQLOutput;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,19 +30,13 @@ import retrofit2.Response;
  */
 
 public class RateActivity extends AppCompatActivity {
-    RadioGroup radioGroup;
-    RadioButton znapSqRunok;
-    RadioButton znapStrLevutskogo;
-    RadioButton znapStrShevchenka;
-    RadioButton znapStrHvulovogo;
-    RadioButton znapPrKalunu;
-    RadioButton znapStrChuprunku;
-    RadioButton znapStrVitovskogo;
-    ImageButton btGoodReview;
-    ImageButton btBadReview;
-    EditText etLeaveReview;
+    Integer[] quality = {1,2,3,4,5};
+    EditText etDescription;
+    EditText etUser_id;
+    EditText etQuality;
     Button btLeaveReview;
-    String leaveReview;
+    String description;
+    int user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +44,23 @@ public class RateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rate);
         getSupportActionBar().setTitle("Відгук");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        znapStrLevutskogo = (RadioButton) findViewById(R.id.znapStrLevutskogo);
-        znapSqRunok = (RadioButton) findViewById(R.id.znapSqRunok);
-        znapPrKalunu = (RadioButton) findViewById(R.id.znapPrKalunu);
-        znapStrChuprunku = (RadioButton) findViewById(R.id.znapStrChuprunku);
-        znapStrHvulovogo = (RadioButton) findViewById(R.id.znapStrHvulovogo);
-        znapStrVitovskogo = (RadioButton) findViewById(R.id.znapStrVitovskogo);
-        znapStrShevchenka = (RadioButton) findViewById(R.id.znapStrShevchenka);
-        btGoodReview = (ImageButton) findViewById(R.id.btGoodReview);
-        btBadReview = (ImageButton) findViewById(R.id.btBadReview);
-        etLeaveReview = (EditText) findViewById(R.id.etLeaveReview);
+        ArrayAdapter<Integer> arrayAdapterForZnap = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_dropdown_item_1line, quality);
+
+        MaterialBetterSpinner dropdownForZnap = (MaterialBetterSpinner)
+                findViewById(R.id.quality);
+        dropdownForZnap.setAdapter(arrayAdapterForZnap);
+
+        etDescription = (EditText) findViewById(R.id.etDescription);
+        etUser_id = (EditText) findViewById(R.id.etUser_id);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
+
 
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                leaveReview = etLeaveReview.getText().toString();
+                description = etDescription.getText().toString();
+                user_id = Integer.parseInt(etUser_id.getText().toString());
                 RateActivity.Request request = new RateActivity.Request();
                 request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");
@@ -91,7 +90,7 @@ public class RateActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.Rate(leaveReview);
+            Response response = services.Rate(description,user_id,quality);
             System.out.println(response.toString());
             return response.toString();
         }
