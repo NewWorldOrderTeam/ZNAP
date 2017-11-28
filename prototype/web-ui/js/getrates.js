@@ -22,7 +22,7 @@ function getRate() {
 
     console.log((rates.user_id));
 
-    for (var i in rates){
+    for (var i =rates.length-1; i>=0; i--){
         $('#list').append("<tr>" +
             "<th class='id' scope='row'></th>" +
             "<th class='name'></th>" +
@@ -82,7 +82,6 @@ function closeRate(id) {
     xhr.open("PUT", "http://znap.pythonanywhere.com/api/v1.0/rate/"+id+"/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(closeRate));
-
 }
 
 
