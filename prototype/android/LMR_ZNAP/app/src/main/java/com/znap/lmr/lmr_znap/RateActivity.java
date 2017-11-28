@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import com.znap.lmr.lmr_znap.Request;
 import android.view.MenuItem;
@@ -34,13 +35,15 @@ import retrofit2.Response;
  */
 
 public class RateActivity extends AppCompatActivity {
-    Integer[] quality = {1,2,3,4,5};
+    int quality;
     EditText etDescription;
     EditText etUser_id;
     EditText etQuality;
     Button btLeaveReview;
     String description;
     int user_id;
+    String idOfUser;
+    String qual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +63,26 @@ public class RateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 description = etDescription.getText().toString();
+                idOfUser = etUser_id.getText().toString();
+                qual = etQuality.getText().toString();
                 RateActivity.Request request = new RateActivity.Request();
-                request.execute();
+                if(TextUtils.isEmpty(description)) {
+                    etDescription.setError("Поле має бути заповнене");
+                    return;
+                }
+                if(TextUtils.isEmpty(idOfUser)) {
+                    etUser_id.setError("Поле має бути заповнене");
+                    return;
+                } else {
+                    user_id = Integer.parseInt(etUser_id.getText().toString());
+                }
+                if(TextUtils.isEmpty(qual)){
+                    etQuality.setError("Поле має бути заповнене");
+                    return;
+                } else {
+                    quality = Integer.parseInt(etQuality.getText().toString());
+                    request.execute();
+                }
                 Pattern pattern = Pattern.compile("message=.*,");
                 try {
                     Matcher matcher = pattern.matcher(request.get());
@@ -99,7 +120,7 @@ public class RateActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            return ;
+            return;
         }
     }
     @Override

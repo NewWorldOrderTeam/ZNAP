@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,8 +41,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
 
         etEmail = (EditText) findViewById(R.id.etEmail);
@@ -62,14 +58,30 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
-                if(etPassword.getText().toString().length()<8 &&!isValidPassword(etPassword.getText().toString())||
-                        etFirstName.getText().toString().length()<3 &&!isValidFirstName(etFirstName.getText().toString())||
-                        etLastName.getText().toString().length()<3 &&!isValidLastName(etLastName.getText().toString())||
-                        etMiddleName.getText().toString().length()<3 &&!isValidMiddleName(etMiddleName.getText().toString())){
+                firstName = etFirstName.getText().toString();
+                middleName = etMiddleName.getText().toString();
+                lastName = etLastName.getText().toString();
+                if(TextUtils.isEmpty(email)||
+                        TextUtils.isEmpty(password)||
+                        TextUtils.isEmpty(firstName)||
+                        TextUtils.isEmpty(middleName)||
+                        TextUtils.isEmpty(lastName)) {
+                    etEmail.setError("Поле має бути заповнене");
+                    etFirstName.setError("Поле має бути заповнене");
+                    etLastName.setError("Поле має бути заповнене");
+                    etMiddleName.setError("Поле має бути заповнене");
+                    etPassword.setError("Поле має бути заповнене");
+                    return;
+                }
+                if (etPassword.getText().toString().length() < 8 && !isValidPassword(etPassword.getText().toString()) ||
+                        etFirstName.getText().toString().length() < 3 && !isValidFirstName(etFirstName.getText().toString()) ||
+                        etMiddleName.getText().toString().length() < 3 && !isValidMiddleName(etMiddleName.getText().toString()) ||
+                        etLastName.getText().toString().length() < 3 && !isValidLastName(etLastName.getText().toString())) {
                     System.out.println("Not Valid");
                     Toast.makeText(getApplicationContext(), "Some data is not entered correctly", Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     System.out.println("Valid");
+                    firstName = etFirstName.getText().toString();
                     middleName = etMiddleName.getText().toString();
                     lastName = etLastName.getText().toString();
                     phone = etTelephoneNumber.getText().toString();
@@ -80,9 +92,9 @@ public class SignUpActivity extends AppCompatActivity {
                     SignUpActivity.this.startActivity(signInIntent);
                     try {
                         Matcher matcher = pattern.matcher(request.get());
-                        while (matcher.find()){
-                            int start = matcher.start()+8;
-                            int end = matcher.end()-1;
+                        while (matcher.find()) {
+                            int start = matcher.start() + 8;
+                            int end = matcher.end() - 1;
                             String match = request.get().substring(start, end);
                             Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
                         }
@@ -92,8 +104,6 @@ public class SignUpActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
-                firstName = etFirstName.getText().toString();
             }
         });
         tSignOnLink.setOnClickListener(new View.OnClickListener() {
@@ -102,10 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-
-
     class Request extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -144,7 +151,7 @@ public class SignUpActivity extends AppCompatActivity {
         matcher = pattern.matcher(first_name);
         return matcher.matches();
     }
-    public static boolean isValidLastName(final String last_name) {
+    public static boolean isValidMiddleName(final String last_name) {
         Pattern pattern;
         Matcher matcher;
         final String PASSWORD_PATTERN = "[А-Яа-я]";
@@ -152,7 +159,7 @@ public class SignUpActivity extends AppCompatActivity {
         matcher = pattern.matcher(last_name);
         return matcher.matches();
     }
-    public static boolean isValidMiddleName(final String middle_name) {
+    public static boolean isValidLastName(final String middle_name) {
         Pattern pattern;
         Matcher matcher;
         final String PASSWORD_PATTERN = "[А-Яа-я]";
@@ -160,5 +167,4 @@ public class SignUpActivity extends AppCompatActivity {
         matcher = pattern.matcher(middle_name);
         return matcher.matches();
     }
-
 }

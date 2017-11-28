@@ -21,7 +21,7 @@ public interface Request {
     Call<User> signOn(@Field("email") String email, @Field("password") String password);
     @FormUrlEncoded
     @POST("/api/v1.0/addrate/")
-    Call<User> addrate(@Field("description") String description, @Field("user_id") int id, @Field("quality") Integer[] quality);
+    Call<User> addrate(@Field("description") String description, @Field("user_id") int id, @Field("quality") int quality);
     @FormUrlEncoded
     @GET("/api/v1.0/user/")
     Response getInfo(@Field("first_name") String first_name, @Field("last_name") String last_name, @Field("middle_name") String middle_name, @Field("phone") String telephone_number, @Field("email") String email, Callback<Response> callback);

@@ -50,7 +50,7 @@ public class Services {
         return null;
     }
 
-    public Response Rate(String leaveReview, int user_id, Integer[] quality) {
+    public Response Rate(String leaveReview, int user_id, int quality) {
         Call<User> call = service.addrate(leaveReview,user_id,quality);
         try {
             Response response = call.execute();
