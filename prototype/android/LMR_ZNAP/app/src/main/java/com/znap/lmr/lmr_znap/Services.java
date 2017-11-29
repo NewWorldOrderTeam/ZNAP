@@ -24,7 +24,10 @@ public class Services {
         Call<User> call = service.signOn(email, password);
         try {
             Response response = call.execute();
-            System.out.println();
+            User user = (User)response.body();
+           Integer userId =  user.getId();
+
+            System.out.println(userId);
             // call.execute();
             return response;
         } catch (IOException e) {

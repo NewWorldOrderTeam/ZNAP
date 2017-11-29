@@ -23,7 +23,7 @@ public class OwnCabinetActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private ListView lv;
 
-    private static String url = "http://znap.pythonanywhere.com/api/v1.0/user/?format=json";
+    private static String url = "http://znap.pythonanywhere.com/api/v1.0/user/";
 
     ArrayList<HashMap<String, String>> contactList;
 
