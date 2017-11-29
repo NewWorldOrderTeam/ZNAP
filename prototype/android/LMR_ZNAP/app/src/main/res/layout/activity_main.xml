@@ -7,14 +7,15 @@
     android:fitsSystemWindows="true">
 
 
-
     <ImageView
         android:id="@+id/znap_logo"
         android:layout_width="fill_parent"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
         android:scaleType="center"
-        android:src ="@drawable/znap_logo" />
+        android:src="@drawable/znap_logo" />
 
     <Button
         android:id="@+id/bQueueState"

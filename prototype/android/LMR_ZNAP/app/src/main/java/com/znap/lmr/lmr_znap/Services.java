@@ -25,8 +25,7 @@ public class Services {
         try {
             Response response = call.execute();
             User user = (User)response.body();
-           Integer userId =  user.getId();
-
+            Integer userId =  user.getId();
             System.out.println(userId);
             // call.execute();
             return response;

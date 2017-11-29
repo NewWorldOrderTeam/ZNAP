@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -28,12 +29,12 @@ public class SignInActivity extends AppCompatActivity {
     TextView tSignUpLink;
     String email;
     String password;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_sign_in);
 
         etEmail = (EditText) findViewById(R.id.etEmail);
@@ -47,6 +48,14 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
+                if(TextUtils.isEmpty(email)) {
+                    etEmail.setError("Поле має бути заповнене");
+                    return;
+                }
+                if(TextUtils.isEmpty(password)) {
+                    etPassword.setError("Поле має бути заповнене");
+                    return;
+                }
                 Request request = new Request();
                 request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");
@@ -93,6 +102,9 @@ public class SignInActivity extends AppCompatActivity {
             Services services = new Services();
             Response response = services.SignIn(email, password);
             System.out.println(response);
+            User user = (User)response.body();
+            usId =  user.getId();
+            System.out.println(usId);
             return response.toString();
         }
 
