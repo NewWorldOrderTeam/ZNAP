@@ -29,6 +29,7 @@ public class SignInActivity extends AppCompatActivity {
     TextView tSignUpLink;
     String email;
     String password;
+    int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,8 +104,8 @@ public class SignInActivity extends AppCompatActivity {
             Response response = services.SignIn(email, password);
             System.out.println(response);
             User user = (User)response.body();
-            usId =  user.getId();
-            System.out.println(usId);
+            userid =  user.getId();
+            System.out.println(userid);
             return response.toString();
         }
 

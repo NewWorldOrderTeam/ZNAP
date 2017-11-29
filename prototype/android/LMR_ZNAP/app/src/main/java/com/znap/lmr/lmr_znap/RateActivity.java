@@ -2,6 +2,7 @@ package com.znap.lmr.lmr_znap;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -27,23 +28,32 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 import retrofit2.Response;
 
 /**
  * Created by Andy Blyzniuk on 13.11.2017.
  */
 
-public class RateActivity extends AppCompatActivity {
+public class RateActivity extends AppCompatActivity implements
+        OnItemSelectedListener  {
     int quality;
     EditText etDescription;
     EditText etUser_id;
-    EditText etQuality;
     Button btLeaveReview;
     String description;
+    Button btGood;
+    Button btBad;
     int user_id;
+    Spinner spinnerForZnaps;
+    Spinner spinnerForServices;
     String idOfUser;
-    String qual;
+    boolean clicked=false;
+    boolean clicked1 = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +61,20 @@ public class RateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rate);
         getSupportActionBar().setTitle("Відгук");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        etQuality = (EditText) findViewById(R.id.etQuality);
+        spinnerForZnaps = (Spinner)findViewById(R.id.znaps);
+        spinnerForServices = (Spinner)findViewById(R.id.services);
+        spinnerForZnaps.setOnItemSelectedListener(this);
         etDescription = (EditText) findViewById(R.id.etDescription);
         etUser_id = (EditText) findViewById(R.id.etUser_id);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
-
+        btGood = (Button) findViewById(R.id.btGood);
+        btBad = (Button) findViewById(R.id.btBad);
 
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 description = etDescription.getText().toString();
                 idOfUser = etUser_id.getText().toString();
-                qual = etQuality.getText().toString();
                 RateActivity.Request request = new RateActivity.Request();
                 if(TextUtils.isEmpty(description)) {
                     etDescription.setError("Поле має бути заповнене");
@@ -76,13 +86,29 @@ public class RateActivity extends AppCompatActivity {
                 } else {
                     user_id = Integer.parseInt(etUser_id.getText().toString());
                 }
-                if(TextUtils.isEmpty(qual)){
-                    etQuality.setError("Поле має бути заповнене");
-                    return;
-                } else {
-                    quality = Integer.parseInt(etQuality.getText().toString());
-                    request.execute();
-                }
+
+                btGood.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        clicked=true;
+                        clicked1=false;
+                    }
+                });
+                btBad.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        clicked=false;
+                        clicked1=true;
+                    }
+                });
+                if(clicked)
+                {
+                    quality = Integer.parseInt(btGood.getText().toString());}
+                else if (clicked1)
+                {
+                    quality = Integer.parseInt(btBad.getText().toString());}
+                request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");
                 try {
                     Matcher matcher = pattern.matcher(request.get());
@@ -101,6 +127,41 @@ public class RateActivity extends AppCompatActivity {
         });
 
     }
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+                               long arg3) {
+        // TODO Auto-generated method stub
+        String sp1= String.valueOf(spinnerForZnaps.getSelectedItem());
+        Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
+        if(sp1.contentEquals("Цнап1")) {
+            List<String> list = new ArrayList<String>();
+            list.add("Одна послуга");
+            list.add("Друга");
+            list.add("Третя");
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, list);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dataAdapter.notifyDataSetChanged();
+            spinnerForServices.setAdapter(dataAdapter);
+        }
+        if(sp1.contentEquals("Цнап2")) {
+            List<String> list = new ArrayList<String>();
+            list.add("А тут вже інша");
+            list.add("А тут вже інша");
+            list.add("А тут вже інша");
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, list);
+            dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dataAdapter2.notifyDataSetChanged();
+            spinnerForServices.setAdapter(dataAdapter2);
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
 
     class Request extends AsyncTask<Void, Void, String> {
 

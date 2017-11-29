@@ -3,8 +3,8 @@
     <string name="search_title">Search</string>
     <string name="spinner_title">Вибір послуг</string>
     <string name="country_prompt">Choose a country</string>
-    <integer-array name="country_arrays">
-        <item>1</item>
-
-    </integer-array>
+    <string-array name="znaps">
+        <item>Цнап1</item>
+        <item>Цнап2</item>
+    </string-array>
 </resources>
