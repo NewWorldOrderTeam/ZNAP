@@ -21,3 +21,9 @@ ADMIN API:
 http://znap.pythonanywhere.com/api/v1.0/adminlogin/ - login for administrators
 http://znap.pythonanywhere.com/api/v1.0/admin/{admin_id}/rate/ - all specific admin rates
 http://znap.pythonanywhere.com/api/v1.0/admin/{admin_id}/rate/{rate_id} - specific rate for specific admin
+
+ZNAP API:
+http://znap.pythonanywhere.com/api/v1.0/znap/ - all znaps
+http://znap.pythonanywhere.com/api/v1.0/znap/{znap_id}/ - specififc znap
+http://znap.pythonanywhere.com/api/v1.0/znap/{znap_id}/rate/ - all rates in specific znap
+http://znap.pythonanywhere.com/api/v1.0/znap/{znap_id}/rate/{rate_id} - specific rate in specific znap
