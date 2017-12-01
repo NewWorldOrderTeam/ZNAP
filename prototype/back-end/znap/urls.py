@@ -33,7 +33,6 @@ class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
 
 router = NestedDefaultRouter()
 router.register(r'queue', QueueViewSet)
-router.register(r'znap', ZnapViewSet)
 
 dialog_router = router.register('rate', RateViewSet)
 dialog_router.register('dialog', DialogViewSet,
@@ -47,6 +46,10 @@ admin_router= router.register('admin', AdminViewSet)
 admin_router.register('rate', RateViewSet,
                       base_name='admin-rate',
                       parents_query_lookups=['admin'])
+znap_router = router.register('znap', ZnapViewSet)
+znap_router.register('rate', RateViewSet,
+                     base_name='znap-rate',
+                     parents_query_lookups=['znap'])
 
 
 urlpatterns = [
