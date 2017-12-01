@@ -8,10 +8,13 @@ import datetime
 # Create your models here.
 
 from adminapi.models import Admin
+from znapapi.models import Znap
+
 
 class Rate(models.Model):
     user = models.ForeignKey(User)
     admin = models.ForeignKey(Admin,default=None, null=True)
+    znap = models.ForeignKey(Znap)
     quality = models.IntegerField()
     TYPE = Choices(
         ('1', '1')
