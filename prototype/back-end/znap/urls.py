@@ -25,11 +25,15 @@ from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet
 
 from rest_framework_extensions.routers import NestedRouterMixin
 
+from znapapi.views import ZnapViewSet
+
+
 class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
     pass
 
 router = NestedDefaultRouter()
 router.register(r'queue', QueueViewSet)
+router.register(r'znap', ZnapViewSet)
 
 dialog_router = router.register('rate', RateViewSet)
 dialog_router.register('dialog', DialogViewSet,

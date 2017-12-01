@@ -13,7 +13,7 @@ class RateSerializer(serializers.ModelSerializer):
     admin_id = CharField(required=False)
     class Meta:
         model = Rate
-        fields = ('id', 'user_id', 'admin_id', 'quality', 'description', 'is_closed')
+        fields = ('id', 'user_id', 'znap_id', 'admin_id', 'quality', 'description', 'is_closed')
 
 class ChoicesField(serializers.Field):
     def __init__(self, choices, **kwargs):
