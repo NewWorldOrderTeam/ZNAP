@@ -1,33 +1,76 @@
 package com.znap.lmr.lmr_znap;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
-
-public class RecordToZnapActivity extends AppCompatActivity {
-    String[] znapS = {"ЦНАП пл.Ринок 1", "ЦНАП на вул. К. Левицького, 67", "ЦНАП на вул. М. Хвильового, 14а", "ЦНАП на пр. Ч. Калини, 72а",
-    "ЦНАП на вул. Т. Шевченка, 374 (Рясне)","ЦНАП на вул. Ген. Чупринки, 85","ЦНАП на вул. І. Вітовського, 32"};
-    String[] services = {"Отримати документ","Подати документ"};
+public class RecordToZnapActivity extends Activity implements
+        OnItemSelectedListener{
+    Spinner s1,s2;
+    Button bTreg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_to_znap);
-        getSupportActionBar().setTitle("Запис у ЦНАП");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        s1 = (Spinner)findViewById(R.id.spinner1);
+        s2 = (Spinner)findViewById(R.id.spinner2);
+        s1.setOnItemSelectedListener(this);
+        bTreg = (Button) findViewById(R.id.bTreg);
+        bTreg.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
 
-        ArrayAdapter<String> arrayAdapterForZnap = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, znapS);
-        MaterialBetterSpinner dropdownForZnap = (MaterialBetterSpinner)
-                findViewById(R.id.znapName);
-        dropdownForZnap.setAdapter(arrayAdapterForZnap);
-
-        ArrayAdapter<String> arrayAdapterForService = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, services);
-        MaterialBetterSpinner dropdownForService = (MaterialBetterSpinner)
-                findViewById(R.id.typeOfService);
-        dropdownForService.setAdapter(arrayAdapterForService);
+                // Start NewActivity.class
+                Intent myIntent = new Intent(RecordToZnapActivity.this,
+                        RegisteredToZnap.class);
+                startActivity(myIntent);
+            }
+            });
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+                               long arg3) {
+        // TODO Auto-generated method stub
+        String sp1= String.valueOf(s1.getSelectedItem());
+        Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
+        if(sp1.contentEquals("Цнап1")) {
+            List<String> list = new ArrayList<String>();
+            list.add("Одна послуга");
+            list.add("Друга");
+            list.add("Третя");
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, list);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dataAdapter.notifyDataSetChanged();
+            s2.setAdapter(dataAdapter);
+        }
+        if(sp1.contentEquals("Цнап2")) {
+            List<String> list = new ArrayList<String>();
+            list.add("Інша");
+            list.add("Друга");
+            list.add("Третя");
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, list);
+            dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dataAdapter2.notifyDataSetChanged();
+            s2.setAdapter(dataAdapter2);
+        }
+
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+
+    }
 }

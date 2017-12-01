@@ -6,31 +6,35 @@
     android:layout_height="match_parent"
     tools:context="com.znap.lmr.lmr_znap.RecordToZnapActivity">
 
-
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-        android:id="@+id/znapName"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/bTreg"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="38dp"
-        android:hint="Вибір цнапу"
-        android:textColorHint="#05ab9a"
-        app:met_floatingLabel="normal" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="63dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
+        android:text="Зареєструватись " />
 
-
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-        android:id="@+id/typeOfService"
-        android:layout_width="match_parent"
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/znapName"
-        android:layout_marginTop="40dp"
-        android:hint="Вибір послуги"
-        android:textColorHint="#05ab9a"
-        app:met_floatingLabel="normal" />
+        android:layout_marginLeft="8dip"
+        android:layout_marginRight="8dip"
+        android:layout_marginTop="10dip"
+        android:entries="@array/znaps" />
 
+    <!-- Spinner Dropdown -->
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/spinner1"
+        android:layout_alignRight="@+id/spinner1"
+        android:layout_below="@+id/spinner1"
+        android:layout_marginTop="46dp" />
 
 </RelativeLayout>
