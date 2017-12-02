@@ -1,15 +1,16 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from rest_framework.fields import EmailField
+from rest_framework.fields import EmailField, IntegerField
 
 from adminapi.models import Admin
 
 
 class AdminLoginSerializer(serializers.ModelSerializer):
     email = EmailField(label= 'Email', write_only=True)
+    znap_id = IntegerField(read_only=True)
     class Meta:
         model = Admin
-        fields = ['id', 'email', 'password',]
+        fields = ['id', 'znap_id', 'email', 'password',]
         extra_kwargs = {"password" : {"write_only": True}}
 
     def validate(self, data):
@@ -21,6 +22,7 @@ class AdminLoginSerializer(serializers.ModelSerializer):
         if admin.exists() and admin.count()==1:
             admin_obj = admin.first()
             data['id'] = admin_obj.id
+            data['znap_id'] = admin_obj.znap_id
         else:
             raise serializers.ValidationError("This email is not valid")
         if admin_obj:

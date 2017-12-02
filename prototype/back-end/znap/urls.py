@@ -25,6 +25,9 @@ from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet
 
 from rest_framework_extensions.routers import NestedRouterMixin
 
+from znapapi.views import ZnapViewSet
+
+
 class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
     pass
 
@@ -43,6 +46,10 @@ admin_router= router.register('admin', AdminViewSet)
 admin_router.register('rate', RateViewSet,
                       base_name='admin-rate',
                       parents_query_lookups=['admin'])
+znap_router = router.register('znap', ZnapViewSet)
+znap_router.register('rate', RateViewSet,
+                     base_name='znap-rate',
+                     parents_query_lookups=['znap'])
 
 
 urlpatterns = [
