@@ -3,4 +3,52 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="ЦНАП м. Львова на вул. Шевченка, 374 "
+        android:theme="@style/PrimaryFlatButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:layout_marginBottom="20dp"
+        android:text="ЦНАП м. Львова на вул. Ген. Чупринки, 85  "
+        android:theme="@style/PrimaryFlatButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:layout_marginBottom="20dp"
+        android:text="ЦНАП м. Львова на вул. І. Виговського, 32  "
+        android:theme="@style/PrimaryFlatButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:layout_marginBottom="20dp"
+        android:text="ЦНАП м. Львова на вул. К. Левицького, 67  "
+        android:theme="@style/PrimaryFlatButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:layout_marginBottom="20dp"
+        android:text="ЦНАП м. Львова на пр. Червоної Калини, 72а  "
+        android:theme="@style/PrimaryFlatButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:layout_marginBottom="20dp"
+        android:text="ЦНАП м. Львова на вул. М. Хвильового, 14а "
+        android:theme="@style/PrimaryFlatButton" />
+
 </LinearLayout>

@@ -7,4 +7,18 @@
         <item>Цнап1</item>
         <item>Цнап2</item>
     </string-array>
+    <string-array name="types">
+        <item>Отримати довідку</item>
+        <item>Подати довідку</item>
+    </string-array>
+    <string-array name="times">
+        <item>Січень</item>
+        <item>Лютий</item>
+        <item>Березень</item>
+    </string-array>
+    <string-array name="hours">
+        <item>11:00</item>
+        <item>12:00</item>
+        <item>13:00</item>
+    </string-array>
 </resources>

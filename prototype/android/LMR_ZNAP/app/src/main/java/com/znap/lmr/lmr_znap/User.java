@@ -1,11 +1,5 @@
 package com.znap.lmr.lmr_znap;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-/**
- * Created by Andy Blyzniuk on 01.11.2017.
- */
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -91,4 +85,3 @@ public class User {
     }
 
 }
-

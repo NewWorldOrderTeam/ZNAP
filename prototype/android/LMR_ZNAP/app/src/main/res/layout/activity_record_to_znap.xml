@@ -19,22 +19,33 @@
         android:text="Зареєструватись " />
 
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinnerForZnaps"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dip"
-        android:layout_marginRight="8dip"
-        android:layout_marginTop="10dip"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
         android:entries="@array/znaps" />
 
     <!-- Spinner Dropdown -->
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinnerForServices"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/spinner1"
-        android:layout_alignRight="@+id/spinner1"
-        android:layout_below="@+id/spinner1"
-        android:layout_marginTop="46dp" />
+        android:layout_height="100dp"
+        android:layout_above="@+id/bTreg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="73dp" />
+
+    <Spinner
+        android:id="@+id/spinnerForTypes"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinnerForZnaps"
+        android:layout_marginTop="52dp"
+        android:entries="@array/types" />
 
 </RelativeLayout>
