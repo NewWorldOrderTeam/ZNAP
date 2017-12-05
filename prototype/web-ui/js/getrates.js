@@ -1,7 +1,16 @@
 getUsers();
-getRate();
+//getRate();
 closeRate(1);
 putAdmin(1,1);
+
+function userRates(id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/"+id+"/rate/", false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+    uRates = JSON.parse(xhr.response);
+    return uRates;
+}
 
 function getUsers(){
     var xhr = new XMLHttpRequest();
@@ -17,6 +26,7 @@ function getUsers(){
             "<th class='last_name'></th>" +
             "<th class='email'></th>" +
             "<th class='phone'></th>" +
+            "<th class='rate'></th>" +
             "</tr>");
         console.log(users);
         id = users[i].id;
@@ -26,12 +36,24 @@ function getUsers(){
         email = users[i].email;
         phone = users[i].phone;
 
+        uRates = userRates(id);
+
+        hasRate = uRates.length > 0;
+
+        console.log(hasRate);
+
         $('#list tr:last .id').append(id);
         $('#list tr:last .name').append(first_name);
         $('#list tr:last .middle_name').append(middle_name);
         $('#list tr:last .last_name').append(last_name);
         $('#list tr:last .email').append(email);
         $('#list tr:last .phone').append(phone);
+        if (hasRate) {
+            $('#list tr:last .rate').append('yes');
+        }
+        else {
+            $('#list tr:last .rate').append('no');
+        }
     }
 
 }
