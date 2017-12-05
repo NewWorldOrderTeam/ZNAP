@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/znap_logo"
-        android:layout_width="fill_parent"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:scaleType="center"
+        android:layout_height="140dp"
         android:src ="@drawable/znap_logo" />
 
     <TextView
@@ -29,10 +29,9 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="fill_parent"
+        android:layout_width="360dp"
         android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="14dp"
         android:layout_weight="1"
@@ -48,7 +47,7 @@
 
     <Button
         android:id="@+id/bSignIn"
-        android:layout_width="fill_parent"
+        android:layout_width="350dp"
         android:layout_height="75dp"
         android:layout_below="@+id/etPassword"
         android:layout_centerHorizontal="true"
@@ -78,10 +77,9 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="fill_parent"
+        android:layout_width="350dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/etEmail"
         android:layout_marginTop="29dp"
         android:layout_weight="1"
@@ -93,6 +91,7 @@
         android:background="#E0E0E0"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp" />
+
 
     <TextView
         android:id="@+id/textView"

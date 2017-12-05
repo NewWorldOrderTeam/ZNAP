@@ -16,7 +16,7 @@
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity android:name=".SignInActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

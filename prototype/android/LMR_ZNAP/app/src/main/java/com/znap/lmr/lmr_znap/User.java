@@ -11,7 +11,7 @@ public class User {
     private String url;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
     @SerializedName("first_name")
     @Expose
     private String firstName;

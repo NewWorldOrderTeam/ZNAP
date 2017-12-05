@@ -19,12 +19,11 @@
 
     <Button
         android:id="@+id/bQueueState"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/bReceptionToOfficial"
+        android:layout_alignStart="@+id/bReceptionToOfficial"
         android:layout_below="@+id/znap_logo"
-        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:text="Cтан черги"
         android:textAlignment="center"
@@ -34,10 +33,10 @@
     <Button
 
         android:id="@+id/bRecordToZnap"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/bReceptionToOfficial"
+        android:layout_alignStart="@+id/bReceptionToOfficial"
         android:layout_below="@+id/bReceptionToOfficial"
         android:layout_weight="1"
         android:text="Запис до ЦНАП"
@@ -48,11 +47,10 @@
     <Button
 
         android:id="@+id/bReceptionToOfficial"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
         android:layout_below="@+id/bQueueState"
+        android:layout_centerHorizontal="true"
         android:layout_weight="1"
         android:text="Запис на прийом до посадовця"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -61,10 +59,10 @@
     <Button
 
         android:id="@+id/bLeaveReview"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/bCheck"
+        android:layout_alignStart="@+id/bCheck"
         android:layout_below="@+id/bCheck"
         android:layout_weight="1"
         android:text="Відгук"
@@ -74,10 +72,10 @@
     <Button
 
         android:id="@+id/bCheck"
-        android:layout_width="fill_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_width="290dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/bRecordToZnap"
+        android:layout_alignStart="@+id/bRecordToZnap"
         android:layout_below="@+id/bRecordToZnap"
         android:layout_weight="1"
         android:text="Перевірити стан виконання звернення"

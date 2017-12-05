@@ -72,6 +72,7 @@ public class SignInActivity extends AppCompatActivity {
                         }
                         if (match.equals("OK")){
                             Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
+                            mainIntent.putExtra("userid", userid);
                             SignInActivity.this.startActivity(mainIntent);
                         }
                     }
