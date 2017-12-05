@@ -40,18 +40,17 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.activity_sign_in);
-
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        bSignOn = (Button) findViewById(R.id.bSignIn);
-        tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
         if(!isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
         else {
             Toast.makeText(SignInActivity.this,"Welcome", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.activity_sign_in);
         }
+        setContentView(R.layout.activity_sign_in);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        bSignOn = (Button) findViewById(R.id.bSignIn);
+        tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
+
 
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
