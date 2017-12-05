@@ -25,8 +25,46 @@ body a{
     display: inline-block;
 }
 
+
+th.headerSortUp { 
+    background-image: url(../images/asc.gif); 
+    background-color: aquamarine ; 
+} 
+
+th.headerSortDown { 
+    background-image: url(../images/desc.gif); 
+    background-color: aquamarine; 
+} 
+
+th.header { 
+    background-image: url(../images/bg.gif);     
+    cursor: pointer; 
+    font-weight: bold; 
+    background-repeat: no-repeat; 
+    background-position: center left; 
+    padding-left: 20px; 
+    border-right: 1px solid #dad9c7; 
+    margin-left: -1px; 
+}
+
 .pagination:hover {
     cursor: pointer;
+}
+
+table.tablesorter thead tr .header {
+	background-image: url(../images/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(../images/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(../images/desc.gif);
 }
 
 .upper-table{
