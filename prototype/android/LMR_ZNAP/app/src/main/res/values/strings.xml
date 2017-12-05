@@ -4,7 +4,7 @@
     <string name="spinner_title">Вибір послуг</string>
     <string name="country_prompt">Choose a country</string>
     <string-array name="znaps">
-        <item>Цнап1</item>
+        <item>1</item>
         <item>Цнап2</item>
     </string-array>
     <string-array name="types">

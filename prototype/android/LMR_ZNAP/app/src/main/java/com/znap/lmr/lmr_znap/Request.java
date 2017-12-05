@@ -23,7 +23,7 @@ public interface Request {
     Call<User> signOn(@Field("email") String email, @Field("password") String password);
     @FormUrlEncoded
     @POST("/api/v1.0/addrate/")
-    Call<User> addrate(@Field("description") String description, @Field("user_id") int id, @Field("quality") int quality);
+    Call<User> addrate(@Field("description") String description, @Field("user_id") int id, @Field("quality") int quality,@Field("znap_id") int znap_id);
     @GET("/api/v1.0/user/{user}/")
     Call<User> getInfo(@Path("user") int userid);
 }

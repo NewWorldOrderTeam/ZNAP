@@ -47,6 +47,11 @@ public class SignInActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bSignOn = (Button) findViewById(R.id.bSignIn);
         tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
+        if(!isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
+        else {
+            Toast.makeText(SignInActivity.this,"Welcome", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.activity_sign_in);
+        }
 
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +67,7 @@ public class SignInActivity extends AppCompatActivity {
                     return;
                 }
                 Request request = new Request();
-                if(!isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
-                else {
-                    Toast.makeText(SignInActivity.this,"Welcome", Toast.LENGTH_SHORT).show();
-                    setContentView(R.layout.activity_sign_in);
-                    request.execute();
-                }
+                request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");
                 try {
                     Matcher matcher = pattern.matcher(request.get());

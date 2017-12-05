@@ -42,6 +42,7 @@ import retrofit2.Response;
 public class RateActivity extends AppCompatActivity implements
         OnItemSelectedListener  {
     int quality;
+    int znap_id;
     EditText etDescription;
     EditText etUser_id;
     Button btLeaveReview;
@@ -129,16 +130,17 @@ public class RateActivity extends AppCompatActivity implements
     }
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                long arg3) {
-        // TODO Auto-generated method stub
         String sp1= String.valueOf(spinnerForZnaps.getSelectedItem());
+        znap_id = Integer.parseInt(sp1);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
-        if(sp1.contentEquals("Цнап1")) {
+        if(sp1.contentEquals("1")) {
             List<String> list = new ArrayList<String>();
             list.add("Одна послуга");
             list.add("Друга");
             list.add("Третя");
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_item, list);
+
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             dataAdapter.notifyDataSetChanged();
             spinnerForServices.setAdapter(dataAdapter);
@@ -173,7 +175,7 @@ public class RateActivity extends AppCompatActivity implements
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.Rate(description,user_id,quality);
+            Response response = services.Rate(description,user_id,quality,znap_id);
             System.out.println(response);
             return response.toString();
         }
