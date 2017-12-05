@@ -1,7 +1,12 @@
 package com.znap.lmr.lmr_znap;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -43,7 +48,6 @@ public class SignInActivity extends AppCompatActivity {
         bSignOn = (Button) findViewById(R.id.bSignIn);
         tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
 
-
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +62,12 @@ public class SignInActivity extends AppCompatActivity {
                     return;
                 }
                 Request request = new Request();
-                request.execute();
+                if(!isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
+                else {
+                    Toast.makeText(SignInActivity.this,"Welcome", Toast.LENGTH_SHORT).show();
+                    setContentView(R.layout.activity_sign_in);
+                    request.execute();
+                }
                 Pattern pattern = Pattern.compile("message=.*,");
                 try {
                     Matcher matcher = pattern.matcher(request.get());
@@ -91,6 +100,39 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+    public boolean isConnected(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netinfo = cm.getActiveNetworkInfo();
+
+        if (netinfo != null && netinfo.isConnectedOrConnecting()) {
+            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting())) return true;
+            else return false;
+        } else
+            return false;
+    }
+
+    public AlertDialog.Builder buildDialog(Context c) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setTitle("Немає з`єднання");
+        builder.setMessage("Увімкніть, будь ласка, інтернет");
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                finish();
+            }
+        });
+
+        return builder;
     }
     class Request extends AsyncTask<Void, Void, String> {
 
