@@ -130,8 +130,9 @@ public class RateActivity extends AppCompatActivity implements
     }
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                long arg3) {
+
         String sp1= String.valueOf(spinnerForZnaps.getSelectedItem());
-        znap_id = Integer.parseInt(sp1);
+        znap_id = (int) spinnerForZnaps.getItemIdAtPosition(arg2);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
         if(sp1.contentEquals("1")) {
             List<String> list = new ArrayList<String>();
@@ -175,8 +176,9 @@ public class RateActivity extends AppCompatActivity implements
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.Rate(description,user_id,quality,znap_id);
+            Response response = services.Rate(user_id,znap_id,description,quality);
             System.out.println(response);
+            System.out.println(znap_id);
             return response.toString();
         }
 

@@ -54,8 +54,8 @@ public class Services {
         return null;
     }
 
-    public Response Rate(String leaveReview, int znap_id, int user_id, int quality) {
-        Call<User> call = service.addrate(leaveReview,user_id,quality,znap_id);
+    public Response Rate(int user_id, int znap_id, String description, int quality) {
+        Call<User> call = service.addrate(user_id,znap_id,description,quality);
         try {
             Response response = call.execute();
             // call.execute();
