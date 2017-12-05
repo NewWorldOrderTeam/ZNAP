@@ -5,8 +5,10 @@ package com.znap.lmr.lmr_znap;
  */
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -24,8 +26,8 @@ public class Services {
         Call<User> call = service.signOn(email, password);
         try {
             Response response = call.execute();
-            User user = (User)response.body();
-            Integer userId =  user.getId();
+            User user = (User) response.body();
+            Integer userId = user.getId();
             System.out.println(userId);
             // call.execute();
             return response;
@@ -53,7 +55,7 @@ public class Services {
     }
 
     public Response Rate(String leaveReview, int user_id, int quality) {
-        Call<User> call = service.addrate(leaveReview,user_id,quality);
+        Call<User> call = service.addrate(leaveReview, user_id, quality);
         try {
             Response response = call.execute();
             // call.execute();

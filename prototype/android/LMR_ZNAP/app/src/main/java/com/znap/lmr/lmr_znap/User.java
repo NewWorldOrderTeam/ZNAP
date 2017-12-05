@@ -24,6 +24,17 @@ public class User {
     @SerializedName("email")
     @Expose
     private String email;
+
+    public User(String url, int id, String firstName, String lastName, String middleName, String email, String phone) {
+        this.url = url;
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.email = email;
+        this.phone = phone;
+    }
+
     @SerializedName("phone")
     @Expose
     private String phone;
