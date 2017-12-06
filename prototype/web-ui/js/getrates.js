@@ -1,7 +1,7 @@
 getUsers();
 //getRate();
-closeRate(1);
-putAdmin(1,1);
+//closeRate(1);
+//putAdmin(1,1);
 
 function userRates(id) {
     var xhr = new XMLHttpRequest();
@@ -28,7 +28,6 @@ function getUsers(){
             "<th class='is_closed'></th>" +           
             "<th class='rate'></th>" +
             "</tr>");
-        console.log(users);
         id = users[i].id;
         first_name = users[i].first_name;
         last_name = users[i].last_name;
@@ -39,8 +38,6 @@ function getUsers(){
         uRates = userRates(id);
 
         hasRate = uRates.length > 0;
-
-        console.log(hasRate);
 
         $('#list tr:last .id').append(id);
         $('#list tr:last .name').append(first_name);

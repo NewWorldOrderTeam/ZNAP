@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
@@ -16,6 +17,9 @@ class RateViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = Rate.objects.all()
     serializer_class = RateSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('is_closed',)
+
 
 class RateCreateAPIView(CreateAPIView):
     permission_classes = [AllowAny]
