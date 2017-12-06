@@ -49,7 +49,7 @@ function getUsers(){
         $('#list tr:last .email').append(email);
         $('#list tr:last .phone').append(phone);
         if (hasRate) {
-            $('#list tr:last .rate').append('yes');
+            $('#list tr:last .rate').append('<button type="button" class="btn btn-primary active">Active Primary</button>');
         }
         else {
             $('#list tr:last .rate').append('no');
