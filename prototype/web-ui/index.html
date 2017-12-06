@@ -29,6 +29,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.table.hpaging.min.js"></script>
     <script  type="text/javascript" src="js/jquery.tablesorter.js"></script> 
     <!----webfonts--->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
@@ -38,9 +42,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- Metis Menu Plugin JavaScript -->
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
-    <!-- Graph JavaScript -->
-    <script src="js/d3.v3.js"></script>
-    <script src="js/rickshaw.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -118,31 +119,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 <div class="bs-example1" data-example-id="contextual-table">
                   <div class="upper-table">
+                  
                    <h4>Select Number of Users</h4>
-                    <div class="form-group">
-                        <select name="state" id="maxRows" class="form-control" style="width:150px;">
-                            <option value="5000">Show All</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                        </select>
-                    </div>
-                    <form class="navbar-form navbar-right">
+                    
+                    <table>
+                        <tr>
+                            <td>
+                                <input id="pglmt" placeholder="Page Limit" title="Page Limit" value="5" class="form-control">
+                            </td>
+                            <td>
+                                <button id="btnApply" class="btn btn-danger">Apply</button>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <form class="navbar-form ">
                     <input type="text" class="form-control" id="myInput" value="Пошук по імені..." onkeyup="Search()" onfocus="this.value = '';"
                    onblur="if (this.value == '') {this.value = 'Search...';}">
                    </form>
                     </div>
+                   
                     <div class="table-responsive">
                         <table class="table table-bordered" id="user_table">
                             <thead>
                             <tr>
                                 <th>id</th>
                                 <th>First name</th>
-                                <th>Middle name</th>
                                 <th>Last name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Is Closed</th>
                                 <th>Rate</th>
                             </tr>
                             </thead>
@@ -150,11 +156,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                             </tbody>
                         </table>
-                        <nav style="text-align: center;">
-                          <ul class="pagination">
-                          
-                          </ul>
-                        </nav>
 
                     </div><!-- /.table-responsive -->
                 </div>
@@ -170,6 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- /#page-wrapper -->
 <!-- Bootstrap Core JavaScript -->
+
 <script src="js/bootstrap.min.js"></script>
 <script src="js/getrates.js"></script>
 <script src="js/pagination.js"></script>
