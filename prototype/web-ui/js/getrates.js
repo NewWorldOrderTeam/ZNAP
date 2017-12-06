@@ -22,10 +22,10 @@ function getUsers(){
         $('#list').append("<tr class='user'>" +
             "<th class='id' scope='row'></th>" +
             "<th class='name'></th>" +
-            "<th class='middle_name'></th>" +
             "<th class='last_name'></th>" +
             "<th class='email'></th>" +
             "<th class='phone'></th>" +
+            "<th class='is_closed'></th>" +           
             "<th class='rate'></th>" +
             "</tr>");
         console.log(users);
@@ -44,10 +44,16 @@ function getUsers(){
 
         $('#list tr:last .id').append(id);
         $('#list tr:last .name').append(first_name);
-        $('#list tr:last .middle_name').append(middle_name);
         $('#list tr:last .last_name').append(last_name);
         $('#list tr:last .email').append(email);
         $('#list tr:last .phone').append(phone);
+//        if (isClosed) {
+//            $('#list tr:last .is_closed').append('yes');
+//        }
+//        else {
+//            $('#list tr:last .is_closed').append('no');
+//        }
+        
         if (hasRate) {
             $('#list tr:last .rate').append('<button id="dialog-link" type="button" class="btn btn-primary active ui-button ui-corner-all ui-widget">Написати</button>');
         }
