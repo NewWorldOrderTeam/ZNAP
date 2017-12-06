@@ -44,15 +44,12 @@ public class RateActivity extends AppCompatActivity implements
     int quality;
     int znap_id;
     EditText etDescription;
-    EditText etUser_id;
     Button btLeaveReview;
     String description;
     Button btGood;
     Button btBad;
-    int user_id;
+    int pushed_user_id;
     Spinner spinnerForZnaps;
-    Spinner spinnerForServices;
-    String idOfUser;
     boolean clicked=false;
     boolean clicked1 = true;
 
@@ -63,29 +60,31 @@ public class RateActivity extends AppCompatActivity implements
         getSupportActionBar().setTitle("Відгук");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerForZnaps = (Spinner)findViewById(R.id.znaps);
-        spinnerForServices = (Spinner)findViewById(R.id.services);
         spinnerForZnaps.setOnItemSelectedListener(this);
         etDescription = (EditText) findViewById(R.id.etDescription);
-        etUser_id = (EditText) findViewById(R.id.etUser_id);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
         btGood = (Button) findViewById(R.id.btGood);
         btBad = (Button) findViewById(R.id.btBad);
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null) {
+            assert bundle != null;
+            int userid = bundle.getInt("userid");
+            System.out.println("Rate  activity:" + String.valueOf(userid));
+            pushed_user_id = userid;
+
+        }
+
+
 
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 description = etDescription.getText().toString();
-                idOfUser = etUser_id.getText().toString();
                 RateActivity.Request request = new RateActivity.Request();
                 if(TextUtils.isEmpty(description)) {
                     etDescription.setError("Поле має бути заповнене");
                     return;
-                }
-                if(TextUtils.isEmpty(idOfUser)) {
-                    etUser_id.setError("Поле має бути заповнене");
-                    return;
-                } else {
-                    user_id = Integer.parseInt(etUser_id.getText().toString());
                 }
 
                 btGood.setOnClickListener(new View.OnClickListener() {
@@ -134,29 +133,6 @@ public class RateActivity extends AppCompatActivity implements
         String sp1= String.valueOf(spinnerForZnaps.getSelectedItem());
         znap_id = (int) spinnerForZnaps.getItemIdAtPosition(arg2);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
-        if(sp1.contentEquals("1")) {
-            List<String> list = new ArrayList<String>();
-            list.add("Одна послуга");
-            list.add("Друга");
-            list.add("Третя");
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_spinner_item, list);
-
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            dataAdapter.notifyDataSetChanged();
-            spinnerForServices.setAdapter(dataAdapter);
-        }
-        if(sp1.contentEquals("Цнап2")) {
-            List<String> list = new ArrayList<String>();
-            list.add("А тут вже інша");
-            list.add("А тут вже інша");
-            list.add("А тут вже інша");
-            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_spinner_item, list);
-            dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            dataAdapter2.notifyDataSetChanged();
-            spinnerForServices.setAdapter(dataAdapter2);
-        }
 
     }
 
@@ -176,9 +152,10 @@ public class RateActivity extends AppCompatActivity implements
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.Rate(user_id,znap_id,description,quality);
+            Response response = services.Rate(pushed_user_id,znap_id,description,quality);
             System.out.println(response);
             System.out.println(znap_id);
+            System.out.println(pushed_user_id);
             return response.toString();
         }
 

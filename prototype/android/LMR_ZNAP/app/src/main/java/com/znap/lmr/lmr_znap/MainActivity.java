@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent openRateActivity = new Intent(MainActivity.this, RateActivity.class);
 
+                openRateActivity.putExtra("userid",user_id);
                 startActivity(openRateActivity);
             }
         });
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(MainActivity.this, OwnCabinetActivity.class);
                 mainIntent.putExtra("userid", user_id);
                 startActivity(mainIntent);
+
+
             }
         });
 
