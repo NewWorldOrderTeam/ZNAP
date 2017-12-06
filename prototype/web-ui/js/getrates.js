@@ -49,10 +49,10 @@ function getUsers(){
         $('#list tr:last .email').append(email);
         $('#list tr:last .phone').append(phone);
         if (hasRate) {
-            $('#list tr:last .rate').append('<button type="button" class="btn btn-primary active">Active Primary</button>');
+            $('#list tr:last .rate').append('<button id="dialog-link" type="button" class="btn btn-primary active ui-button ui-corner-all ui-widget">Написати</button>');
         }
         else {
-            $('#list tr:last .rate').append('no');
+            $('#list tr:last .rate').append('<button type="button" class="btn .btn-warning disabled">Немає відгуку</button>');
         }
     }
 
