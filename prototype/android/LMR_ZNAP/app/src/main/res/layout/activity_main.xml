@@ -27,8 +27,7 @@
         android:layout_weight="1"
         android:text="Cтан черги"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton" />
+        android:theme="@style/mainActButton" />
 
     <Button
 
@@ -41,8 +40,7 @@
         android:layout_weight="1"
         android:text="Запис до ЦНАП"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton" />
+        android:theme="@style/mainActButton" />
 
     <Button
 
@@ -53,8 +51,7 @@
         android:layout_centerHorizontal="true"
         android:layout_weight="1"
         android:text="Запис на прийом до посадовця"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton" />
+        android:theme="@style/mainActButton" />
 
     <Button
 
@@ -66,8 +63,7 @@
         android:layout_below="@+id/bCheck"
         android:layout_weight="1"
         android:text="Відгук"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton" />
+        android:theme="@style/mainActButton" />
 
     <Button
 
@@ -79,8 +75,7 @@
         android:layout_below="@+id/bRecordToZnap"
         android:layout_weight="1"
         android:text="Перевірити стан виконання звернення"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton" />
+        android:theme="@style/mainActButton" />
 
     <Button
 
@@ -94,8 +89,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Особистий кабінет"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton" />
+        android:theme="@style/mainActButton" />
 
     <Button
 
@@ -108,8 +102,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:text="Реєстр послуг"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton" />
+        android:theme="@style/mainActButton" />
 
 
 </RelativeLayout>
