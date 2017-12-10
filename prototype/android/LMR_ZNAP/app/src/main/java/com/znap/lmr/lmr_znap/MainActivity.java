@@ -4,6 +4,7 @@ package com.znap.lmr.lmr_znap;
  * Created by Andy Blyzniuk on 01.11.2017.
  */
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -67,6 +68,29 @@ public class MainActivity extends AppCompatActivity {
                 mainIntent.putExtra("userid", user_id);
                 startActivity(mainIntent);
 
+
+            }
+        });
+
+        findViewById(R.id.bOnline).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent callOnline = new Intent(Intent.ACTION_DIAL);
+                callOnline.setData(Uri.parse("tel:0971735178"));
+                startActivity(callOnline);
+            }
+        });
+
+        findViewById(R.id.ibtFacebook).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent openFacebook= new Intent(Intent.ACTION_VIEW);
+                openFacebook.setClassName("com.facebook.цнап", "com.facebook.цнап.MainActivity");
+                Long uid = new Long("123456789");
+                openFacebook.putExtra("extra_user_id", uid);
+                startActivity(openFacebook);
 
             }
         });

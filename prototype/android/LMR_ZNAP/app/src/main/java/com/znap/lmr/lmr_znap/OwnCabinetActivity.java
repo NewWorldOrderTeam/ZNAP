@@ -1,7 +1,9 @@
 package com.znap.lmr.lmr_znap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -33,11 +35,21 @@ public class OwnCabinetActivity extends AppCompatActivity {
         middleNameText = (TextView) findViewById(R.id.etMiddleName);
         Bundle bundle = getIntent().getExtras();
 
+        findViewById(R.id.myreviews).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent openMyReviewsActivity = new Intent(OwnCabinetActivity.this, MyReviewsActivity.class);
+
+                startActivity(openMyReviewsActivity);
+            }
+        });
+
         users = new ArrayList<>();
         if (bundle != null) {
             assert bundle != null;
             int userid = bundle.getInt("userid");
-            System.out.println("Own cabonet  activity:" + String.valueOf(userid));
+            System.out.println("Own cabinet  activity:" + String.valueOf(userid));
 
 
             retrofit = new Retrofit.Builder()
@@ -73,4 +85,6 @@ public class OwnCabinetActivity extends AppCompatActivity {
     public static Request getApi() {
         return request;
     }
+
+
 }
