@@ -26,6 +26,9 @@ public interface Request {
     Call<User> addrate(@Field("user_id") int user_id, @Field("znap_id") int znap_id, @Field("description") String description, @Field("quality") int quality);
     @GET("/api/v1.0/user/{user}/")
     Call<User> getInfo(@Path("user") int userid);
+    @GET("/api/v1.0/user/{user}/rate")
+    Call<List<Rate>> getRateForUser(@Path("user") int userid);
+
 }
 
 

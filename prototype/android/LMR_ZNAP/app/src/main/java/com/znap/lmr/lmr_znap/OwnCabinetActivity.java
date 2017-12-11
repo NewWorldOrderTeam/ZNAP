@@ -24,6 +24,7 @@ public class OwnCabinetActivity extends AppCompatActivity {
     TextView middleNameText;
     private Retrofit retrofit;
     private static Request request;
+    private int user_id;
     List<User> users;
 
     @Override
@@ -35,30 +36,29 @@ public class OwnCabinetActivity extends AppCompatActivity {
         middleNameText = (TextView) findViewById(R.id.etMiddleName);
         Bundle bundle = getIntent().getExtras();
 
-        findViewById(R.id.myreviews).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent openMyReviewsActivity = new Intent(OwnCabinetActivity.this, MyReviewsActivity.class);
-
-                startActivity(openMyReviewsActivity);
-            }
-        });
-
         users = new ArrayList<>();
         if (bundle != null) {
             assert bundle != null;
-            int userid = bundle.getInt("userid");
-            System.out.println("Own cabinet  activity:" + String.valueOf(userid));
+            user_id = bundle.getInt("userid");
+            System.out.println("Own cabinet  activity:" + String.valueOf(user_id));
 
 
+            findViewById(R.id.myreviews).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent openMyReviewsActivity = new Intent(OwnCabinetActivity.this, MyReviewsActivity.class);
+                    openMyReviewsActivity.putExtra("userid", user_id);
+                    startActivity(openMyReviewsActivity);
+                }
+            });
             retrofit = new Retrofit.Builder()
                     .baseUrl("http://znap.pythonanywhere.com/") //Базовая часть адреса
                     .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
                     .build();
             request = retrofit.create(Request.class); //Создаем объект, при помощи которого будем выполнять запросы
 
-            OwnCabinetActivity.getApi().getInfo(userid).enqueue(new Callback<User>() {
+            OwnCabinetActivity.getApi().getInfo(user_id).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     User user = (User)response.body();
@@ -73,7 +73,7 @@ public class OwnCabinetActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    System.out.println("asdhnashd");
+                    System.out.println("Fail");
                 }
             });
             //System.out.println(users);
