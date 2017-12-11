@@ -9,36 +9,39 @@
 
     <TextView
         android:id="@+id/etFirstName"
-        android:layout_width="120dp"
+        android:layout_width="180dp"
         android:layout_height="30dp"
-        android:layout_alignLeft="@+id/etMiddleName"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/etMiddleName"
-        android:layout_marginTop="115dp"
-        android:text="TextView"
+        android:layout_marginEnd="66dp"
+        android:layout_marginRight="66dp"
+        android:layout_marginTop="106dp"
+        android:text=""
         android:textAlignment="center"
         android:textSize="20dp" />
 
     <TextView
         android:id="@+id/etMiddleName"
-        android:layout_width="120dp"
+        android:layout_width="180dp"
         android:layout_height="30dp"
+        android:layout_alignLeft="@+id/etFirstName"
+        android:layout_alignStart="@+id/etFirstName"
         android:layout_below="@+id/etFirstName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="TextView"
+        android:layout_marginTop="17dp"
+        android:text=""
         android:textAlignment="center"
         android:textSize="20dp" />
 
     <TextView
         android:id="@+id/etLastName"
-        android:layout_width="120dp"
+        android:layout_width="180dp"
         android:layout_height="30dp"
         android:layout_alignLeft="@+id/etMiddleName"
         android:layout_alignStart="@+id/etMiddleName"
         android:layout_below="@+id/etMiddleName"
         android:layout_marginTop="17dp"
-        android:text="TextView"
+        android:text=""
         android:textAlignment="center"
         android:textSize="20dp" />
 
@@ -52,6 +55,35 @@
         android:background="@color/color"
         android:text="Мої відгуки"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/etMiddleName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:text="Ваше ім'я:" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_alignTop="@+id/etMiddleName"
+        android:text="Прізвище:" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_alignRight="@+id/textView5"
+        android:layout_alignTop="@+id/etLastName"
+        android:text="По-батькові:" />
 
 
 </RelativeLayout>
