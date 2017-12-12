@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        user_id = bundle.getInt("userid");
+        user_id = bundle.getInt(SystemMessages.userId);
 
         findViewById(R.id.bLeaveReview).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent openRateActivity = new Intent(MainActivity.this, RateActivity.class);
 
-                openRateActivity.putExtra("userid", user_id);
+                openRateActivity.putExtra(SystemMessages.userId, user_id);
                 startActivity(openRateActivity);
             }
         });
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(openQueueStateActivity);
 
                 Intent mainIntent = new Intent(MainActivity.this, OwnCabinetActivity.class);
-                mainIntent.putExtra("userid", user_id);
+                mainIntent.putExtra(SystemMessages.userId, user_id);
                 startActivity(mainIntent);
 
 
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bOnline).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent callOnline = new Intent(Intent.ACTION_DIAL);
                 callOnline.setData(Uri.parse("tel:0971735178"));
                 startActivity(callOnline);

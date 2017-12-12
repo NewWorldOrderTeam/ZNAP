@@ -73,9 +73,8 @@ public class RateActivity extends AppCompatActivity implements
 
         if (bundle != null) {
             assert bundle != null;
-            int userid = bundle.getInt("userid");
+            int userid = bundle.getInt(SystemMessages.userId);
             pushed_user_id = userid;
-
         }
 
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +83,7 @@ public class RateActivity extends AppCompatActivity implements
                 description = etDescription.getText().toString();
                 RateActivity.Request request = new RateActivity.Request();
                 if (TextUtils.isEmpty(description)) {
-                    etDescription.setError("Поле має бути заповнене");
+                    etDescription.setError(NonSystemMessages.fieldMustBeNotEmpty);
                     return;
                 }
                 btGood.setOnClickListener(new View.OnClickListener() {
@@ -125,8 +124,7 @@ public class RateActivity extends AppCompatActivity implements
         });
     }
 
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-                               long arg3) {
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         String sp1 = String.valueOf(spinnerForZnaps.getSelectedItem());
         znap_id = (int) spinnerForZnaps.getItemIdAtPosition(arg2);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
@@ -135,7 +133,6 @@ public class RateActivity extends AppCompatActivity implements
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
-
 
     class Request extends AsyncTask<Void, Void, String> {
 
@@ -148,9 +145,6 @@ public class RateActivity extends AppCompatActivity implements
         protected String doInBackground(Void... params) {
             Services services = new Services();
             Response response = services.Rate(pushed_user_id, znap_id, description, quality);
-            System.out.println(response);
-            System.out.println(znap_id);
-            System.out.println(pushed_user_id);
             return response.toString();
         }
 
@@ -163,7 +157,6 @@ public class RateActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();

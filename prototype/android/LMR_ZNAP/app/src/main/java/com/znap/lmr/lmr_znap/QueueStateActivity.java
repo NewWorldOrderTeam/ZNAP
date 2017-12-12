@@ -19,7 +19,7 @@ public class QueueStateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue_state);
-        getSupportActionBar().setTitle("Стан черги");
+        getSupportActionBar().setTitle(SystemMessages.queueStateTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

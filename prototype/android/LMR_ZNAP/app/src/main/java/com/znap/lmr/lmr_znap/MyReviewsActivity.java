@@ -39,15 +39,11 @@ public class MyReviewsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             assert bundle != null;
-            userid = bundle.getInt("userid");
-            System.out.println("My reviews  activity:" + String.valueOf(userid));
+            userid = bundle.getInt(SystemMessages.userId);
             rates = new ArrayList<>();
             ratesOfUsers = new ArrayList<>();
-            retrofit = new Retrofit.Builder()
-                    .baseUrl("http://znap.pythonanywhere.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            request = retrofit.create(Request.class);
+
+            request = ZnapUtility.generateRetroRequest();
 
             MyReviewsActivity.getApi().getRateForUser(userid).enqueue(new Callback<List<Rate>>() {
                 @Override
@@ -57,19 +53,13 @@ public class MyReviewsActivity extends AppCompatActivity {
                     for (int i = rates.size() - 1; i > 0; i--) {
                         System.out.println(rates.get(i).getDescription());
                         ratesOfUsers.add(rates.get(i).getDescription());
-
                     }
                     list.setAdapter(new ArrayAdapter<>(MyReviewsActivity.this, android.R.layout.simple_list_item_1, ratesOfUsers));
-
                 }
-
                 @Override
                 public void onFailure(Call<List<Rate>> call, Throwable t) {
-
                 }
             });
-
-            //System.out.println(users);
         } else {
             finish();
         }

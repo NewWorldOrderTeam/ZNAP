@@ -70,11 +70,11 @@ public class SignUpActivity extends AppCompatActivity {
                         TextUtils.isEmpty(firstName)||
                         TextUtils.isEmpty(middleName)||
                         TextUtils.isEmpty(lastName)) {
-                    etEmail.setError("Поле має бути заповнене");
-                    etFirstName.setError("Поле має бути заповнене");
-                    etLastName.setError("Поле має бути заповнене");
-                    etMiddleName.setError("Поле має бути заповнене");
-                    etPassword.setError("Поле має бути заповнене");
+                    etEmail.setError(NonSystemMessages.fieldMustBeNotEmpty);
+                    etFirstName.setError(NonSystemMessages.fieldMustBeNotEmpty);
+                    etLastName.setError(NonSystemMessages.fieldMustBeNotEmpty);
+                    etMiddleName.setError(NonSystemMessages.fieldMustBeNotEmpty);
+                    etPassword.setError(NonSystemMessages.fieldMustBeNotEmpty);
                     return;
                 }
                 if (etPassword.getText().toString().length() < 8 && !isValidPassword(etPassword.getText().toString()) ||
@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
                         etMiddleName.getText().toString().length() < 3 && !isValidMiddleName(etMiddleName.getText().toString()) ||
                         etLastName.getText().toString().length() < 3 && !isValidLastName(etLastName.getText().toString())) {
                     System.out.println("Not Valid");
-                    Toast.makeText(getApplicationContext(), "Some data is not entered correctly", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), NonSystemMessages.fieldIsNotEnteredCorrectly, Toast.LENGTH_LONG).show();
                 } else {
                     System.out.println("Valid");
                     firstName = etFirstName.getText().toString();

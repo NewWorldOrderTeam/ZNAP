@@ -30,14 +30,14 @@ public class Services {
         try {
             Response response = call.execute();
             User user = (User) response.body();
-            if(user==null){
-                return response;
-            }else {
+            if(user!=null){
                 Integer userId = user.getId();
                 System.out.println(userId);
                 // call.execute();
                 return response;
+
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SecurityException e) {

@@ -39,20 +39,20 @@ public class OwnCabinetActivity extends AppCompatActivity {
         users = new ArrayList<>();
         if (bundle != null) {
             assert bundle != null;
-            user_id = bundle.getInt("userid");
+            user_id = bundle.getInt(SystemMessages.userId);
             findViewById(R.id.myreviews).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent openMyReviewsActivity = new Intent(OwnCabinetActivity.this, MyReviewsActivity.class);
-                    openMyReviewsActivity.putExtra("userid", user_id);
+                    openMyReviewsActivity.putExtra(SystemMessages.userId, user_id);
                     startActivity(openMyReviewsActivity);
                 }
             });
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://znap.pythonanywhere.com/") //Базовая часть адреса
-                    .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
+                    .baseUrl("http://znap.pythonanywhere.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            request = retrofit.create(Request.class); //Создаем объект, при помощи которого будем выполнять запросы
+            request = retrofit.create(Request.class);
 
             OwnCabinetActivity.getApi().getInfo(user_id).enqueue(new Callback<User>() {
                 @Override
@@ -69,7 +69,6 @@ public class OwnCabinetActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    System.out.println("Something went wrong");
                 }
             });
         } else {

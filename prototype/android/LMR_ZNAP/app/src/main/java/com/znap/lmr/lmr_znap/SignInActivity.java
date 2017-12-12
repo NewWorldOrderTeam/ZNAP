@@ -42,7 +42,6 @@ public class SignInActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (!isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
         else {
-            Toast.makeText(SignInActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.activity_sign_in);
         }
         setContentView(R.layout.activity_sign_in);
@@ -58,11 +57,11 @@ public class SignInActivity extends AppCompatActivity {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    etEmail.setError("Поле має бути заповнене");
+                    etEmail.setError(NonSystemMessages.fieldMustBeNotEmpty);
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    etPassword.setError("Поле має бути заповнене");
+                    etPassword.setError(NonSystemMessages.fieldMustBeNotEmpty);
                     return;
                 }
                 Request request = new Request();
@@ -121,14 +120,12 @@ public class SignInActivity extends AppCompatActivity {
     public AlertDialog.Builder buildDialog(Context c) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
-        builder.setTitle("Немає з`єднання");
-        builder.setMessage("Увімкніть, будь ласка, інтернет");
-
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setTitle(SystemMessages.noInternetConnection);
+        builder.setMessage(NonSystemMessages.enableInternetRequest);
+        builder.setPositiveButton(NonSystemMessages.okay, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 finish();
             }
         });
