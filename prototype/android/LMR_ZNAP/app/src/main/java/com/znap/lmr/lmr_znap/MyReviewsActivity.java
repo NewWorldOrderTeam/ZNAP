@@ -44,10 +44,10 @@ public class MyReviewsActivity extends AppCompatActivity {
             rates = new ArrayList<>();
             ratesOfUsers = new ArrayList<>();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://znap.pythonanywhere.com/") //Базовая часть адреса
-                    .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
+                    .baseUrl("http://znap.pythonanywhere.com/")
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            request = retrofit.create(Request.class); //Создаем объект, при помощи которого будем выполнять запросы
+            request = retrofit.create(Request.class);
 
             MyReviewsActivity.getApi().getRateForUser(userid).enqueue(new Callback<List<Rate>>() {
                 @Override

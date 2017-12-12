@@ -86,12 +86,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.ibtFacebook).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent openFacebook = new Intent(Intent.ACTION_VIEW);
-                openFacebook.setClassName("com.facebook.цнап", "com.facebook.цнап.MainActivity");
-                Long uid = new Long("123456789");
-                openFacebook.putExtra("extra_user_id", uid);
-                startActivity(openFacebook);
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.facebook.com/cnaplviv")));
 
             }
         });

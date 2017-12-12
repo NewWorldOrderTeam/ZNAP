@@ -4,9 +4,13 @@ package com.znap.lmr.lmr_znap;
  * Created by Andy Blyzniuk on 01.11.2017.
  */
 
+import android.widget.ArrayAdapter;
+
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,15 +24,20 @@ public class Services {
 
     Request service = retrofit.create(Request.class);
 
+
     public Response SignIn(String email, String password) {
         Call<User> call = service.signOn(email, password);
         try {
             Response response = call.execute();
             User user = (User) response.body();
-            Integer userId = user.getId();
-            System.out.println(userId);
-            // call.execute();
-            return response;
+            if(user==null){
+                return response;
+            }else {
+                Integer userId = user.getId();
+                System.out.println(userId);
+                // call.execute();
+                return response;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SecurityException e) {

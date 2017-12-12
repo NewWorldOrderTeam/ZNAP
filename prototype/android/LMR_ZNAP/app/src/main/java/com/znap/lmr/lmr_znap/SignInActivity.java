@@ -149,9 +149,13 @@ public class SignInActivity extends AppCompatActivity {
             Response response = services.SignIn(email, password);
             System.out.println(response);
             User user = (User) response.body();
-            userid = user.getId();
-            System.out.println(userid);
-            return response.toString();
+            if(user==null){
+                return response.toString();
+            }else {
+                userid = user.getId();
+                System.out.println(userid);
+                return response.toString();
+            }
         }
 
         @Override

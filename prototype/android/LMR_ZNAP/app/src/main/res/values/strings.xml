@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">LMR_ZNAP</string>
+    <string name="app_name">ЦНАП м.Львів</string>
     <string name="search_title">Search</string>
     <string name="spinner_title">Вибір послуг</string>
-    <string name="country_prompt">Choose a country</string>
     <string-array name="znaps">
         <item>Виберіть ЦНАП</item>
         <item>Виговського</item>
