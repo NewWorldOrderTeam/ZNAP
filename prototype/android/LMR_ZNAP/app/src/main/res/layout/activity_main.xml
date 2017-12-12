@@ -1,150 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="1dp"
+    android:fillViewport="false">
 
 
-    <ImageView
-        android:id="@+id/znap_logo"
-        android:layout_width="fill_parent"
+    <RelativeLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_weight="1"
-        android:scaleType="center"
-        android:src="@drawable/znap_logo" />
+        android:fitsSystemWindows="true">
 
-    <Button
-        android:id="@+id/bQueueState"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/bReceptionToOfficial"
-        android:layout_alignStart="@+id/bReceptionToOfficial"
-        android:layout_below="@+id/znap_logo"
-        android:layout_weight="1"
-        android:text="Cтан черги"
-        android:textAlignment="center"
-        android:theme="@style/mainActButton" />
+        <ImageView
+            android:id="@+id/znap_logo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/znap_logo" />
 
-    <Button
+        <Button
+            android:id="@+id/bQueueState"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/bReceptionToOfficial"
+            android:layout_alignStart="@+id/bReceptionToOfficial"
+            android:layout_below="@+id/znap_logo"
+            android:layout_weight="1"
+            android:text="Cтан черги"
+            android:textAlignment="center"
+            android:theme="@style/mainActButton" />
 
-        android:id="@+id/bRecordToZnap"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/bReceptionToOfficial"
-        android:layout_alignStart="@+id/bReceptionToOfficial"
-        android:layout_below="@+id/bReceptionToOfficial"
-        android:layout_weight="1"
-        android:text="Запис до ЦНАП"
-        android:textAlignment="center"
-        android:theme="@style/mainActButton" />
+        <Button
 
-    <Button
+            android:id="@+id/bRecordToZnap"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/bReceptionToOfficial"
+            android:layout_alignStart="@+id/bReceptionToOfficial"
+            android:layout_below="@+id/bReceptionToOfficial"
+            android:layout_weight="1"
+            android:text="Запис до ЦНАП"
+            android:textAlignment="center"
+            android:theme="@style/mainActButton" />
 
-        android:id="@+id/bReceptionToOfficial"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/bQueueState"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="1"
-        android:text="Запис на прийом до посадовця"
-        android:theme="@style/mainActButton" />
+        <Button
 
-    <Button
+            android:id="@+id/bReceptionToOfficial"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/bQueueState"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:text="Запис на прийом до посадовця"
+            android:theme="@style/mainActButton" />
 
-        android:id="@+id/bLeaveReview"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/bCheck"
-        android:layout_alignStart="@+id/bCheck"
-        android:layout_below="@+id/bCheck"
-        android:layout_weight="1"
-        android:text="Відгук"
-        android:theme="@style/mainActButton" />
+        <Button
 
-    <Button
+            android:id="@+id/bLeaveReview"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/bCheck"
+            android:layout_alignStart="@+id/bCheck"
+            android:layout_below="@+id/bCheck"
+            android:layout_weight="1"
+            android:text="Відгук"
+            android:theme="@style/mainActButton" />
 
-        android:id="@+id/bCheck"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/bRecordToZnap"
-        android:layout_alignStart="@+id/bRecordToZnap"
-        android:layout_below="@+id/bRecordToZnap"
-        android:layout_weight="1"
-        android:text="Перевірити стан виконання звернення"
-        android:theme="@style/mainActButton" />
+        <Button
 
-    <Button
+            android:id="@+id/bCheck"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/bRecordToZnap"
+            android:layout_alignStart="@+id/bRecordToZnap"
+            android:layout_below="@+id/bRecordToZnap"
+            android:layout_weight="1"
+            android:text="Перевірити стан виконання звернення"
+            android:theme="@style/mainActButton" />
 
-        android:id="@+id/bOwnCabinet"
-        android:layout_width="160dp"
-        android:layout_height="65dp"
-        android:layout_below="@+id/bOnline"
-        android:layout_centerHorizontal="true"
-        android:text="Особистий кабінет"
-        android:theme="@style/mainActButton" />
+        <Button
 
-    <Button
+            android:id="@+id/bOwnCabinet"
+            android:layout_width="160dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/bOnline"
+            android:layout_centerHorizontal="true"
+            android:text="Особистий кабінет"
+            android:theme="@style/mainActButton" />
 
-        android:id="@+id/bServices"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:layout_alignLeft="@+id/bLeaveReview"
-        android:layout_alignStart="@+id/bLeaveReview"
-        android:layout_below="@+id/bLeaveReview"
-        android:text="Реєстр послуг"
-        android:theme="@style/mainActButton" />
+        <Button
 
-    <Button
-        android:id="@+id/bOnline"
-        android:layout_width="290dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/bServices"
-        android:layout_centerHorizontal="true"
-        android:drawableLeft="@drawable/headphones"
-        android:text="Онлайн підтримка"
-        android:theme="@style/mainActButton" />
+            android:id="@+id/bServices"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_alignLeft="@+id/bLeaveReview"
+            android:layout_alignStart="@+id/bLeaveReview"
+            android:layout_below="@+id/bLeaveReview"
+            android:text="Реєстр послуг"
+            android:theme="@style/mainActButton" />
 
-    <ImageButton
-        android:id="@+id/ibtFacebook"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignLeft="@+id/bOnline"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/bOnline"
-        android:layout_marginBottom="36dp"
-        android:background="@drawable/roundedbutton"
-        app:srcCompat="@drawable/facebook64" />
+        <Button
+            android:id="@+id/bOnline"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/bServices"
+            android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/headphones"
+            android:text="Онлайн підтримка"
+            android:theme="@style/mainActButton" />
 
-    <ImageButton
-        android:id="@+id/ibtPayment"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignBottom="@+id/ibtFacebook"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginRight="41dp"
-        android:background="@drawable/roundedbutton"
-        app:srcCompat="@drawable/wallet64" />
+        <ImageButton
+            android:id="@+id/ibtFacebook"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/roundedbutton"
+            app:srcCompat="@drawable/facebook64" />
 
-    <Button
-        android:id="@+id/bAboutZNAP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ibtPayment"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_toLeftOf="@+id/ibtPayment"
-        android:layout_toStartOf="@+id/ibtPayment"
-        android:background="@drawable/roundedbutton"
-        android:text="Про ЦНАП" />
+        <ImageButton
+            android:id="@+id/ibtPayment"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/bOwnCabinet"
+            android:layout_toEndOf="@+id/bOwnCabinet"
+            android:layout_toRightOf="@+id/bOwnCabinet"
+            android:background="@drawable/roundedbutton"
+            app:srcCompat="@drawable/wallet64" />
+
+        <Button
+            android:id="@+id/bAboutZNAP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/roundedbutton"
+            android:text="Про ЦНАП" />
 
 
-</RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>
