@@ -13,7 +13,7 @@ import retrofit2.Response;
  * Created by Andy Blyzniuk on 14.11.2017.
  */
 
-public class QueueStateActivity extends AppCompatActivity{
+public class QueueStateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +21,10 @@ public class QueueStateActivity extends AppCompatActivity{
         setContentView(R.layout.activity_queue_state);
         getSupportActionBar().setTitle("Стан черги");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();

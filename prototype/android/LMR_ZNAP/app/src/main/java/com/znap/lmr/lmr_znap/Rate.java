@@ -3,6 +3,7 @@ package com.znap.lmr.lmr_znap;
 /**
  * Created by Zava on 11.12.2017.
  */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

@@ -40,13 +40,9 @@ public class OwnCabinetActivity extends AppCompatActivity {
         if (bundle != null) {
             assert bundle != null;
             user_id = bundle.getInt("userid");
-            System.out.println("Own cabinet  activity:" + String.valueOf(user_id));
-
-
             findViewById(R.id.myreviews).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     Intent openMyReviewsActivity = new Intent(OwnCabinetActivity.this, MyReviewsActivity.class);
                     openMyReviewsActivity.putExtra("userid", user_id);
                     startActivity(openMyReviewsActivity);
@@ -61,10 +57,10 @@ public class OwnCabinetActivity extends AppCompatActivity {
             OwnCabinetActivity.getApi().getInfo(user_id).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
-                    User user = (User)response.body();
-                    String firstName =  user.getFirstName();
+                    User user = (User) response.body();
+                    String firstName = user.getFirstName();
                     String lastName = user.getLastName();
-                    String middleName= user.getMiddleName();
+                    String middleName = user.getMiddleName();
                     firstNameText.setText(String.valueOf(firstName));
                     lastNameText.setText(String.valueOf(lastName));
                     middleNameText.setText(String.valueOf(middleName));
@@ -73,10 +69,9 @@ public class OwnCabinetActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    System.out.println("Fail");
+                    System.out.println("Something went wrong");
                 }
             });
-            //System.out.println(users);
         } else {
             finish();
         }
@@ -85,6 +80,4 @@ public class OwnCabinetActivity extends AppCompatActivity {
     public static Request getApi() {
         return request;
     }
-
-
 }

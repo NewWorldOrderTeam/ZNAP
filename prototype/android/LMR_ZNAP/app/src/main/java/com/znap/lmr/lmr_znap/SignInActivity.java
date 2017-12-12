@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import retrofit2.Call;
+
 import retrofit2.Response;
 
 public class SignInActivity extends AppCompatActivity {
@@ -35,14 +34,15 @@ public class SignInActivity extends AppCompatActivity {
     String email;
     String password;
     int userid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if(!isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if (!isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
         else {
-            Toast.makeText(SignInActivity.this,"Welcome", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignInActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.activity_sign_in);
         }
         setContentView(R.layout.activity_sign_in);
@@ -57,11 +57,11 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
-                if(TextUtils.isEmpty(email)) {
+                if (TextUtils.isEmpty(email)) {
                     etEmail.setError("Поле має бути заповнене");
                     return;
                 }
-                if(TextUtils.isEmpty(password)) {
+                if (TextUtils.isEmpty(password)) {
                     etPassword.setError("Поле має бути заповнене");
                     return;
                 }
@@ -70,15 +70,15 @@ public class SignInActivity extends AppCompatActivity {
                 Pattern pattern = Pattern.compile("message=.*,");
                 try {
                     Matcher matcher = pattern.matcher(request.get());
-                    while (matcher.find()){
-                        int start = matcher.start()+8;
-                        int end = matcher.end()-1;
+                    while (matcher.find()) {
+                        int start = matcher.start() + 8;
+                        int end = matcher.end() - 1;
                         String match = request.get().substring(start, end);
-                        if(match.equals("Bad Request")){
+                        if (match.equals("Bad Request")) {
                             match = "Неправильно введені дані!";
                             Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
                         }
-                        if (match.equals("OK")){
+                        if (match.equals("OK")) {
                             Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                             mainIntent.putExtra("userid", userid);
                             SignInActivity.this.startActivity(mainIntent);
@@ -101,6 +101,7 @@ public class SignInActivity extends AppCompatActivity {
 
 
     }
+
     public boolean isConnected(Context context) {
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -110,7 +111,8 @@ public class SignInActivity extends AppCompatActivity {
             android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting())) return true;
+            if ((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting()))
+                return true;
             else return false;
         } else
             return false;
@@ -133,6 +135,7 @@ public class SignInActivity extends AppCompatActivity {
 
         return builder;
     }
+
     class Request extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -145,8 +148,8 @@ public class SignInActivity extends AppCompatActivity {
             Services services = new Services();
             Response response = services.SignIn(email, password);
             System.out.println(response);
-            User user = (User)response.body();
-            userid =  user.getId();
+            User user = (User) response.body();
+            userid = user.getId();
             System.out.println(userid);
             return response.toString();
         }
@@ -154,7 +157,7 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            return ;
+            return;
         }
 
 

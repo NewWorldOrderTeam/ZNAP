@@ -7,7 +7,9 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.znap.lmr.lmr_znap.Request;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -28,11 +30,13 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
+
 import retrofit2.Response;
 
 /**
@@ -40,18 +44,18 @@ import retrofit2.Response;
  */
 
 public class RateActivity extends AppCompatActivity implements
-        OnItemSelectedListener  {
+        OnItemSelectedListener {
     int quality;
     int znap_id;
-    EditText etDescription;
+    int pushed_user_id;
+    Button btBad;
+    Button btGood;
     Button btLeaveReview;
     String description;
-    Button btGood;
-    Button btBad;
-    int pushed_user_id;
     Spinner spinnerForZnaps;
-    boolean clicked=false;
-    boolean clicked1 = true;
+    EditText etDescription;
+    boolean badButtonClickedStatus = false;
+    boolean goodButtonClickedStatus = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,7 @@ public class RateActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_rate);
         getSupportActionBar().setTitle("Відгук");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerForZnaps = (Spinner)findViewById(R.id.znaps);
+        spinnerForZnaps = (Spinner) findViewById(R.id.znaps);
         spinnerForZnaps.setOnItemSelectedListener(this);
         etDescription = (EditText) findViewById(R.id.etDescription);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
@@ -70,44 +74,38 @@ public class RateActivity extends AppCompatActivity implements
         if (bundle != null) {
             assert bundle != null;
             int userid = bundle.getInt("userid");
-            System.out.println("Rate  activity:" + String.valueOf(userid));
             pushed_user_id = userid;
 
         }
-
-
 
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 description = etDescription.getText().toString();
                 RateActivity.Request request = new RateActivity.Request();
-                if(TextUtils.isEmpty(description)) {
+                if (TextUtils.isEmpty(description)) {
                     etDescription.setError("Поле має бути заповнене");
                     return;
                 }
-
                 btGood.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v)
-                    {
-                        clicked=true;
-                        clicked1=false;
+                    public void onClick(View v) {
+                        goodButtonClickedStatus = true;
+                        badButtonClickedStatus = false;
                     }
                 });
                 btBad.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        clicked=false;
-                        clicked1=true;
+                        goodButtonClickedStatus = false;
+                        badButtonClickedStatus = true;
                     }
                 });
-                if(clicked)
-                {
-                    quality = Integer.parseInt(btGood.getText().toString());}
-                else if (clicked1)
-                {
-                    quality = Integer.parseInt(btBad.getText().toString());}
+                if (goodButtonClickedStatus) {
+                    quality = Integer.parseInt(btGood.getText().toString());
+                } else if (badButtonClickedStatus) {
+                    quality = Integer.parseInt(btBad.getText().toString());
+                }
                 request.execute();
                 Pattern pattern = Pattern.compile("message=.*,");
                 try {
@@ -125,20 +123,17 @@ public class RateActivity extends AppCompatActivity implements
                 }
             }
         });
-
     }
+
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                long arg3) {
-
-        String sp1= String.valueOf(spinnerForZnaps.getSelectedItem());
+        String sp1 = String.valueOf(spinnerForZnaps.getSelectedItem());
         znap_id = (int) spinnerForZnaps.getItemIdAtPosition(arg2);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
 
@@ -152,7 +147,7 @@ public class RateActivity extends AppCompatActivity implements
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.Rate(pushed_user_id,znap_id,description,quality);
+            Response response = services.Rate(pushed_user_id, znap_id, description, quality);
             System.out.println(response);
             System.out.println(znap_id);
             System.out.println(pushed_user_id);
@@ -165,6 +160,7 @@ public class RateActivity extends AppCompatActivity implements
             return;
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Auto-generated method stub

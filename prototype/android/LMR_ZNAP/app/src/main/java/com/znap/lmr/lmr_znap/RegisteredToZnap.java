@@ -12,19 +12,19 @@ import android.widget.Spinner;
  */
 
 public class RegisteredToZnap extends AppCompatActivity {
-    Spinner spinnerForTime,spinnerForHour;
+    Spinner spinnerForTime, spinnerForHour;
     Button btToReg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorded_to_znap);
-        spinnerForTime = (Spinner)findViewById(R.id.spinnerForTime);
-        spinnerForHour = (Spinner)findViewById(R.id.spinnerForHour);
-        btToReg = (Button)findViewById(R.id.buttonTOReg);
+        spinnerForTime = (Spinner) findViewById(R.id.spinnerForTime);
+        spinnerForHour = (Spinner) findViewById(R.id.spinnerForHour);
+        btToReg = (Button) findViewById(R.id.buttonTOReg);
         btToReg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
 
-                // Start NewActivity.class
                 Intent myIntent = new Intent(RegisteredToZnap.this,
                         MainActivity.class);
                 startActivity(myIntent);

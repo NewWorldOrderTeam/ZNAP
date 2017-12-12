@@ -1,14 +1,12 @@
 package com.znap.lmr.lmr_znap;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,7 @@ public class MyReviewsActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_my_reviews);
-        list = (ListView)findViewById(R.id.ReviewsList);
+        list = (ListView) findViewById(R.id.ReviewsList);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             assert bundle != null;
@@ -56,12 +54,12 @@ public class MyReviewsActivity extends AppCompatActivity {
                 public void onResponse(Call<List<Rate>> call, Response<List<Rate>> response) {
                     rates.addAll(response.body());
                     System.out.println(rates);
-                    for(int i = rates.size()-1; i>0; i--){
+                    for (int i = rates.size() - 1; i > 0; i--) {
                         System.out.println(rates.get(i).getDescription());
                         ratesOfUsers.add(rates.get(i).getDescription());
 
                     }
-                    list.setAdapter(new ArrayAdapter<>(MyReviewsActivity.this, android.R.layout.simple_list_item_1,ratesOfUsers));
+                    list.setAdapter(new ArrayAdapter<>(MyReviewsActivity.this, android.R.layout.simple_list_item_1, ratesOfUsers));
 
                 }
 
