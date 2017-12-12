@@ -9,4 +9,6 @@ public class NonSystemMessages {
     public static String enableInternetRequest = "Увімкніть, будь ласка, інтернет";
     public static String okay = "Oк";
     public static String fieldIsNotEnteredCorrectly = "Some data is not entered correctly";
+    public static String notValid = "Not Valid";
+    public static String valid = "Valid";
 }

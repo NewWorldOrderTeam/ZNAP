@@ -77,14 +77,13 @@ public class SignUpActivity extends AppCompatActivity {
                     etPassword.setError(NonSystemMessages.fieldMustBeNotEmpty);
                     return;
                 }
-                if (etPassword.getText().toString().length() < 8 && !isValidPassword(etPassword.getText().toString()) ||
-                        etFirstName.getText().toString().length() < 3 && !isValidFirstName(etFirstName.getText().toString()) ||
-                        etMiddleName.getText().toString().length() < 3 && !isValidMiddleName(etMiddleName.getText().toString()) ||
-                        etLastName.getText().toString().length() < 3 && !isValidLastName(etLastName.getText().toString())) {
-                    System.out.println("Not Valid");
+                if (etPassword.getText().toString().length() < 8 && !Validations.isValidPassword(etPassword.getText().toString()) ||
+                        etFirstName.getText().toString().length() < 3 && !Validations.isValidFirstName(etFirstName.getText().toString()) ||
+                        etMiddleName.getText().toString().length() < 3 && !Validations.isValidMiddleName(etMiddleName.getText().toString()) ||
+                        etLastName.getText().toString().length() < 3 && !Validations.isValidLastName(etLastName.getText().toString())) {
                     Toast.makeText(getApplicationContext(), NonSystemMessages.fieldIsNotEnteredCorrectly, Toast.LENGTH_LONG).show();
                 } else {
-                    System.out.println("Valid");
+
                     firstName = etFirstName.getText().toString();
                     middleName = etMiddleName.getText().toString();
                     lastName = etLastName.getText().toString();
@@ -139,36 +138,4 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    public static boolean isValidPassword(final String password) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "[a-zA-Z0-9]{8,24}";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-        return matcher.matches();
-    }
-    public static boolean isValidFirstName(final String first_name) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "[А-Яа-я]";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(first_name);
-        return matcher.matches();
-    }
-    public static boolean isValidMiddleName(final String last_name) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "[А-Яа-я]";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(last_name);
-        return matcher.matches();
-    }
-    public static boolean isValidLastName(final String middle_name) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "[А-Яа-я]";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(middle_name);
-        return matcher.matches();
-    }
 }

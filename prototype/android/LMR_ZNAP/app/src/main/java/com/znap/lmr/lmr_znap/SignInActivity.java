@@ -40,7 +40,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if (!isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
+        if (!Validations.isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
         else {
             setContentView(R.layout.activity_sign_in);
         }
@@ -101,21 +101,6 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    public boolean isConnected(Context context) {
-
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netinfo = cm.getActiveNetworkInfo();
-
-        if (netinfo != null && netinfo.isConnectedOrConnecting()) {
-            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-            if ((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting()))
-                return true;
-            else return false;
-        } else
-            return false;
-    }
 
     public AlertDialog.Builder buildDialog(Context c) {
 
@@ -129,7 +114,6 @@ public class SignInActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         return builder;
     }
 
@@ -150,7 +134,6 @@ public class SignInActivity extends AppCompatActivity {
                 return response.toString();
             }else {
                 userid = user.getId();
-                System.out.println(userid);
                 return response.toString();
             }
         }
@@ -160,8 +143,5 @@ public class SignInActivity extends AppCompatActivity {
             super.onPostExecute(result);
             return;
         }
-
-
     }
-
 }
