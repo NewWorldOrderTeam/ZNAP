@@ -18,8 +18,7 @@ class RateViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Rate.objects.all()
     serializer_class = RateSerializer
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('is_closed',)
-
+    filter_fields = ('is_closed', 'admin_id')
 
 class RateCreateAPIView(CreateAPIView):
     permission_classes = [AllowAny]
