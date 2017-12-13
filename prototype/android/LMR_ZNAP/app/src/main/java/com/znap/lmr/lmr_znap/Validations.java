@@ -49,6 +49,7 @@ public class Validations {
     }
 
     public static boolean isConnected(Context context) {
+
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netinfo = cm.getActiveNetworkInfo();
         if (netinfo != null && netinfo.isConnectedOrConnecting()) {

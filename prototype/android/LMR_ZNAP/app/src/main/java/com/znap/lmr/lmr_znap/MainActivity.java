@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        user_id = bundle.getInt(SystemMessages.userId);
+        user_id = bundle.getInt(SystemMessages.USER_ID);
 
         findViewById(R.id.bLeaveReview).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent openRateActivity = new Intent(MainActivity.this, RateActivity.class);
 
-                openRateActivity.putExtra(SystemMessages.userId, user_id);
+                openRateActivity.putExtra(SystemMessages.USER_ID, user_id);
                 startActivity(openRateActivity);
             }
         });
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(openQueueStateActivity);
 
                 Intent mainIntent = new Intent(MainActivity.this, OwnCabinetActivity.class);
-                mainIntent.putExtra(SystemMessages.userId, user_id);
+                mainIntent.putExtra(SystemMessages.USER_ID, user_id);
                 startActivity(mainIntent);
 
 

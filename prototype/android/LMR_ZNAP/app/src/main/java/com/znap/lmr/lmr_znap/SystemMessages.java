@@ -5,8 +5,10 @@ package com.znap.lmr.lmr_znap;
  */
 
 public class SystemMessages {
-    public static String noInternetConnection = "Немає з`єднання";
-    public static String userId = "userid";
-    public static String rateTitle = "Відгук";
-    public static String queueStateTitle = "Стан черги";
+    public static final String  NO_INERNET_CONNECTION = "Немає з`єднання";
+    public static final String USER_ID = "userid";
+    public static final String RATE_TITLE = "Відгук";
+    public static final String QUEUE_STATE_TITLE = "Стан черги";
+    public static final String OK = "OK";
+    public static final String BAD_REQUEST = "Bad request";
 }

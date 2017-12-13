@@ -70,18 +70,18 @@ public class SignUpActivity extends AppCompatActivity {
                         TextUtils.isEmpty(firstName)||
                         TextUtils.isEmpty(middleName)||
                         TextUtils.isEmpty(lastName)) {
-                    etEmail.setError(NonSystemMessages.fieldMustBeNotEmpty);
-                    etFirstName.setError(NonSystemMessages.fieldMustBeNotEmpty);
-                    etLastName.setError(NonSystemMessages.fieldMustBeNotEmpty);
-                    etMiddleName.setError(NonSystemMessages.fieldMustBeNotEmpty);
-                    etPassword.setError(NonSystemMessages.fieldMustBeNotEmpty);
+                    etEmail.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+                    etFirstName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+                    etLastName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+                    etMiddleName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+                    etPassword.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                     return;
                 }
                 if (etPassword.getText().toString().length() < 8 && !Validations.isValidPassword(etPassword.getText().toString()) ||
                         etFirstName.getText().toString().length() < 3 && !Validations.isValidFirstName(etFirstName.getText().toString()) ||
                         etMiddleName.getText().toString().length() < 3 && !Validations.isValidMiddleName(etMiddleName.getText().toString()) ||
                         etLastName.getText().toString().length() < 3 && !Validations.isValidLastName(etLastName.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), NonSystemMessages.fieldIsNotEnteredCorrectly, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY, Toast.LENGTH_LONG).show();
                 } else {
 
                     firstName = etFirstName.getText().toString();

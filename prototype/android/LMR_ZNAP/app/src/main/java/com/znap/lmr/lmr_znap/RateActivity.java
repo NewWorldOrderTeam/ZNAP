@@ -61,7 +61,7 @@ public class RateActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate);
-        getSupportActionBar().setTitle("Відгук");
+        getSupportActionBar().setTitle(SystemMessages.RATE_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerForZnaps = (Spinner) findViewById(R.id.znaps);
         spinnerForZnaps.setOnItemSelectedListener(this);
@@ -73,7 +73,7 @@ public class RateActivity extends AppCompatActivity implements
 
         if (bundle != null) {
             assert bundle != null;
-            int userid = bundle.getInt(SystemMessages.userId);
+            int userid = bundle.getInt(SystemMessages.USER_ID);
             pushed_user_id = userid;
         }
 
@@ -83,7 +83,7 @@ public class RateActivity extends AppCompatActivity implements
                 description = etDescription.getText().toString();
                 RateActivity.Request request = new RateActivity.Request();
                 if (TextUtils.isEmpty(description)) {
-                    etDescription.setError(NonSystemMessages.fieldMustBeNotEmpty);
+                    etDescription.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                     return;
                 }
                 btGood.setOnClickListener(new View.OnClickListener() {

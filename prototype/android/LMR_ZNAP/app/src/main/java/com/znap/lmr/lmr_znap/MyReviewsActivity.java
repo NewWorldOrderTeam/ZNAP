@@ -39,7 +39,7 @@ public class MyReviewsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             assert bundle != null;
-            userid = bundle.getInt(SystemMessages.userId);
+            userid = bundle.getInt(SystemMessages.USER_ID);
             rates = new ArrayList<>();
             ratesOfUsers = new ArrayList<>();
 

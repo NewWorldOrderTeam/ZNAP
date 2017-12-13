@@ -39,12 +39,12 @@ public class OwnCabinetActivity extends AppCompatActivity {
         users = new ArrayList<>();
         if (bundle != null) {
             assert bundle != null;
-            user_id = bundle.getInt(SystemMessages.userId);
+            user_id = bundle.getInt(SystemMessages.USER_ID);
             findViewById(R.id.myreviews).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent openMyReviewsActivity = new Intent(OwnCabinetActivity.this, MyReviewsActivity.class);
-                    openMyReviewsActivity.putExtra(SystemMessages.userId, user_id);
+                    openMyReviewsActivity.putExtra(SystemMessages.USER_ID, user_id);
                     startActivity(openMyReviewsActivity);
                 }
             });

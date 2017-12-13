@@ -57,37 +57,15 @@ public class SignInActivity extends AppCompatActivity {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    etEmail.setError(NonSystemMessages.fieldMustBeNotEmpty);
+                    etEmail.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    etPassword.setError(NonSystemMessages.fieldMustBeNotEmpty);
+                    etPassword.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                     return;
                 }
-                Request request = new Request();
-                request.execute();
-                Pattern pattern = Pattern.compile("message=.*,");
-                try {
-                    Matcher matcher = pattern.matcher(request.get());
-                    while (matcher.find()) {
-                        int start = matcher.start() + 8;
-                        int end = matcher.end() - 1;
-                        String match = request.get().substring(start, end);
-                        if (match.equals("Bad Request")) {
-                            match = "Неправильно введені дані!";
-                            Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
-                        }
-                        if (match.equals("OK")) {
-                            Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
-                            mainIntent.putExtra("userid", userid);
-                            SignInActivity.this.startActivity(mainIntent);
-                        }
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+                requestPatternValidation();
+
             }
         });
         tSignUpLink.setOnClickListener(new View.OnClickListener() {
@@ -101,13 +79,39 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
+    public void requestPatternValidation() {
+        Request request = new Request();
+        request.execute();
+        Pattern pattern = Pattern.compile("message=.*,");
+        try {
+            Matcher matcher = pattern.matcher(request.get());
+            while (matcher.find()) {
+                int start = matcher.start() + 8;
+                int end = matcher.end() - 1;
+                String match = request.get().substring(start, end);
+                if (match.equals(SystemMessages.BAD_REQUEST)) {
+                    match =NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY;
+                    Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
+                }
+                if (match.equals(SystemMessages.OK)) {
+                    Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
+                    mainIntent.putExtra(SystemMessages.USER_ID, userid);
+                    SignInActivity.this.startActivity(mainIntent);
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 
     public AlertDialog.Builder buildDialog(Context c) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
-        builder.setTitle(SystemMessages.noInternetConnection);
-        builder.setMessage(NonSystemMessages.enableInternetRequest);
-        builder.setPositiveButton(NonSystemMessages.okay, new DialogInterface.OnClickListener() {
+        builder.setTitle(SystemMessages.NO_INERNET_CONNECTION);
+        builder.setMessage(NonSystemMessages.ENABLE_INTERNET_REQUEST);
+        builder.setPositiveButton(NonSystemMessages.OKAY, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -130,9 +134,9 @@ public class SignInActivity extends AppCompatActivity {
             Response response = services.SignIn(email, password);
             System.out.println(response);
             User user = (User) response.body();
-            if(user==null){
+            if (user == null) {
                 return response.toString();
-            }else {
+            } else {
                 userid = user.getId();
                 return response.toString();
             }
