@@ -10,6 +10,16 @@ function userRates(id) {
     return uRates;
 }
 
+function isRateClosed (user_id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/"+user_id+"/rate/?is_closed=false", false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+    closed_rates = JSON.parse(xhr.response);
+    console.log(closed_rates);
+    return closed_rates;
+}
+
 function getUsers(){
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/", false);
@@ -34,23 +44,29 @@ function getUsers(){
         phone = users[i].phone;
 
         uRates = userRates(id);
+        
+        open_rates_per_user = isRateClosed(id);
+        
 
         hasRate = uRates.length > 0;
+        
+        is_open_rates = open_rates_per_user.length > 0;
+        
 
         $('#list tr:last .id').append(id);
         $('#list tr:last .name').append(first_name);
         $('#list tr:last .last_name').append(last_name);
         $('#list tr:last .email').append(email);
         $('#list tr:last .phone').append(phone);
-//        if (isClosed) {
-//            $('#list tr:last .is_closed').append('yes');
-//        }
-//        else {
-//            $('#list tr:last .is_closed').append('no');
-//        }
+        if (is_open_rates) {
+            $('#list tr:last .is_closed').append('no');
+        }
+        else {
+            $('#list tr:last .is_closed').append('yes');
+        }
         
         if (hasRate) {
-            $('#list tr:last .rate').append('<button id="dialog-link" type="button" class="btn btn-primary active ui-button ui-corner-all ui-widget">Написати</button>');
+            $('#list tr:last .rate').append('<button id="dialog-opener" type="button" class="btn btn-primary active ui-button ui-corner-all ui-widget">Написати</button>');
         }
         else {
             $('#list tr:last .rate').append('<button type="button" class="btn .btn-warning disabled">Немає відгуку</button>');

@@ -23,8 +23,17 @@
 .titler {
     position: absolute;
     height: 80px;
-    margin-left: 300px;
+    margin-left: 263px;
     font-family: roboto;
+}
+
+.second-logo {
+    width: 80px;
+    background: transparent url(../images/znap_logo.jpg) no-repeat ;
+    height: 80px;
+    position: absolute;
+    margin-left: 1146px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
 }
 
 .content {

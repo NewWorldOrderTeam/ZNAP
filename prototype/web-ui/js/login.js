@@ -18,5 +18,5 @@ function adminLogin() {
     localStorage.setItem('admin_id', admin_id);
     localStorage.setItem('znap_id', znap_id);
 
-    window.location.href="/web-ui/pages/users.html";
+    window.location.href="../web-ui/pages/users.html";
 }
