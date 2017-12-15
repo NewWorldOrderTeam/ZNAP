@@ -115,7 +115,6 @@ public class SignInActivity extends AppCompatActivity {
                     Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                     mainIntent.putExtra(SystemMessages.USER_ID, userid);
                     SignInActivity.this.startActivity(mainIntent);
-                    finish();
                 }
             }
         } catch (InterruptedException e) {

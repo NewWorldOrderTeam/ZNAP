@@ -16,7 +16,7 @@ import android.view.WindowManager;
 
 
 public class MainActivity extends AppCompatActivity {
-    private int user_id;
+    public int user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +59,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bOwnCabinet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent openQueueStateActivity = new Intent(MainActivity.this, OwnCabinetActivity.class);
-
-                startActivity(openQueueStateActivity);
                 Intent mainIntent = new Intent(MainActivity.this, OwnCabinetActivity.class);
                 mainIntent.putExtra(SystemMessages.USER_ID, user_id);
                 startActivity(mainIntent);
@@ -104,6 +100,4 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-
 }
-

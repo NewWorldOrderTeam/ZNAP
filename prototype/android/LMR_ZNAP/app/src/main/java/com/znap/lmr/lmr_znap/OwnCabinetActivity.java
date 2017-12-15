@@ -48,7 +48,7 @@ public class OwnCabinetActivity extends AppCompatActivity {
                     startActivity(openMyReviewsActivity);
                 }
             });
-            ZnapUtility.generateRetroRequest();
+            request = ZnapUtility.generateRetroRequest();
             OwnCabinetActivity.getApi().getInfo(user_id).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
