@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText etFirstName;
     EditText etLastName;
     EditText etMiddleName;
-    EditText etTelephoneNumber;
+    EditText etPhoneNumber;
     Button bSignUp;
     TextView tSignOnLink;
     String email;
@@ -44,18 +45,10 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
-
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        etFirstName = (EditText) findViewById(R.id.etFirstName);
-        etLastName = (EditText) findViewById(R.id.etLastName);
-        etMiddleName = (EditText)findViewById(R.id.etMiddleName);
-        etTelephoneNumber =(EditText) findViewById(R.id.etTelephoneNumber);
-        bSignUp = (Button) findViewById(R.id.bSignUp);
-        tSignOnLink = (TextView) findViewById(R.id.tSignUpLink);
-
+        findViewsById();
+        hideKeyboardOnTap();
 
         bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,18 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
                 firstName = etFirstName.getText().toString();
                 middleName = etMiddleName.getText().toString();
                 lastName = etLastName.getText().toString();
-                if(TextUtils.isEmpty(email)||
-                        TextUtils.isEmpty(password)||
-                        TextUtils.isEmpty(firstName)||
-                        TextUtils.isEmpty(middleName)||
-                        TextUtils.isEmpty(lastName)) {
-                    etEmail.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
-                    etFirstName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
-                    etLastName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
-                    etMiddleName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
-                    etPassword.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
-                    return;
-                }
+                setErrorsForFields();
                 if (etPassword.getText().toString().length() < 8 && !Validations.isValidPassword(etPassword.getText().toString()) ||
                         etFirstName.getText().toString().length() < 3 && !Validations.isValidFirstName(etFirstName.getText().toString()) ||
                         etMiddleName.getText().toString().length() < 3 && !Validations.isValidMiddleName(etMiddleName.getText().toString()) ||
@@ -87,28 +69,12 @@ public class SignUpActivity extends AppCompatActivity {
                     firstName = etFirstName.getText().toString();
                     middleName = etMiddleName.getText().toString();
                     lastName = etLastName.getText().toString();
-                    phone = etTelephoneNumber.getText().toString();
-                    Request request = new Request();
-                    request.execute();
-                    Pattern pattern = Pattern.compile("message=.*,");
-                    Intent signInIntent = new Intent(SignUpActivity.this, SignInActivity.class);
-                    SignUpActivity.this.startActivity(signInIntent);
-                    try {
-                        Matcher matcher = pattern.matcher(request.get());
-                        while (matcher.find()) {
-                            int start = matcher.start() + 8;
-                            int end = matcher.end() - 1;
-                            String match = request.get().substring(start, end);
-                            Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
+                    phone = etPhoneNumber.getText().toString();
+                    requestPatternValidation();
                 }
             }
         });
+
         tSignOnLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +82,113 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(SignUpActivity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void hideKeyboardOnTap() {
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        etFirstName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        etMiddleName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        etLastName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        etPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+    }
+
+    public void setErrorsForFields() {
+        if (TextUtils.isEmpty(email)) {
+            etEmail.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+        }
+        if (TextUtils.isEmpty(password)) {
+            etPassword.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+        }
+        if (TextUtils.isEmpty(firstName)) {
+            etFirstName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+        }
+        if (TextUtils.isEmpty(middleName)) {
+            etMiddleName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+        }
+        if (TextUtils.isEmpty(lastName)) {
+            etLastName.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+        }
+    }
+
+    public void requestPatternValidation(){
+        Request request = new Request();
+        request.execute();
+        Pattern pattern = Pattern.compile("message=.*,");
+        Intent signInIntent = new Intent(SignUpActivity.this, SignInActivity.class);
+        SignUpActivity.this.startActivity(signInIntent);
+        try {
+            Matcher matcher = pattern.matcher(request.get());
+            while (matcher.find()) {
+                int start = matcher.start() + 8;
+                int end = matcher.end() - 1;
+                String match = request.get().substring(start, end);
+                Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void findViewsById(){
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        etFirstName = (EditText) findViewById(R.id.etFirstName);
+        etLastName = (EditText) findViewById(R.id.etLastName);
+        etMiddleName = (EditText) findViewById(R.id.etMiddleName);
+        etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
+        bSignUp = (Button) findViewById(R.id.bSignUp);
+        tSignOnLink = (TextView) findViewById(R.id.tSignUpLink);
+    }
+
     class Request extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -134,7 +207,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            return ;
+            return;
         }
     }
 

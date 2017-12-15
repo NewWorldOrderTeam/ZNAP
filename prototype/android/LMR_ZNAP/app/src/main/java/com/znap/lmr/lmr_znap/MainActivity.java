@@ -4,9 +4,11 @@ package com.znap.lmr.lmr_znap;
  * Created by Andy Blyzniuk on 01.11.2017.
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -20,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
@@ -29,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bLeaveReview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent openRateActivity = new Intent(MainActivity.this, RateActivity.class);
-
                 openRateActivity.putExtra(SystemMessages.USER_ID, user_id);
                 startActivity(openRateActivity);
             }
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent openQueueStateActivity = new Intent(MainActivity.this, OwnCabinetActivity.class);
 
                 startActivity(openQueueStateActivity);
-
                 Intent mainIntent = new Intent(MainActivity.this, OwnCabinetActivity.class);
                 mainIntent.putExtra(SystemMessages.USER_ID, user_id);
                 startActivity(mainIntent);
@@ -90,7 +88,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        MainActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
 
 }
 

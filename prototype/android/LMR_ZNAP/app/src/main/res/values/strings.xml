@@ -3,7 +3,6 @@
     <string name="search_title">Search</string>
     <string name="spinner_title">Вибір послуг</string>
     <string-array name="znaps">
-        <item>Виберіть ЦНАП</item>
         <item>Виговського</item>
         <item>Ратуша</item>
         <item>Червоної калини</item>
@@ -11,6 +10,13 @@
     <string-array name="types">
         <item>Отримати довідку</item>
         <item>Подати довідку</item>
+    </string-array>
+    <string-array name="services">
+        <item>Послуги міської Ради</item>
+        <item>Оформлення паспорта громадянина </item>
+        <item>Держгеокадастр</item>
+        <item>Документи дозвільного характеру</item>
+        <item>Оформлення паспорта громадянина України</item>
     </string-array>
     <string-array name="times">
         <item>Січень</item>

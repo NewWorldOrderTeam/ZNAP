@@ -3,8 +3,6 @@ package com.znap.lmr.lmr_znap;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,15 +39,10 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if (!Validations.isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
-        else {
-            setContentView(R.layout.activity_sign_in);
-        }
+        checkInternetConnection();
         setContentView(R.layout.activity_sign_in);
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        bSignOn = (Button) findViewById(R.id.bSignIn);
-        tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
+        findViewsById();
+        hideKeyboardOnTap();
 
 
         bSignOn.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +73,30 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(SignInActivity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void hideKeyboardOnTap() {
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+    }
+
     public void requestPatternValidation() {
         Request request = new Request();
         request.execute();
@@ -90,13 +108,14 @@ public class SignInActivity extends AppCompatActivity {
                 int end = matcher.end() - 1;
                 String match = request.get().substring(start, end);
                 if (match.equals(SystemMessages.BAD_REQUEST)) {
-                    match =NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY;
+                    match = NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY;
                     Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
                 }
                 if (match.equals(SystemMessages.OK)) {
                     Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                     mainIntent.putExtra(SystemMessages.USER_ID, userid);
                     SignInActivity.this.startActivity(mainIntent);
+                    finish();
                 }
             }
         } catch (InterruptedException e) {
@@ -106,8 +125,15 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    public AlertDialog.Builder buildDialog(Context c) {
 
+    public void findViewsById() {
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        bSignOn = (Button) findViewById(R.id.bSignIn);
+        tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
+    }
+
+    public AlertDialog.Builder buildDialog(Context c) {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
         builder.setTitle(SystemMessages.NO_INERNET_CONNECTION);
         builder.setMessage(NonSystemMessages.ENABLE_INTERNET_REQUEST);
@@ -119,6 +145,13 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
         return builder;
+    }
+
+    public void checkInternetConnection() {
+        if (!Validations.isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
+        else {
+            setContentView(R.layout.activity_sign_in);
+        }
     }
 
     class Request extends AsyncTask<Void, Void, String> {

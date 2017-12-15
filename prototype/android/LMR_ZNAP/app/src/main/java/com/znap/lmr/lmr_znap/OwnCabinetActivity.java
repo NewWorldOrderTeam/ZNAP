@@ -48,12 +48,7 @@ public class OwnCabinetActivity extends AppCompatActivity {
                     startActivity(openMyReviewsActivity);
                 }
             });
-            retrofit = new Retrofit.Builder()
-                    .baseUrl("http://znap.pythonanywhere.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            request = retrofit.create(Request.class);
-
+            ZnapUtility.generateRetroRequest();
             OwnCabinetActivity.getApi().getInfo(user_id).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
@@ -64,7 +59,6 @@ public class OwnCabinetActivity extends AppCompatActivity {
                     firstNameText.setText(String.valueOf(firstName));
                     lastNameText.setText(String.valueOf(lastName));
                     middleNameText.setText(String.valueOf(middleName));
-                    System.out.println(firstName);
                 }
 
                 @Override

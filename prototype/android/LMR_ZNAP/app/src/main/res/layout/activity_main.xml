@@ -86,15 +86,7 @@
             android:text="Перевірити стан виконання звернення"
             android:theme="@style/mainActButton" />
 
-        <Button
 
-            android:id="@+id/bOwnCabinet"
-            android:layout_width="160dp"
-            android:layout_height="65dp"
-            android:layout_below="@+id/bOnline"
-            android:layout_centerHorizontal="true"
-            android:text="Особистий кабінет"
-            android:theme="@style/mainActButton" />
 
         <Button
 
@@ -117,36 +109,60 @@
             android:text="Онлайн підтримка"
             android:theme="@style/mainActButton" />
 
-        <ImageButton
-            android:id="@+id/ibtFacebook"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/roundedbutton"
-            app:srcCompat="@drawable/facebook64" />
-
-        <ImageButton
-            android:id="@+id/ibtPayment"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_below="@+id/bOwnCabinet"
-            android:layout_toEndOf="@+id/bOwnCabinet"
-            android:layout_toRightOf="@+id/bOwnCabinet"
-            android:background="@drawable/roundedbutton"
-            app:srcCompat="@drawable/wallet64" />
 
         <Button
             android:id="@+id/bAboutZNAP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_width="290dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/bOnline"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/roundedbutton"
+            android:theme="@style/mainActButton"
             android:text="Про ЦНАП" />
 
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/bAboutZNAP"
+            android:layout_marginTop="10dp"
+            android:background="@color/mainButtons"
+            android:gravity="center">
 
+            <ImageButton
+                android:id="@+id/bOwnCabinet"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@null"
+                app:srcCompat="@drawable/settings" />
+
+            <ImageButton
+                android:id="@+id/ibtFacebook"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@null"
+                app:srcCompat="@drawable/facebook64" />
+
+
+            <ImageButton
+                android:id="@+id/ibtPayment"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/bOwnCabinet"
+                android:layout_marginEnd="13dp"
+                android:layout_marginRight="13dp"
+                android:background="@null"
+                app:srcCompat="@drawable/wallet64" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </ScrollView>
