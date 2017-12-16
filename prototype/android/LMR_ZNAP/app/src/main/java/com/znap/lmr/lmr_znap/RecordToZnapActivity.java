@@ -4,6 +4,7 @@ package com.znap.lmr.lmr_znap;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -27,6 +28,8 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_to_znap);
+        getSupportActionBar().setTitle(SystemMessages.REG_TO_QUEUE_TITLE);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerForZnap = (Spinner) findViewById(R.id.spinnerForZnaps);
         spinnerForZnap.setOnItemSelectedListener(this);
         spinnerForTypeOfService = (Spinner) findViewById(R.id.spinnerForTypeOfServices);
@@ -36,6 +39,14 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
         bTreg = (Button) findViewById(R.id.bTreg);
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {

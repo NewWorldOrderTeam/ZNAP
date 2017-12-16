@@ -12,7 +12,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -59,11 +58,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bOwnCabinet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(MainActivity.this, OwnCabinetActivity.class);
+                Intent mainIntent = new Intent(MainActivity.this, ProfileActivity.class);
                 mainIntent.putExtra(SystemMessages.USER_ID, user_id);
                 startActivity(mainIntent);
-
-
             }
         });
 
