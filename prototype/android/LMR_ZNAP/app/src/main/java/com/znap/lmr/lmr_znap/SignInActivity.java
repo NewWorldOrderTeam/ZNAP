@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +26,6 @@ import java.util.regex.Pattern;
 import retrofit2.Response;
 
 public class SignInActivity extends AppCompatActivity {
-
     EditText etEmail;
     EditText etPassword;
     Button bSignOn;
@@ -43,8 +43,8 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         findViewsById();
         hideKeyboardOnTap();
-
-
+        AESEncryption aesEncryption = new AESEncryption(this);
+        aesEncryption.decrypt();
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,4 +180,5 @@ public class SignInActivity extends AppCompatActivity {
             return;
         }
     }
+
 }

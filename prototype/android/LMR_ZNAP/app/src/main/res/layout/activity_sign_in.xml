@@ -29,6 +29,40 @@
         android:textSize="30dp"
         android:id="@+id/textView2" />
 
+    <TextView
+
+        android:id="@+id/originalField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/encodedField"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#000"
+        android:textSize="10dp" />
+
+    <TextView
+
+        android:id="@+id/encodedField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/decodedField"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#000"
+        android:textSize="10dp" />
+
+    <TextView
+
+        android:id="@+id/decodedField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="#000"
+        android:textSize="10dp" />
+
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="360dp"
