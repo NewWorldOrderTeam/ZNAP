@@ -1,16 +1,15 @@
 package com.znap.lmr.lmr_znap;
 
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +36,14 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
         spinnerForService = (Spinner) findViewById(R.id.spinnerForService);
         spinnerForService.setOnItemSelectedListener(this);
         bTreg = (Button) findViewById(R.id.bTreg);
+        bTreg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(RecordToZnapActivity.this,
+                        RegisteredToZnap.class);
+                startActivity(myIntent);
+            }
+        });
 
 
     }

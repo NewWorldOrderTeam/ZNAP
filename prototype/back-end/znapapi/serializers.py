@@ -9,4 +9,3 @@ class ZnapSerialezer(serializers.ModelSerializer):
     class Meta:
         model = Znap
         fields = ('id', 'name')
-
