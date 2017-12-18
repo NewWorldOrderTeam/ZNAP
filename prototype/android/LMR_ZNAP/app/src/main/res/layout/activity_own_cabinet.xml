@@ -11,12 +11,9 @@
         android:id="@+id/etFirstName"
         android:layout_width="180dp"
         android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="66dp"
-        android:layout_marginRight="66dp"
-        android:layout_marginTop="106dp"
+        android:layout_alignLeft="@+id/etMiddleName"
+        android:layout_alignStart="@+id/etMiddleName"
+        android:layout_alignTop="@+id/linearLayout3"
         android:text=""
         android:textAlignment="center"
         android:textSize="20dp" />
@@ -25,10 +22,11 @@
         android:id="@+id/etMiddleName"
         android:layout_width="180dp"
         android:layout_height="30dp"
-        android:layout_alignLeft="@+id/etFirstName"
-        android:layout_alignStart="@+id/etFirstName"
-        android:layout_below="@+id/etFirstName"
-        android:layout_marginTop="17dp"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/linearLayout2"
+        android:layout_toRightOf="@+id/linearLayout2"
         android:text=""
         android:textAlignment="center"
         android:textSize="20dp" />
@@ -37,53 +35,94 @@
         android:id="@+id/etLastName"
         android:layout_width="180dp"
         android:layout_height="30dp"
-        android:layout_alignLeft="@+id/etMiddleName"
-        android:layout_alignStart="@+id/etMiddleName"
-        android:layout_below="@+id/etMiddleName"
-        android:layout_marginTop="17dp"
+        android:layout_alignBottom="@+id/linearLayout2"
+        android:layout_alignLeft="@+id/etFirstName"
+        android:layout_alignStart="@+id/etFirstName"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:text=""
         android:textAlignment="center"
         android:textSize="20dp" />
 
+
+
+
+    <LinearLayout
+        android:layout_marginTop="240dp"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3">
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/person"/>
+        <TextView
+            android:textStyle="bold"
+
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Ваше ім'я:"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="290dp"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2">
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/person"/>
+        <TextView
+            android:textStyle="bold"
+
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Ваше прізвище:"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="340dp"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout">
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/person"/>
+        <TextView
+            android:textStyle="bold"
+
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="По-батькові:"/>
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/myreviews"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/etLastName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp"
-        android:background="@color/color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="75dp"
+        android:layout_toEndOf="@+id/linearLayout3"
+        android:layout_toRightOf="@+id/linearLayout3"
+        android:background="@drawable/buttonstyle"
         android:text="Мої відгуки"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:layout_above="@+id/etMiddleName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp"
-        android:text="Ваше ім'я:" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_alignTop="@+id/etMiddleName"
-        android:text="Прізвище:" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:layout_alignEnd="@+id/textView5"
-        android:layout_alignRight="@+id/textView5"
-        android:layout_alignTop="@+id/etLastName"
-        android:text="По-батькові:" />
-
-
+        android:textColor="#fff" />
 </RelativeLayout>
