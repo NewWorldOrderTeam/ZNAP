@@ -18,6 +18,7 @@ from django.contrib import admin
 from rest_framework import routers
 from rest_framework.routers import DefaultRouter
 
+import userapi
 from adminapi.views import AdminLoginAPIView, AdminViewSet
 from queueapi.views import QueueViewSet, QueueCreateAPIView
 from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView, DialogViewSet
@@ -62,4 +63,5 @@ urlpatterns = [
     url(r'^api/v1.0/addrate/', RateCreateAPIView.as_view(), name='create rate'),
     url(r'^api/v1.0/addmessage/', AddMessageAPIView.as_view(), name='add message'),
     url(r'^api/v1.0/registerToQueue/',QueueCreateAPIView.as_view(), name='register to queue'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', userapi.views.activate, name='activate'),
 ]
