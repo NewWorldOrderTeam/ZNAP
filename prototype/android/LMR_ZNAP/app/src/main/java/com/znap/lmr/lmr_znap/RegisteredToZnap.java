@@ -18,17 +18,18 @@ public class RegisteredToZnap extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recorded_to_znap);
+        setContentView(R.layout.activity_registered_to_znap);
         spinnerForTime = (Spinner) findViewById(R.id.spinnerForTime);
         spinnerForHour = (Spinner) findViewById(R.id.spinnerForHour);
         btToReg = (Button) findViewById(R.id.buttonTOReg);
         btToReg.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-
+            @Override
+            public void onClick(View view) {
                 Intent myIntent = new Intent(RegisteredToZnap.this,
-                        MainActivity.class);
+                        RecordToZnapActivity.class);
                 startActivity(myIntent);
             }
         });
     }
 }
+
