@@ -1,10 +1,18 @@
+from django.conf.urls import url
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.fields import CharField, EmailField, IntegerField
 
 from userapi.models import UserProfile
+from userapi.tokens import account_activation_token
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -43,10 +51,22 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
             last_name = last_name,
             middle_name = middle_name,
             email = email,
-            phone=phone
+            phone=phone,
+            is_active = False
         )
         user_obj.set_password(password)
+
         user_obj.save()
+        mail_subject = 'Activate your account.'
+        user = urlsafe_base64_encode(force_bytes(user_obj.id))
+        token = account_activation_token.make_token(user_obj)
+        message =  'Hi ' + '\nPlease click on the link to confirm your registration\n' +'http://znap.pythonanywhere.com/' + 'activate/' + user + '/' +token + '/'
+        print message
+        to_email = email
+        email = EmailMessage(
+            mail_subject, message, to=[to_email]
+        )
+        email.send()
         return validated_data
 
 class UserLoginSerializer(serializers.ModelSerializer):
@@ -69,6 +89,8 @@ class UserLoginSerializer(serializers.ModelSerializer):
         if user_obj:
             if not user_obj.check_password(password):
                 raise serializers.ValidationError("Incorrect password")
+            elif (user_obj.is_active!=True):
+                raise serializers.ValidationError("This account is not activated")
             else:
                 data['id'] = user_obj.id
         return data
