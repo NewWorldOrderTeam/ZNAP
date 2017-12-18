@@ -61,7 +61,6 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         user = urlsafe_base64_encode(force_bytes(user_obj.id))
         token = account_activation_token.make_token(user_obj)
         message =  'Hi ' + '\nPlease click on the link to confirm your registration\n' +'http://znap.pythonanywhere.com/' + 'activate/' + user + '/' +token + '/'
-        print message
         to_email = email
         email = EmailMessage(
             mail_subject, message, to=[to_email]
