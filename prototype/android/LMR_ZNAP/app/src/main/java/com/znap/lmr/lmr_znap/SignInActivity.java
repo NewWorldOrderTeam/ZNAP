@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -17,11 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 import retrofit2.Response;
 
@@ -164,14 +162,24 @@ public class SignInActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             Services services = new Services();
             Response response = services.SignIn(email, password);
-            System.out.println(response);
+            /*System.out.println(response);*/
             User user = (User) response.body();
             if (user == null) {
+                System.out.println(response.body());
                 return response.toString();
             } else {
                 userid = user.getId();
-                return response.toString();
+                if (userid!=0) {
+                    return response.toString();
+                }
+                else {
+                    String error = user.getNonFieldErrors().get(0);
+                    System.out.println("qwe");
+                    return response.toString();
+                }
+
             }
+
         }
 
         @Override
