@@ -169,13 +169,13 @@ public class SignInActivity extends AppCompatActivity {
                 return response.toString();
             } else {
                 userid = user.getId();
-                if (userid!=0) {
+                if (userid==0) {
                     return response.toString();
                 }
                 else {
                     String error = user.getNonFieldErrors().get(0);
-                    System.out.println("qwe");
-                    return response.toString();
+                    System.out.println(error);
+                    return error;
                 }
 
             }

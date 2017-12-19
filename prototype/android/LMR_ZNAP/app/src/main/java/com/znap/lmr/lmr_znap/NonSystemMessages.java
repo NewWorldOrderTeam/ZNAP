@@ -12,7 +12,7 @@ public class NonSystemMessages {
     public static final String FIELD_MUST_BE_NOT_EMPTY = "Поле має бути заповнене";
     public static final String ENABLE_INTERNET_REQUEST = "Увімкніть, будь ласка, інтернет";
     public static final String OKAY = "Oк";
-    public static final String FIELD_IS_NOT_ENTERED_CORRECTLY = "Some data is not entered correctly";
+    public static final String FIELD_IS_NOT_ENTERED_CORRECTLY = "Дані введено неправильно введено або акаунт не активовано";
     public static final String NOT_VALID = "Not Valid";
     public static final String VALID = "Valid";
     public static final String activateAccount = "Підтвердіть ваш аккаунт на :";
