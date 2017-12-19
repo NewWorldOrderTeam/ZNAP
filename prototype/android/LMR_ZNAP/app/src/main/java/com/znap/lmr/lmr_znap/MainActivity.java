@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        MainActivity.this.finish();
+                        finish();
                     }
                 })
                 .setNegativeButton("No", null)

@@ -4,9 +4,12 @@ package com.znap.lmr.lmr_znap;
  * Created by Andy Blyzniuk on 01.11.2017.
  */
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,7 +18,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +28,7 @@ import java.util.regex.Pattern;
 import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
-
+    Context context = this;
     EditText etEmail;
     EditText etPassword;
     EditText etFirstName;
@@ -41,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
     String lastName;
     String middleName;
     String phone;
-    private PopupWindow mPopupWindow;
+    String emailToShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,18 @@ public class SignUpActivity extends AppCompatActivity {
                     middleName = etMiddleName.getText().toString();
                     lastName = etLastName.getText().toString();
                     phone = etPhoneNumber.getText().toString();
-                    requestPatternValidation();
+                    emailToShow = email;
+                    new AlertDialog.Builder(context)
+                            .setMessage(NonSystemMessages.activateAccount + " " +emailToShow)
+                            .setCancelable(false)
+                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    requestPatternValidation();
+                                    finish();
+                                }
+                            })
+                            .show();
+
                 }
             }
         });

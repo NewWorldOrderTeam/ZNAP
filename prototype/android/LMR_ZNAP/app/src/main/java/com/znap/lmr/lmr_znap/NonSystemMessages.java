@@ -15,6 +15,7 @@ public class NonSystemMessages {
     public static final String FIELD_IS_NOT_ENTERED_CORRECTLY = "Some data is not entered correctly";
     public static final String NOT_VALID = "Not Valid";
     public static final String VALID = "Valid";
+    public static final String activateAccount = "Підтвердіть ваш аккаунт на :";
 
     public AlertDialog.Builder buildDialog(Context c) {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
