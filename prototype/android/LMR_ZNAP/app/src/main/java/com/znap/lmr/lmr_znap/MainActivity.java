@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent openRecordToZnapActivity = new Intent(MainActivity.this, RecordToZnapActivity.class);
-
+                openRecordToZnapActivity.putExtra(SystemMessages.USER_ID, user_id);
                 startActivity(openRecordToZnapActivity);
             }
         });

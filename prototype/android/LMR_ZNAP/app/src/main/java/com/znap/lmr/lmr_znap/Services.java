@@ -18,11 +18,11 @@ public class Services {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    Request service = retrofit.create(Request.class);
+    Request serviceR = retrofit.create(Request.class);
 
 
     public Response SignIn(String email, String password) {
-        Call<User> call = service.signOn(email, password);
+        Call<User> call = serviceR.signOn(email, password);
         try {
             Response response = call.execute();
             return response;
@@ -37,7 +37,7 @@ public class Services {
     }
 
     public Response SignUp(String firstName, String lastName, String middleName, String phone, String email, String password) {
-        Call<User> call = service.signUp(firstName, lastName, middleName, phone, email, password);
+        Call<User> call = serviceR.signUp(firstName, lastName, middleName, phone, email, password);
         try {
             Response response = call.execute();
             // call.execute();
@@ -51,7 +51,7 @@ public class Services {
     }
 
     public Response Rate(int user_id, int znap_id, String description, int quality) {
-        Call<User> call = service.addrate(user_id,znap_id,description,quality);
+        Call<User> call = serviceR.addrate(user_id, znap_id, description, quality);
         try {
             Response response = call.execute();
             // call.execute();
@@ -64,4 +64,19 @@ public class Services {
         return null;
     }
 
+    public Response Queue(int user_id, int znap_id, String date, String time, int service) {
+        Call<User> call = serviceR.regToQueue(user_id,znap_id,date,time,service);
+        try {
+            Response response = call.execute();
+            // call.execute();
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
+
+

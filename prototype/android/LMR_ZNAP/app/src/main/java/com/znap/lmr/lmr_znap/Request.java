@@ -32,6 +32,11 @@ public interface Request {
     @GET("/api/v1.0/user/{user}/rate")
     Call<List<Rate>> getRateForUser(@Path("user") int userid);
 
+    @FormUrlEncoded
+    @POST("/api/v1.0/registerToQueue/")
+    Call<User> regToQueue(@Field("user_id") int user_id, @Field("znap_id") int znap_id, @Field("date") String date, @Field("time") String time,@Field("service") int service);
+
+
 }
 
 

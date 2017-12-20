@@ -21,7 +21,7 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
             textForTypeOfService,
             textForService;
     Button bTreg;
-    int znap_id,type_id,service_id;
+    int znap_id,type_id,service_id,user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,10 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
         setContentView(R.layout.activity_record_to_znap);
         getSupportActionBar().setTitle(SystemMessages.REG_TO_QUEUE_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Bundle bundle = getIntent().getExtras();
+        assert bundle != null;
+        user_id = bundle.getInt(SystemMessages.USER_ID);
+        System.out.println(user_id);
         spinnerForZnap = (Spinner) findViewById(R.id.spinnerForZnaps);
         spinnerForZnap.setOnItemSelectedListener(this);
         spinnerForTypeOfService = (Spinner) findViewById(R.id.spinnerForTypeOfServices);
@@ -41,6 +45,9 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
             public void onClick(View view) {
                 Intent myIntent = new Intent(RecordToZnapActivity.this,
                         RegisteredToZnap.class);
+                myIntent.putExtra(SystemMessages.USER_ID, user_id);
+                myIntent.putExtra("znap_id",znap_id);
+                myIntent.putExtra("service_id",service_id);
                 startActivity(myIntent);
             }
         });
