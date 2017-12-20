@@ -26,14 +26,14 @@ from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet
 
 from rest_framework_extensions.routers import NestedRouterMixin
 
-from znapapi.views import ZnapViewSet
+from znapapi.views import ZnapViewSet, RegistrationToZnapCreateAPIView, RegistrationToZnapViewSet
 
 
 class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
     pass
 
 router = NestedDefaultRouter()
-router.register(r'queue', QueueViewSet)
+router.register(r'queue', RegistrationToZnapViewSet)
 
 dialog_router = router.register('rate', RateViewSet)
 dialog_router.register('dialog', DialogViewSet,
@@ -62,6 +62,6 @@ urlpatterns = [
     url(r'^api/v1.0/adminlogin/', AdminLoginAPIView.as_view(), name='adminlogin'),
     url(r'^api/v1.0/addrate/', RateCreateAPIView.as_view(), name='create rate'),
     url(r'^api/v1.0/addmessage/', AddMessageAPIView.as_view(), name='add message'),
-    url(r'^api/v1.0/registerToQueue/',QueueCreateAPIView.as_view(), name='register to queue'),
+    url(r'^api/v1.0/registerToQueue/',RegistrationToZnapCreateAPIView.as_view(), name='register to queue'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', userapi.views.activate, name='activate'),
 ]

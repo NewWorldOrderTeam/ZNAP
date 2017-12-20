@@ -30,7 +30,7 @@ class servicesForCNAP(models.Model):
 class cnapWithService(models.Model):
     nameOfZnap = models.ForeignKey(infoAboutCnap)
     service = models.ForeignKey(servicesForCNAP)
-    dateOfRegistration = models.DateField(default=datetime.now())
+    dateOfRegistration = models.DateField()
     status = models.BooleanField()
 
 class historyOfRecords(models.Model):

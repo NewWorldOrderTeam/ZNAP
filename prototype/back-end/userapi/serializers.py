@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
