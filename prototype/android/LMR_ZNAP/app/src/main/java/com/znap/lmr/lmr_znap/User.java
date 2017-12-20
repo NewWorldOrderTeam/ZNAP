@@ -4,6 +4,8 @@ package com.znap.lmr.lmr_znap;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User {
 
     @SerializedName("url")
@@ -24,6 +26,18 @@ public class User {
     @SerializedName("email")
     @Expose
     private String email;
+
+    @SerializedName("non_field_errors")
+    @Expose
+    private List<String> nonFieldErrors = null;
+
+    public List<String> getNonFieldErrors() {
+        return nonFieldErrors;
+    }
+
+    public void setNonFieldErrors(List<String> nonFieldErrors) {
+        this.nonFieldErrors = nonFieldErrors;
+    }
 
     public User(String url, int id, String firstName, String lastName, String middleName, String email, String phone) {
         this.url = url;

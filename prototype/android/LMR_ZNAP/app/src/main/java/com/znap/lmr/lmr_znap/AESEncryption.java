@@ -1,6 +1,5 @@
 package com.znap.lmr.lmr_znap;
 
-import android.util.Base64;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -24,7 +23,7 @@ public class AESEncryption extends SignInActivity {
     }
     public  void decrypt() {
         TextView originalField = (TextView) this.activity.findViewById(R.id.originalField);
-        originalField.setText("\n[ORIGINAL]:\n" + theTestText + "\n");
+        //originalField.setText("\n[ORIGINAL]:\n" + theTestText + "\n");
         // Set up secret key spec for 128-bit AES encryption and decryption
         SecretKeySpec sks = null;
         try {
@@ -47,8 +46,7 @@ public class AESEncryption extends SignInActivity {
             Log.e(TAG, "AES encryption error");
         }
         TextView encodedField = (TextView)this.activity.findViewById(R.id.encodedField);
-        encodedField.setText("[ENCODED]:\n" +
-                Base64.encodeToString(encodedBytes, Base64.DEFAULT) + "\n");
+        //encodedField.setText("[ENCODED]:\n" +Base64.encodeToString(encodedBytes, Base64.DEFAULT) + "\n");
 
         // Decode the encoded data with AES
         byte[] decodedBytes = null;
@@ -60,6 +58,6 @@ public class AESEncryption extends SignInActivity {
             Log.e(TAG, "AES decryption error");
         }
         TextView decodedField = (TextView)this.activity.findViewById(R.id.decodedField);
-        decodedField.setText("[DECODED]:\n" + new String(decodedBytes) + "\n");
+        //decodedField.setText("[DECODED]:\n" + new String(decodedBytes) + "\n");
     }
 }
