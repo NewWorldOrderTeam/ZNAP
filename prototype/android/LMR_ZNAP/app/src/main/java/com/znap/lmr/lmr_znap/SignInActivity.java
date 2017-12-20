@@ -1,5 +1,6 @@
 package com.znap.lmr.lmr_znap;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class SignInActivity extends AppCompatActivity {
     String email;
     String password;
     int userid;
+    ProgressDialog progDailog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +69,15 @@ public class SignInActivity extends AppCompatActivity {
                 SignInActivity.this.startActivity(signUpIntent);
             }
         });
-
-
     }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if ( progDailog!=null && progDailog.isShowing() ){
+            progDailog.cancel();
+        }
+    }
+
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(SignInActivity.INPUT_METHOD_SERVICE);
@@ -153,9 +161,16 @@ public class SignInActivity extends AppCompatActivity {
 
     class Request extends AsyncTask<Void, Void, String> {
 
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progDailog = new ProgressDialog(SignInActivity.this);
+            progDailog.setMessage("Loading...");
+            progDailog.setIndeterminate(false);
+            progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDailog.setCancelable(true);
+            progDailog.show();
         }
 
         @Override
@@ -169,24 +184,18 @@ public class SignInActivity extends AppCompatActivity {
                 return response.toString();
             } else {
                 userid = user.getId();
-                if (userid==0) {
-                    return response.toString();
-                }
-                else {
-                    String error = user.getNonFieldErrors().get(0);
-                    System.out.println(error);
-                    return error;
-                }
-
             }
+            return response.toString();
 
         }
+
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            return;
+
         }
+
     }
 
 }
