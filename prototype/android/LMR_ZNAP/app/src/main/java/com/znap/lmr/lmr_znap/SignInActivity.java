@@ -48,7 +48,10 @@ public class SignInActivity extends AppCompatActivity {
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = etEmail.getText().toString();
+                if (checkInternetConnection()) {
+
+                } else{
+                    email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
                 if (TextUtils.isEmpty(email)) {
                     etEmail.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
@@ -59,6 +62,7 @@ public class SignInActivity extends AppCompatActivity {
                     return;
                 }
                 requestPatternValidation();
+            }
 
             }
         });
@@ -152,10 +156,13 @@ public class SignInActivity extends AppCompatActivity {
         return builder;
     }
 
-    public void checkInternetConnection() {
-        if (!Validations.isConnected(SignInActivity.this)) buildDialog(SignInActivity.this).show();
-        else {
+    public boolean checkInternetConnection() {
+        if (!Validations.isConnected(SignInActivity.this)) {
+            buildDialog(SignInActivity.this).show();
+            return true;
+        }else {
             setContentView(R.layout.activity_sign_in);
+            return false;
         }
     }
 
