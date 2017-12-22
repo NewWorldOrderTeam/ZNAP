@@ -20,6 +20,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView firstNameText;
     TextView lastNameText;
     TextView middleNameText;
+    TextView emailText,phoneText,emailText1;
     private Retrofit retrofit;
     private static Request request;
     private int user_id;
@@ -31,9 +32,11 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_own_cabinet);
         getSupportActionBar().setTitle(SystemMessages.PROFILE_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        firstNameText = (TextView) findViewById(R.id.etFirstName);
-        lastNameText = (TextView) findViewById(R.id.etLastName);
-        middleNameText = (TextView) findViewById(R.id.etMiddleName);
+        firstNameText = (TextView) findViewById(R.id.user_profile_name);
+        lastNameText = (TextView) findViewById(R.id.user_profile_surname);
+        emailText = (TextView) findViewById(R.id.email);
+        emailText1 = (TextView) findViewById(R.id.email1);
+        phoneText = (TextView) findViewById(R.id.phone);
         Bundle bundle = getIntent().getExtras();
 
         users = new ArrayList<>();
@@ -55,10 +58,14 @@ public class ProfileActivity extends AppCompatActivity {
                     User user = (User) response.body();
                     String firstName = user.getFirstName();
                     String lastName = user.getLastName();
-                    String middleName = user.getMiddleName();
+                    String phone = user.getPhone();
+                    String email = user.getEmail();
+                    String email1= user.getEmail();
                     firstNameText.setText(String.valueOf(firstName));
                     lastNameText.setText(String.valueOf(lastName));
-                    middleNameText.setText(String.valueOf(middleName));
+                    emailText.setText(String.valueOf(email));
+                    emailText1.setText(String.valueOf(phone));
+                    phoneText.setText(String.valueOf(phone));
                 }
 
                 @Override

@@ -160,14 +160,13 @@ public class SignInActivity extends AppCompatActivity {
         if (!Validations.isConnected(SignInActivity.this)) {
             buildDialog(SignInActivity.this).show();
             return true;
-        }else {
+        } else {
             setContentView(R.layout.activity_sign_in);
             return false;
         }
     }
 
     class Request extends AsyncTask<Void, Void, String> {
-
 
         @Override
         protected void onPreExecute() {
