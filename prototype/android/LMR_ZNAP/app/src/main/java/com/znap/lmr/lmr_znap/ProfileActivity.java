@@ -25,11 +25,12 @@ public class ProfileActivity extends AppCompatActivity {
     private static Request request;
     private int user_id;
     List<User> users;
+    private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_own_cabinet);
+        setContentView(R.layout.activity_profile);
         getSupportActionBar().setTitle(SystemMessages.PROFILE_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         firstNameText = (TextView) findViewById(R.id.user_profile_name);
@@ -60,7 +61,6 @@ public class ProfileActivity extends AppCompatActivity {
                     String lastName = user.getLastName();
                     String phone = user.getPhone();
                     String email = user.getEmail();
-                    String email1= user.getEmail();
                     firstNameText.setText(String.valueOf(firstName));
                     lastNameText.setText(String.valueOf(lastName));
                     emailText.setText(String.valueOf(email));
@@ -84,7 +84,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     public static Request getApi() {
         return request;

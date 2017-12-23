@@ -95,8 +95,9 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:text="Увійти"
+        android:textColor="#FFFFFF"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton"
+        android:theme="@style/mainActButton"
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="105dp" />
 

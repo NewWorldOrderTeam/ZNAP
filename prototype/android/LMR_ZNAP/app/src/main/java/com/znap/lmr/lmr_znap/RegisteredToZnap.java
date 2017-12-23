@@ -37,9 +37,6 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
         user_id = bundle.getInt(SystemMessages.USER_ID);
         znap_id = bundle.getInt("znap_id");
         service = bundle.getInt("service_id");
-        System.out.println(znap_id);
-        System.out.println(service);
-        System.out.println(user_id);
         if (bundle != null) {
             assert bundle != null;
             int userid = bundle.getInt(SystemMessages.USER_ID);
@@ -104,7 +101,6 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         Toast.makeText(this, "Select something", Toast.LENGTH_SHORT).show();
-
     }
 
     class Request extends AsyncTask<Void, Void, String> {

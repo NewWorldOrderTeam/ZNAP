@@ -4,21 +4,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-
 
 import retrofit2.Response;
 
@@ -37,6 +35,7 @@ public class RateActivity extends AppCompatActivity implements
     String description;
     Spinner spinnerForZnaps;
     EditText etDescription;
+    TextView labelForQuality;
     boolean badButtonClickedStatus = false;
     boolean goodButtonClickedStatus = true;
 
@@ -50,6 +49,7 @@ public class RateActivity extends AppCompatActivity implements
         spinnerForZnaps.setOnItemSelectedListener(this);
         etDescription = (EditText) findViewById(R.id.etDescription);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
+        labelForQuality = (TextView) findViewById(R.id.labelForQuality);
         btGood = (Button) findViewById(R.id.btGood);
         btBad = (Button) findViewById(R.id.btBad);
         Bundle bundle = getIntent().getExtras();

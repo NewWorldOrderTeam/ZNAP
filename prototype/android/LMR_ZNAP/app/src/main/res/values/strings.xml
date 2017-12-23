@@ -2,6 +2,8 @@
     <string name="app_name">ЦНАП м.Львів</string>
     <string name="search_title">Search</string>
     <string name="spinner_title">Вибір послуг</string>
+    <string name="permissions_not_granted_read_phone_state" />
+    <string name="permission_read_phone_state_rationale" />
     <string-array name="znaps">
         <item>Виговського</item>
         <item>Ратуша</item>
