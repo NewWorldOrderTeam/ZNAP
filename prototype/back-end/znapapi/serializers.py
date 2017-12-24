@@ -1,4 +1,6 @@
+# coding=utf-8
 from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 from rest_framework import serializers
 from rest_framework.fields import CharField, IntegerField, DateField, TimeField
 
@@ -18,8 +20,8 @@ class RegistrationToZnapSerializer(serializers.ModelSerializer):
 
 class CreateRegistrationToZnapSerializer(serializers.HyperlinkedModelSerializer):
     user_id = IntegerField()
-    date = DateField()
-    time = TimeField()
+    date = CharField()
+    time = CharField()
     service = CharField()
     znap_id = IntegerField()
     class Meta:
@@ -47,5 +49,14 @@ class CreateRegistrationToZnapSerializer(serializers.HyperlinkedModelSerializer)
             service = service
         )
         reg_obj.save()
+
+        mail_subject = "Реєстрація у ЦНАП"
+        message = u"Вітаємо, Ви зареєстровані на прийом у ЦНАП на {} о {}".format(reg_obj.date, reg_obj.time)
+
+        to_email = User.objects.filter(id=user_id).first().email
+        email = EmailMessage(
+            mail_subject, message, to=[to_email]
+        )
+        email.send()
 
         return validated_data
