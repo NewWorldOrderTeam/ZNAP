@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.conf.urls import url
 from django.contrib.auth import login
 from django.contrib.auth.models import User
@@ -56,10 +57,10 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         user_obj.set_password(password)
 
         user_obj.save()
-        mail_subject = 'Activate your account.'
+        mail_subject = 'Активація аккаунта - ЦНАП'
         user = urlsafe_base64_encode(force_bytes(user_obj.id))
         token = account_activation_token.make_token(user_obj)
-        message =  'Hi ' + '\nPlease click on the link to confirm your registration\n' +'http://znap.pythonanywhere.com/' + 'activate/' + user + '/' +token + '/'
+        message =  u'Привіт, {} \nБудь ласка, перейди за посиланням, щоб підтвердити реєстрацію\nhttp://znap.pythonanywhere.com/activate/{}/{}/'.format(user_obj.first_name, user, token)
         to_email = email
         email = EmailMessage(
             mail_subject, message, to=[to_email]
