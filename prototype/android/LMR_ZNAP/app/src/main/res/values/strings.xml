@@ -5,9 +5,13 @@
     <string name="permissions_not_granted_read_phone_state" />
     <string name="permission_read_phone_state_rationale" />
     <string-array name="znaps">
-        <item>Виговського</item>
-        <item>Ратуша</item>
-        <item>Червоної калини</item>
+        <item>вул. І. Виговського, 32</item>
+        <item>вул. Ген. Чупринки, 85</item>
+        <item>вул. К. Левицького, 67</item>
+        <item>вул. К. Левицького, 67</item>
+        <item>пр. Червоної Калини, 72а</item>
+        <item>пл. Ринок, 1</item>
+        <item>вул. Хвильового, 14а</item>
     </string-array>
     <string-array name="types">
         <item>Отримати довідку</item>

@@ -1,7 +1,10 @@
 package com.znap.lmr.lmr_znap;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -38,6 +41,7 @@ public class RateActivity extends AppCompatActivity implements
     TextView labelForQuality;
     boolean badButtonClickedStatus = false;
     boolean goodButtonClickedStatus = true;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,6 @@ public class RateActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 description = etDescription.getText().toString();
-                RateActivity.Request request = new RateActivity.Request();
                 if (TextUtils.isEmpty(description)) {
                     etDescription.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                     return;
@@ -88,21 +91,17 @@ public class RateActivity extends AppCompatActivity implements
                 } else if (badButtonClickedStatus) {
                     quality = Integer.parseInt(btBad.getText().toString());
                 }
-                request.execute();
-                Pattern pattern = Pattern.compile("message=.*,");
-                try {
-                    Matcher matcher = pattern.matcher(request.get());
-                    while (matcher.find()) {
-                        int start = matcher.start() + 8;
-                        int end = matcher.end() - 1;
-                        String match = request.get().substring(start, end);
-                        Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+                new AlertDialog.Builder(context)
+                        .setMessage(NonSystemMessages.rateSuccessful)
+                        .setCancelable(false)
+                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                requestPatternValidation();
+                                finish();
+                            }
+                        })
+                        .show();
+
             }
         });
     }
@@ -115,6 +114,25 @@ public class RateActivity extends AppCompatActivity implements
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+    public void requestPatternValidation(){
+        RateActivity.Request request = new RateActivity.Request();
+        request.execute();
+        Pattern pattern = Pattern.compile("message=.*,");
+        try {
+            Matcher matcher = pattern.matcher(request.get());
+            while (matcher.find()) {
+                int start = matcher.start() + 8;
+                int end = matcher.end() - 1;
+                String match = request.get().substring(start, end);
+                Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     class Request extends AsyncTask<Void, Void, String> {
