@@ -17,6 +17,7 @@ public class NonSystemMessages {
     public static final String VALID = "Valid";
     public static final String activateAccount = "Підтвердіть ваш аккаунт на :";
     public static final String rateSuccessful = "Ви успішно залишили відгук";
+    public static final String recordToZnapSuccessFull = "Ви успішно зареєструвались ";
 
     public AlertDialog.Builder buildDialog(Context c) {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
