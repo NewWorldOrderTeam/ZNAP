@@ -57,6 +57,7 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         user_obj.set_password(password)
 
         user_obj.save()
+        
         mail_subject = 'Активація аккаунта - ЦНАП'
         user = urlsafe_base64_encode(force_bytes(user_obj.id))
         token = account_activation_token.make_token(user_obj)
