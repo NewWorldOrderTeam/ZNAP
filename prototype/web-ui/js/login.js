@@ -2,7 +2,7 @@ function adminLogin() {
     username = $('#username').val();
     password = $('#password').val();
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://znap.pythonanywhere.com/api/v1.0/adminlogin/", false);
+    xhr.open("POST", "https://znap.pythonanywhere.com/api/v1.0/adminlogin/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     admin = {

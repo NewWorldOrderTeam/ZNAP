@@ -3,7 +3,7 @@ znap_id = localStorage.getItem('znap_id');
 
 function userRates(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/"+id+"/rate/", false);
+    xhr.open("GET", "https://znap.pythonanywhere.com/api/v1.0/user/"+id+"/rate/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
     uRates = JSON.parse(xhr.response);
@@ -12,7 +12,7 @@ function userRates(id) {
 
 function isRateClosed (user_id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/"+user_id+"/rate/?is_closed=false", false);
+    xhr.open("GET", "https://znap.pythonanywhere.com/api/v1.0/user/"+user_id+"/rate/?is_closed=false", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
     closed_rates = JSON.parse(xhr.response);
@@ -22,7 +22,7 @@ function isRateClosed (user_id) {
 
 function getUsers(){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/", false);
+    xhr.open("GET", "https://znap.pythonanywhere.com/api/v1.0/user/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
     users = JSON.parse(xhr.response);
@@ -78,7 +78,7 @@ function getUsers(){
 
 function getUser(id){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/user/"+id+"/", false);
+    xhr.open("GET", "https://znap.pythonanywhere.com/api/v1.0/user/"+id+"/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
     user = JSON.parse(xhr.response);
@@ -88,7 +88,7 @@ function getUser(id){
 function getRate() {
   //  console.log(admin_id);
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/znap/"+znap_id+"/rate/", false);
+    xhr.open("GET", "https://znap.pythonanywhere.com/api/v1.0/znap/"+znap_id+"/rate/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
     rates = JSON.parse(xhr.response);
@@ -121,7 +121,7 @@ function getRate() {
 
 function getAdminRates() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://znap.pythonanywhere.com/api/v1.0/admin/"+admin_id+"/rate/", false);
+    xhr.open("GET", "https://znap.pythonanywhere.com/api/v1.0/admin/"+admin_id+"/rate/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
     rates = JSON.parse(xhr.response);
@@ -134,7 +134,7 @@ function closeRate(id) {
     };
 
     var xhr = new XMLHttpRequest();
-    xhr.open("PUT", "http://znap.pythonanywhere.com/api/v1.0/rate/"+id+"/", false);
+    xhr.open("PUT", "https://znap.pythonanywhere.com/api/v1.0/rate/"+id+"/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(closeRate));
 }
@@ -145,7 +145,7 @@ function putAdmin(admin_id, rate_id) {
         admin: admin_id
     };
     var xhr = new XMLHttpRequest();
-    xhr.open("PUT", "http://znap.pythonanywhere.com/api/v1.0/rate/"+rate_id+"/", false);
+    xhr.open("PUT", "https://znap.pythonanywhere.com/api/v1.0/rate/"+rate_id+"/", false);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(adminInRate));
 
