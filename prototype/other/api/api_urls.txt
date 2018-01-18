@@ -28,3 +28,6 @@ http://znap.pythonanywhere.com/api/v1.0/znap/ - all znaps
 http://znap.pythonanywhere.com/api/v1.0/znap/{znap_id}/ - specific znap
 http://znap.pythonanywhere.com/api/v1.0/znap/{znap_id}/rate/ - all rates in specific znap
 http://znap.pythonanywhere.com/api/v1.0/znap/{znap_id}/rate/{rate_id} - specific rate in specific znap
+
+Qlogic API:
+http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/getServiceCenterList?organisationGuid={28c94bad-f024-4289-a986-f9d79c9d8102} - all znaps

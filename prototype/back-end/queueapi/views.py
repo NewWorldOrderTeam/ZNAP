@@ -16,5 +16,3 @@ class QueueCreateAPIView(CreateAPIView):
     permission_classes = [AllowAny]
     serializer_class = QueueCreateSerializer
     queryset = cnapWithService.objects.all()
-
-
