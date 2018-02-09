@@ -1,3 +1,5 @@
+import json, urllib
+
 import requests
 from django.shortcuts import render
 
@@ -20,9 +22,12 @@ class ZnapViewSet(viewsets.ModelViewSet):
 class QlogicCnapViewSet(APIView):
     permission_classes = [AllowAny]
 
-    def get(self,request, format = None):
-        r = requests.get('http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/getServiceCenterList?organisationGuid={28c94bad-f024-4289-a986-f9d79c9d8102}')
-        cnaps = r.json()
+    def get(self, request):
+        organisationGuid = '{28c94bad-f024-4289-a986-f9d79c9d8102}'
+
+        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/getServiceCenterList?organisationGuid='+organisationGuid
+        r = urllib.urlopen(url).read()
+        cnaps = json.loads(r)
         cnaps_list = cnaps['d']
 
         json_cnap = []
@@ -30,7 +35,7 @@ class QlogicCnapViewSet(APIView):
             name = cnap['ServiceCenterName']
             service_id = cnap['ServiceCenterId']
             json_cnap.append({'name':name,
-                              'service_id': service_id})
+                              'service_center_id': service_id})
         return Response(json_cnap)
 
 class RegistrationToZnapCreateAPIView(CreateAPIView):
@@ -42,3 +47,28 @@ class RegistrationToZnapViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = RegistrationToZnap.objects.all()
     serializer_class = RegistrationToZnapSerializer
+
+class QlogicServicesViewSet(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, service_center):
+        organisationGuid = '{28c94bad-f024-4289-a986-f9d79c9d8102}'
+
+        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/GetServiceList?organisationGuid=' + organisationGuid + '&serviceCenterId=' + service_center
+        r = urllib.urlopen(url).read()
+        services = json.loads(r)
+
+        return Response(services['d'])
+
+class QlogicDaysForServiceViewSet(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, service_center, service):
+        organisationGuid = '{28c94bad-f024-4289-a986-f9d79c9d8102}'
+
+        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/GetDayList?organisationGuid=' + organisationGuid + '&serviceCenterId=' + service_center + '&serviceId=' + service
+
+        r = urllib.urlopen(url).read()
+        days = json.loads(r)
+
+        return Response(days['d'])
