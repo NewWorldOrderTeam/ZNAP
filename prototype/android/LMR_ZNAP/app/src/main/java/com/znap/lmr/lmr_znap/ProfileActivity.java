@@ -1,8 +1,14 @@
 package com.znap.lmr.lmr_znap;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -20,12 +26,14 @@ public class ProfileActivity extends AppCompatActivity {
     TextView firstNameText;
     TextView lastNameText;
     TextView middleNameText;
-    TextView emailText,phoneText,emailText1;
+    TextView emailText, phoneText, emailText1;
     private Retrofit retrofit;
     private static Request request;
     private int user_id;
     List<User> users;
-    private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 0;
+    private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 999;
+    private TelephonyManager mTelephonyManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,13 @@ public class ProfileActivity extends AppCompatActivity {
         emailText1 = (TextView) findViewById(R.id.email1);
         phoneText = (TextView) findViewById(R.id.phone);
         Bundle bundle = getIntent().getExtras();
-
+        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
+                    PERMISSIONS_REQUEST_READ_PHONE_STATE);
+        } else {
+            getDeviceImei();
+        }
         users = new ArrayList<>();
         if (bundle != null) {
             assert bundle != null;
@@ -76,6 +90,33 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_READ_PHONE_STATE
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            getDeviceImei();
+        }
+    }
+
+    private void getDeviceImei() {
+
+        mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        String deviceid = mTelephonyManager.getDeviceId();
+        Log.d("msg", "DeviceImei " + deviceid);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
