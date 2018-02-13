@@ -13,8 +13,6 @@ public class NonSystemMessages {
     public static final String ENABLE_INTERNET_REQUEST = "Увімкніть, будь ласка, інтернет";
     public static final String OKAY = "Oк";
     public static final String FIELD_IS_NOT_ENTERED_CORRECTLY = "Дані введено неправильно введено або акаунт не активовано";
-    public static final String NOT_VALID = "Not Valid";
-    public static final String VALID = "Valid";
     public static final String activateAccount = "Підтвердіть ваш аккаунт на :";
     public static final String rateSuccessful = "Ви успішно залишили відгук";
     public static final String recordToZnapSuccessFull = "Ви успішно зареєструвались ";

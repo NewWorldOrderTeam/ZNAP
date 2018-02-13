@@ -10,16 +10,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class RecordToZnapActivity extends AppCompatActivity implements OnItemSelectedListener {
     Spinner spinnerForZnap,
             spinnerForTypeOfService,
             spinnerForService;
-    TextView textForZnap,
-            textForTypeOfService,
-            textForService;
     Button bTreg;
     int znap_id,type_id,service_id,user_id;
 

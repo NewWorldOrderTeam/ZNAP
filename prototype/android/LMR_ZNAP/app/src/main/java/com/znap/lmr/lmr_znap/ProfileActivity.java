@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,21 +20,17 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class ProfileActivity extends AppCompatActivity {
     TextView firstNameText;
     TextView lastNameText;
-    TextView middleNameText;
     TextView emailText, phoneText, emailText1;
-    private Retrofit retrofit;
     private static Request request;
     private int user_id;
     List<User> users;
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 999;
     private TelephonyManager mTelephonyManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +44,19 @@ public class ProfileActivity extends AppCompatActivity {
         emailText1 = (TextView) findViewById(R.id.email1);
         phoneText = (TextView) findViewById(R.id.phone);
         Bundle bundle = getIntent().getExtras();
-        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
-                    PERMISSIONS_REQUEST_READ_PHONE_STATE);
-        } else {
-            getDeviceImei();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
+                        PERMISSIONS_REQUEST_READ_PHONE_STATE);
+            } else {
+                getDeviceImei();
+            }
         }
+
         users = new ArrayList<>();
+
         if (bundle != null) {
             assert bundle != null;
             user_id = bundle.getInt(SystemMessages.USER_ID);
