@@ -13,8 +13,7 @@ from rest_framework.fields import CharField, EmailField, IntegerField
 
 from userapi.models import UserProfile
 from userapi.tokens import account_activation_token
-from znap.AES import encryption
-
+from znap.AES import encryption, decryption
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -51,12 +50,12 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         return data
 
     def create(self, validated_data):
-        first_name = validated_data['first_name']
-        last_name = validated_data['last_name']
-        middle_name = validated_data['middle_name']
-        email = validated_data['email']
-        phone = validated_data['phone']
-        password = validated_data['password']
+        first_name = decryption(validated_data['first_name'])
+        last_name = decryption(validated_data['last_name'])
+        middle_name = decryption(validated_data['middle_name'])
+        email = decryption(validated_data['email'])
+        phone = decryption(validated_data['phone'])
+        password = decryption(validated_data['password'])
         user_obj = UserProfile(
             username = email,
             first_name = first_name,
@@ -90,8 +89,8 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         user_obj = None
-        email = data.get("email", None)
-        password = data['password']
+        email = decryption(data.get("email", None))
+        password = decryption(data['password'])
         user = UserProfile.objects.filter(email = email)
         user = user.exclude(email__isnull = True).exclude(email__iexact = '')
         if user.exists() and user.count()==1:
