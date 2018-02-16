@@ -55,12 +55,17 @@ znap_router.register('rate', RateViewSet,
 
 
 #for web
+
+'''
 dialog_router_web = router.register('web_rate', WebRateViewSet)
-user_router_web = router.register('web_user', WebUserViewSet)
+'''
+router.register('web_user', WebUserViewSet)
+
+'''
 user_router_web.register('rate', WebRateViewSet,
                      base_name='web-user-rate',
                      parents_query_lookups=['user'])
-
+'''
 
 
 
