@@ -11,16 +11,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -42,6 +55,9 @@ public class RateActivity extends AppCompatActivity implements
     boolean badButtonClickedStatus = false;
     boolean goodButtonClickedStatus = true;
     Context context = this;
+    public static Request request;
+    List<ZnapName> znapNames;
+    List<String> znaps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +78,58 @@ public class RateActivity extends AppCompatActivity implements
             assert bundle != null;
             int userid = bundle.getInt(SystemMessages.USER_ID);
             pushed_user_id = userid;
-        }
+            znapNames = new ArrayList<>();
+            znaps = new ArrayList<>();
+            request = ZnapUtility.generateRetroRequest();
+            RateActivity.getApi().getZnapNames().enqueue(new Callback<List<ZnapName>>() {
+                @Override
+                public void onResponse(Call<List<ZnapName>> call, Response<List<ZnapName>> response) {
+                    znapNames.addAll(response.body());
+
+                    for (int i = 0; i < znapNames.size(); i++) {
+                        System.out.println(znapNames.get(i).getName());
+                        znaps.add(znapNames.get(i).getName());
+
+                    }
+                    final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, znaps);
+                    a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerForZnaps.setAdapter(a);
+
+                }
+
+                @Override
+                public void onFailure(Call<List<ZnapName>> call, Throwable t) {
+                }
+            });
+            } else {
+            finish();
+            }
+
+
+
+
 
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 description = etDescription.getText().toString();
+                try {
+                    description = AESEncryption.encrypt_string(description);
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (NoSuchPaddingException e) {
+                    e.printStackTrace();
+                } catch (InvalidAlgorithmParameterException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if (TextUtils.isEmpty(description)) {
                     etDescription.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                     return;
@@ -104,11 +166,17 @@ public class RateActivity extends AppCompatActivity implements
 
             }
         });
+
+    }
+
+    public static Request getApi() {
+        return request;
     }
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         String sp1 = String.valueOf(spinnerForZnaps.getSelectedItem());
         znap_id = (int) spinnerForZnaps.getItemIdAtPosition(arg2);
+        System.out.println(znap_id);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
     }
 
@@ -117,7 +185,7 @@ public class RateActivity extends AppCompatActivity implements
     }
 
     public void requestPatternValidation(){
-        RateActivity.Request request = new RateActivity.Request();
+        RateActivity.RequestForServer request = new RateActivity.RequestForServer();
         request.execute();
         Pattern pattern = Pattern.compile("message=.*,");
         try {
@@ -135,7 +203,7 @@ public class RateActivity extends AppCompatActivity implements
         }
     }
 
-    class Request extends AsyncTask<Void, Void, String> {
+    class RequestForServer extends AsyncTask<Void, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -164,5 +232,7 @@ public class RateActivity extends AppCompatActivity implements
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
 
