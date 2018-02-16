@@ -35,7 +35,7 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     first_name = CharField()
     last_name = CharField()
     middle_name = CharField()
-    email = EmailField(label='Email')
+    email = CharField(label='Email')
     phone = CharField()
     class Meta:
         model = UserProfile
@@ -81,7 +81,7 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         return validated_data
 
 class UserLoginSerializer(serializers.ModelSerializer):
-    email = EmailField(label= 'Email', write_only=True)
+    email = CharField(label= 'Email', write_only=True)
     class Meta:
         model = UserProfile
         fields = ['id', 'email', 'password']
