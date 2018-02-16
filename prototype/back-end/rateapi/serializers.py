@@ -7,7 +7,7 @@ from rest_framework.fields import CharField, IntegerField
 from rest_framework_encrypted_lookup.serializers import EncryptedLookupModelSerializer
 
 from rateapi.models import Rate, Dialog
-from znap.AES import encryption
+from znap.AES import encryption, decryption
 from znapapi.models import Znap
 
 
@@ -55,7 +55,7 @@ class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         user_id = validated_data['user_id']
         znap_id = validated_data['znap_id']
-        description = validated_data['description']
+        description = decryption(validated_data['description'])
         quality=validated_data['quality']
         rate_obj = Rate(
             user_id=user_id,
@@ -97,7 +97,7 @@ class AddMessageSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         dialog_id= validated_data['dialog_id']
-        message = validated_data['message']
+        message = decryption(validated_data['message'])
         dialog_obj = Dialog(
             dialog_id=dialog_id,
             message=message

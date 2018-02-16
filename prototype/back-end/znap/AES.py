@@ -30,11 +30,6 @@ def decryption(ciphertext):
     cipher = AES.new(key, AES.MODE_CBC, iv)
     return _unpad(cipher.decrypt(ciphertext[AES.block_size:])).decode('utf-8')
 
-a = encryption('IDU NAHYI')
-
-print a
-
-#print decryption('0mW9BrQXzrB3B2OzCeMRpn6ObA/y+UMcfB+Pw4wZyyM=')
 
 
 
