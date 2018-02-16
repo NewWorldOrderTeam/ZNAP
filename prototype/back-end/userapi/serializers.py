@@ -16,6 +16,12 @@ from userapi.tokens import account_activation_token
 from znap.AES import encryption, decryption
 
 
+class WebUserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('url', 'id', 'first_name', 'last_name', 'middle_name', 'email', 'phone')
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserProfile

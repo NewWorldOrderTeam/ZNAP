@@ -11,6 +11,15 @@ from znap.AES import encryption, decryption
 from znapapi.models import Znap
 
 
+class WebRateSerializer(serializers.ModelSerializer):
+    description = CharField(required=False)
+    quality = CharField(required=False)
+    admin_id = CharField(required=False)
+    class Meta:
+        model = Rate
+        fields = ('id', 'user_id', 'znap_id', 'admin_id', 'quality', 'description', 'is_closed')
+
+
 class RateSerializer(serializers.ModelSerializer):
     description = CharField(required=False)
     quality = CharField(required=False)
