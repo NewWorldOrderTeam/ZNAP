@@ -1,4 +1,5 @@
 import base64
+import hashlib
 
 from Crypto import Random
 
@@ -7,6 +8,8 @@ from Crypto.Cipher import AES
 from znap.settings import key
 
 BS = 16
+
+key = hashlib.sha256(key.encode()).digest()
 
 def _pad(s):
     return s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
@@ -17,16 +20,34 @@ def _unpad(s):
 def encryption(message):
     message = message.encode('utf-8')
     message = _pad(message)
-    obj = AES.new(key)
-    ciphertext = obj.encrypt(message)
-    return base64.b64encode(ciphertext)
+    iv = Random.new().read(AES.block_size)
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    return base64.b64encode(iv + cipher.encrypt(message)).decode('utf-8')
 
 def decryption(ciphertext):
     ciphertext = base64.b64decode(ciphertext)
-    obj = AES.new(key)
-    plaintext = obj.decrypt(ciphertext)
-    plaintext = _unpad(plaintext)
-    return plaintext
+    iv = ciphertext[:AES.block_size]
+    cipher = AES.new(key, AES.MODE_CBC, iv)
+    return _unpad(cipher.decrypt(ciphertext[AES.block_size:])).decode('utf-8')
+
+a = encryption('IDU NAHYI')
+
+print a
+
+#print decryption('0mW9BrQXzrB3B2OzCeMRpn6ObA/y+UMcfB+Pw4wZyyM=')
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 """
