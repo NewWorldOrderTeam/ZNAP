@@ -5,6 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
+from rest_framework_encrypted_lookup.views import EncryptedLookupGenericViewSet
 
 from rateapi.models import Rate, Dialog
 from rest_framework.generics import CreateAPIView
@@ -12,8 +13,7 @@ from rest_framework.generics import CreateAPIView
 from rateapi.serializers import RateSerializer, RateCreateSerializer, AddMessageSerializer, DialogSerializer
 from rest_framework_extensions.mixins import NestedViewSetMixin
 
-
-class RateViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+class RateViewSet(NestedViewSetMixin, viewsets.ModelViewSet ):
     permission_classes = [AllowAny]
     queryset = Rate.objects.all()
     serializer_class = RateSerializer

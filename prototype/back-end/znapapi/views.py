@@ -1,3 +1,4 @@
+import base64
 import json, urllib
 
 import requests
@@ -10,8 +11,12 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from znap.AES import encryption, decryption
+from znap.settings import organisationGuid
 from znapapi.models import Znap, RegistrationToZnap
 from znapapi.serializers import ZnapSerialezer, CreateRegistrationToZnapSerializer, RegistrationToZnapSerializer
+
+
 
 
 class ZnapViewSet(viewsets.ModelViewSet):
@@ -23,7 +28,6 @@ class QlogicCnapViewSet(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        organisationGuid = '{28c94bad-f024-4289-a986-f9d79c9d8102}'
 
         url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/getServiceCenterList?organisationGuid='+organisationGuid
         r = urllib.urlopen(url).read()
@@ -32,7 +36,7 @@ class QlogicCnapViewSet(APIView):
 
         json_cnap = []
         for cnap in cnaps_list:
-            name = cnap['ServiceCenterName']
+            name =encryption(cnap['ServiceCenterName'])
             service_id = cnap['ServiceCenterId']
             json_cnap.append({'name':name,
                               'service_center_id': service_id})
@@ -52,7 +56,6 @@ class QlogicServicesViewSet(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, service_center):
-        organisationGuid = '{28c94bad-f024-4289-a986-f9d79c9d8102}'
 
         url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/GetServiceList?organisationGuid=' + organisationGuid + '&serviceCenterId=' + service_center
         r = urllib.urlopen(url).read()
@@ -64,7 +67,6 @@ class QlogicDaysForServiceViewSet(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, service_center, service):
-        organisationGuid = '{28c94bad-f024-4289-a986-f9d79c9d8102}'
 
         url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/GetDayList?organisationGuid=' + organisationGuid + '&serviceCenterId=' + service_center + '&serviceId=' + service
 

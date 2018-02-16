@@ -1,9 +1,13 @@
+import base64
+
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.fields import CharField, IntegerField
+from rest_framework_encrypted_lookup.serializers import EncryptedLookupModelSerializer
 
 from rateapi.models import Rate, Dialog
+from znap.AES import encryption
 from znapapi.models import Znap
 
 
@@ -14,6 +18,11 @@ class RateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rate
         fields = ('id', 'user_id', 'znap_id', 'admin_id', 'quality', 'description', 'is_closed')
+
+    def to_representation(self, instance):
+        ret = super(RateSerializer, self).to_representation(instance)
+        ret['description'] = encryption(ret['description'])
+        return ret
 
 class ChoicesField(serializers.Field):
     def __init__(self, choices, **kwargs):

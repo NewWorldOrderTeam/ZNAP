@@ -13,12 +13,24 @@ from rest_framework.fields import CharField, EmailField, IntegerField
 
 from userapi.models import UserProfile
 from userapi.tokens import account_activation_token
+from znap.AES import encryption
+
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('url', 'id', 'first_name', 'last_name', 'middle_name', 'email', 'phone')
+
+    def to_representation(self, instance):
+        ret = super(UserSerializer, self).to_representation(instance)
+        ret['first_name'] = encryption(ret['first_name'])
+        ret['last_name'] = encryption(ret['last_name'])
+        ret['middle_name'] = encryption(ret['middle_name'])
+        ret['email'] = encryption(ret['email'])
+        ret['phone'] = encryption(ret['phone'])
+        return ret
+
 
 class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     first_name = CharField()
