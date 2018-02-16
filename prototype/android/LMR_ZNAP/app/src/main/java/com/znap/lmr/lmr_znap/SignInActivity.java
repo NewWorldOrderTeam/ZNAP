@@ -60,7 +60,27 @@ public class SignInActivity extends AppCompatActivity {
                 } else{
                     email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
-                if (TextUtils.isEmpty(email)) {
+                    try {
+                        email = AESEncryption.encrypt_string(email);
+                        System.out.println(email);
+                        password = AESEncryption.encrypt_string(password);
+                        System.out.println(password);
+                    } catch (InvalidKeyException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchPaddingException e) {
+                        e.printStackTrace();
+                    } catch (InvalidAlgorithmParameterException e) {
+                        e.printStackTrace();
+                    } catch (IllegalBlockSizeException e) {
+                        e.printStackTrace();
+                    } catch (BadPaddingException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (TextUtils.isEmpty(email)) {
                     etEmail.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                     return;
                 }

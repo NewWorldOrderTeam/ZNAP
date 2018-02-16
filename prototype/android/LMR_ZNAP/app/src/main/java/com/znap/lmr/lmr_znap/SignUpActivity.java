@@ -21,9 +21,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import retrofit2.Response;
 
@@ -74,6 +82,28 @@ public class SignUpActivity extends AppCompatActivity {
                     middleName = etMiddleName.getText().toString();
                     lastName = etLastName.getText().toString();
                     phone = etPhoneNumber.getText().toString();
+                    try {
+                        email = AESEncryption.encrypt_string(email);
+                        firstName = AESEncryption.encrypt_string(firstName);
+                        middleName = AESEncryption.encrypt_string(middleName);
+                        lastName = AESEncryption.encrypt_string(lastName);
+                        phone = AESEncryption.encrypt_string(phone);
+                        password = AESEncryption.encrypt_string(password);
+                    } catch (InvalidKeyException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchPaddingException e) {
+                        e.printStackTrace();
+                    } catch (InvalidAlgorithmParameterException e) {
+                        e.printStackTrace();
+                    } catch (IllegalBlockSizeException e) {
+                        e.printStackTrace();
+                    } catch (BadPaddingException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     emailToShow = email;
                     new AlertDialog.Builder(context)
                             .setMessage(NonSystemMessages.activateAccount + " " +emailToShow)
