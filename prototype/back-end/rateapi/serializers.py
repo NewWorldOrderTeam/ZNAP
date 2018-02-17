@@ -19,6 +19,10 @@ class WebRateSerializer(serializers.ModelSerializer):
         model = Rate
         fields = ('id', 'user_id', 'znap_id', 'admin_id', 'quality', 'description', 'is_closed')
 
+    def to_representation(self, instance):
+        ret = super(WebRateSerializer, self).to_representation(instance)
+        ret['timestamp'] = Dialog.objects.filter(dialog_id=instance.id)[0].timeStamp
+        return ret
 
 class RateSerializer(serializers.ModelSerializer):
     description = CharField(required=False)
