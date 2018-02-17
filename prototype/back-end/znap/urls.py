@@ -27,7 +27,7 @@ from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet, WebU
 from rest_framework_extensions.routers import NestedRouterMixin
 
 from znapapi.views import ZnapViewSet, RegistrationToZnapCreateAPIView, RegistrationToZnapViewSet, QlogicCnapViewSet, \
-    QlogicServicesViewSet, QlogicDaysForServiceViewSet
+    QlogicServicesViewSet, QlogicDaysForServiceViewSet, QlogicQueueStateViewSet
 
 
 class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
@@ -45,11 +45,11 @@ user_router.register('rate', RateViewSet,
                      base_name='user-rate',
                      parents_query_lookups=['user'])
 admin_router= router.register('admin', AdminViewSet)
-admin_router.register('rate', RateViewSet,
+admin_router.register('rate', WebRateViewSet,
                       base_name='admin-rate',
                       parents_query_lookups=['admin'])
 znap_router = router.register('znap', ZnapViewSet)
-znap_router.register('rate', RateViewSet,
+znap_router.register('rate', WebRateViewSet,
                      base_name='znap-rate',
                      parents_query_lookups=['znap'])
 
@@ -83,5 +83,6 @@ urlpatterns = [
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', userapi.views.activate, name='activate'),
     url(r'^api/v1.0/cnap/(?P<service_center>[0-9])/services/', QlogicServicesViewSet.as_view(), name='cnap services'),
     url(r'^api/v1.0/cnap/', QlogicCnapViewSet.as_view(), name='cnap'),
-    url(r'^api/v1.0/getDays/cnap/(?P<service_center>[0-9])/service/(?P<service>[0-9])/', QlogicDaysForServiceViewSet.as_view(), name='days for services')
+    url(r'^api/v1.0/getDays/cnap/(?P<service_center>[0-9])/service/(?P<service>[0-9])/', QlogicDaysForServiceViewSet.as_view(), name='days for services'),
+    url(r'^queue/', QlogicQueueStateViewSet.as_view(), name='loh')
 ]
