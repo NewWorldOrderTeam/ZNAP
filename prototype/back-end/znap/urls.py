@@ -45,7 +45,7 @@ user_router.register('rate', RateViewSet,
                      base_name='user-rate',
                      parents_query_lookups=['user'])
 admin_router= router.register('admin', AdminViewSet)
-admin_router.register('rate', RateViewSet,
+admin_router.register('rate', WebRateViewSet,
                       base_name='admin-rate',
                       parents_query_lookups=['admin'])
 znap_router = router.register('znap', ZnapViewSet)
