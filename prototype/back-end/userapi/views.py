@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 
 from userapi.models import UserProfile
-from userapi.serializers import UserSerializer
+from userapi.serializers import UserSerializer, WebUserSerializer
 from userapi.tokens import account_activation_token
 from .serializers import UserCreateSerializer, UserLoginSerializer
 from rest_framework.generics import CreateAPIView, UpdateAPIView
@@ -19,6 +19,11 @@ from rest_framework.views import APIView
 
 
 # Create your views here.
+
+class WebUserViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+    queryset = UserProfile.objects.all()
+    serializer_class = WebUserSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]

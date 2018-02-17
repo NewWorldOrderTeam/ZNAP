@@ -9,11 +9,31 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from rest_framework.fields import CharField, EmailField, IntegerField
+from rest_framework.fields import CharField, EmailField, IntegerField, SerializerMethodField
 
+from rateapi.models import Rate
+from rateapi.serializers import WebRateSerializer
 from userapi.models import UserProfile
 from userapi.tokens import account_activation_token
 from znap.AES import encryption, decryption
+
+from rest_framework.test import APIRequestFactory
+
+factory = APIRequestFactory()
+request = factory.get('/')
+
+
+class WebUserSerializer(serializers.HyperlinkedModelSerializer):
+    rates = SerializerMethodField()
+
+    class Meta:
+        model = UserProfile
+        fields = ('url', 'id', 'first_name', 'last_name', 'middle_name', 'email', 'phone', 'rates')
+
+    def get_rates(self, obj):
+        r_qs = Rate.objects.filter(user_id=obj.id)
+        friends = WebRateSerializer(r_qs, many=True, context={'request': request}).data
+        return friends
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

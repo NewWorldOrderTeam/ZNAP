@@ -21,8 +21,8 @@ from rest_framework.routers import DefaultRouter
 import userapi
 from adminapi.views import AdminLoginAPIView, AdminViewSet
 from queueapi.views import QueueViewSet, QueueCreateAPIView
-from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView, DialogViewSet
-from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet
+from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView, DialogViewSet, WebRateViewSet
+from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet, WebUserViewSet
 
 from rest_framework_extensions.routers import NestedRouterMixin
 
@@ -52,6 +52,22 @@ znap_router = router.register('znap', ZnapViewSet)
 znap_router.register('rate', RateViewSet,
                      base_name='znap-rate',
                      parents_query_lookups=['znap'])
+
+
+#for web
+
+'''
+dialog_router_web = router.register('web_rate', WebRateViewSet)
+'''
+router.register('web_user', WebUserViewSet)
+
+'''
+user_router_web.register('rate', WebRateViewSet,
+                     base_name='web-user-rate',
+                     parents_query_lookups=['user'])
+'''
+
+
 
 
 urlpatterns = [

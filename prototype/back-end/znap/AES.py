@@ -42,9 +42,6 @@ def decryption(ciphertext):
 
 
 
-
-
-
 """
 def encryption2(message):
     print message

@@ -10,8 +10,17 @@ from rest_framework_encrypted_lookup.views import EncryptedLookupGenericViewSet
 from rateapi.models import Rate, Dialog
 from rest_framework.generics import CreateAPIView
 
-from rateapi.serializers import RateSerializer, RateCreateSerializer, AddMessageSerializer, DialogSerializer
+from rateapi.serializers import RateSerializer, RateCreateSerializer, AddMessageSerializer, DialogSerializer, \
+    WebRateSerializer
 from rest_framework_extensions.mixins import NestedViewSetMixin
+
+class WebRateViewSet(NestedViewSetMixin, viewsets.ModelViewSet ):
+    permission_classes = [AllowAny]
+    queryset = Rate.objects.all()
+    serializer_class = WebRateSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('is_closed', 'admin_id')
+
 
 class RateViewSet(NestedViewSetMixin, viewsets.ModelViewSet ):
     permission_classes = [AllowAny]
