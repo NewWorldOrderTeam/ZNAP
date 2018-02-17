@@ -3,24 +3,32 @@ import base64
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from rest_framework.fields import CharField, IntegerField
+from rest_framework.fields import CharField, IntegerField, SerializerMethodField
 from rest_framework_encrypted_lookup.serializers import EncryptedLookupModelSerializer
 
 from rateapi.models import Rate, Dialog
+from userapi.models import UserProfile
 from znap.AES import encryption, decryption
 from znapapi.models import Znap
 
+from rest_framework.test import APIRequestFactory
 
 class WebRateSerializer(serializers.ModelSerializer):
+
     description = CharField(required=False)
     quality = CharField(required=False)
     admin_id = CharField(required=False)
     class Meta:
         model = Rate
-        fields = ('id', 'user_id', 'znap_id', 'admin_id', 'quality', 'description', 'is_closed')
+        fields = ('id', 'znap_id', 'user_id', 'admin_id', 'quality', 'description', 'is_closed')
 
     def to_representation(self, instance):
         ret = super(WebRateSerializer, self).to_representation(instance)
+        try:
+            ret['first_name'] = UserProfile.objects.filter(id=instance.user_id)[0].first_name
+            ret['last_name'] = UserProfile.objects.filter(id=instance.user_id)[0].last_name
+        except:
+            pass
         ret['timestamp'] = Dialog.objects.filter(dialog_id=instance.id)[0].timeStamp
         return ret
 
@@ -30,12 +38,13 @@ class RateSerializer(serializers.ModelSerializer):
     admin_id = CharField(required=False)
     class Meta:
         model = Rate
-        fields = ('id', 'user_id', 'znap_id', 'admin_id', 'quality', 'description', 'is_closed')
+        fields = ('id', 'user_id', 'znap_id', 'admin_id', 'quality', 'description', 'is_closed', 'user')
 
     def to_representation(self, instance):
         ret = super(RateSerializer, self).to_representation(instance)
         ret['description'] = encryption(ret['description'])
         return ret
+
 
 class ChoicesField(serializers.Field):
     def __init__(self, choices, **kwargs):
