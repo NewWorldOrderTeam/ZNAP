@@ -91,8 +91,8 @@ public class RateActivity extends AppCompatActivity implements
                         znaps.add(znapNames.get(i).getName());
 
                     }
-                    final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, znaps);
-                    a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, znaps);
+                    a.setDropDownViewResource(R.layout.spinner_item);
                     spinnerForZnaps.setAdapter(a);
 
                 }
