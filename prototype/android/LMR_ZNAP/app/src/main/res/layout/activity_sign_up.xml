@@ -6,33 +6,35 @@
     android:layout_height="match_parent"
     tools:context="com.znap.lmr.lmr_znap.SignUpActivity"
     android:clickable="true"
+    android:paddingTop="35dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+
+    android:background="@color/bg"
     android:focusableInTouchMode="true">
 
     <ImageView
         android:id="@+id/znap_logo"
-        android:layout_width="fill_parent"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:scaleType="center"
+        android:layout_height="90dp"
         android:src ="@drawable/znap_logo" />
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_height="45dp"
+        android:layout_alignLeft="@+id/etMiddleName"
+        android:layout_alignStart="@+id/etMiddleName"
         android:layout_below="@+id/etMiddleName"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="#E0E0E0"
+        android:layout_marginRight="10dp"
         android:ems="10"
         android:hint="  Email"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="15dp" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/bSignUp"
@@ -42,9 +44,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_weight="1"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
         android:text="Зареєструватися"
+
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:theme="@style/PrimaryButton" />
+        android:theme="@style/mainActButton" />
 
     <TextView
         android:id="@+id/tSignUpLink"
@@ -52,7 +57,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorAccent"
+
         android:text="Увійти"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp" />
@@ -60,16 +68,17 @@
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/etPhoneNumber"
         android:layout_centerHorizontal="true"
+
         android:layout_marginTop="19dp"
         android:layout_weight="1"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="#E0E0E0"
         android:ems="10"
-        android:hint="  Пароль"
+        android:hint=" Пароль"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp" />
@@ -77,7 +86,7 @@
     <EditText
         android:id="@+id/etFirstName"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/znap_logo"
@@ -93,7 +102,7 @@
     <EditText
         android:id="@+id/etLastName"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etFirstName"
@@ -109,15 +118,15 @@
     <EditText
         android:id="@+id/etMiddleName"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etLastName"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
         android:background="#E0E0E0"
         android:ems="10"
         android:hint="  По-батькові"
@@ -126,7 +135,7 @@
     <EditText
         android:id="@+id/etPhoneNumber"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/etEmail"

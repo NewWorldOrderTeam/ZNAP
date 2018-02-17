@@ -81,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.bAboutZNAP).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent aboutUsActivity = new Intent(MainActivity.this, AboutUsActivity.class);
+                aboutUsActivity.putExtra(SystemMessages.USER_ID, user_id);
+                startActivity(aboutUsActivity);
+            }
+        });
+
 
     }
     @Override

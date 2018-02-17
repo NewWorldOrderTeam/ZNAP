@@ -13,6 +13,9 @@
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
+    <style name="test" parent="Theme.AppCompat">
+        <item name="colorButtonNormal">@color/test</item>
+    </style>
     <style name="mainActButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/colorNonActive</item>
         <item name="colorControlHighlight">@color/colorAccent</item>

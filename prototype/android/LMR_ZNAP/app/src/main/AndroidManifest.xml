@@ -95,6 +95,15 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".AboutUsActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.STATE"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
