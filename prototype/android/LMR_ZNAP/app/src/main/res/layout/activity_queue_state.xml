@@ -1,54 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="ЦНАП м. Львова на вул. Шевченка, 374 "
-        android:theme="@style/PrimaryFlatButton" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-
-        android:layout_marginBottom="20dp"
-        android:text="ЦНАП м. Львова на вул. Ген. Чупринки, 85  "
-        android:theme="@style/PrimaryFlatButton" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-
-        android:layout_marginBottom="20dp"
-        android:text="ЦНАП м. Львова на вул. І. Виговського, 32  "
-        android:theme="@style/PrimaryFlatButton" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-
-        android:layout_marginBottom="20dp"
-        android:text="ЦНАП м. Львова на вул. К. Левицького, 67  "
-        android:theme="@style/PrimaryFlatButton" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-
-        android:layout_marginBottom="20dp"
-        android:text="ЦНАП м. Львова на пр. Червоної Калини, 72а  "
-        android:theme="@style/PrimaryFlatButton" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-
-        android:layout_marginBottom="20dp"
-        android:text="ЦНАП м. Львова на вул. М. Хвильового, 14а "
-        android:theme="@style/PrimaryFlatButton" />
+    <ListView
+        android:id="@+id/ReviewsList"
+        android:layout_width="416dp"
+        android:layout_height="751dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
 
 </LinearLayout>

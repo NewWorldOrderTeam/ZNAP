@@ -9,9 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-/**
- * Created by Andy Blyzniuk on 01.11.2017.
- */
+
 
 public interface Request {
     @FormUrlEncoded
@@ -34,6 +32,9 @@ public interface Request {
 
     @GET("/api/v1.0/znap")
     Call<List<ZnapName>> getZnapNames();
+
+    @GET("/VideoAd/GetOrganisationState?orgKey=28c94bad-f024-4289-a986-f9d79c9d8102")
+    Call<List<QueueStateAPI>> getQueue();
 
     @FormUrlEncoded
     @POST("/api/v1.0/registerToQueue/")
