@@ -105,10 +105,6 @@ public class RateActivity extends AppCompatActivity implements
             finish();
             }
 
-
-
-
-
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
