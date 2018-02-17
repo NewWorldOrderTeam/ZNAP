@@ -13,22 +13,27 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class RecordToZnapActivity extends AppCompatActivity implements OnItemSelectedListener {
-    Spinner spinnerForZnap,
-            spinnerForTypeOfService,
-            spinnerForService;
+    Spinner spinnerForZnap;
     Button bTreg;
-    int znap_id, type_id, service_id, user_id;
-    public static Request request;
-    List<ZnapName> znapNames;
+    int user_id;
+    int znap_id;
+    private static Retrofit retrofit;
+    private static Request request;
+    List<RecordToZnapAPI> znapNames;
     List<String> znaps;
+    HashMap<Integer,Integer> znapsMap;
 
 
     @Override
@@ -43,10 +48,6 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
         System.out.println(user_id);
         spinnerForZnap = (Spinner) findViewById(R.id.spinnerForZnaps);
         spinnerForZnap.setOnItemSelectedListener(this);
-        spinnerForTypeOfService = (Spinner) findViewById(R.id.spinnerForTypeOfServices);
-        spinnerForTypeOfService.setOnItemSelectedListener(this);
-        spinnerForService = (Spinner) findViewById(R.id.spinnerForService);
-        spinnerForService.setOnItemSelectedListener(this);
         bTreg = (Button) findViewById(R.id.bTreg);
         bTreg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,31 +56,34 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
                         RegisteredToZnap.class);
                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
                 myIntent.putExtra("znap_id", znap_id);
-                myIntent.putExtra("service_id", service_id);
                 startActivity(myIntent);
             }
         });
         znapNames = new ArrayList<>();
         znaps = new ArrayList<>();
-        request = ZnapUtility.generateRetroRequest();
-        RecordToZnapActivity.getApi().getZnapNames().enqueue(new Callback<List<ZnapName>>() {
+        znapsMap = new HashMap<Integer, Integer>();
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://qlogic.net.ua:8084/")
+                .addConverterFactory(new GsonPConverterFactory(new Gson()))
+                .build();
+        request = retrofit.create(Request.class);
+        RecordToZnapActivity.getApi().getRecordsToZnap().enqueue(new Callback<List<RecordToZnapAPI>>() {
             @Override
-            public void onResponse(Call<List<ZnapName>> call, Response<List<ZnapName>> response) {
+            public void onResponse(Call<List<RecordToZnapAPI>> call, Response<List<RecordToZnapAPI>> response) {
+                System.out.println(response.body());
                 znapNames.addAll(response.body());
 
                 for (int i = 0; i < znapNames.size(); i++) {
-                    System.out.println(znapNames.get(i).getName());
-                    znaps.add(znapNames.get(i).getName());
-
+                    System.out.println(znapNames.get(i).getServiceCenterName());
+                    znaps.add(znapNames.get(i).getLocationName());
+                    znapsMap.put(i,znapNames.get(i).getServiceCenterId());
                 }
                 final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, znaps);
                 a.setDropDownViewResource(R.layout.spinner_item);
                 spinnerForZnap.setAdapter(a);
-
             }
-
             @Override
-            public void onFailure(Call<List<ZnapName>> call, Throwable t) {
+            public void onFailure(Call<List<RecordToZnapAPI>> call, Throwable t) {
             }
         });
     }
@@ -94,15 +98,9 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
     }
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        znap_id = (int) spinnerForZnap.getItemIdAtPosition(arg2);
+        znap_id = znapsMap.get(spinnerForZnap.getSelectedItemPosition());
         System.out.println(znap_id);
 
-
-        type_id = (int) spinnerForTypeOfService.getItemIdAtPosition(arg2);
-        System.out.println(type_id);
-
-        service_id = (int) spinnerForService.getItemIdAtPosition(arg2);
-        System.out.println(service_id);
     }
 
     @Override

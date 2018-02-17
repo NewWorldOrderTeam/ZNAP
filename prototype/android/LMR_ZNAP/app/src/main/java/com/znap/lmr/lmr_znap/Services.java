@@ -63,20 +63,6 @@ public class Services {
         }
         return null;
     }
-
-    public Response Queue(int user_id, int znap_id, String date, String time, int service) {
-        Call<User> call = serviceR.regToQueue(user_id,znap_id,date,time,service);
-        try {
-            Response response = call.execute();
-            // call.execute();
-            return response;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
 
 

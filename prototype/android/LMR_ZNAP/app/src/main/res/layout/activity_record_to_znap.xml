@@ -15,27 +15,6 @@
         android:layout_marginTop="12dp"
         android:textAlignment="center" />
 
-    <Spinner
-        android:id="@+id/spinnerForTypeOfServices"
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textForType"
-        android:layout_marginTop="14dp"
-        android:entries="@array/types"
-        android:textAlignment="center" />
-
-    <Spinner
-        android:id="@+id/spinnerForService"
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_above="@+id/bTreg"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="53dp"
-        android:entries="@array/services"
-        android:textAlignment="center" />
 
 
     <Button
@@ -61,26 +40,5 @@
         android:textSize="15dp"
         android:text="Виберіть Центр Надання Адміністративних Послуг:" />
 
-    <TextView
-        android:id="@+id/textForType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textForService"
-        android:layout_alignStart="@+id/textForService"
-        android:layout_below="@+id/spinnerForZnaps"
-        android:layout_marginTop="30dp"
-        android:textSize="15dp"
-        android:text="Виберіть тип послуги:" />
-
-    <TextView
-        android:id="@+id/textForService"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/spinnerForService"
-        android:layout_alignLeft="@+id/textForZnap"
-        android:layout_alignStart="@+id/textForZnap"
-        android:layout_marginBottom="9dp"
-        android:textSize="15dp"
-        android:text="Виберіть послугу:" />
 
 </RelativeLayout>

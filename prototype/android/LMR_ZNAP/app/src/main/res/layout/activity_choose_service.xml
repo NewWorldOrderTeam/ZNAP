@@ -21,24 +21,15 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:text="Оберіть час"
+                android:text="Виберіть тип послуги"
                 android:textSize="60dp"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Spinner
-                android:id="@+id/spinnerForTime"
+                android:id="@+id/spinnerForService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:entries="@array/times"
-                android:padding="15dp" />
-
-            <Spinner
-                android:id="@+id/spinnerForHour"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:entries="@array/hours"
                 android:padding="15dp" />
 
             <Button
