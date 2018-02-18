@@ -47,7 +47,7 @@
         android:layout_marginRight="35dp"
         android:layout_marginLeft="35dp"
         android:text="Зареєструватися"
-
+        android:textColorHint="#fcfff5"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:theme="@style/mainActButton" />
 

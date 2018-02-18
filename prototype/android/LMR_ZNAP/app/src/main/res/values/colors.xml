@@ -6,8 +6,9 @@
     <color name="mainBackground">#e2e2e2</color>
     <color name="colorWhite">#e2e2e2</color>
     <color name="color">#ECEFF1</color>
-    <color name="bg">#fafafa</color>
+    <color name="bg">#fcfff5</color>
     <color name="mainButtons">#BDBDBD</color>
-    <color name="colorNonActive">#0c57b4</color>
-    <color name="test">#D7DBE6</color>
+    <color name="colorNonActive">#193441</color>
+    <color name="test">#3e606f</color>
+    <color name="main_menu_button">#3e606f</color>
 </resources>

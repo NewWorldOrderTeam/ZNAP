@@ -77,14 +77,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:layout_weight="1"
-        android:background="#E0E0E0"
         android:drawableLeft="@drawable/man"
         android:drawablePadding="10dp"
         android:ems="10"
+
+        android:background="@drawable/rouded"
         android:hint="  Email"
         android:inputType="textPersonName"
         android:paddingLeft="15dp"
-        android:textColorHint="#BDBDBD"
+        android:textColorHint="@color/bg"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="15dp" />
 
@@ -100,7 +101,7 @@
         android:text="Увійти"
 
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
+        android:textColor="#fcfff5"
 
         android:theme="@style/mainActButton"
         tools:layout_editor_absoluteX="147dp"
@@ -115,7 +116,7 @@
         android:layout_gravity="right"
         android:layout_marginBottom="11dp"
         android:text="Зареєструватися"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorNonActive"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp" />
 
@@ -127,14 +128,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="29dp"
         android:layout_weight="1"
-        android:background="#E0E0E0"
+
+        android:background="@drawable/rouded"
         android:drawableLeft="@drawable/lock"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint=" Пароль"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
-        android:textColorHint="#BDBDBD"
+        android:textColorHint="@color/bg"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp" />
 

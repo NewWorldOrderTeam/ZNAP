@@ -1,7 +1,10 @@
 package com.znap.lmr.lmr_znap;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -39,6 +42,7 @@ public class FinishActivity extends AppCompatActivity {
     String time,date;
     String organisationID = "{28c94bad-f024-4289-a986-f9d79c9d8102}";
     String firstName, lastName, phone, email;
+    final Context context = this;
 
     private static Retrofit retrofit;
     private static Request request;;
@@ -117,37 +121,63 @@ public class FinishActivity extends AppCompatActivity {
         bFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(FinishActivity.this,
-                        MainActivity.class);
-                myIntent.putExtra(SystemMessages.USER_ID, user_id);
-                myIntent.putExtra("znap_id", znap_id);
-                myIntent.putExtra("service_id", service_id);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
 
-                retrofit = new Retrofit.Builder()
-                        .baseUrl("http://qlogic.net.ua:8084/")
-                        .addConverterFactory(new GsonPConverterFactory(new Gson()))
-                        .build();
-                request = retrofit.create(Request.class);
+                // set title
+                alertDialogBuilder.setTitle("Реєстрація");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("Ви дійсно хочете зареєструватись у чергу ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Так",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                Intent myIntent = new Intent(FinishActivity.this,
+                                        MainActivity.class);
+                                myIntent.putExtra(SystemMessages.USER_ID, user_id);
+                                myIntent.putExtra("znap_id", znap_id);
+                                myIntent.putExtra("service_id", service_id);
+
+                                retrofit = new Retrofit.Builder()
+                                        .baseUrl("http://qlogic.net.ua:8084/")
+                                        .addConverterFactory(new GsonPConverterFactory(new Gson()))
+                                        .build();
+                                request = retrofit.create(Request.class);
 
 
 
-                String name = lastName + firstName;
-                FinishActivity.getApi().getResult(organisationID, znap_id,service_id, dateAndTime, phone, email, name, 1).enqueue(new Callback<SuccessRegistrationAPI>() {
-                    @Override
-                    public void onResponse(Call<SuccessRegistrationAPI> call, Response<SuccessRegistrationAPI> response) {
-                        System.out.println(request.getResult(organisationID, znap_id,service_id, dateAndTime, phone, email, "Підор", 1).request().url().toString());
-                        SuccessRegistrationAPI successRegistrationAPI = (SuccessRegistrationAPI) response.body();
-                        String orderId = successRegistrationAPI.getCustOrderGuid();
-                        System.out.println(orderId);
+                                String name = lastName + firstName;
+                                FinishActivity.getApi().getResult(organisationID, znap_id,service_id, dateAndTime, phone, email, name, 1).enqueue(new Callback<SuccessRegistrationAPI>() {
+                                    @Override
+                                    public void onResponse(Call<SuccessRegistrationAPI> call, Response<SuccessRegistrationAPI> response) {
+                                        System.out.println(request.getResult(organisationID, znap_id,service_id, dateAndTime, phone, email, "Підор", 1).request().url().toString());
+                                        SuccessRegistrationAPI successRegistrationAPI = (SuccessRegistrationAPI) response.body();
+                                        String orderId = successRegistrationAPI.getCustOrderGuid();
+                                        System.out.println(orderId);
 
 
 
-                    }
-                    @Override
-                    public void onFailure(Call<SuccessRegistrationAPI> call, Throwable t) {
-                    }
-                });
-                startActivity(myIntent);
+                                    }
+                                    @Override
+                                    public void onFailure(Call<SuccessRegistrationAPI> call, Throwable t) {
+                                    }
+                                });
+                                startActivity(myIntent);
+                            }
+                        })
+                        .setNegativeButton("Ні",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
             }
         });
 

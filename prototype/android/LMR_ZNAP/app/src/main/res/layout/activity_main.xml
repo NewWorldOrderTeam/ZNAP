@@ -39,7 +39,7 @@
 
             android:textAlignment="center"
             android:theme="@style/test"
-            android:textColor="#2B2A2F"
+            android:textColor="#fcfff5"
             />
 
         <Button
@@ -51,7 +51,7 @@
             android:text="Запис до ЦНАП"
             android:textAlignment="center"
             android:theme="@style/test"
-            android:textColor="#2B2A2F" />
+            android:textColor="#fcfff5" />
     </LinearLayout>
 
     <LinearLayout
@@ -73,7 +73,7 @@
             android:text="Запис на прийом до посадовця "
 
             android:theme="@style/test"
-            android:textColor="#2B2A2F" />
+            android:textColor="#fcfff5" />
         <Button
 
             android:id="@+id/bCheck"
@@ -85,7 +85,7 @@
             android:text="Перевірити стан виконання звернення"
 
             android:theme="@style/test"
-            android:textColor="#2B2A2F" />
+            android:textColor="#fcfff5" />
 
     </LinearLayout>
 
@@ -108,7 +108,7 @@
             android:text="Відгук"
 
             android:theme="@style/test"
-            android:textColor="#2B2A2F" />
+            android:textColor="#fcfff5" />
 
         <Button
 
@@ -119,7 +119,7 @@
             android:text="Реєстр послуг"
 
             android:theme="@style/test"
-            android:textColor="#2B2A2F" />
+            android:textColor="#fcfff5" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,7 +133,7 @@
             android:layout_height="60dp"
             android:text="Онлайн підтримка"
             android:theme="@style/test"
-            android:textColor="#2B2A2F"
+            android:textColor="#fcfff5"
             android:layout_width="290dp" />
 
 
@@ -144,7 +144,7 @@
             android:layout_weight="1"
             android:text="Про ЦНАП"
             android:theme="@style/test"
-            android:textColor="#2B2A2F" />
+            android:textColor="#fcfff5" />
     </LinearLayout>
 
 
