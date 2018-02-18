@@ -3,7 +3,7 @@ import base64
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from rest_framework.fields import CharField, IntegerField, SerializerMethodField
+from rest_framework.fields import CharField, IntegerField, SerializerMethodField, BooleanField
 from rest_framework_encrypted_lookup.serializers import EncryptedLookupModelSerializer
 
 from rateapi.models import Rate, Dialog
@@ -90,7 +90,8 @@ class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
 
         chat_obj = Dialog(
             dialog_id=rate_obj.id,
-            message=description
+            message=description,
+            is_admin=False
         )
 
         chat_obj.save()
@@ -100,15 +101,16 @@ class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
 class DialogSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Dialog
-        fields = ('message', 'timeStamp')
+        fields = ('message', 'timeStamp', 'is_admin')
 
 
 class AddMessageSerializer(serializers.HyperlinkedModelSerializer):
     dialog_id = IntegerField()
     message = CharField(allow_blank=True)
+    is_admin = BooleanField()
     class Meta:
         model = Dialog
-        fields = ('dialog_id', 'message')
+        fields = ('dialog_id', 'message', 'is_admin')
 
     def validate(self, data):
         dialog_id = data['dialog_id']
@@ -119,10 +121,12 @@ class AddMessageSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         dialog_id= validated_data['dialog_id']
-        message = decryption(validated_data['message'])
+        message = validated_data['message']
+        is_admin = validated_data['is_admin']
         dialog_obj = Dialog(
             dialog_id=dialog_id,
-            message=message
+            message=message,
+            is_admin=is_admin
         )
         dialog_obj.save()
 

@@ -27,4 +27,5 @@ class Rate(models.Model):
 class Dialog(models.Model):
     dialog = models.ForeignKey(Rate)
     message = models.CharField(max_length=200)
+    is_admin = models.BooleanField()
     timeStamp = models.DateTimeField(default=datetime.datetime.now())
