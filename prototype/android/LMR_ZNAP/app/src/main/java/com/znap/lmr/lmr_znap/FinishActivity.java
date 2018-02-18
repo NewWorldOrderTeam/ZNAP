@@ -60,6 +60,7 @@ public class FinishActivity extends AppCompatActivity {
         date = bundle.getString("date");
 
         time = bundle.getString("hours");
+        System.out.println(time);
 
 
         final String dateAndTime = date + " " + time + ":00";

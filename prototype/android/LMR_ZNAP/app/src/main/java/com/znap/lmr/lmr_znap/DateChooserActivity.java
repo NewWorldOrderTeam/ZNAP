@@ -41,7 +41,6 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
     private static Retrofit retrofit;
     private static Request request;
     List<DateChooserAPI> dates;
-    List<StringBuilder> datesList;
     List<String> datesListFormated;
     HashMap<Integer,Integer> datesMap;
 
@@ -79,7 +78,6 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
             }
         });
         dates = new ArrayList<>();
-        datesList = new ArrayList<>();
         datesListFormated=new ArrayList<>();
         datesMap = new HashMap<Integer, Integer>();
         retrofit = new Retrofit.Builder()
@@ -96,18 +94,18 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
                 dates.addAll(response.body());
 
                 for (int i = 0; i < dates.size(); i++) {
-
-                    datesMap.put(i, dates.get(i).getCountJobs());
-                    StringBuilder stringBuilder = new StringBuilder(dates.get(i).getDatePart().toString());
-                    stringBuilder.delete(0,6);
-                    stringBuilder.delete(10,stringBuilder.length());
-                    datesList.add(stringBuilder);
-                    long unix = Integer.valueOf(datesList.get(i).toString());
-                    Date date = new Date(unix*1000);
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    sdf.setTimeZone(TimeZone.getTimeZone("GMT+2"));
-                    String formattedDate = sdf.format(date);
-                    datesListFormated.add(formattedDate);
+                    if (dates.get(i).getIsAllow()==1) {
+                        datesMap.put(i, dates.get(i).getCountJobs());
+                        StringBuilder stringBuilder = new StringBuilder(dates.get(i).getDatePart().toString());
+                        stringBuilder.delete(0, 6);
+                        stringBuilder.delete(10, stringBuilder.length());
+                        long unix = Integer.valueOf(stringBuilder.toString());
+                        Date date = new Date(unix * 1000);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        sdf.setTimeZone(TimeZone.getTimeZone("GMT+2"));
+                        String formattedDate = sdf.format(date);
+                        datesListFormated.add(formattedDate);
+                    }
 
                 }
 

@@ -102,20 +102,21 @@ public class HoursChooserActivity extends AppCompatActivity implements AdapterVi
                 System.out.println(response.body());
                 hours.addAll(response.body());
                 for (int i = 0; i < hours.size(); i++) {
-                    startTime = hours.get(i).getStartTime();
-                    startTime = startTime.substring(2,startTime.length()-1);
-                    if(startTime.contains("H")){
-                        startTime = startTime.replace("H",":");
-                    } else {
-                        if (startTime.length()==1){
-                            startTime = "0" + startTime + ":00";
-                        }
-                        else {
-                            startTime = startTime + ":00";
-                        }
+                    if (hours.get(i).getIsAllow()==1) {
+                        startTime = hours.get(i).getStartTime();
+                        startTime = startTime.substring(2, startTime.length() - 1);
+                        if (startTime.contains("H")) {
+                            startTime = startTime.replace("H", ":");
+                        } else {
+                            if (startTime.length() == 1) {
+                                startTime = "0" + startTime + ":00";
+                            } else {
+                                startTime = startTime + ":00";
+                            }
 
+                        }
+                        hoursList.add(startTime);
                     }
-                    hoursList.add(startTime);
                 }
 
                 final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, hoursList);
@@ -139,7 +140,7 @@ public class HoursChooserActivity extends AppCompatActivity implements AdapterVi
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         System.out.println("Choto tam"+service_id);
-
+        startTime = spinnerForHour.getSelectedItem().toString();
 
 
     }
