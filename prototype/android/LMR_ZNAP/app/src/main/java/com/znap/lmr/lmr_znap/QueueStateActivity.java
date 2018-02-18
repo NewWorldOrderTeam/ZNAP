@@ -35,7 +35,7 @@ public class QueueStateActivity extends AppCompatActivity {
     private static Retrofit retrofit;
     private static Request request;
     List<QueueStateAPI> queueStateList;
-    List<Integer> queues;
+    List<String> queues;
     ListView list;
 
     @Override
@@ -53,22 +53,26 @@ public class QueueStateActivity extends AppCompatActivity {
         queueStateList = new ArrayList<>();
         queues = new ArrayList<>();
         QueueStateActivity.getApi().getQueue().enqueue(new Callback<List<QueueStateAPI>>() {
-
             @Override
             public void onResponse(Call<List<QueueStateAPI>> call, Response<List<QueueStateAPI>> response) {
                 System.out.println(response.body());
                 queueStateList.addAll(response.body());
+                queueStateList.get(0).setDescription(queueStateList.get(0).getDescription().substring(17, queueStateList.get(0).getDescription().length()));
+                queueStateList.get(1).setDescription(queueStateList.get(1).getDescription().substring(41, queueStateList.get(1).getDescription().length()));
+                queueStateList.get(2).setDescription(queueStateList.get(2).getDescription().substring(41, queueStateList.get(2).getDescription().length()));
+                queueStateList.get(3).setDescription(queueStateList.get(3).getDescription().substring(41, queueStateList.get(3).getDescription().length()));
+                queueStateList.get(4).setDescription(queueStateList.get(4).getDescription().substring(41, queueStateList.get(4).getDescription().length()));
+                queueStateList.get(5).setDescription(queueStateList.get(5).getDescription().substring(41, queueStateList.get(5).getDescription().length()));
+                queueStateList.get(6).setDescription(queueStateList.get(6).getDescription().substring(38, queueStateList.get(6).getDescription().length()));
                 for (int i = 0; i < queueStateList.size(); i++) {
                     System.out.println(queueStateList.get(i).getDescription());
-                    queues.add(queueStateList.get(i).getCustomerCount());
-
+                    queues.add(queueStateList.get(i).getDescription()+ " | к-сть людей :  " + queueStateList.get(i).getCustomerCount() );
                 }
                 list.setAdapter(new ArrayAdapter<>(QueueStateActivity.this, android.R.layout.simple_list_item_1, queues));
             }
 
             @Override
             public void onFailure(Call<List<QueueStateAPI>> call, Throwable t) {
-                System.out.println("qwe");
             }
         });
     }

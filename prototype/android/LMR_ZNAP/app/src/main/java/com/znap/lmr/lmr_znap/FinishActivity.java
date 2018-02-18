@@ -124,10 +124,8 @@ public class FinishActivity extends AppCompatActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
 
-                // set title
-                alertDialogBuilder.setTitle("Реєстрація");
+                alertDialogBuilder.setTitle("Реєстрація на послугу");
 
-                // set dialog message
                 alertDialogBuilder
                         .setMessage("Ви дійсно хочете зареєструватись у чергу ?")
                         .setCancelable(false)
@@ -155,8 +153,6 @@ public class FinishActivity extends AppCompatActivity {
                                         SuccessRegistrationAPI successRegistrationAPI = (SuccessRegistrationAPI) response.body();
                                         String orderId = successRegistrationAPI.getCustOrderGuid();
                                         System.out.println(orderId);
-
-
 
                                     }
                                     @Override
