@@ -66,6 +66,7 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
                 myIntent.putExtra("znap_id", znap_id);
                 myIntent.putExtra("service_id",service_id);
+                myIntent.putExtra("group_id",group_id);
                 startActivity(myIntent);
             }
         });
@@ -77,11 +78,10 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
                 .addConverterFactory(new GsonPConverterFactory(new Gson()))
                 .build();
         request = retrofit.create(Request.class);
-        ServiceChooserActivity.getApi().getServices(organisationID, znap_id,group_id).enqueue(new Callback<List<ServiceChooserAPI>>() {
+        ServiceChooserActivity.getApi().getServices(organisationID,znap_id,group_id).enqueue(new Callback<List<ServiceChooserAPI>>() {
             @Override
             public void onResponse(Call<List<ServiceChooserAPI>> call, Response<List<ServiceChooserAPI>> response) {
                 System.out.println(znap_id);
-                System.out.println(request.getServices(organisationID,znap_id,group_id).request().url().toString());
                 System.out.println(response.body());
                 services.addAll(response.body());
 

@@ -13,9 +13,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.Reader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,24 +30,29 @@ import retrofit2.Retrofit;
  * Created by Zava on 01.12.2017.
  */
 
-public class RegisteredToZnap extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Spinner spinnerForTypeOfService;
+public class HoursChooserActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    Spinner spinnerForHour;
     Button bTreg;
     int user_id;
+
     int znap_id;
+    int service_id;
     int group_id;
+    String date;
+    String startTime,endTime,time;
     String organisationID = "{28c94bad-f024-4289-a986-f9d79c9d8102}";
     private static Retrofit retrofit;
     private static Request request;
-    List<TypeOfServiceAPI> typeOfServices;
-    List<String> services;
-    HashMap<Integer,Integer> servicesMap;
+    List<HoursChooserAPI> hours;
+    List<String> hoursList;
+    List<String> datesListFormated;
+    HashMap<Integer,Integer> hoursMap;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_type_of_service);
+        setContentView(R.layout.activity_choose_hour);
         getSupportActionBar().setTitle(SystemMessages.REG_TO_QUEUE_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle bundle = getIntent().getExtras();
@@ -52,47 +61,69 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
         System.out.println(user_id);
         znap_id = bundle.getInt(SystemMessages.ZNAP_ID);
         System.out.println("qwe"+ znap_id);
-        spinnerForTypeOfService = (Spinner) findViewById(R.id.spinnerForTypeOfService);
-        spinnerForTypeOfService.setOnItemSelectedListener(this);
+        group_id = bundle.getInt(SystemMessages.GROUP_ID);
+        System.out.println("group_id" + group_id);
+        service_id = bundle.getInt(SystemMessages.SERVICE_ID);
+        System.out.println("service_id" + service_id);
+        date = bundle.getString("date");
+        spinnerForHour = (Spinner) findViewById(R.id.spinnerForHour);
+        spinnerForHour.setOnItemSelectedListener(this);
         bTreg = (Button) findViewById(R.id.buttonTOReg);
+
         bTreg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(RegisteredToZnap.this,
-                        ServiceChooserActivity.class);
+                Intent myIntent = new Intent(HoursChooserActivity.this,
+                        FinishActivity.class);
                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
                 myIntent.putExtra("znap_id", znap_id);
-                myIntent.putExtra("group_id",group_id);
+                myIntent.putExtra("service_id",service_id);
+                myIntent.putExtra("hours", startTime);
+                myIntent.putExtra("date", date);
+
+                
                 startActivity(myIntent);
             }
         });
-        typeOfServices = new ArrayList<>();
-        services = new ArrayList<>();
-        servicesMap = new HashMap<Integer, Integer>();
+        hours = new ArrayList<>();
+        hoursList = new ArrayList<>();
+        datesListFormated=new ArrayList<>();
+        hoursMap = new HashMap<Integer, Integer>();
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://qlogic.net.ua:8084/")
                 .addConverterFactory(new GsonPConverterFactory(new Gson()))
                 .build();
         request = retrofit.create(Request.class);
-        RegisteredToZnap.getApi().getTypeOfService(organisationID, znap_id).enqueue(new Callback<List<TypeOfServiceAPI>>() {
+        HoursChooserActivity.getApi().getHours(organisationID, znap_id,service_id,date).enqueue(new Callback<List<HoursChooserAPI>>() {
             @Override
-            public void onResponse(Call<List<TypeOfServiceAPI>> call, Response<List<TypeOfServiceAPI>> response) {
+            public void onResponse(Call<List<HoursChooserAPI>> call, Response<List<HoursChooserAPI>> response) {
                 System.out.println(znap_id);
-                System.out.println(request.getTypeOfService(organisationID,znap_id).request().url().toString());
+                System.out.println(request.getHours(organisationID,znap_id,service_id,date).request().url().toString());
                 System.out.println(response.body());
-                typeOfServices.addAll(response.body());
+                hours.addAll(response.body());
+                for (int i = 0; i < hours.size(); i++) {
+                    startTime = hours.get(i).getStartTime();
+                    startTime = startTime.substring(2,startTime.length()-1);
+                    if(startTime.contains("H")){
+                        startTime = startTime.replace("H",":");
+                    } else {
+                        if (startTime.length()==1){
+                            startTime = "0" + startTime + ":00";
+                        }
+                        else {
+                            startTime = startTime + ":00";
+                        }
 
-                for (int i = 0; i < typeOfServices.size(); i++) {
-                    System.out.println(typeOfServices.get(i).getDescription());
-                    services.add(typeOfServices.get(i).getDescription());
-                    servicesMap.put(i, typeOfServices.get(i).getGroupId());
+                    }
+                    hoursList.add(startTime);
                 }
-                final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, services);
+
+                final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, hoursList);
                 a.setDropDownViewResource(R.layout.spinner_item);
-                spinnerForTypeOfService.setAdapter(a);
+                spinnerForHour.setAdapter(a);
             }
             @Override
-            public void onFailure(Call<List<TypeOfServiceAPI>> call, Throwable t) {
+            public void onFailure(Call<List<HoursChooserAPI>> call, Throwable t) {
             }
         });
     }
@@ -107,8 +138,9 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
     }
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        group_id = servicesMap.get(spinnerForTypeOfService.getSelectedItemPosition());
-        System.out.println("GROUP ID"+group_id);
+        System.out.println("Choto tam"+service_id);
+
+
 
     }
 

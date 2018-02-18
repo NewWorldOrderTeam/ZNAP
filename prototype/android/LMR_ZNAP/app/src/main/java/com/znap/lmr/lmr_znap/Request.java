@@ -44,6 +44,23 @@ public interface Request {
 
     @GET("/QueueService.svc/json_wellcome_point/getServicesByCenterId")
     Call<List<ServiceChooserAPI>> getServices(@Query("organisationGuid") String organisationID, @Query("serviceCenterId")int znap_id, @Query("groupId") int group_id);
+
+    @GET("/QueueService.svc/json_pre_reg/GetDayList")
+    Call<List<DateChooserAPI>> getDates(@Query("organisationGuid") String organisationID, @Query("serviceCenterId") int znap_id, @Query("serviceId") int service_id);
+
+    @GET("/QueueService.svc/json_pre_reg/GetTimeList")
+    Call<List<HoursChooserAPI>> getHours(@Query("organisationGuid") String organisationID, @Query("serviceCenterId") int znap_id,@Query("serviceId") int service_id, @Query("date") String date);
+
+    @GET( "/QueueService.svc/json_pre_reg/RegCustomerEx")
+    Call<SuccessRegistrationAPI> getResult(@Query("organisationGuid") String organisationID,
+                                           @Query("serviceCenterId") int znap_id,
+                                           @Query("serviceId") int service_id,
+                                           @Query("date") String date,
+                                           @Query("phone") String phone,
+                                           @Query("email") String email,
+                                           @Query("name") String name,
+                                           @Query("langId") int language);
+
 }
 
 

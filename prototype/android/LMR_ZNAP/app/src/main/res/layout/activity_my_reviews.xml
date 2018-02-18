@@ -7,8 +7,6 @@
 
     <ListView
         android:id="@+id/ReviewsList"
-        android:layout_width="416dp"
-        android:layout_height="751dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </android.support.constraint.ConstraintLayout>
