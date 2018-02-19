@@ -21,8 +21,8 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:text="Виберіть тип послуги"
-                android:textSize="60dp"
+                android:text="          Виберіть дату"
+                android:textSize="30dp"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Spinner

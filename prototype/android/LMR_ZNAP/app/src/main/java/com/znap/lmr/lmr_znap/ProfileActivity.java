@@ -109,8 +109,8 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                     firstNameText.setText(String.valueOf(firstName));
                     lastNameText.setText(String.valueOf(lastName));
-                    emailText.setText(String.valueOf(email));
-                    emailText1.setText(String.valueOf(phone));
+                    emailText.setText(String.valueOf("Email : " + email));
+                    emailText1.setText(String.valueOf("Phone : " + phone));
                     phoneText.setText(String.valueOf(phone));
                 }
 
