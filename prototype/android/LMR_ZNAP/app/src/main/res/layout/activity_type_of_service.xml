@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.znap.lmr.lmr_znap.RegisteredToZnap">
+    tools:context="com.znap.lmr.lmr_znap.Activities.RegisteredToZnap">
 
     <ScrollView
         android:layout_width="match_parent"

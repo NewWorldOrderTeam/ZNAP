@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.znap.lmr.lmr_znap.SignUpActivity"
+    tools:context="com.znap.lmr.lmr_znap.Activities.SignUpActivity"
     android:clickable="true"
     android:paddingTop="35dp"
     android:paddingLeft="15dp"

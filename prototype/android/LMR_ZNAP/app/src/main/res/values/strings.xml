@@ -38,4 +38,5 @@
         <item>16:00</item>
         <item>17:00</item>
     </string-array>
+    <string name="title_activity_info">Map</string>
 </resources>
