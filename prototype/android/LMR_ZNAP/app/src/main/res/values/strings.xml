@@ -4,39 +4,9 @@
     <string name="spinner_title">Вибір послуг</string>
     <string name="permissions_not_granted_read_phone_state" />
     <string name="permission_read_phone_state_rationale" />
-    <string-array name="znaps">
-        <item>вул. І. Виговського, 32</item>
-        <item>вул. Ген. Чупринки, 85</item>
-        <item>вул. К. Левицького, 67</item>
-        <item>вул. К. Левицького, 67</item>
-        <item>пр. Червоної Калини, 72а</item>
-        <item>пл. Ринок, 1</item>
-        <item>вул. Хвильового, 14а</item>
-    </string-array>
-    <string-array name="types">
-        <item>Отримати довідку</item>
-        <item>Подати довідку</item>
-    </string-array>
-    <string-array name="services">
-        <item>Послуги міської Ради</item>
-        <item>Оформлення паспорта громадянина </item>
-        <item>Держгеокадастр</item>
-        <item>Документи дозвільного характеру</item>
-        <item>Оформлення паспорта громадянина України</item>
-    </string-array>
-    <string-array name="times">
-        <item>27 грудня</item>
-        <item>28 грудня</item>
-        <item>29 грудня</item>
-    </string-array>
-    <string-array name="hours">
-        <item>11:00</item>
-        <item>12:00</item>
-        <item>13:00</item>
-        <item>14:00</item>
-        <item>15:00</item>
-        <item>16:00</item>
-        <item>17:00</item>
-    </string-array>
+    <string name="about_us_title">ЦНАП м. Львова та його територіальні підрозділи створені з метою надання якісних адміністративних послуг</string>
+    <string name="about_us">Отримайте інформацію як вирішити своє питання щодо: реклами, оренди майна, приватизації, реконструкції, благоустрою, реєстрації/зняття з реєстрації місця проживання, оформлення паспорта громадянина України для виїзду за кордон, оформлення паспорта громадянина України у формі ID-картки, реєстрації бізнесу, майна та багато іншого.
+Територіальні підрозділи ЦНАП м. Львова працюють за адресами: вул. Костя Левицького, 67, пр. Червоної Калини, 72а, вул. М. Хвильового, 14а, вул. І. Виговського, 32, вул. Генерала Чупринки, 85, вул. Т. Шевченка, 374.
+</string>
     <string name="title_activity_info">Map</string>
 </resources>
