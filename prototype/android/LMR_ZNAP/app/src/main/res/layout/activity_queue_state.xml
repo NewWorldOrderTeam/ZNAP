@@ -6,11 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/ReviewsList"
-        android:layout_width="416dp"
-        android:layout_height="751dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Стан черги у реальному часі"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textColor="@color/colorNonActive"
+        android:paddingBottom="40dp"/>
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="300dip" />
 
 </LinearLayout>

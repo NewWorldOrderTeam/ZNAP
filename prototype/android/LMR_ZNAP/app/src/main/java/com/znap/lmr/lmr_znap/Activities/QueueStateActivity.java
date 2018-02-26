@@ -1,5 +1,6 @@
 package com.znap.lmr.lmr_znap.Activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -7,6 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 import com.znap.lmr.lmr_znap.ServerUtilities.GsonPConverterFactory;
 import com.znap.lmr.lmr_znap.Pojo.QueueStateAPI;
 import com.znap.lmr.lmr_znap.R;
@@ -30,15 +36,15 @@ public class QueueStateActivity extends AppCompatActivity {
     private static Request request;
     List<QueueStateAPI> queueStateList;
     List<String> queues;
-    ListView list;
+    GraphView graph;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue_state);
+        graph = (GraphView) findViewById(R.id.graph);
         getSupportActionBar().setTitle(SystemMessages.QUEUE_STATE_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        list = (ListView) findViewById(R.id.ReviewsList);
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://qlogic.net.ua:8081/")
                 .addConverterFactory(new GsonPConverterFactory(new Gson()))
@@ -51,18 +57,46 @@ public class QueueStateActivity extends AppCompatActivity {
             public void onResponse(Call<List<QueueStateAPI>> call, Response<List<QueueStateAPI>> response) {
                 System.out.println(response.body());
                 queueStateList.addAll(response.body());
-                queueStateList.get(0).setDescription(queueStateList.get(0).getDescription().substring(17, queueStateList.get(0).getDescription().length()));
-                queueStateList.get(1).setDescription(queueStateList.get(1).getDescription().substring(41, queueStateList.get(1).getDescription().length()));
-                queueStateList.get(2).setDescription(queueStateList.get(2).getDescription().substring(41, queueStateList.get(2).getDescription().length()));
-                queueStateList.get(3).setDescription(queueStateList.get(3).getDescription().substring(41, queueStateList.get(3).getDescription().length()));
-                queueStateList.get(4).setDescription(queueStateList.get(4).getDescription().substring(41, queueStateList.get(4).getDescription().length()));
-                queueStateList.get(5).setDescription(queueStateList.get(5).getDescription().substring(41, queueStateList.get(5).getDescription().length()));
-                queueStateList.get(6).setDescription(queueStateList.get(6).getDescription().substring(38, queueStateList.get(6).getDescription().length()));
-                for (int i = 0; i < queueStateList.size(); i++) {
-                    System.out.println(queueStateList.get(i).getDescription());
-                    queues.add(queueStateList.get(i).getDescription() + " | к-сть людей :  " + queueStateList.get(i).getCustomerCount());
-                }
-                list.setAdapter(new ArrayAdapter<>(QueueStateActivity.this, android.R.layout.simple_list_item_1, queues));
+
+                    BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
+                            new DataPoint(0, queueStateList.get(0).getCustomerCount()),
+                            new DataPoint(1, 1),
+                            new DataPoint(2, 2),
+                            new DataPoint(3, 3),
+                            new DataPoint(4, 4),
+                            new DataPoint(5, 5),
+                            new DataPoint(6, 6),
+
+                    });
+                graph.getViewport().setYAxisBoundsManual(true);
+                graph.getViewport().setMinY(0);
+                graph.getViewport().setMaxY(50);
+
+                graph.getViewport().setXAxisBoundsManual(true);
+                graph.getViewport().setMinX(0);
+                graph.getViewport().setMaxX(6);
+                graph.getViewport().setScrollable(true); // enables horizontal scrolling
+                graph.getViewport().setScrollableY(true);
+
+                StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+                staticLabelsFormatter.setHorizontalLabels(new String[] {"ЦНАП1", "ЦНАП2", "ЦНАП3","ЦНАП4", "ЦНАП5", "ЦНАП6","CNAP5"});
+                graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+                graph.addSeries(series);
+
+// styling
+                    series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+                        @Override
+                        public int get(DataPoint data) {
+                            return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/6), 100);
+                        }
+                    });
+
+                    series.setSpacing(50);
+
+// draw values on top
+                    series.setDrawValuesOnTop(true);
+                    series.setValuesOnTopColor(Color.RED);
+
             }
 
             @Override
@@ -87,4 +121,3 @@ public class QueueStateActivity extends AppCompatActivity {
 
 
 }
-
