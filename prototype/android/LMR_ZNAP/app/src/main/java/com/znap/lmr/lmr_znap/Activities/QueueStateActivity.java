@@ -57,33 +57,19 @@ public class QueueStateActivity extends AppCompatActivity {
             public void onResponse(Call<List<QueueStateAPI>> call, Response<List<QueueStateAPI>> response) {
                 System.out.println(response.body());
                 queueStateList.addAll(response.body());
-
                     BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
-                            new DataPoint(0, queueStateList.get(0).getCustomerCount()),
-                            new DataPoint(1, 1),
-                            new DataPoint(2, 2),
-                            new DataPoint(3, 3),
-                            new DataPoint(4, 4),
-                            new DataPoint(5, 5),
-                            new DataPoint(6, 6),
+                            new DataPoint(0, queueStateList.get(0).getCountOfWaitingJobs()),
+                            new DataPoint(1, queueStateList.get(1).getCountOfWaitingJobs()),
+                            new DataPoint(2, queueStateList.get(2).getCountOfWaitingJobs()),
+                            new DataPoint(3, queueStateList.get(3).getCountOfWaitingJobs()),
+                            new DataPoint(4, queueStateList.get(4).getCountOfWaitingJobs()),
+                            new DataPoint(5, queueStateList.get(5).getCountOfWaitingJobs()),
+                            new DataPoint(6, queueStateList.get(6).getCountOfWaitingJobs()),
 
                     });
-                graph.getViewport().setYAxisBoundsManual(true);
-                graph.getViewport().setMinY(0);
-                graph.getViewport().setMaxY(50);
 
-                graph.getViewport().setXAxisBoundsManual(true);
-                graph.getViewport().setMinX(0);
-                graph.getViewport().setMaxX(6);
-                graph.getViewport().setScrollable(true); // enables horizontal scrolling
-                graph.getViewport().setScrollableY(true);
 
-                StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
-                staticLabelsFormatter.setHorizontalLabels(new String[] {"ЦНАП1", "ЦНАП2", "ЦНАП3","ЦНАП4", "ЦНАП5", "ЦНАП6","CNAP5"});
-                graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
                 graph.addSeries(series);
-
-// styling
                     series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
                         @Override
                         public int get(DataPoint data) {
@@ -91,7 +77,7 @@ public class QueueStateActivity extends AppCompatActivity {
                         }
                     });
 
-                    series.setSpacing(50);
+                    series.setSpacing(20);
 
 // draw values on top
                     series.setDrawValuesOnTop(true);

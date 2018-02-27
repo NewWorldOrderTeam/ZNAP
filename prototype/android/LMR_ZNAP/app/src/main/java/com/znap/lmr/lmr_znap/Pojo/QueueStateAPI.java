@@ -3,29 +3,56 @@ package com.znap.lmr.lmr_znap.Pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class QueueStateAPI {
+public class QueueStateAPI{
 
     @SerializedName("SrvCenterId")
     @Expose
     private Integer srvCenterId;
-    @SerializedName("Description")
+    @SerializedName("SrvCenterDescription")
     @Expose
-    private String description;
-    @SerializedName("CustomerCount")
+    private String srvCenterDescription;
+    @SerializedName("CountOfOperatorsOnline")
     @Expose
-    private Integer customerCount;
-    @SerializedName("JobCount")
+    private Integer countOfOperatorsOnline;
+    @SerializedName("CountOfRegisteredJobs")
     @Expose
-    private Integer jobCount;
-    @SerializedName("TotalWp")
+    private Integer countOfRegisteredJobs;
+    @SerializedName("CountOfWaitingJobs")
     @Expose
-    private Integer totalWp;
-    @SerializedName("InWorkWp")
+    private Integer countOfWaitingJobs;
+    @SerializedName("CountOfExecudedJobs")
     @Expose
-    private Integer inWorkWp;
-    @SerializedName("OutOfWorkWp")
+    private Integer countOfExecudedJobs;
+    @SerializedName("CountOfDroppedJobs")
     @Expose
-    private Integer outOfWorkWp;
+    private Integer countOfDroppedJobs;
+    @SerializedName("AverageWaitingTime")
+    @Expose
+    private Integer averageWaitingTime;
+    @SerializedName("MaximumWaitingTime")
+    @Expose
+    private Integer maximumWaitingTime;
+    @SerializedName("AverageExecutingTime")
+    @Expose
+    private Integer averageExecutingTime;
+    @SerializedName("MaximumExecutingTime")
+    @Expose
+    private Integer maximumExecutingTime;
+    @SerializedName("HourOfDay")
+    @Expose
+    private Integer hourOfDay;
+    @SerializedName("Date")
+    @Expose
+    private String date;
+    @SerializedName("Color")
+    @Expose
+    private String color;
+    @SerializedName("CountOfServingAndWaitingJobs_Serving")
+    @Expose
+    private Integer countOfServingAndWaitingJobsServing;
+    @SerializedName("CountOfServingAndWaitingJobs_Waiting")
+    @Expose
+    private Integer countOfServingAndWaitingJobsWaiting;
 
     public Integer getSrvCenterId() {
         return srvCenterId;
@@ -35,52 +62,124 @@ public class QueueStateAPI {
         this.srvCenterId = srvCenterId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSrvCenterDescription() {
+        return srvCenterDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSrvCenterDescription(String srvCenterDescription) {
+        this.srvCenterDescription = srvCenterDescription;
     }
 
-    public Integer getCustomerCount() {
-        return customerCount;
+    public Integer getCountOfOperatorsOnline() {
+        return countOfOperatorsOnline;
     }
 
-    public void setCustomerCount(Integer customerCount) {
-        this.customerCount = customerCount;
+    public void setCountOfOperatorsOnline(Integer countOfOperatorsOnline) {
+        this.countOfOperatorsOnline = countOfOperatorsOnline;
     }
 
-    public Integer getJobCount() {
-        return jobCount;
+    public Integer getCountOfRegisteredJobs() {
+        return countOfRegisteredJobs;
     }
 
-    public void setJobCount(Integer jobCount) {
-        this.jobCount = jobCount;
+    public void setCountOfRegisteredJobs(Integer countOfRegisteredJobs) {
+        this.countOfRegisteredJobs = countOfRegisteredJobs;
     }
 
-    public Integer getTotalWp() {
-        return totalWp;
+    public Integer getCountOfWaitingJobs() {
+        return countOfWaitingJobs;
     }
 
-    public void setTotalWp(Integer totalWp) {
-        this.totalWp = totalWp;
+    public void setCountOfWaitingJobs(Integer countOfWaitingJobs) {
+        this.countOfWaitingJobs = countOfWaitingJobs;
     }
 
-    public Integer getInWorkWp() {
-        return inWorkWp;
+    public Integer getCountOfExecudedJobs() {
+        return countOfExecudedJobs;
     }
 
-    public void setInWorkWp(Integer inWorkWp) {
-        this.inWorkWp = inWorkWp;
+    public void setCountOfExecudedJobs(Integer countOfExecudedJobs) {
+        this.countOfExecudedJobs = countOfExecudedJobs;
     }
 
-    public Integer getOutOfWorkWp() {
-        return outOfWorkWp;
+    public Integer getCountOfDroppedJobs() {
+        return countOfDroppedJobs;
     }
 
-    public void setOutOfWorkWp(Integer outOfWorkWp) {
-        this.outOfWorkWp = outOfWorkWp;
+    public void setCountOfDroppedJobs(Integer countOfDroppedJobs) {
+        this.countOfDroppedJobs = countOfDroppedJobs;
+    }
+
+    public Integer getAverageWaitingTime() {
+        return averageWaitingTime;
+    }
+
+    public void setAverageWaitingTime(Integer averageWaitingTime) {
+        this.averageWaitingTime = averageWaitingTime;
+    }
+
+    public Integer getMaximumWaitingTime() {
+        return maximumWaitingTime;
+    }
+
+    public void setMaximumWaitingTime(Integer maximumWaitingTime) {
+        this.maximumWaitingTime = maximumWaitingTime;
+    }
+
+    public Integer getAverageExecutingTime() {
+        return averageExecutingTime;
+    }
+
+    public void setAverageExecutingTime(Integer averageExecutingTime) {
+        this.averageExecutingTime = averageExecutingTime;
+    }
+
+    public Integer getMaximumExecutingTime() {
+        return maximumExecutingTime;
+    }
+
+    public void setMaximumExecutingTime(Integer maximumExecutingTime) {
+        this.maximumExecutingTime = maximumExecutingTime;
+    }
+
+    public Integer getHourOfDay() {
+        return hourOfDay;
+    }
+
+    public void setHourOfDay(Integer hourOfDay) {
+        this.hourOfDay = hourOfDay;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public Integer getCountOfServingAndWaitingJobsServing() {
+        return countOfServingAndWaitingJobsServing;
+    }
+
+    public void setCountOfServingAndWaitingJobsServing(Integer countOfServingAndWaitingJobsServing) {
+        this.countOfServingAndWaitingJobsServing = countOfServingAndWaitingJobsServing;
+    }
+
+    public Integer getCountOfServingAndWaitingJobsWaiting() {
+        return countOfServingAndWaitingJobsWaiting;
+    }
+
+    public void setCountOfServingAndWaitingJobsWaiting(Integer countOfServingAndWaitingJobsWaiting) {
+        this.countOfServingAndWaitingJobsWaiting = countOfServingAndWaitingJobsWaiting;
     }
 
 }

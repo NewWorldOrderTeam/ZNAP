@@ -44,7 +44,7 @@ public interface Request {
     @GET("/api/v1.0/znap")
     Call<List<ZnapName>> getZnapNames();
 
-    @GET("/VideoAd/GetOrganisationState?orgKey=28c94bad-f024-4289-a986-f9d79c9d8102")
+    @GET("/Chart/ChartByNow?orgKey=28c94bad-f024-4289-a986-f9d79c9d8102")
     Call<List<QueueStateAPI>> getQueue();
 
     @GET("/QueueService.svc/json_pre_reg/getServiceCenterList?organisationGuid=%7B28c94bad-f024-4289-a986-f9d79c9d8102%7D")
