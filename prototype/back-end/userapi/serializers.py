@@ -13,7 +13,7 @@ from rest_framework.fields import CharField, EmailField, IntegerField, Serialize
 
 from rateapi.models import Rate
 from rateapi.serializers import WebRateSerializer
-from userapi.models import UserProfile
+from userapi.models import UserProfile, IMEI
 from userapi.tokens import account_activation_token
 from znap.AES import encryption, decryption
 
@@ -32,8 +32,8 @@ class WebUserSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_rates(self, obj):
         r_qs = Rate.objects.filter(user_id=obj.id)
-        friends = WebRateSerializer(r_qs, many=True, context={'request': request}).data
-        return friends
+        rates = WebRateSerializer(r_qs, many=True, context={'request': request}).data
+        return rates
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -57,9 +57,10 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
     middle_name = CharField()
     email = CharField(label='Email')
     phone = CharField()
+    imei = CharField()
     class Meta:
         model = UserProfile
-        fields = ['id','first_name', 'last_name', 'middle_name', 'email', 'password', 'phone']
+        fields = ['id','first_name', 'last_name', 'middle_name', 'email', 'password', 'phone', 'imei',]
         extra_kwargs = {"password" : {"write_only": True}}
 
     def validate(self, data):
@@ -86,9 +87,16 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
             is_active = False
         )
         user_obj.set_password(password)
-
         user_obj.save()
-        
+
+        imei = decryption(validated_data['imei'])
+        imei_obj = IMEI (
+            user_id=user_obj.id,
+            name=imei,
+            is_active=True
+        )
+        imei_obj.save()
+
         mail_subject = 'Активація аккаунта - ЦНАП'
         user = urlsafe_base64_encode(force_bytes(user_obj.id))
         token = account_activation_token.make_token(user_obj)
