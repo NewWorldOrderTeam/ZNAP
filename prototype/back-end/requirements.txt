@@ -1,0 +1,9 @@
+Django==1.10.3
+drf_extensions==0.3.1
+requests==2.7.0
+django_filter==1.1.0
+django_rest_encrypted_lookup==0.10.1
+pycrypto==2.6.1
+django_filters==0.2.1
+django_model_utils==3.1.1
+djangorestframework==3.7.7
