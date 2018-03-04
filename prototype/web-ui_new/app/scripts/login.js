@@ -11,16 +11,24 @@ function adminLogin() {
     };
     xhr.send(JSON.stringify(admin));
 
-    var admin_id = JSON
+  if (xhr.status===200 && xhr.statusText==='OK') {
+      var admin_id = JSON
         .parse(xhr.response)
         .id;
-    console.log(admin_id);
-    var znap_id = JSON
+      console.log(admin_id);
+      var znap_id = JSON
         .parse(xhr.response)
         .znap_id;
-    console.log(znap_id);
-    localStorage.setItem('admin_id', admin_id);
-    localStorage.setItem('znap_id', znap_id);
+      console.log(znap_id);
+      localStorage.setItem('admin_id', admin_id);
+      localStorage.setItem('znap_id', znap_id);
 
-    window.location.href = './users.html';
+      window.location.href = './users.html';
+    }
+    else {
+      var error = JSON.parse(xhr.responseText);
+      for (k in error){
+        console.log(error[k][0]);
+      }
+  }
 }
