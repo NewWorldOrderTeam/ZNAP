@@ -82,5 +82,4 @@ public class QueueStateActivity extends AppCompatActivity {
         return request;
     }
 
-
 }

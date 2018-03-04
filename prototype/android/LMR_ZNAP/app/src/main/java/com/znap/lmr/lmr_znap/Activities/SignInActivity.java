@@ -1,14 +1,23 @@
 package com.znap.lmr.lmr_znap.Activities;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -49,6 +58,9 @@ public class SignInActivity extends AppCompatActivity {
     String password;
     int userid;
     ProgressDialog progDailog;
+    String imei;
+    public static boolean isMultiSimEnabled = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +71,16 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         findViewsById();
         hideKeyboardOnTap();
+        getImeiNumber();
+
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkInternetConnection()) {
 
-                } else{
+                } else {
                     email = etEmail.getText().toString();
-                password = etPassword.getText().toString();
+                    password = etPassword.getText().toString();
                     try {
                         email = AESEncryption.encrypt_string(email);
                         System.out.println(email);
@@ -88,15 +102,15 @@ public class SignInActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     if (TextUtils.isEmpty(email)) {
-                    etEmail.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
-                    return;
+                        etEmail.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+                        return;
+                    }
+                    if (TextUtils.isEmpty(password)) {
+                        etPassword.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
+                        return;
+                    }
+                    requestPatternValidation();
                 }
-                if (TextUtils.isEmpty(password)) {
-                    etPassword.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
-                    return;
-                }
-                requestPatternValidation();
-            }
 
             }
         });
@@ -108,10 +122,11 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
-        if ( progDailog!=null && progDailog.isShowing() ){
+        if (progDailog != null && progDailog.isShowing()) {
             progDailog.cancel();
         }
     }
@@ -199,6 +214,76 @@ public class SignInActivity extends AppCompatActivity {
             return false;
         }
     }
+
+
+    private void askForPermission(String permission, Integer requestCode) {
+        if (ContextCompat.checkSelfPermission(SignInActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+
+            // Should show an explanation
+            if (ActivityCompat.shouldShowRequestPermissionRationale(SignInActivity.this, permission)) {
+
+                ActivityCompat.requestPermissions(SignInActivity.this, new String[]{permission}, requestCode);
+
+            } else {
+
+                ActivityCompat.requestPermissions(SignInActivity.this, new String[]{permission}, requestCode);
+            }
+        } else {
+            imei = getImeiNumber();
+            Toast.makeText(this, permission + " is already granted.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    imei = getImeiNumber();
+
+
+                } else {
+
+                    Toast.makeText(SignInActivity.this, "You have Denied the Permission", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
+
+
+    public String getImeiNumber() {
+        final TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+
+        /*
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //getDeviceId() is Deprecated so for android O we can use getImei() method
+            return telephonyManager.getImei();
+        }
+        else {
+            return telephonyManager.getDeviceId();
+        }
+        */
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return "test";
+        }
+
+        return telephonyManager.getDeviceId();
+
+    }
+
 
     class Request extends AsyncTask<Void, Void, String> {
 
