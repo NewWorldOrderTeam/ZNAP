@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="false"
+        android:text="Запис на прийом до посадоців"
+        android:textColor="@color/colorNonActive"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etAddress"
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint="  Email" />
+
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/description"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint="  Ім'я" />
+
+    <EditText
+        android:id="@+id/etLastName"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etFirstName"
+        android:layout_marginTop="13dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint="  Прізвище" />
+
+    <EditText
+        android:id="@+id/etMiddleName"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etLastName"
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint="  По-батькові" />
+
+    <EditText
+        android:id="@+id/etTelephoneNumber"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etEmail"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint="  Номер телефону" />
+
+    <EditText
+        android:id="@+id/etAddress"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etMiddleName"
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint="  Ваша адреса" />
+
+    <EditText
+        android:id="@+id/etYourProblem"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etTelephoneNumber"
+        android:layout_marginTop="19dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint="  Опишіть вашу проблему" />
+
+
+    <Button
+        android:id="@+id/bOfficialPerson"
+        android:layout_width="fill_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        android:text="Надіслати"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColorHint="#fcfff5"
+        android:theme="@style/mainActButton" />
+
+
+</RelativeLayout>

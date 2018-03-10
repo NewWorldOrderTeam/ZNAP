@@ -71,7 +71,6 @@
         android:layout_height="45dp"
         android:layout_below="@+id/etPhoneNumber"
         android:layout_centerHorizontal="true"
-
         android:layout_marginTop="19dp"
         android:layout_weight="1"
         android:layout_marginLeft="10dp"

@@ -83,7 +83,6 @@ public class SignUpActivity extends AppCompatActivity {
                         etLastName.getText().toString().length() < 3 && !Validations.isValidLastName(etLastName.getText().toString())) {
                     Toast.makeText(getApplicationContext(), NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY, Toast.LENGTH_LONG).show();
                 } else {
-
                     firstName = etFirstName.getText().toString();
                     middleName = etMiddleName.getText().toString();
                     lastName = etLastName.getText().toString();
