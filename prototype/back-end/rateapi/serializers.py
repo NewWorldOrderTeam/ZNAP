@@ -1,11 +1,8 @@
-import base64
-
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.fields import CharField, IntegerField, SerializerMethodField, BooleanField
 from rest_framework_encrypted_lookup.serializers import EncryptedLookupModelSerializer
-
 from rateapi.models import Rate, Dialog
 from userapi.models import UserProfile
 from znap.AES import encryption, decryption

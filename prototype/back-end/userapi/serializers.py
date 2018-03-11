@@ -110,15 +110,17 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserLoginSerializer(serializers.ModelSerializer):
     email = CharField(label= 'Email', write_only=True)
+    imei = CharField(label='IMEI', write_only=True)
     class Meta:
         model = UserProfile
-        fields = ['id', 'email', 'password']
+        fields = ['id', 'email', 'password', 'imei']
         extra_kwargs = {"password" : {"write_only": True}}
 
     def validate(self, data):
         user_obj = None
         email = decryption(data.get("email", None))
         password = decryption(data['password'])
+        imei = decryption(data['imei'])
         user = UserProfile.objects.filter(email = email)
         user = user.exclude(email__isnull = True).exclude(email__iexact = '')
         if user.exists() and user.count()==1:
@@ -130,6 +132,8 @@ class UserLoginSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("Incorrect password")
             elif (user_obj.is_active!=True):
                 raise serializers.ValidationError("This account is not activated")
+            elif not IMEI.objects.filter(user_id=user_obj.id).filter(name=imei).exists():
+                raise serializers.ValidationError("This IMEI is not activated")
             else:
                 data['id'] = user_obj.id
         return data
