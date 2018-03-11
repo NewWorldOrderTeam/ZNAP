@@ -4,7 +4,6 @@ import hashlib
 from Crypto import Random
 
 from Crypto.Cipher import AES
-
 from znap.settings import key
 
 BS = 16
