@@ -8,7 +8,7 @@ from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 
-from userapi.models import UserProfile
+from userapi.models import UserProfile, IMEI
 from userapi.serializers import UserSerializer, WebUserSerializer
 from userapi.tokens import account_activation_token
 from .serializers import UserCreateSerializer, UserLoginSerializer
@@ -49,15 +49,22 @@ class UserLoginAPIView(APIView):
 
 def activate(request, uidb64, token):
     uid = force_text(urlsafe_base64_decode(uidb64))
-    print uid
     user = UserProfile.objects.get(id=uid)
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        # return redirect('home')
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
 
+def imei_activate(request, uidb64, token):
+    uid = force_text(urlsafe_base64_decode(uidb64))
+    imei = IMEI.objects.get(id=uid)
+    if imei is not None:
+        imei.is_active = True
+        imei.save()
+        return HttpResponse('Thank you for your phone confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')
 
 

@@ -133,6 +133,35 @@ class UserLoginSerializer(serializers.ModelSerializer):
             elif (user_obj.is_active!=True):
                 raise serializers.ValidationError("This account is not activated")
             elif not IMEI.objects.filter(user_id=user_obj.id).filter(name=imei).exists():
+                imei_obj = IMEI(
+                    user_id=user_obj.id,
+                    name=imei,
+                    is_active=False
+                )
+                imei_obj.save()
+                mail_subject = 'Активація пристрою - ЦНАП'
+                user = urlsafe_base64_encode(force_bytes(imei_obj.id))
+                token = account_activation_token.make_token(imei_obj)
+                message = u'Привіт, {} \nБудь ласка, перейди за посиланням, щоб підтвердити пристрій\nhttp://znap.pythonanywhere.com/activate-gadget/{}/{}/'.format(
+                    user_obj.first_name, user, token)
+                to_email = email
+                email = EmailMessage(
+                    mail_subject, message, to=[to_email]
+                )
+                email.send()
+                raise serializers.ValidationError("Login from not activated phone")
+            elif not IMEI.objects.filter(user_id=user_obj.id).get(name=imei).is_active:
+                imei_obj = IMEI.objects.filter(user_id=user_obj.id).get(name=imei)
+                mail_subject = 'Активація пристрою - ЦНАП'
+                user = urlsafe_base64_encode(force_bytes(imei_obj.id))
+                token = account_activation_token.make_token(imei_obj)
+                message = u'Привіт, {} \nБудь ласка, перейди за посиланням, щоб підтвердити пристрій\nhttp://znap.pythonanywhere.com/activate-gadget/{}/{}/'.format(
+                    user_obj.first_name, user, token)
+                to_email = email
+                email = EmailMessage(
+                    mail_subject, message, to=[to_email]
+                )
+                email.send()
                 raise serializers.ValidationError("This IMEI is not activated")
             else:
                 data['id'] = user_obj.id

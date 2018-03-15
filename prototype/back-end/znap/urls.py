@@ -80,6 +80,7 @@ urlpatterns = [
     url(r'^api/v1.0/addrate/', RateCreateAPIView.as_view(), name='create rate'),
     url(r'^api/v1.0/addmessage/', AddMessageAPIView.as_view(), name='add message'),
     url(r'^api/v1.0/registerToQueue/',RegistrationToZnapCreateAPIView.as_view(), name='register to queue'),
+    url(r'^activate-gadget/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',userapi.views.imei_activate, name='imei-activate'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', userapi.views.activate, name='activate'),
     url(r'^api/v1.0/cnap/(?P<service_center>[0-9])/services/', QlogicServicesViewSet.as_view(), name='cnap services'),
     url(r'^api/v1.0/cnap/', QlogicCnapViewSet.as_view(), name='cnap'),
