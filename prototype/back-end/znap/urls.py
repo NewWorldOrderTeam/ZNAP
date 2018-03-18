@@ -27,7 +27,8 @@ from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet, WebU
 from rest_framework_extensions.routers import NestedRouterMixin
 
 from znapapi.views import ZnapViewSet, RegistrationToZnapCreateAPIView, RegistrationToZnapViewSet, QlogicCnapViewSet, \
-    QlogicServicesViewSet, QlogicDaysForServiceViewSet, QlogicQueueStateViewSet
+    QlogicServicesViewSet, QlogicQueueStateViewSet, QlogicGroupViewSet, \
+    QlogicTimeForServiceViewSet
 
 
 class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
@@ -82,8 +83,9 @@ urlpatterns = [
     url(r'^api/v1.0/registerToQueue/',RegistrationToZnapCreateAPIView.as_view(), name='register to queue'),
     url(r'^activate-gadget/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',userapi.views.imei_activate, name='imei-activate'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', userapi.views.activate, name='activate'),
-    url(r'^api/v1.0/cnap/(?P<service_center>[0-9])/services/', QlogicServicesViewSet.as_view(), name='cnap services'),
+    url(r'^api/v1.0/cnap/(?P<service_center>[0-9]+)/service/(?P<service>[0-9]+)/time/', QlogicTimeForServiceViewSet.as_view(), name='time for registration'),
+    url(r'^api/v1.0/cnap/(?P<service_center>[0-9]+)/group/(?P<group>[0-9]+)/service/', QlogicServicesViewSet.as_view(), name='cnap services'),
+    url(r'^api/v1.0/cnap/(?P<service_center>[0-9]+)/group/', QlogicGroupViewSet.as_view(), name='cnap groups'),
     url(r'^api/v1.0/cnap/', QlogicCnapViewSet.as_view(), name='cnap'),
-    url(r'^api/v1.0/getDays/cnap/(?P<service_center>[0-9])/service/(?P<service>[0-9])/', QlogicDaysForServiceViewSet.as_view(), name='days for services'),
     url(r'^queue/', QlogicQueueStateViewSet.as_view(), name='loh')
 ]
