@@ -106,10 +106,25 @@ class QlogicTimeForServiceViewSet(APIView):
         current_day = datetime.datetime.fromtimestamp(int(current_day)).strftime('%m-%d-%Y')
         last_day = datetime.datetime.fromtimestamp(int(last_day)).strftime('%m-%d-%Y')
 
-        print current_day
-        print last_day
+        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/GetDayIntervalListEx?organisationGuid='+organisationGuid+'&serviceCenterId='+service_center+'&serviceId='+service+'&dateStart='+current_day+'&dateEnd='+last_day
+        r = urllib.urlopen(url).read()
+        time_list = json.loads(r)['d']
+        json_time = []
 
-        return Response(days)
+        for time in time_list:
+            if time['IsAllow']==1:
+                day = time['DatePart'].split('(')[1].split(')')[0][0:10]
+                day = datetime.datetime.fromtimestamp(int(day)).strftime('%d-%m-%Y')
+                hours = time['Times']
+                json_hour = []
+                for hour in hours:
+                    if hour['IsAllow']==1:
+                        start = hour['StartTime']
+                        stop = hour['StopTime']
+                        json_hour.append({'start':start, 'stop':stop})
+                json_time.append({'day': day, 'times':json_hour})
+
+        return Response(json_time)
 
 class QlogicQueueStateViewSet(APIView):
     permission_classes = [AllowAny]
