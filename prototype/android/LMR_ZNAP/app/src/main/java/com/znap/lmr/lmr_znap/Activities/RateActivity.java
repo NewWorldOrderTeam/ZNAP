@@ -49,8 +49,7 @@ import retrofit2.Response;
  * Created by Andy Blyzniuk on 13.11.2017.
  */
 
-public class RateActivity extends AppCompatActivity implements
-        OnItemSelectedListener {
+public class RateActivity extends AppCompatActivity implements OnItemSelectedListener {
     int quality;
     int znap_id;
     int pushed_user_id;

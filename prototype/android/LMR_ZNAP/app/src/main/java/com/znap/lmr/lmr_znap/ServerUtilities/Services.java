@@ -67,8 +67,8 @@ public class Services {
         return null;
     }
 
-    public Response SignToOfficialPerson(String email, String firstName, String lastName, String middleName, String address, String telephoneNumber, String yourProblem ) {
-        Call<User> call = serviceR.signToOfficialPerson(email, firstName, lastName, middleName, address, telephoneNumber, yourProblem);
+    public Response SignToOfficialPerson(int user_id, String address, String yourProblem ) {
+        Call<User> call = serviceR.signToOfficialPerson(user_id, address, yourProblem);
         try {
             Response response = call.execute();
             return response;

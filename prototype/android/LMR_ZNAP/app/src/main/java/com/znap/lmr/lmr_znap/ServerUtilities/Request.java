@@ -37,7 +37,7 @@ public interface Request {
 
     @FormUrlEncoded
     @POST("/api/v1.0/")
-    Call<User>signToOfficialPerson(@Field("email") String email, @Field("name") String firstName, @Field("last_name") String lastName, @Field("middle_name") String middleName, @Field("address") String address, @Field("phone") String telephoneNumber, @Field("your_problem") String yourProblem);
+    Call<User>signToOfficialPerson(@Field("user_id") int user_id, @Field("address") String address, @Field("your_problem") String yourProblem);
 
     @GET("/api/v1.0/user/{user}/")
     Call<User> getInfo(@Path("user") int userid);
