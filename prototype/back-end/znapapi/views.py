@@ -1,23 +1,24 @@
 import base64
 import json, urllib
 import datetime
+import string
 
 import requests
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
 from znap.AES import encryption, decryption
 from znap.settings import organisationGuid
 from znapapi.models import Znap, RegistrationToZnap
-from znapapi.serializers import ZnapSerialezer, CreateRegistrationToZnapSerializer, RegistrationToZnapSerializer
-
-
+from znapapi.serializers import ZnapSerialezer, CreateRegistrationToZnapSerializer, RegistrationToZnapSerializer, \
+    QlogicFinishRegistrationToZnapSerializer
 
 
 class ZnapViewSet(viewsets.ModelViewSet):
@@ -120,11 +121,34 @@ class QlogicTimeForServiceViewSet(APIView):
                 for hour in hours:
                     if hour['IsAllow']==1:
                         start = hour['StartTime']
+                        start = start[2:]
+                        start = start.replace('H', ':')
+                        if len(start) ==2:
+                            start = '0'+start+'00'
+                        elif len(start)==3:
+                            start = start + '00'
+                        elif 'M' in start:
+                            start = start.replace('M', '')
                         stop = hour['StopTime']
+                        stop = stop[2:]
+                        stop = stop.replace('H', ':')
+                        if len(stop) ==2:
+                            stop = '0'+stop+'00'
+                        elif len(stop)==3:
+                            stop = stop + '00'
+                        elif 'M' in stop:
+                            stop = stop.replace('M', '')
                         json_hour.append({'start':start, 'stop':stop})
                 json_time.append({'day': day, 'times':json_hour})
 
         return Response(json_time)
+
+class QlogicFinishRegistration(CreateAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = QlogicFinishRegistrationToZnapSerializer
+    queryset = ''
+
+
 
 class QlogicQueueStateViewSet(APIView):
     permission_classes = [AllowAny]
