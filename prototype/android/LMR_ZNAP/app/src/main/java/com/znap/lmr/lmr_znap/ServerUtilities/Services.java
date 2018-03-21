@@ -24,8 +24,8 @@ public class Services {
     Request serviceR = retrofit.create(Request.class);
 
 
-    public Response SignIn(String email, String password) {
-        Call<User> call = serviceR.signOn(email, password);
+    public Response SignIn(String email, String password, String imei) {
+        Call<User> call = serviceR.signOn(email, password,imei);
         try {
             Response response = call.execute();
             return response;
@@ -39,8 +39,8 @@ public class Services {
         return null;
     }
 
-    public Response SignUp(String firstName, String lastName, String middleName, String phone, String email, String password) {
-        Call<User> call = serviceR.signUp(firstName, lastName, middleName, phone, email, password);
+    public Response SignUp(String firstName, String lastName, String middleName, String phone, String email, String password, String imei) {
+        Call<User> call = serviceR.signUp(firstName, lastName, middleName, phone, email, password,imei);
         try {
             Response response = call.execute();
             // call.execute();

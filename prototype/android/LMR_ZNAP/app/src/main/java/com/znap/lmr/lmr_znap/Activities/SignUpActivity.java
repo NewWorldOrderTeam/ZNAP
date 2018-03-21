@@ -4,13 +4,19 @@ package com.znap.lmr.lmr_znap.Activities;
  * Created by Andy Blyzniuk on 01.11.2017.
  */
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -58,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
     String middleName;
     String phone;
     String emailToShow;
+     public String imei;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         findViewsById();
         hideKeyboardOnTap();
+        imei = getImeiNumber();
 
         bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                         lastName = AESEncryption.encrypt_string(lastName);
                         phone = AESEncryption.encrypt_string(phone);
                         password = AESEncryption.encrypt_string(password);
+                        imei = AESEncryption.encrypt_string(imei);
                     } catch (InvalidKeyException e) {
                         e.printStackTrace();
                     } catch (NoSuchAlgorithmException e) {
@@ -110,7 +119,25 @@ public class SignUpActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    emailToShow = email;
+                    try {
+                        emailToShow = AESEncryption.decrypt_string(email);
+                    } catch (InvalidKeyException e) {
+
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchPaddingException e) {
+                        e.printStackTrace();
+                    } catch (InvalidAlgorithmParameterException e) {
+                        e.printStackTrace();
+                    } catch (IllegalBlockSizeException e) {
+                        e.printStackTrace();
+                    } catch (BadPaddingException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     new AlertDialog.Builder(context)
                             .setMessage(NonSystemMessages.activateAccount + " " +emailToShow)
                             .setCancelable(false)
@@ -240,6 +267,76 @@ public class SignUpActivity extends AppCompatActivity {
         tSignOnLink = (TextView) findViewById(R.id.tSignUpLink);
     }
 
+
+    private void askForPermission(String permission, Integer requestCode) {
+        if (ContextCompat.checkSelfPermission(SignUpActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+
+            // Should show an explanation
+            if (ActivityCompat.shouldShowRequestPermissionRationale(SignUpActivity.this, permission)) {
+
+                ActivityCompat.requestPermissions(SignUpActivity.this, new String[]{permission}, requestCode);
+
+            } else {
+
+                ActivityCompat.requestPermissions(SignUpActivity.this, new String[]{permission}, requestCode);
+            }
+        } else {
+            imei = getImeiNumber();
+            Toast.makeText(this, permission + " is already granted.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    imei = getImeiNumber();
+                    System.out.println(imei);
+
+                } else {
+
+                    Toast.makeText(SignUpActivity.this, "You have Denied the Permission", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
+
+
+    public String getImeiNumber() {
+        final TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+
+        /*
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //getDeviceId() is Deprecated so for android O we can use getImei() method
+            return telephonyManager.getImei();
+        }
+        else {
+            return telephonyManager.getDeviceId();
+        }
+        */
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return "test";
+        }
+
+        return telephonyManager.getDeviceId();
+
+    }
+
+
     class Request extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -250,8 +347,8 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.SignUp(firstName, lastName, middleName, phone, email, password);
-            System.out.println(response.toString());
+            Response response = services.SignUp(firstName, lastName, middleName, phone, email, password,imei);
+            System.out.println(response.body());
             return response.toString();
         }
 
