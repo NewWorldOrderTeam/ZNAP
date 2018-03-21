@@ -35,6 +35,10 @@ public interface Request {
     @POST("/api/v1.0/addrate/")
     Call<User> addrate(@Field("user_id") int user_id, @Field("znap_id") int znap_id, @Field("description") String description, @Field("quality") int quality);
 
+    @FormUrlEncoded
+    @POST("/api/v1.0/")
+    Call<User>signToOfficialPerson(@Field("user_id") int user_id, @Field("address") String address, @Field("your_problem") String yourProblem);
+
     @GET("/api/v1.0/user/{user}/")
     Call<User> getInfo(@Path("user") int userid);
 

@@ -94,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.bReceptionToOfficial).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent officialPersonActivity = new Intent(MainActivity.this, RecordToTheOfficialPersonActivity.class);
+                startActivity(officialPersonActivity);
+            }
+        });
+
 
     }
     @Override

@@ -66,6 +66,21 @@ public class Services {
         }
         return null;
     }
+
+    public Response SignToOfficialPerson(int user_id, String address, String yourProblem ) {
+        Call<User> call = serviceR.signToOfficialPerson(user_id, address, yourProblem);
+        try {
+            Response response = call.execute();
+            return response;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
 
 

@@ -1,5 +1,6 @@
 import base64
 import json, urllib
+import datetime
 
 import requests
 from django.shortcuts import render
@@ -46,48 +47,104 @@ class QlogicCnapViewSet(APIView):
 
         json_cnap = []
         for cnap in cnaps_list:
-            name =encryption(cnap['ServiceCenterName'])
+            name =cnap['LocationName']
             service_id = cnap['ServiceCenterId']
             json_cnap.append({'name':name,
-                              'service_center_id': service_id})
+                              'id': service_id})
         return Response(json_cnap)
+
+class QlogicGroupViewSet(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, service_center):
+        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_wellcome_point/getGroupsByCenterId?organisationGuid='+organisationGuid+'&serviceCenterId='+service_center+'&preliminary=1'
+        r = urllib.urlopen(url).read()
+        groups = json.loads(r)
+        group_list = groups['d']
+        json_group = []
+        for group in group_list:
+            if group['IsActive']==1:
+                description = group['Description']
+                group_id = group['GroupId']
+                json_group.append({'description':description,
+                                   'id':group_id})
+        return Response(json_group)
+
 
 class QlogicServicesViewSet(APIView):
     permission_classes = [AllowAny]
 
-    def get(self, request, service_center):
+    def get(self, request, service_center, group):
 
-        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/GetServiceList?organisationGuid=' + organisationGuid + '&serviceCenterId=' + service_center
+        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_wellcome_point/getServicesByCenterId?organisationGuid='+organisationGuid+'&serviceCenterId='+service_center+'&groupId='+group+'&preliminary=1'
         r = urllib.urlopen(url).read()
         services = json.loads(r)
+        services_list = services['d']
+        json_services = []
+        for service in services_list:
+            if service['IsActive']==1:
+                description = service['Description']
+                id = service['ServiceId']
+                json_services.append({'description':description,
+                                      'id':id})
 
-        return Response(services['d'])
+        return Response(json_services)
 
-class QlogicDaysForServiceViewSet(APIView):
+class QlogicTimeForServiceViewSet(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, service_center, service):
 
-        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/GetDayList?organisationGuid=' + organisationGuid + '&serviceCenterId=' + service_center + '&serviceId=' + service
+        url = 'http://qlogic.net.ua:8081/WebPreRegistration/GetServiceCenterInfo?orgKey=' + organisationGuid + '&srvCenterId='+service_center
 
         r = urllib.urlopen(url).read()
-        days = json.loads(r)
+        json_data = r.split('(',1)[1].rsplit(')', 1)[0]
+        days = json.loads(json_data)
+        current_day = days['currentDay'].split('(')[1].split(')')[0][0:10]
+        last_day = days['lastDateTime'].split('(')[1].split(')')[0][0:10]
 
-        return Response(days['d'])
+        current_day = datetime.datetime.fromtimestamp(int(current_day)).strftime('%m-%d-%Y')
+        last_day = datetime.datetime.fromtimestamp(int(last_day)).strftime('%m-%d-%Y')
+
+        url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/GetDayIntervalListEx?organisationGuid='+organisationGuid+'&serviceCenterId='+service_center+'&serviceId='+service+'&dateStart='+current_day+'&dateEnd='+last_day
+        r = urllib.urlopen(url).read()
+        time_list = json.loads(r)['d']
+        json_time = []
+
+        for time in time_list:
+            if time['IsAllow']==1:
+                day = time['DatePart'].split('(')[1].split(')')[0][0:10]
+                day = datetime.datetime.fromtimestamp(int(day)).strftime('%d-%m-%Y')
+                hours = time['Times']
+                json_hour = []
+                for hour in hours:
+                    if hour['IsAllow']==1:
+                        start = hour['StartTime']
+                        stop = hour['StopTime']
+                        json_hour.append({'start':start, 'stop':stop})
+                json_time.append({'day': day, 'times':json_hour})
+
+        return Response(json_time)
 
 class QlogicQueueStateViewSet(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        url = 'http://qlogic.net.ua:8081/VideoAd/GetOrganisationState?orgKey=28c94bad-f024-4289-a986-f9d79c9d8102'
+        url = 'http://qlogic.net.ua:8081/Chart/ChartByNow?orgKey=28c94bad-f024-4289-a986-f9d79c9d8102'
 
         r = urllib.urlopen(url).read()
 
-        data_json = r.split('Text":')[1].split(',"IsError')[0]
+        queue = json.loads(r)
+        queue_list = queue['data']
+        json_queue = []
 
-        days = json.loads(data_json)
+        for service_center in queue_list:
+            name = service_center['SrvCenterDescription']
+            count = service_center['CountOfWaitingJobs']
+            json_queue.append({'name':name,
+                              'count':count})
 
-        return Response(days)
+        return Response(json_queue)
 
 
 
