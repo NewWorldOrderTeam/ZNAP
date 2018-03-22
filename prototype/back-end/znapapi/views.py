@@ -170,6 +170,8 @@ class QlogicQueueStateViewSet(APIView):
 
         return Response(json_queue)
 
+def site_response(request):
+    return render(request, 'dist/index.html')
 
 
 
