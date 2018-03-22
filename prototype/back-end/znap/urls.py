@@ -91,6 +91,5 @@ urlpatterns = [
     url(r'^api/v1.0/cnap/(?P<service_center>[0-9]+)/group/', QlogicGroupViewSet.as_view(), name='cnap groups'),
     url(r'^api/v1.0/cnap/register/', QlogicFinishRegistration.as_view(), name='finish registration to cnap'),
     url(r'^api/v1.0/cnap/', QlogicCnapViewSet.as_view(), name='cnap'),
-    url(r'^queue/', QlogicQueueStateViewSet.as_view(), name='loh'),
-    url(r'^$', TemplateView.as_view(template_name='dist/index.html'), name = 'admin')
+    url(r'^queue/', QlogicQueueStateViewSet.as_view(), name='loh')
 ]
