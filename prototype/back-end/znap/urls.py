@@ -31,7 +31,7 @@ from rest_framework_extensions.routers import NestedRouterMixin
 from znap import settings
 from znapapi.views import ZnapViewSet, RegistrationToZnapCreateAPIView, RegistrationToZnapViewSet, QlogicCnapViewSet, \
     QlogicServicesViewSet, QlogicQueueStateViewSet, QlogicGroupViewSet, \
-    QlogicTimeForServiceViewSet, QlogicFinishRegistration, site_response
+    QlogicTimeForServiceViewSet, QlogicFinishRegistration
 
 
 class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
