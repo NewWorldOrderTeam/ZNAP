@@ -94,6 +94,3 @@ urlpatterns = [
     url(r'^queue/', QlogicQueueStateViewSet.as_view(), name='loh'),
     url(r'^$', TemplateView.as_view(template_name='dist/index.html'), name = 'admin')
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
