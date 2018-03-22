@@ -54,6 +54,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText etPassword;
     Button bSignOn;
     TextView tSignUpLink;
+    TextView tPasswordRecoveryLink;
     String email;
     String password;
     int userid;
@@ -71,8 +72,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         findViewsById();
         hideKeyboardOnTap();
-        getImeiNumber();
-
+        imei = getImeiNumber();
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,9 +83,9 @@ public class SignInActivity extends AppCompatActivity {
                     password = etPassword.getText().toString();
                     try {
                         email = AESEncryption.encrypt_string(email);
-                        System.out.println(email);
                         password = AESEncryption.encrypt_string(password);
-                        System.out.println(password);
+                        imei = AESEncryption.encrypt_string(imei);
+                        System.out.println(imei);
                     } catch (InvalidKeyException e) {
                         e.printStackTrace();
                     } catch (NoSuchAlgorithmException e) {
@@ -121,6 +121,14 @@ public class SignInActivity extends AppCompatActivity {
                 SignInActivity.this.startActivity(signUpIntent);
             }
         });
+        tPasswordRecoveryLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent passwordRecoveryIntent = new Intent(SignInActivity.this, PasswordRecoveryActivity.class);
+                SignInActivity.this.startActivity(passwordRecoveryIntent);
+            }
+        });
+
     }
 
     @Override
@@ -189,6 +197,7 @@ public class SignInActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bSignOn = (Button) findViewById(R.id.bSignIn);
         tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
+        tPasswordRecoveryLink = (TextView) findViewById(R.id.tPasswordRecoveryLink);
     }
 
     public AlertDialog.Builder buildDialog(Context c) {
@@ -242,10 +251,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     imei = getImeiNumber();
-
-
                 } else {
 
                     Toast.makeText(SignInActivity.this, "You have Denied the Permission", Toast.LENGTH_SHORT).show();
@@ -301,11 +307,10 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.SignIn(email, password);
-            /*System.out.println(response);*/
+            Response response = services.SignIn(email, password,imei);
+            System.out.println(response);
             User user = (User) response.body();
             if (user == null) {
-                System.out.println(response.body());
                 return response.toString();
             } else {
                 userid = user.getId();
