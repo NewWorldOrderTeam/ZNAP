@@ -39,6 +39,10 @@ public interface Request {
     @POST("/api/v1.0/")
     Call<User>signToOfficialPerson(@Field("user_id") int user_id, @Field("address") String address, @Field("your_problem") String yourProblem);
 
+    @FormUrlEncoded
+    @POST("/api/v1.0/")
+    Call<User>passwordRecovery(@Field("email") String email);
+
     @GET("/api/v1.0/user/{user}/")
     Call<User> getInfo(@Path("user") int userid);
 

@@ -94,15 +94,14 @@
         android:id="@+id/bSignIn"
         android:layout_width="200dp"
         android:layout_height="55dp"
-        android:layout_below="@+id/etPassword"
+
+        android:layout_above="@+id/encodedField"
+
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
         android:layout_weight="1"
         android:text="Увійти"
-
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#fcfff5"
-
         android:theme="@style/mainActButton"
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="105dp" />
@@ -116,6 +115,19 @@
         android:layout_gravity="right"
         android:layout_marginBottom="11dp"
         android:text="Зареєструватися"
+        android:textColor="@color/colorNonActive"
+        tools:layout_editor_absoluteX="169dp"
+        tools:layout_editor_absoluteY="162dp" />
+
+    <TextView
+        android:id="@+id/tPasswordRecoveryLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="right"
+        android:layout_marginTop="13dp"
+        android:text="Забули пароль?"
         android:textColor="@color/colorNonActive"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp" />
