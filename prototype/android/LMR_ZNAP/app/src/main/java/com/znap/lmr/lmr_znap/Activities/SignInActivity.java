@@ -59,7 +59,8 @@ public class SignInActivity extends AppCompatActivity {
     int userid;
     ProgressDialog progDailog;
     String imei;
-    public static boolean isMultiSimEnabled = false;
+    String error;
+    private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 999;
 
 
     @Override
@@ -71,7 +72,15 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         findViewsById();
         hideKeyboardOnTap();
-        imei = getImeiNumber();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
+                        PERMISSIONS_REQUEST_READ_PHONE_STATE);
+            } else {
+                imei = getImeiNumber();
+            }
+        }
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,7 +175,7 @@ public class SignInActivity extends AppCompatActivity {
                 int end = matcher.end() - 1;
                 String match = request.get().substring(start, end);
                 if (match.equals(SystemMessages.BAD_REQUEST)) {
-                    match = NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY;
+                    match = error;
                     Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
                 }
                 if (match.equals(SystemMessages.OK)) {
@@ -254,28 +263,8 @@ public class SignInActivity extends AppCompatActivity {
 
     public String getImeiNumber() {
         final TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-
-        /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //getDeviceId() is Deprecated so for android O we can use getImei() method
-            return telephonyManager.getImei();
-        }
-        else {
-            return telephonyManager.getDeviceId();
-        }
-        */
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return "test";
         }
-
         return telephonyManager.getDeviceId();
 
     }
@@ -298,21 +287,29 @@ public class SignInActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             Services services = new Services();
             Response response = services.SignIn(email, password,imei);
-            System.out.println(response);
-            User user = (User) response.body();
-            if (user == null) {
-                return response.toString();
+            if(response.isSuccessful()) {
+                User user = (User) response.body();
+                if (user == null) {
+                    return response.toString();
+                } else {
+                    userid = user.getId();
+                }
             } else {
-                userid = user.getId();
+                try {
+                    error = response.errorBody().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return response.toString();
-
         }
 
 
         @Override
         protected void onPostExecute(String result) {
-            super.onPostExecute(result);
+            if(progDailog.isShowing()){
+                progDailog.dismiss();
+            }
 
         }
 

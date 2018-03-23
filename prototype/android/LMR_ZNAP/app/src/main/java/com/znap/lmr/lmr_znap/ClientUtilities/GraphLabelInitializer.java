@@ -89,13 +89,13 @@ public class GraphLabelInitializer {
         seventhLabel.setDrawValuesOnTop(true);
         seventhLabel.setValuesOnTopColor(Color.BLACK);
         graph.addSeries(seventhLabel);
-        firstLabel.setTitle("Пл.Ринок");
-        secondLabel.setTitle("РЯСНЕ");
-        thirdLabel.setTitle("Ч.Калини");
+        firstLabel.setTitle("Ч.Калини");
+        secondLabel.setTitle("Левицького");
+        thirdLabel.setTitle("пл.Ринок");
         fourthLabel.setTitle("Хвильового");
-        fifthLabel.setTitle("Левицького");
-        sixthLabel.setTitle("Виговського");
-        seventhLabel.setTitle("Чупринки");
+        fifthLabel.setTitle("Виговського");
+        sixthLabel.setTitle("Чупринки");
+        seventhLabel.setTitle("РЯСНЕ");
     }
 
     public void setScalingForGraphic(GraphView graph){
