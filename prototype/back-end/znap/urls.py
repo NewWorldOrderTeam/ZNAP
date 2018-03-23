@@ -14,7 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic import TemplateView
 from rest_framework import routers
 from rest_framework.routers import DefaultRouter
 
@@ -26,9 +28,10 @@ from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet, WebU
 
 from rest_framework_extensions.routers import NestedRouterMixin
 
+from znap import settings
 from znapapi.views import ZnapViewSet, RegistrationToZnapCreateAPIView, RegistrationToZnapViewSet, QlogicCnapViewSet, \
     QlogicServicesViewSet, QlogicQueueStateViewSet, QlogicGroupViewSet, \
-    QlogicTimeForServiceViewSet
+    QlogicTimeForServiceViewSet, QlogicFinishRegistration
 
 
 class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
@@ -86,6 +89,7 @@ urlpatterns = [
     url(r'^api/v1.0/cnap/(?P<service_center>[0-9]+)/service/(?P<service>[0-9]+)/time/', QlogicTimeForServiceViewSet.as_view(), name='time for registration'),
     url(r'^api/v1.0/cnap/(?P<service_center>[0-9]+)/group/(?P<group>[0-9]+)/service/', QlogicServicesViewSet.as_view(), name='cnap services'),
     url(r'^api/v1.0/cnap/(?P<service_center>[0-9]+)/group/', QlogicGroupViewSet.as_view(), name='cnap groups'),
+    url(r'^api/v1.0/cnap/register/', QlogicFinishRegistration.as_view(), name='finish registration to cnap'),
     url(r'^api/v1.0/cnap/', QlogicCnapViewSet.as_view(), name='cnap'),
     url(r'^queue/', QlogicQueueStateViewSet.as_view(), name='loh')
 ]

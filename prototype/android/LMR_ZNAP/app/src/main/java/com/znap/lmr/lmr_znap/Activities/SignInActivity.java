@@ -54,6 +54,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText etPassword;
     Button bSignOn;
     TextView tSignUpLink;
+    TextView tPasswordRecoveryLink;
     String email;
     String password;
     int userid;
@@ -129,6 +130,14 @@ public class SignInActivity extends AppCompatActivity {
                 SignInActivity.this.startActivity(signUpIntent);
             }
         });
+        tPasswordRecoveryLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent passwordRecoveryIntent = new Intent(SignInActivity.this, PasswordRecoveryActivity.class);
+                SignInActivity.this.startActivity(passwordRecoveryIntent);
+            }
+        });
+
     }
 
     @Override
@@ -197,6 +206,7 @@ public class SignInActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bSignOn = (Button) findViewById(R.id.bSignIn);
         tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
+        tPasswordRecoveryLink = (TextView) findViewById(R.id.tPasswordRecoveryLink);
     }
 
     public AlertDialog.Builder buildDialog(Context c) {

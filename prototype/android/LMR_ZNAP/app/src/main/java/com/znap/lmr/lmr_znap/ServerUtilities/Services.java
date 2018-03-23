@@ -81,6 +81,21 @@ public class Services {
 
         return null;
     }
+
+    public Response PasswordRecovery(String email) {
+        Call<User> call = serviceR.passwordRecovery(email);
+        try {
+            Response response = call.execute();
+            return response;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
 
 
