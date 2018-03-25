@@ -57,11 +57,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorAccent"
-
+        android:layout_marginBottom="22dp"
         android:text="Увійти"
+        android:textColor="@color/colorAccent"
         tools:layout_editor_absoluteX="169dp"
         tools:layout_editor_absoluteY="162dp" />
 
@@ -69,15 +67,30 @@
         android:id="@+id/etPassword"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
+        android:layout_alignLeft="@+id/etPhoneNumber"
+        android:layout_alignStart="@+id/etPhoneNumber"
         android:layout_below="@+id/etPhoneNumber"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
         android:layout_weight="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:background="#E0E0E0"
         android:ems="10"
         android:hint=" Пароль"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="60dp" />
+
+    <EditText
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignLeft="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword"
+        android:layout_below="@+id/etPassword"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint=" Підтвердіть пароль"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="60dp" />

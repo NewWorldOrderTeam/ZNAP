@@ -18,6 +18,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -50,7 +51,7 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
     Context context = this;
     EditText etEmail;
-    EditText etPassword;
+    EditText etPassword,etConfirmPassword;
     EditText etFirstName;
     EditText etLastName;
     EditText etMiddleName;
@@ -64,7 +65,9 @@ public class SignUpActivity extends AppCompatActivity {
     String middleName;
     String phone;
     String emailToShow;
-     public String imei;
+    public String imei;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         findViewsById();
         hideKeyboardOnTap();
+
         imei = getImeiNumber();
 
         bSignUp.setOnClickListener(new View.OnClickListener() {
@@ -86,9 +90,11 @@ public class SignUpActivity extends AppCompatActivity {
                 lastName = etLastName.getText().toString();
                 setErrorsForFields();
                 if (etPassword.getText().toString().length() < 8 && !Validations.isValidPassword(etPassword.getText().toString()) ||
+                        !etConfirmPassword.getText().toString().equals(etPassword.getText().toString())||
                         etFirstName.getText().toString().length() < 3 && !Validations.isValidFirstName(etFirstName.getText().toString()) ||
                         etMiddleName.getText().toString().length() < 3 && !Validations.isValidMiddleName(etMiddleName.getText().toString()) ||
                         etLastName.getText().toString().length() < 3 && !Validations.isValidLastName(etLastName.getText().toString())) {
+                    etConfirmPassword.setError("Паролі мають співпадати");
                     Toast.makeText(getApplicationContext(), NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY, Toast.LENGTH_LONG).show();
                 } else {
                     firstName = etFirstName.getText().toString();
@@ -159,6 +165,8 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(SignUpActivity.INPUT_METHOD_SERVICE);
@@ -258,6 +266,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void findViewsById(){
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etMiddleName = (EditText) findViewById(R.id.etMiddleName);
@@ -267,16 +276,13 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
+
+
     private void askForPermission(String permission, Integer requestCode) {
         if (ContextCompat.checkSelfPermission(SignUpActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
-
-            // Should show an explanation
             if (ActivityCompat.shouldShowRequestPermissionRationale(SignUpActivity.this, permission)) {
-
                 ActivityCompat.requestPermissions(SignUpActivity.this, new String[]{permission}, requestCode);
-
             } else {
-
                 ActivityCompat.requestPermissions(SignUpActivity.this, new String[]{permission}, requestCode);
             }
         } else {
@@ -290,15 +296,10 @@ public class SignUpActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case 1: {
-
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     imei = getImeiNumber();
                     System.out.println(imei);
-
                 } else {
-
                     Toast.makeText(SignUpActivity.this, "You have Denied the Permission", Toast.LENGTH_SHORT).show();
                 }
                 return;
@@ -321,13 +322,6 @@ public class SignUpActivity extends AppCompatActivity {
         */
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return "test";
         }
 
