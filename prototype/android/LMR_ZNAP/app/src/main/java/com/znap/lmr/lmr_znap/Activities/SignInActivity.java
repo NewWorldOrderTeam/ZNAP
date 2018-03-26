@@ -72,16 +72,9 @@ public class SignInActivity extends AppCompatActivity {
         checkInternetConnection();
         setContentView(R.layout.activity_sign_in);
         findViewsById();
+        getPermission();
+        System.out.println(imei);
         hideKeyboardOnTap();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
-                        PERMISSIONS_REQUEST_READ_PHONE_STATE);
-            } else {
-                imei = getImeiNumber();
-            }
-        }
         bSignOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +83,7 @@ public class SignInActivity extends AppCompatActivity {
                 } else {
                     email = etEmail.getText().toString();
                     password = etPassword.getText().toString();
+                    imei = getImeiNumber();
                     try {
                         email = AESEncryption.encrypt_string(email);
                         password = AESEncryption.encrypt_string(password);
@@ -152,6 +146,21 @@ public class SignInActivity extends AppCompatActivity {
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(SignInActivity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public  void getPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
+                        PERMISSIONS_REQUEST_READ_PHONE_STATE);
+            } else {
+                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
+                        PERMISSIONS_REQUEST_READ_PHONE_STATE);
+                System.out.println(imei);
+                imei = getImeiNumber();
+            }
+        }
     }
 
     public void hideKeyboardOnTap() {
@@ -273,6 +282,7 @@ public class SignInActivity extends AppCompatActivity {
 
     public String getImeiNumber() {
         final TelephonyManager telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
         }
         return telephonyManager.getDeviceId();

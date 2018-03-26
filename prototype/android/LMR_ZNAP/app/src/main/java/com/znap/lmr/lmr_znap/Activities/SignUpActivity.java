@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -66,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
     String phone;
     String emailToShow;
     public String imei;
+    private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 999;
 
 
 
@@ -77,8 +79,9 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         findViewsById();
         hideKeyboardOnTap();
-
+        getPermission();
         imei = getImeiNumber();
+        System.out.println(imei);
 
         bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +170,19 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
+    public  void getPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
+                        PERMISSIONS_REQUEST_READ_PHONE_STATE);
+            } else {
+                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
+                        PERMISSIONS_REQUEST_READ_PHONE_STATE);
+                imei = getImeiNumber();
+            }
+        }
+    }
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(SignUpActivity.INPUT_METHOD_SERVICE);
@@ -298,7 +314,6 @@ public class SignUpActivity extends AppCompatActivity {
             case 1: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     imei = getImeiNumber();
-                    System.out.println(imei);
                 } else {
                     Toast.makeText(SignUpActivity.this, "You have Denied the Permission", Toast.LENGTH_SHORT).show();
                 }
