@@ -29,6 +29,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lamudi.phonefield.PhoneInputLayout;
+import com.znap.lmr.lmr_znap.ClientUtilities.SystemMessages;
 import com.znap.lmr.lmr_znap.Security.AESEncryption;
 import com.znap.lmr.lmr_znap.ClientUtilities.NonSystemMessages;
 import com.znap.lmr.lmr_znap.R;
@@ -52,11 +54,11 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
     Context context = this;
     EditText etEmail;
-    EditText etPassword,etConfirmPassword;
+    EditText etPassword, etConfirmPassword;
     EditText etFirstName;
     EditText etLastName;
     EditText etMiddleName;
-    EditText etPhoneNumber;
+    String phoneNumber;
     Button bSignUp;
     TextView tSignOnLink;
     String email;
@@ -66,9 +68,10 @@ public class SignUpActivity extends AppCompatActivity {
     String middleName;
     String phone;
     String emailToShow;
+    PhoneInputLayout phoneInputLayout;
     public String imei;
+    private String error;
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 999;
-
 
 
     @Override
@@ -78,6 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sign_up);
         findViewsById();
+        phoneInputLayout.setDefaultCountry("UA");
         hideKeyboardOnTap();
         getPermission();
         imei = getImeiNumber();
@@ -86,6 +90,7 @@ public class SignUpActivity extends AppCompatActivity {
         bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean valid = true;
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
                 firstName = etFirstName.getText().toString();
@@ -93,23 +98,25 @@ public class SignUpActivity extends AppCompatActivity {
                 lastName = etLastName.getText().toString();
                 setErrorsForFields();
                 if (etPassword.getText().toString().length() < 8 && !Validations.isValidPassword(etPassword.getText().toString()) ||
-                        !etConfirmPassword.getText().toString().equals(etPassword.getText().toString())||
+                        !etConfirmPassword.getText().toString().equals(etPassword.getText().toString()) ||
                         etFirstName.getText().toString().length() < 3 && !Validations.isValidFirstName(etFirstName.getText().toString()) ||
                         etMiddleName.getText().toString().length() < 3 && !Validations.isValidMiddleName(etMiddleName.getText().toString()) ||
-                        etLastName.getText().toString().length() < 3 && !Validations.isValidLastName(etLastName.getText().toString())) {
-                    etConfirmPassword.setError("Паролі мають співпадати");
+                        !phoneInputLayout.isValid()||
+                        etLastName.getText().toString().length() < 3 && !Validations.isValidLastName(etLastName.getText().toString()))  {
+                    etConfirmPassword.setError("Перевірте чи паролі співпадають");
+                    phoneInputLayout.setError("Перевірте чи правильно введено телефон");
                     Toast.makeText(getApplicationContext(), NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY, Toast.LENGTH_LONG).show();
                 } else {
                     firstName = etFirstName.getText().toString();
                     middleName = etMiddleName.getText().toString();
                     lastName = etLastName.getText().toString();
-                    phone = etPhoneNumber.getText().toString();
+                    phoneNumber = phoneInputLayout.getPhoneNumber();
                     try {
                         email = AESEncryption.encrypt_string(email);
                         firstName = AESEncryption.encrypt_string(firstName);
                         middleName = AESEncryption.encrypt_string(middleName);
                         lastName = AESEncryption.encrypt_string(lastName);
-                        phone = AESEncryption.encrypt_string(phone);
+                        phoneNumber = AESEncryption.encrypt_string(phoneNumber);
                         password = AESEncryption.encrypt_string(password);
                         imei = AESEncryption.encrypt_string(imei);
                     } catch (InvalidKeyException e) {
@@ -147,7 +154,7 @@ public class SignUpActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     new AlertDialog.Builder(context)
-                            .setMessage(NonSystemMessages.activateAccount + " " +emailToShow)
+                            .setMessage(NonSystemMessages.activateAccount + " " + emailToShow)
                             .setCancelable(false)
                             .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -170,7 +177,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    public  void getPermission(){
+    public void getPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -183,6 +190,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
+
 
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(SignUpActivity.INPUT_METHOD_SERVICE);
@@ -230,14 +238,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-        etPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    hideKeyboard(v);
-                }
-            }
-        });
     }
 
     public void setErrorsForFields() {
@@ -258,7 +258,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    public void requestPatternValidation(){
+    public void requestPatternValidation() {
         Request request = new Request();
         request.execute();
         Pattern pattern = Pattern.compile("message=.*,");
@@ -269,7 +269,16 @@ public class SignUpActivity extends AppCompatActivity {
             while (matcher.find()) {
                 int start = matcher.start() + 8;
                 int end = matcher.end() - 1;
+
                 String match = request.get().substring(start, end);
+                if (match.equals(SystemMessages.INTERNAL_SERVER_ERROR) || match.equals(SystemMessages.BAD_REQUEST)) {
+                    match = error;
+                    Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
+                }
+                if (match.equals(SystemMessages.OK)) {
+                    Intent mainIntent = new Intent(SignUpActivity.this, SignInActivity.class);
+                    SignUpActivity.this.startActivity(mainIntent);
+                }
                 Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
             }
         } catch (InterruptedException e) {
@@ -279,19 +288,17 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    public void findViewsById(){
+    public void findViewsById() {
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etMiddleName = (EditText) findViewById(R.id.etMiddleName);
-        etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
         bSignUp = (Button) findViewById(R.id.bSignUp);
         tSignOnLink = (TextView) findViewById(R.id.tSignUpLink);
+        phoneInputLayout = (PhoneInputLayout) findViewById(R.id.phone_input_layout);
     }
-
-
 
 
     private void askForPermission(String permission, Integer requestCode) {
@@ -355,8 +362,15 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.SignUp(firstName, lastName, middleName, phone, email, password,imei);
-            System.out.println(response.body());
+            Response response = services.SignUp(firstName, lastName, middleName, phoneNumber, email, password, imei);
+            if (response.isSuccessful()) {
+            } else {
+                try {
+                    error = response.errorBody().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             return response.toString();
         }
 
