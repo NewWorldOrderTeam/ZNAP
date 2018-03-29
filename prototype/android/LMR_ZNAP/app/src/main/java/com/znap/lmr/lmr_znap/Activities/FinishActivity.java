@@ -24,6 +24,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -41,11 +42,9 @@ public class FinishActivity extends AppCompatActivity {
     Button bFinish;
     int user_id,cnap_id,service_id;
     String hour,day;
-    String organisationID = SystemMessages.ORGANISATION_ID;
     String firstName, lastName, phone, email;
     final Context context = this;
 
-    private static Retrofit retrofit;
     private static Request request;;
 
     @Override
@@ -61,7 +60,6 @@ public class FinishActivity extends AppCompatActivity {
         service_id = bundle.getInt(SystemMessages.SERVICE_ID);
         day = bundle.getString("day");
         hour = bundle.getString("hour");
-
         request = ZnapUtility.generateRetroRequest();
         FinishActivity.getApi().getInfo(user_id).enqueue(new Callback<User>() {
             @Override
@@ -130,12 +128,7 @@ public class FinishActivity extends AppCompatActivity {
                                 FinishActivity.getApi().regToQueue(user_id, cnap_id,service_id, day, hour).enqueue(new Callback<SuccessRegistrationAPI>() {
                                     @Override
                                     public void onResponse(Call<SuccessRegistrationAPI> call, Response<SuccessRegistrationAPI> response) {
-                                        System.out.println(user_id + "q " + cnap_id + "q" + service_id + " q" + day + " " + hour);
-                                        try {
-                                            System.out.println(response.errorBody().string());
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
+
                                     }
                                     @Override
                                     public void onFailure(Call<SuccessRegistrationAPI> call, Throwable t) {
