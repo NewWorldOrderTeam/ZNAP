@@ -2,6 +2,7 @@
 import json
 import urllib
 
+import pdfkit
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from rest_framework.response import Response
@@ -106,13 +107,19 @@ class QlogicFinishRegistrationToZnapSerializer(serializers.Serializer):
             url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/getReceipt?organisationGuid=' + organisationGuid + '&serviceCenterId=' + str(cnap_id) + '&orderGuid={' + order_id + '}'
             r = urllib.urlopen(url).read()
             registration_check = json.loads(r)['d']
+
+            registration_check = registration_check.replace('windows-1251', 'utf-8')
+            path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
+            config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+            pdfkit.from_string(registration_check, 'registration.pdf', configuration=config)
+            attachment = open('registration.pdf', 'rb')
+
             validated_data['html']=registration_check
-            registration_check = registration_check.replace('&nbsp', ' ')
             mail_subject = "Реєстрація у ЦНАП"
             email = EmailMessage(
-                mail_subject, registration_check, to=[email]
+                mail_subject, 'Дякуємо за реєстрацію у ЦНАП', to=[email]
             )
-            email.content_subtype = 'html'
+            email.attach('registration.pdf',attachment.read(),'application/pdf')
             email.send()
 
             return validated_data
