@@ -50,7 +50,7 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
     List<DateChooserAPI> dates,times;
     List<String> datesList;
     List<String> timesList;
-    String days;
+    String day,hour;
     HashMap<Integer,Integer> datesMap,timesMap;
 
 
@@ -65,7 +65,6 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
         getSpinnerForTime = (Spinner) findViewById(R.id.spinnerForTime);
         getSpinnerForTime.setOnItemSelectedListener(this);
         spinnerForDate.setOnItemSelectedListener(this);
-        System.out.println("qwe");
         bTreg = (Button) findViewById(R.id.buttonTOReg);
         bTreg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +74,8 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
                 myIntent.putExtra("znap_id", znap_id);
                 myIntent.putExtra("service_id",service_id);
-                myIntent.putExtra("date",date);
+                myIntent.putExtra("day",day);
+                myIntent.putExtra("hour",hour);
                 startActivity(myIntent);
             }
         });
@@ -84,15 +84,11 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
         datesList = new ArrayList<>();
         timesList = new ArrayList<>();
         request = ZnapUtility.QLogicRequest();
-        System.out.println("lol");
         DateChooserActivity.getApi().getDates(znap_id,service_id).enqueue(new Callback<List<DateChooserAPI>>() {
             @Override
             public void onResponse(Call<List<DateChooserAPI>> call, Response<List<DateChooserAPI>> response) {
-                System.out.println("qwe");
                 dates.addAll(response.body());
-                System.out.println("qwe");
                 for (int i=0; i<dates.size(); i++){
-                    System.out.println(dates.get(i).getDay());
                     datesList.add(dates.get(i).getDay());
                 }
                 final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, datesList);
@@ -122,6 +118,8 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
         }
         final ArrayAdapter<String> timeAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, timesList);
         getSpinnerForTime.setAdapter(timeAdapter);
+        day = spinnerForDate.getSelectedItem().toString();
+        hour = getSpinnerForTime.getSelectedItem().toString();
     }
 
     @Override

@@ -43,6 +43,10 @@ public interface Request {
     @POST("/api/v1.0/")
     Call<User>passwordRecovery(@Field("email") String email);
 
+    @FormUrlEncoded
+    @POST("/api/v1.0/cnap/register/")
+    Call<SuccessRegistrationAPI> regToQueue(@Field("user_id") int user_id,@Field("cnap_id") int znap_id,@Field("service_id") int service_id,@Field("day") String day, @Field("hour") String hour);
+
     @GET("/api/v1.0/user/{user}/")
     Call<User> getInfo(@Path("user") int userid);
 
@@ -66,9 +70,6 @@ public interface Request {
 
     @GET("/api/v1.0/cnap/{znap_id}/service/{service_id}/time/")
     Call<List<DateChooserAPI>> getDates( @Path("znap_id") int znap_id, @Path("service_id") int service_id);
-
-    @GET("/QueueService.svc/json_pre_reg/GetTimeList")
-    Call<List<HoursChooserAPI>> getHours(@Query("organisationGuid") String organisationID, @Query("serviceCenterId") int znap_id, @Query("serviceId") int service_id, @Query("date") String date);
 
     @GET( "/QueueService.svc/json_pre_reg/RegCustomerEx")
     Call<SuccessRegistrationAPI> getResult(@Query("organisationGuid") String organisationID,

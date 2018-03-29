@@ -59,7 +59,7 @@ public class MyReviewsActivity extends AppCompatActivity {
                 public void onResponse(Call<List<Rate>> call, Response<List<Rate>> response) {
                     rates.addAll(response.body());
                     System.out.println(rates);
-                    for (int i = rates.size() - 1; i > 0; i--) {
+                    for (int i = rates.size() - 1; i > -1; i--) {
                         try {
                             ratesOfUsers.add(AESEncryption.decrypt_string(rates.get(i).getDescription()));
                         } catch (InvalidKeyException e) {

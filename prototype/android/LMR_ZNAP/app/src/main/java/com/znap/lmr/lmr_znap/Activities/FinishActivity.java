@@ -39,8 +39,8 @@ import retrofit2.Retrofit;
 
 public class FinishActivity extends AppCompatActivity {
     Button bFinish;
-    int user_id,znap_id,service_id;
-    String time,date;
+    int user_id,cnap_id,service_id;
+    String hour,day;
     String organisationID = SystemMessages.ORGANISATION_ID;
     String firstName, lastName, phone, email;
     final Context context = this;
@@ -57,19 +57,10 @@ public class FinishActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         user_id = bundle.getInt(SystemMessages.USER_ID);
-
-        znap_id = bundle.getInt(SystemMessages.ZNAP_ID);
-
+        cnap_id = bundle.getInt(SystemMessages.ZNAP_ID);
         service_id = bundle.getInt(SystemMessages.SERVICE_ID);
-
-        date = bundle.getString("date");
-
-        time = bundle.getString("hours");
-        System.out.println(time);
-
-
-        final String dateAndTime = date + " " + time + ":00";
-        System.out.println(dateAndTime);
+        day = bundle.getString("day");
+        hour = bundle.getString("hour");
 
         request = ZnapUtility.generateRetroRequest();
         FinishActivity.getApi().getInfo(user_id).enqueue(new Callback<User>() {
@@ -86,8 +77,6 @@ public class FinishActivity extends AppCompatActivity {
                     lastName = AESEncryption.decrypt_string(lastName);
                     phone = AESEncryption.decrypt_string(phone);
                     email = AESEncryption.decrypt_string(email);
-
-
 
                 } catch (InvalidKeyException e) {
                     e.printStackTrace();
@@ -131,25 +120,26 @@ public class FinishActivity extends AppCompatActivity {
                         .setMessage("Ви дійсно хочете зареєструватись у чергу ?")
                         .setCancelable(false)
                         .setPositiveButton("Так",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
+                            public void onClick(final DialogInterface dialog, int id) {
                                 Intent myIntent = new Intent(FinishActivity.this,
                                         MainActivity.class);
                                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
-                                myIntent.putExtra("znap_id", znap_id);
+                                myIntent.putExtra("znap_id", cnap_id);
                                 myIntent.putExtra("service_id", service_id);
                                 request = ZnapUtility.QLogicRequest();
-                                String name = lastName + firstName;
-                                FinishActivity.getApi().getResult(organisationID, znap_id,service_id, dateAndTime, phone, email, name, 1).enqueue(new Callback<SuccessRegistrationAPI>() {
+                                FinishActivity.getApi().regToQueue(user_id, cnap_id,service_id, day, hour).enqueue(new Callback<SuccessRegistrationAPI>() {
                                     @Override
                                     public void onResponse(Call<SuccessRegistrationAPI> call, Response<SuccessRegistrationAPI> response) {
-                                        System.out.println(request.getResult(organisationID, znap_id,service_id, dateAndTime, phone, email, "Підор", 1).request().url().toString());
-                                        SuccessRegistrationAPI successRegistrationAPI = (SuccessRegistrationAPI) response.body();
-                                        String orderId = successRegistrationAPI.getCustOrderGuid();
-                                        System.out.println(orderId);
-
+                                        System.out.println(user_id + "q " + cnap_id + "q" + service_id + " q" + day + " " + hour);
+                                        try {
+                                            System.out.println(response.errorBody().string());
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                     @Override
                                     public void onFailure(Call<SuccessRegistrationAPI> call, Throwable t) {
+                                        System.out.println();
                                     }
                                 });
                                 startActivity(myIntent);
@@ -161,7 +151,6 @@ public class FinishActivity extends AppCompatActivity {
                             }
                         });
 
-                // create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
 
                 // show it

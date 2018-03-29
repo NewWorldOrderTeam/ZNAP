@@ -48,14 +48,7 @@ public class Validations {
         return matcher.matches();
     }
 
-    public static boolean isValidPhoneNumber(final String phone_number) {
-        Pattern pattern;
-        Matcher matcher;
-        final String PHONE_PATTERN = "(\\\\D?[0-9]{3}\\\\D?)[0-9]{3}-[0-9]{4}";
-        pattern = Pattern.compile(PHONE_PATTERN);
-        matcher = pattern.matcher(phone_number);
-        return matcher.matches();
-    }
+
 
     public static boolean isConnected(Context context) {
 

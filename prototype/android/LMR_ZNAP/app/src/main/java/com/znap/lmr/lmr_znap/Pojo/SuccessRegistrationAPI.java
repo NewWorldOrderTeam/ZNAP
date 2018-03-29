@@ -6,59 +6,60 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class SuccessRegistrationAPI {
-    @SerializedName("__type")
+    @SerializedName("user_id")
     @Expose
-    private String type;
-    @SerializedName("CustOrderGuid")
+    private Object userId;
+    @SerializedName("cnap_id")
     @Expose
-    private String custOrderGuid;
-    @SerializedName("CustReceiptLetter")
+    private Object cnapId;
+    @SerializedName("service_id")
     @Expose
-    private String custReceiptLetter;
-    @SerializedName("CustReceiptNum")
+    private Object serviceId;
+    @SerializedName("day")
     @Expose
-    private Integer custReceiptNum;
-    @SerializedName("CustJobGuid")
+    private String day;
+    @SerializedName("hour")
     @Expose
-    private String custJobGuid;
+    private String hour;
 
-    public String getType() {
-        return type;
+    public Object getUserId() {
+        return userId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setUserId(Object userId) {
+        this.userId = userId;
     }
 
-    public String getCustOrderGuid() {
-        return custOrderGuid;
+    public Object getCnapId() {
+        return cnapId;
     }
 
-    public void setCustOrderGuid(String custOrderGuid) {
-        this.custOrderGuid = custOrderGuid;
+    public void setCnapId(Object cnapId) {
+        this.cnapId = cnapId;
     }
 
-    public String getCustReceiptLetter() {
-        return custReceiptLetter;
+    public Object getServiceId() {
+        return serviceId;
     }
 
-    public void setCustReceiptLetter(String custReceiptLetter) {
-        this.custReceiptLetter = custReceiptLetter;
+    public void setServiceId(Object serviceId) {
+        this.serviceId = serviceId;
     }
 
-    public Integer getCustReceiptNum() {
-        return custReceiptNum;
+    public String getDay() {
+        return day;
     }
 
-    public void setCustReceiptNum(Integer custReceiptNum) {
-        this.custReceiptNum = custReceiptNum;
+    public void setDay(String day) {
+        this.day = day;
     }
 
-    public String getCustJobGuid() {
-        return custJobGuid;
+    public String getHour() {
+        return hour;
     }
 
-    public void setCustJobGuid(String custJobGuid) {
-        this.custJobGuid = custJobGuid;
+    public void setHour(String hour) {
+        this.hour = hour;
     }
+
 }

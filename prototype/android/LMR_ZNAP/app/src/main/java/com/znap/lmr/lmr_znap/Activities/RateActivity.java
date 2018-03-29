@@ -95,7 +95,6 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
                     znapNames.addAll(response.body());
 
                     for (int i = 0; i < znapNames.size(); i++) {
-                        System.out.println(znapNames.get(i).getName());
                         znaps.add(znapNames.get(i).getName());
 
                     }
