@@ -115,7 +115,7 @@ class QlogicTimeForServiceViewSet(APIView):
         for time in time_list:
             if time['IsAllow']==1:
                 day = time['DatePart'].split('(')[1].split(')')[0][0:10]
-                day = datetime.datetime.fromtimestamp(int(day)).strftime('%d-%m-%Y')
+                day = datetime.datetime.fromtimestamp(int(day)).strftime('%Y-%m-%d')
                 hours = time['Times']
                 json_hour = []
                 for hour in hours:
