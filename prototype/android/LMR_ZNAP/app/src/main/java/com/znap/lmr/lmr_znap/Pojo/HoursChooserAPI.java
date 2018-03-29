@@ -5,82 +5,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class HoursChooserAPI {
 
-    @SerializedName("__type")
+    @SerializedName("start")
     @Expose
-    private String type;
-    @SerializedName("CountJobs")
+    private String start;
+    @SerializedName("stop")
     @Expose
-    private Integer countJobs;
-    @SerializedName("CountJobsAllow")
-    @Expose
-    private Integer countJobsAllow;
-    @SerializedName("IsAllow")
-    @Expose
-    private Integer isAllow;
-    @SerializedName("StartTime")
-    @Expose
-    private String startTime;
-    @SerializedName("StopTime")
-    @Expose
-    private String stopTime;
-    @SerializedName("TimeType")
-    @Expose
-    private Integer timeType;
+    private String stop;
 
-    public String getType() {
-        return type;
+    public String getStart() {
+        return start;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setStart(String start) {
+        this.start = start;
     }
 
-    public Integer getCountJobs() {
-        return countJobs;
+    public String getStop() {
+        return stop;
     }
 
-    public void setCountJobs(Integer countJobs) {
-        this.countJobs = countJobs;
-    }
-
-    public Integer getCountJobsAllow() {
-        return countJobsAllow;
-    }
-
-    public void setCountJobsAllow(Integer countJobsAllow) {
-        this.countJobsAllow = countJobsAllow;
-    }
-
-    public Integer getIsAllow() {
-        return isAllow;
-    }
-
-    public void setIsAllow(Integer isAllow) {
-        this.isAllow = isAllow;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getStopTime() {
-        return stopTime;
-    }
-
-    public void setStopTime(String stopTime) {
-        this.stopTime = stopTime;
-    }
-
-    public Integer getTimeType() {
-        return timeType;
-    }
-
-    public void setTimeType(Integer timeType) {
-        this.timeType = timeType;
+    public void setStop(String stop) {
+        this.stop = stop;
     }
 
 }

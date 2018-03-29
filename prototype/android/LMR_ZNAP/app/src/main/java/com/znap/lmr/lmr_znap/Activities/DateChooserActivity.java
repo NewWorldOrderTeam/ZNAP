@@ -36,19 +36,22 @@ import retrofit2.Retrofit;
  */
 
 public class DateChooserActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Spinner spinnerForDate;
+    Spinner spinnerForDate,getSpinnerForTime;
     Button bTreg;
     int user_id;
     int znap_id;
     int service_id;
     int group_id;
-    String date;
+    String date,time;
+    int date_id;
     String organisationID = SystemMessages.ORGANISATION_ID;
     private static Retrofit retrofit;
     private static Request request;
-    List<DateChooserAPI> dates;
-    List<String> datesListFormated;
-    HashMap<Integer,Integer> datesMap;
+    List<DateChooserAPI> dates,times;
+    List<String> datesList;
+    List<String> timesList;
+    String days;
+    HashMap<Integer,Integer> datesMap,timesMap;
 
 
     @Override
@@ -59,13 +62,16 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getBunldes();
         spinnerForDate = (Spinner) findViewById(R.id.spinnerForDate);
+        getSpinnerForTime = (Spinner) findViewById(R.id.spinnerForTime);
+        getSpinnerForTime.setOnItemSelectedListener(this);
         spinnerForDate.setOnItemSelectedListener(this);
+        System.out.println("qwe");
         bTreg = (Button) findViewById(R.id.buttonTOReg);
         bTreg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(DateChooserActivity.this,
-                        HoursChooserActivity.class);
+                        FinishActivity.class);
                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
                 myIntent.putExtra("znap_id", znap_id);
                 myIntent.putExtra("service_id",service_id);
@@ -74,36 +80,28 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
             }
         });
         dates = new ArrayList<>();
-        datesListFormated=new ArrayList<>();
-        datesMap = new HashMap<Integer, Integer>();
+        times = new ArrayList<>();
+        datesList = new ArrayList<>();
+        timesList = new ArrayList<>();
         request = ZnapUtility.QLogicRequest();
-        DateChooserActivity.getApi().getDates(organisationID, znap_id,service_id).enqueue(new Callback<List<DateChooserAPI>>() {
+        System.out.println("lol");
+        DateChooserActivity.getApi().getDates(znap_id,service_id).enqueue(new Callback<List<DateChooserAPI>>() {
             @Override
             public void onResponse(Call<List<DateChooserAPI>> call, Response<List<DateChooserAPI>> response) {
+                System.out.println("qwe");
                 dates.addAll(response.body());
-
-                for (int i = 0; i < dates.size(); i++) {
-                    if (dates.get(i).getIsAllow()==1) {
-                        datesMap.put(i, dates.get(i).getCountJobs());
-                        StringBuilder stringBuilder = new StringBuilder(dates.get(i).getDatePart().toString());
-                        stringBuilder.delete(0, 6);
-                        stringBuilder.delete(10, stringBuilder.length());
-                        long unix = Integer.valueOf(stringBuilder.toString());
-                        Date date = new Date(unix * 1000);
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        sdf.setTimeZone(TimeZone.getTimeZone("GMT+2"));
-                        String formattedDate = sdf.format(date);
-                        datesListFormated.add(formattedDate);
-                    }
-
+                System.out.println("qwe");
+                for (int i=0; i<dates.size(); i++){
+                    System.out.println(dates.get(i).getDay());
+                    datesList.add(dates.get(i).getDay());
                 }
-
-                final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, datesListFormated);
+                final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, datesList);
                 a.setDropDownViewResource(R.layout.spinner_item);
                 spinnerForDate.setAdapter(a);
             }
             @Override
             public void onFailure(Call<List<DateChooserAPI>> call, Throwable t) {
+                System.out.println(t.getCause());
             }
         });
     }
@@ -118,7 +116,12 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
     }
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        date = String.valueOf(spinnerForDate.getSelectedItem().toString());
+        date_id = (int) spinnerForDate.getSelectedItemId();
+        for (int i=0; i<dates.get(date_id).getTimes().size(); i++){
+            timesList.add(dates.get(date_id).getTimes().get(i).getStart());
+        }
+        final ArrayAdapter<String> timeAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, timesList);
+        getSpinnerForTime.setAdapter(timeAdapter);
     }
 
     @Override

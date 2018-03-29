@@ -32,6 +32,13 @@
                 android:layout_marginTop="12dp"
                 android:padding="15dp" />
 
+            <Spinner
+                android:id="@+id/spinnerForTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:padding="15dp" />
+
             <Button
                 android:id="@+id/buttonTOReg"
                 android:layout_width="240dp"
