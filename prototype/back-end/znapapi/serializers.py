@@ -109,17 +109,14 @@ class QlogicFinishRegistrationToZnapSerializer(serializers.Serializer):
             registration_check = json.loads(r)['d']
 
             registration_check = registration_check.replace('windows-1251', 'utf-8')
-            path_wkthmltopdf = r'C:\Python27\wkhtmltopdf\bin\wkhtmltopdf.exe'
-            config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-            pdfkit.from_string(registration_check, 'registration.pdf', configuration=config)
-            attachment = open('registration.pdf', 'rb')
+            registration_check = registration_check.replace('&nbsp', '  ')
 
             validated_data['html']=registration_check
             mail_subject = "Реєстрація у ЦНАП"
             email = EmailMessage(
-                mail_subject, 'Дякуємо за реєстрацію у ЦНАП', to=[email]
+                mail_subject, registration_check, to=[email]
             )
-            email.attach('registration.pdf',attachment.read(),'application/pdf')
+            email.content_subtype ='html'
             email.send()
 
             return validated_data
