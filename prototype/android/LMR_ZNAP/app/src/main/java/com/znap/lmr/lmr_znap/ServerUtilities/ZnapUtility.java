@@ -25,8 +25,8 @@ public class ZnapUtility {
 
     public static Request QLogicRequest() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://qlogic.net.ua:8084/")
-                .addConverterFactory(new GsonPConverterFactory(new Gson()))
+                .baseUrl("http://znap.pythonanywhere.com/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         request = retrofit.create(Request.class);
         return request;

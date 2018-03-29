@@ -70,8 +70,8 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
             public void onResponse(Call<List<RecordToZnapAPI>> call, Response<List<RecordToZnapAPI>> response) {
                 znapNames.addAll(response.body());
                 for (int i = 0; i < znapNames.size(); i++) {
-                    znaps.add(znapNames.get(i).getLocationName());
-                    znapsMap.put(i, znapNames.get(i).getServiceCenterId());
+                    znaps.add(znapNames.get(i).getName());
+                    znapsMap.put(i, znapNames.get(i).getId());
                 }
                 final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, znaps);
                 a.setDropDownViewResource(R.layout.spinner_item);

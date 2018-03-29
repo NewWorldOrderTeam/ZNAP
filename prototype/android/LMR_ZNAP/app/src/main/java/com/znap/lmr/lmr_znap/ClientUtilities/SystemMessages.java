@@ -19,4 +19,5 @@ public class SystemMessages {
     public static final String ORGANISATION_ID = "{28c94bad-f024-4289-a986-f9d79c9d8102}";
     public static final String OFFICIAL_PERSON_TITLE = "Запис до посадовця";
     public static final String PASSWORD_RECOVERY_TITLE = "Відновлення паролю";
+    public static final String INTERNAL_SERVER_ERROR = "Internal Server Error";
 }

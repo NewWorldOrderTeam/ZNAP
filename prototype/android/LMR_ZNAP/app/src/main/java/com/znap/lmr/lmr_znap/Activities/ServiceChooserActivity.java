@@ -73,13 +73,13 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
         servicesList = new ArrayList<>();
         servicesMap = new HashMap<Integer, Integer>();
         request = ZnapUtility.QLogicRequest();
-        ServiceChooserActivity.getApi().getServices(organisationID,znap_id,group_id).enqueue(new Callback<List<ServiceChooserAPI>>() {
+        ServiceChooserActivity.getApi().getServices(znap_id,group_id).enqueue(new Callback<List<ServiceChooserAPI>>() {
             @Override
             public void onResponse(Call<List<ServiceChooserAPI>> call, Response<List<ServiceChooserAPI>> response) {
                 services.addAll(response.body());
                 for (int i = 0; i < services.size(); i++) {
                     servicesList.add(services.get(i).getDescription());
-                    servicesMap.put(i, services.get(i).getServiceId());
+                    servicesMap.put(i, services.get(i).getId());
                 }
                 final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, servicesList);
                 a.setDropDownViewResource(R.layout.spinner_item);

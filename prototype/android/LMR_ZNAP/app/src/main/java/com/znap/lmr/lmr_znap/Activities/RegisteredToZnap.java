@@ -71,14 +71,14 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
         services = new ArrayList<>();
         servicesMap = new HashMap<Integer, Integer>();
         request = ZnapUtility.QLogicRequest();
-        RegisteredToZnap.getApi().getTypeOfService(organisationID, znap_id).enqueue(new Callback<List<TypeOfServiceAPI>>() {
+        RegisteredToZnap.getApi().getTypeOfService(znap_id).enqueue(new Callback<List<TypeOfServiceAPI>>() {
             @Override
             public void onResponse(Call<List<TypeOfServiceAPI>> call, Response<List<TypeOfServiceAPI>> response) {
                 typeOfServices.addAll(response.body());
 
                 for (int i = 0; i < typeOfServices.size(); i++) {
                     services.add(typeOfServices.get(i).getDescription());
-                    servicesMap.put(i, typeOfServices.get(i).getGroupId());
+                    servicesMap.put(i, typeOfServices.get(i).getId());
                 }
                 final ArrayAdapter<String> a = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, services);
                 a.setDropDownViewResource(R.layout.spinner_item);

@@ -55,17 +55,17 @@ public interface Request {
     @GET("/Chart/ChartByNow?orgKey=28c94bad-f024-4289-a986-f9d79c9d8102")
     Call<List<QueueStateAPI>> getQueue();
 
-    @GET("/QueueService.svc/json_pre_reg/getServiceCenterList?organisationGuid=%7B28c94bad-f024-4289-a986-f9d79c9d8102%7D")
+    @GET("/api/v1.0/cnap/")
     Call<List<RecordToZnapAPI>> getRecordsToZnap();
 
-    @GET("/QueueService.svc/json_wellcome_point/GetGroupsByCenterId")
-    Call<List<TypeOfServiceAPI>> getTypeOfService(@Query("organisationGuid") String organisationID, @Query("serviceCenterId") int znap_id);
+    @GET("/api/v1.0/cnap/{znap_id}/group/")
+    Call<List<TypeOfServiceAPI>> getTypeOfService(@Path("znap_id") int znap_id);
 
-    @GET("/QueueService.svc/json_wellcome_point/getServicesByCenterId")
-    Call<List<ServiceChooserAPI>> getServices(@Query("organisationGuid") String organisationID, @Query("serviceCenterId")int znap_id, @Query("groupId") int group_id);
+    @GET("/api/v1.0/cnap/{znap_id}/group/{group_id}/service/")
+    Call<List<ServiceChooserAPI>> getServices(@Path("znap_id")int znap_id, @Path("group_id") int group_id);
 
-    @GET("/QueueService.svc/json_pre_reg/GetDayList")
-    Call<List<DateChooserAPI>> getDates(@Query("organisationGuid") String organisationID, @Query("serviceCenterId") int znap_id, @Query("serviceId") int service_id);
+    @GET("/api/v1.0/cnap/{znap_id}/service/{service_id}/time/")
+    Call<List<DateChooserAPI>> getDates( @Path("znap_id") int znap_id, @Path("service_id") int service_id);
 
     @GET("/QueueService.svc/json_pre_reg/GetTimeList")
     Call<List<HoursChooserAPI>> getHours(@Query("organisationGuid") String organisationID, @Query("serviceCenterId") int znap_id, @Query("serviceId") int service_id, @Query("date") String date);

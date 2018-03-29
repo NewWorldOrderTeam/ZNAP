@@ -67,11 +67,10 @@
         android:id="@+id/etPassword"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:layout_alignLeft="@+id/etPhoneNumber"
-        android:layout_alignStart="@+id/etPhoneNumber"
-        android:layout_below="@+id/etPhoneNumber"
+        android:layout_above="@+id/etConfirmPassword"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="9dp"
         android:layout_weight="1"
-        android:layout_marginTop="10dp"
         android:background="#E0E0E0"
         android:ems="10"
         android:hint=" Пароль"
@@ -83,11 +82,10 @@
         android:id="@+id/etConfirmPassword"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:layout_alignLeft="@+id/etPassword"
-        android:layout_alignStart="@+id/etPassword"
-        android:layout_below="@+id/etPassword"
+        android:layout_above="@+id/bSignUp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_weight="1"
-        android:layout_marginTop="10dp"
         android:background="#E0E0E0"
         android:ems="10"
         android:hint=" Підтвердіть пароль"
@@ -144,19 +142,14 @@
         android:hint="  По-батькові"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/etPhoneNumber"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+    <com.lamudi.phonefield.PhoneInputLayout
+        android:id="@+id/phone_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_alignEnd="@+id/etEmail"
+        android:layout_alignRight="@+id/etEmail"
         android:layout_below="@+id/etEmail"
-        android:layout_marginTop="14dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#E0E0E0"
-        android:ems="10"
-        android:hint="  Номер телефону"
-        android:inputType="textPersonName" />
+        android:layout_marginTop="15dp" />
+
 </RelativeLayout>

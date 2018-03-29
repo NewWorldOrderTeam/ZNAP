@@ -88,7 +88,7 @@ public class SignInActivity extends AppCompatActivity {
                         email = AESEncryption.encrypt_string(email);
                         password = AESEncryption.encrypt_string(password);
                         imei = AESEncryption.encrypt_string(imei);
-                        System.out.println(imei);
+                        checkInternetConnection();
                     } catch (InvalidKeyException e) {
                         e.printStackTrace();
                     } catch (NoSuchAlgorithmException e) {
@@ -112,6 +112,7 @@ public class SignInActivity extends AppCompatActivity {
                         etPassword.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                         return;
                     }
+                    checkInternetConnection();
                     requestPatternValidation();
                 }
 
@@ -197,6 +198,7 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
                 }
                 if (match.equals(SystemMessages.OK)) {
+                    checkInternetConnection();
                     Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                     mainIntent.putExtra(SystemMessages.USER_ID, userid);
                     SignInActivity.this.startActivity(mainIntent);
@@ -316,7 +318,7 @@ public class SignInActivity extends AppCompatActivity {
                 }
             } else {
                 try {
-                    error = response.errorBody().string();
+                        error = response.errorBody().string();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
