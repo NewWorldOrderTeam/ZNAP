@@ -2,6 +2,7 @@
 from django.conf.urls import url
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -118,20 +119,20 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         user_obj = None
-        email = decryption(data.get("email", None))
-        password = decryption(data['password'])
-        imei = decryption(data['imei'])
+        email = data.get("email", None)
+        password = data['password']
+        imei = data['imei']
         user = UserProfile.objects.filter(email = email)
         user = user.exclude(email__isnull = True).exclude(email__iexact = '')
         if user.exists() and user.count()==1:
             user_obj = user.first()
         else:
-            raise serializers.ValidationError("This email is not valid")
+            raise serializers.ValidationError('This email is not valid')
         if user_obj:
             if not user_obj.check_password(password):
-                raise serializers.ValidationError("Incorrect password")
+                raise serializers.ValidationError('Incorrect password')
             elif (user_obj.is_active!=True):
-                raise serializers.ValidationError("This account is not activated")
+                raise serializers.ValidationError('This account is not activated')
             elif not IMEI.objects.filter(user_id=user_obj.id).filter(name=imei).exists():
                 imei_obj = IMEI(
                     user_id=user_obj.id,
@@ -149,7 +150,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
                     mail_subject, message, to=[to_email]
                 )
                 email.send()
-                raise serializers.ValidationError("Login from not activated phone")
+                raise serializers.ValidationError('Login from not activated phone')
             elif not IMEI.objects.filter(user_id=user_obj.id).get(name=imei).is_active:
                 imei_obj = IMEI.objects.filter(user_id=user_obj.id).get(name=imei)
                 mail_subject = 'Активація пристрою - ЦНАП'
@@ -162,8 +163,35 @@ class UserLoginSerializer(serializers.ModelSerializer):
                     mail_subject, message, to=[to_email]
                 )
                 email.send()
-                raise serializers.ValidationError("This IMEI is not activated")
+                raise serializers.ValidationError('This IMEI is not activated')
             else:
                 data['id'] = user_obj.id
         return data
 
+class UserForgotPasswordSerializer(serializers.ModelSerializer):
+    email = CharField(label= 'Email', write_only=True)
+
+    class Meta:
+        model = UserProfile
+        fields = ['email', ]
+
+    def validate(self, data):
+        user_obj = None
+        email = data.get("email", None)
+        user = UserProfile.objects.filter(email=email)
+        user = user.exclude(email__isnull=True).exclude(email__iexact='')
+        if user.exists() and user.count() == 1:
+            user_obj = user.first()
+        else:
+            raise serializers.ValidationError('This email is not valid')
+        if user_obj:
+            mail_subject = 'Відновлення паролю - ЦНАП'
+            user = urlsafe_base64_encode(force_bytes(user_obj.id))
+            token = default_token_generator.make_token(user_obj)
+            message = u'Привіт, {} \nБудь ласка, перейди за посиланням, щоб підтвердити реєстрацію\nhttp://znap.pythonanywhere.com/reset_password/{}/{}/'.format(user_obj.first_name, user, token)
+            to_email = email
+            email = EmailMessage(
+                mail_subject, message, to=[to_email]
+            )
+            email.send()
+            return data
