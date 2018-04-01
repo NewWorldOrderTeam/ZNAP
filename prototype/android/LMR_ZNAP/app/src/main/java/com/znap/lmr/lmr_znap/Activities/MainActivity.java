@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent callOnline = new Intent(Intent.ACTION_DIAL);
-                callOnline.setData(Uri.parse("tel:0971735178"));
+                callOnline.setData(Uri.parse("tel:0322975795"));
                 startActivity(callOnline);
             }
         });

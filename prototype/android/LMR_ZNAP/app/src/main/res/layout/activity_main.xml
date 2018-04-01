@@ -117,7 +117,6 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:text="Реєстр послуг"
-
             android:theme="@style/test"
             android:textColor="#fcfff5" />
     </LinearLayout>
@@ -131,7 +130,7 @@
             android:id="@+id/bOnline"
             android:layout_weight="1"
             android:layout_height="60dp"
-            android:text="Онлайн підтримка"
+            android:text="Гаряча лінія міста"
             android:theme="@style/test"
             android:textColor="#fcfff5"
             android:layout_width="290dp" />

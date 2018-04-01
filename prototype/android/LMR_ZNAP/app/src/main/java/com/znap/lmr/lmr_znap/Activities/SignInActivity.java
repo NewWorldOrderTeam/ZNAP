@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -130,6 +132,13 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent passwordRecoveryIntent = new Intent(SignInActivity.this, PasswordRecoveryActivity.class);
                 SignInActivity.this.startActivity(passwordRecoveryIntent);
+            }
+        });
+        findViewById(R.id.iot).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://iot.lviv.ua/")));
+
             }
         });
 
@@ -336,5 +345,7 @@ public class SignInActivity extends AppCompatActivity {
         }
 
     }
+
+
 
 }
