@@ -119,9 +119,9 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         user_obj = None
-        email = data.get("email", None)
-        password = data['password']
-        imei = data['imei']
+        email = decryption(data.get("email", None))
+        password = decryption(data['password'])
+        imei = decryption(data['imei'])
         user = UserProfile.objects.filter(email = email)
         user = user.exclude(email__isnull = True).exclude(email__iexact = '')
         if user.exists() and user.count()==1:
@@ -177,7 +177,7 @@ class UserForgotPasswordSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         user_obj = None
-        email = data.get("email", None)
+        email = decryption(data.get("email", None))
         user = UserProfile.objects.filter(email=email)
         user = user.exclude(email__isnull=True).exclude(email__iexact='')
         if user.exists() and user.count() == 1:
