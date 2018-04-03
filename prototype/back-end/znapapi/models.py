@@ -17,5 +17,4 @@ class RegistrationToZnap(models.Model):
     date = models.CharField(max_length=124)
     time = models.CharField(max_length=124)
     service = models.CharField(max_length=226)
-
-
+    html = models.TextField()
