@@ -97,8 +97,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bReceptionToOfficial).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent officialPersonActivity = new Intent(MainActivity.this, RecordToTheOfficialPersonActivity.class);
-                startActivity(officialPersonActivity);
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://city-adm.lviv.ua/lmr/hall/appointment")));
+            }
+        });
+
+        findViewById(R.id.bServices).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://city-adm.lviv.ua/services/directory-services/lvivska-miska-rada")));
             }
         });
 
