@@ -7,8 +7,9 @@ from django.contrib.auth.models import User
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from django.views.generic import FormView
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.authtoken.models import Token
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny
 
 from userapi.models import UserProfile, IMEI
@@ -27,6 +28,8 @@ class WebUserViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = UserProfile.objects.all()
     serializer_class = WebUserSerializer
+    pagination_class = LimitOffsetPagination
+    filter_backends = (filters.OrderingFilter,)
 
 
 class UserViewSet(viewsets.ModelViewSet):
