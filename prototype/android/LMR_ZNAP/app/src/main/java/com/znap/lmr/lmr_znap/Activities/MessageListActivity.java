@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.znap.lmr.lmr_znap.MessageListAdapter;
+import com.znap.lmr.lmr_znap.ClientUtilities.MessageListAdapter;
 import com.znap.lmr.lmr_znap.R;
 
 import java.util.ArrayList;

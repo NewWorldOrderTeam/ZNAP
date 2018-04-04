@@ -1,4 +1,4 @@
-package com.znap.lmr.lmr_znap;
+package com.znap.lmr.lmr_znap.ClientUtilities;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.sendbird.android.BaseMessage;
 import com.sendbird.android.SendBird;
 import com.sendbird.android.UserMessage;
+import com.znap.lmr.lmr_znap.R;
 
 import java.util.List;
 
