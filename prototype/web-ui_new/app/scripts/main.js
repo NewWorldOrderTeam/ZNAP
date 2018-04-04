@@ -1,6 +1,6 @@
 var admin_id = localStorage.getItem('admin_id');
 var znap_id = localStorage.getItem('znap_id');
-var users;
+var users_response;
 console.log(admin_id, znap_id);
 
 function getUsers() {
@@ -8,7 +8,9 @@ function getUsers() {
   xhr.open('GET', 'https://znap.pythonanywhere.com/api/v1.0/web_user/', false);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send();
-  users = JSON.parse(xhr.response);
+  users_response = JSON.parse(xhr.response);
+  users = users_response.results;
+  users_count = users_response.count;
   var rates_count = 0;
   for (var i = 0; i < users.length; i++) {
     $('#list').append('<tr class=\'user\'><th class=\'id\' scope=\'row\'></th><th class=\'name\'></th><' +
@@ -47,7 +49,7 @@ function getUsers() {
       $('#list tr:last .rate').append('<button type="button" class ="btn .btn-warning disabled">Немає відгуків</button>');
     }
   }
-  $('#users_count').text(users.length);
+  $('#users_count').text(users_count);
   $('#rates_count').text(rates_count);
 }
 
@@ -77,11 +79,11 @@ function getRate() {
   var total_rate = 0;
   var rates = JSON.parse(xhr.response);
   for (var i = 0; i < rates.length; i++) {
-    if (rates[i].quality > 0) 
+    if (rates[i].quality > 0)
       total_rate++;
-    else 
+    else
       total_rate--;
-    
+
     $('#list2').append('<li class="rates-item" xmlns="http://www.w3.org/1999/html"><div class="row"> <di' +
         'v class="col-md-6"><h4 class="name"></h4><h6 class="description"></h6></div><div' +
         ' class="col-md-6 text-right"><h4 class="quality"></h4></div></div></li>');
