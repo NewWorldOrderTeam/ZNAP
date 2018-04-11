@@ -329,6 +329,7 @@ public class SignInActivity extends AppCompatActivity {
             } else {
                 try {
                         error = response.errorBody().string();
+                        error = error.split("\\[\"")[1].split("\"\\]")[0];
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

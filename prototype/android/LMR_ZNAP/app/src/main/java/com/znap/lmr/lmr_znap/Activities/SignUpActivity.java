@@ -98,6 +98,8 @@ public class SignUpActivity extends AppCompatActivity {
                 lastName = etLastName.getText().toString();
                 password = etPassword.getText().toString();
                 confirmPassword = etConfirmPassword.getText().toString();
+                phoneNumber = phoneInputLayout.getPhoneNumber();
+
                 setErrorsForFields();
                 if (password.length() < 8 || !Validations.isValidPassword(password)){
                     etPassword.setError("Паролі повинні містити більше 8 символів!");
@@ -113,17 +115,17 @@ public class SignUpActivity extends AppCompatActivity {
                     etMiddleName.setError("Більше 3 символів");
                 }
                 if  (lastName.length() < 3 || !Validations.isValidLastName(lastName) ){
-                    etMiddleName.setError("Більше 3 символів");
+                    etLastName.setError("Більше 3 символів");
                 }
                 if(!phoneInputLayout.isValid()){
                     phoneInputLayout.setError("Перевірте чи правильно введено телефон");
                 }
 
+                if (email.length()<6 || !Validations.isValidEmail(email)){
+                    etEmail.setError("Неправильний емейл");
+                }
+
                 else {
-                    firstName = etFirstName.getText().toString();
-                    middleName = etMiddleName.getText().toString();
-                    lastName = etLastName.getText().toString();
-                    phoneNumber = phoneInputLayout.getPhoneNumber();
                     try {
                         email = AESEncryption.encrypt_string(email);
                         firstName = AESEncryption.encrypt_string(firstName);
@@ -150,7 +152,7 @@ public class SignUpActivity extends AppCompatActivity {
                     try {
                         emailToShow = AESEncryption.decrypt_string(email);
                     } catch (InvalidKeyException e) {
-
+                        e.printStackTrace();
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     } catch (NoSuchPaddingException e) {

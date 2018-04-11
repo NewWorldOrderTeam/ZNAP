@@ -24,27 +24,36 @@ public class Validations {
     public static boolean isValidFirstName(final String first_name) {
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "[А-Яа-я]";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
+        final String FIRST_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z0-9]+";
+        pattern = Pattern.compile(FIRST_NAME_PATTERN);
         matcher = pattern.matcher(first_name);
         return matcher.matches();
     }
 
-    public static boolean isValidMiddleName(final String last_name) {
+    public static boolean isValidMiddleName(final String middle_name) {
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "[А-Яа-я]";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
+        final String MIDDLE_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z0-9]+";
+        pattern = Pattern.compile(MIDDLE_NAME_PATTERN);
+        matcher = pattern.matcher(middle_name);
+        return matcher.matches();
+    }
+
+    public static boolean isValidLastName(final String last_name) {
+        Pattern pattern;
+        Matcher matcher;
+        final String LAST_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z0-9]+";
+        pattern = Pattern.compile(LAST_NAME_PATTERN);
         matcher = pattern.matcher(last_name);
         return matcher.matches();
     }
 
-    public static boolean isValidLastName(final String middle_name) {
+    public static boolean isValidEmail(final String email) {
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "[А-Яа-я]";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(middle_name);
+        final String EMAIL_PATTERN = "[a-zA-Z0-9]+@[a-zA-Z]+\\.[A-Za-z]{2,4}";
+        pattern = Pattern.compile(EMAIL_PATTERN);
+        matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
