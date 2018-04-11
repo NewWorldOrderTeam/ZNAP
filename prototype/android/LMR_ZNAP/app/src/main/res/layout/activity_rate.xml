@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
+                    android:background="@drawable/bg_selector"
                     android:drawableTop="@drawable/happy"
                     android:text="0"
                     android:textColor="@color/bg" />
@@ -80,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
+                    android:background="@drawable/bg_selector"
                     android:drawableTop="@drawable/sad"
                     android:text="1"
                     android:textColor="@color/bg" />

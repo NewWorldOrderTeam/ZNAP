@@ -81,7 +81,6 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
         btGood = (Button) findViewById(R.id.btGood);
         btBad = (Button) findViewById(R.id.btBad);
         Bundle bundle = getIntent().getExtras();
-
         if (bundle != null) {
             assert bundle != null;
             int userid = bundle.getInt(SystemMessages.USER_ID);
@@ -112,6 +111,24 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
             finish();
             }
 
+        btGood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btGood.setPressed(true);
+                goodButtonClickedStatus = true;
+                badButtonClickedStatus = false;
+            }
+        });
+        btBad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btBad.setSelected(true);
+                goodButtonClickedStatus = false;
+                badButtonClickedStatus = true;
+
+            }
+        });
+
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,20 +154,6 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
                     etDescription.setError(NonSystemMessages.FIELD_MUST_BE_NOT_EMPTY);
                     return;
                 }
-                btGood.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        goodButtonClickedStatus = true;
-                        badButtonClickedStatus = false;
-                    }
-                });
-                btBad.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        goodButtonClickedStatus = false;
-                        badButtonClickedStatus = true;
-                    }
-                });
                 if (goodButtonClickedStatus) {
                     quality = Integer.parseInt(btGood.getText().toString());
                 } else if (badButtonClickedStatus) {
@@ -180,6 +183,7 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
         String sp1 = String.valueOf(spinnerForZnaps.getSelectedItem());
         znap_id = (int) spinnerForZnaps.getItemIdAtPosition(arg2);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
+        znap_id+=1;
     }
 
     @Override
