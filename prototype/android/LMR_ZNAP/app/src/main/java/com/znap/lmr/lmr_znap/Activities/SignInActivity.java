@@ -54,7 +54,6 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity {
     EditText etEmail;
     EditText etPassword;
-    Button bSignOn;
     TextView tSignUpLink;
     TextView tPasswordRecoveryLink;
     String email;
@@ -73,19 +72,23 @@ public class SignInActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         checkInternetConnection();
         setContentView(R.layout.activity_sign_in);
-        findViewsById();
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
+        tPasswordRecoveryLink = (TextView) findViewById(R.id.tPasswordRecoveryLink);
         getPermission();
-        System.out.println(imei);
         hideKeyboardOnTap();
-        bSignOn.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bSignIn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (checkInternetConnection()) {
 
                 } else {
                     email = etEmail.getText().toString();
                     password = etPassword.getText().toString();
                     imei = getImeiNumber();
+
                     try {
                         email = AESEncryption.encrypt_string(email);
                         password = AESEncryption.encrypt_string(password);
@@ -167,7 +170,6 @@ public class SignInActivity extends AppCompatActivity {
             } else {
                 requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
                         PERMISSIONS_REQUEST_READ_PHONE_STATE);
-                System.out.println(imei);
                 imei = getImeiNumber();
             }
         }
@@ -205,8 +207,9 @@ public class SignInActivity extends AppCompatActivity {
                 if (match.equals(SystemMessages.BAD_REQUEST)) {
                     match = error;
                     Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
+
                 }
-                if (match.equals(SystemMessages.OK)) {
+                else if (match.equals(SystemMessages.OK)) {
                     checkInternetConnection();
                     Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                     mainIntent.putExtra(SystemMessages.USER_ID, userid);
@@ -221,13 +224,12 @@ public class SignInActivity extends AppCompatActivity {
     }
 
 
-    public void findViewsById() {
+  /*  public void findViewsById() {
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
-        bSignOn = (Button) findViewById(R.id.bSignIn);
         tSignUpLink = (TextView) findViewById(R.id.tSignUpLink);
         tPasswordRecoveryLink = (TextView) findViewById(R.id.tPasswordRecoveryLink);
-    }
+    }*/
 
     public AlertDialog.Builder buildDialog(Context c) {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
@@ -248,7 +250,6 @@ public class SignInActivity extends AppCompatActivity {
             buildDialog(SignInActivity.this).show();
             return true;
         } else {
-            setContentView(R.layout.activity_sign_in);
             return false;
         }
     }

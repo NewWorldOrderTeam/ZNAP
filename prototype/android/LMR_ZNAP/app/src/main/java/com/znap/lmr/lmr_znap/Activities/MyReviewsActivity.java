@@ -58,7 +58,6 @@ public class MyReviewsActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<List<Rate>> call, Response<List<Rate>> response) {
                     rates.addAll(response.body());
-                    System.out.println(rates);
                     for (int i = rates.size() - 1; i > -1; i--) {
                         try {
                             ratesOfUsers.add(AESEncryption.decrypt_string(rates.get(i).getDescription()));

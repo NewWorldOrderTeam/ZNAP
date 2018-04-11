@@ -97,7 +97,7 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
             }
             @Override
             public void onFailure(Call<List<DateChooserAPI>> call, Throwable t) {
-                System.out.println(t.getCause());
+
             }
         });
     }

@@ -95,7 +95,6 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         znap_id = znapsMap.get(spinnerForZnap.getSelectedItemPosition());
-        System.out.println(znap_id);
 
     }
 

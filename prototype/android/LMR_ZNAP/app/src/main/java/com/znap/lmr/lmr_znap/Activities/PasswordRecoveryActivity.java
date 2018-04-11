@@ -142,7 +142,6 @@ public class PasswordRecoveryActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             Services services = new Services();
             Response response = services.PasswordRecovery(email);
-            System.out.println(response.toString());
             return response.toString();
         }
 

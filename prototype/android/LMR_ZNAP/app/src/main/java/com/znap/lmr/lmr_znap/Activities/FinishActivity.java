@@ -132,7 +132,7 @@ public class FinishActivity extends AppCompatActivity {
                                     }
                                     @Override
                                     public void onFailure(Call<SuccessRegistrationAPI> call, Throwable t) {
-                                        System.out.println();
+
                                     }
                                 });
                                 startActivity(myIntent);

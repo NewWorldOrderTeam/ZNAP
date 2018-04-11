@@ -31,7 +31,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Created by Andy Blyzniuk on 14.11.2017.
+ * Created by ne andy on 14.11.2017.
  */
 
 public class QueueStateActivity extends AppCompatActivity {
@@ -54,7 +54,6 @@ public class QueueStateActivity extends AppCompatActivity {
         QueueStateActivity.getApi().getQueue().enqueue(new Callback<List<QueueStateAPI>>() {
             @Override
             public void onResponse(Call<List<QueueStateAPI>> call, Response<List<QueueStateAPI>> response) {
-                System.out.println(response.body());
                 queueStateList.addAll(response.body());
                 GraphLabelInitializer graphLabelInitializer = new GraphLabelInitializer();
                 graphLabelInitializer.initializeGraphic(graph,queueStateList);

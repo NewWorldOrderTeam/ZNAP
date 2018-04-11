@@ -179,7 +179,6 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         String sp1 = String.valueOf(spinnerForZnaps.getSelectedItem());
         znap_id = (int) spinnerForZnaps.getItemIdAtPosition(arg2);
-        System.out.println(znap_id);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
     }
 
