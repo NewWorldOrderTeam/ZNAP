@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
     String firstName;
     String lastName;
     String middleName;
-    String phone;
+    String confirmPassword;
     String emailToShow;
     PhoneInputLayout phoneInputLayout;
     public String imei;
@@ -96,17 +96,30 @@ public class SignUpActivity extends AppCompatActivity {
                 firstName = etFirstName.getText().toString();
                 middleName = etMiddleName.getText().toString();
                 lastName = etLastName.getText().toString();
+                password = etPassword.getText().toString();
+                confirmPassword = etConfirmPassword.getText().toString();
                 setErrorsForFields();
-                if (etPassword.getText().toString().length() < 8 && !Validations.isValidPassword(etPassword.getText().toString()) ||
-                        !etConfirmPassword.getText().toString().equals(etPassword.getText().toString()) ||
-                        etFirstName.getText().toString().length() < 3 && !Validations.isValidFirstName(etFirstName.getText().toString()) ||
-                        etMiddleName.getText().toString().length() < 3 && !Validations.isValidMiddleName(etMiddleName.getText().toString()) ||
-                        !phoneInputLayout.isValid()||
-                        etLastName.getText().toString().length() < 3 && !Validations.isValidLastName(etLastName.getText().toString()))  {
+                if (password.length() < 8 || !Validations.isValidPassword(password)){
+                    etPassword.setError("Паролі повинні містити більше 8 символів!");
+                }
+                if (!confirmPassword.equals(password)){
                     etConfirmPassword.setError("Перевірте чи паролі співпадають");
+                }
+                if (firstName.length() < 1 || !Validations.isValidFirstName(firstName)){
+                    etFirstName.setError("Ім'я повинно містити більше 2 символів");
+
+                }
+                if (middleName.length() < 3 || !Validations.isValidMiddleName(middleName)){
+                    etMiddleName.setError("Більше 3 символів");
+                }
+                if  (lastName.length() < 3 || !Validations.isValidLastName(lastName) ){
+                    etMiddleName.setError("Більше 3 символів");
+                }
+                if(!phoneInputLayout.isValid()){
                     phoneInputLayout.setError("Перевірте чи правильно введено телефон");
-                    Toast.makeText(getApplicationContext(), NonSystemMessages.FIELD_IS_NOT_ENTERED_CORRECTLY, Toast.LENGTH_LONG).show();
-                } else {
+                }
+
+                else {
                     firstName = etFirstName.getText().toString();
                     middleName = etMiddleName.getText().toString();
                     lastName = etLastName.getText().toString();

@@ -72,12 +72,9 @@ public class AESEncryption {
             BadPaddingException, IOException {
 
         keyBytes = key.getBytes("UTF-8");
-        Log.d(tag,"Long KEY: "+keyBytes.length);
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(keyBytes);
         keyBytes = md.digest();
-
-        Log.d(tag,"Long KEY: "+keyBytes.length);
 
         AlgorithmParameterSpec ivSpec = new IvParameterSpec(ivBytes);
         SecretKeySpec newKey = new SecretKeySpec(keyBytes, aesEncryptionAlgorithm);
@@ -106,14 +103,11 @@ public class AESEncryption {
             BadPaddingException, IOException, ClassNotFoundException {
 
         keyBytes = key.getBytes("UTF-8");
-        Log.d(tag,"Long KEY: "+keyBytes.length);
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(keyBytes);
         keyBytes = md.digest();
-        Log.d(tag,"Long KEY: "+keyBytes.length);
 
         byte[] ivB = Arrays.copyOfRange(bytes,0,16);
-        Log.d(tag, "IV: "+new String(ivB));
         byte[] codB = Arrays.copyOfRange(bytes,16,bytes.length);
 
 

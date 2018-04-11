@@ -34,7 +34,8 @@
         android:layout_marginRight="10dp"
         android:ems="10"
         android:hint="  Email"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingLeft ="10dp"/>
 
     <Button
         android:id="@+id/bSignUp"
@@ -76,22 +77,24 @@
         android:hint=" Пароль"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="60dp" />
+        tools:layout_editor_absoluteY="60dp"
+        android:paddingLeft ="10dp"/>
 
     <EditText
         android:id="@+id/etConfirmPassword"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:layout_above="@+id/bSignUp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignEnd="@+id/etPassword"
+        android:layout_alignRight="@+id/etPassword"
         android:layout_weight="1"
         android:background="#E0E0E0"
         android:ems="10"
         android:hint=" Підтвердіть пароль"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="60dp" />
+        tools:layout_editor_absoluteY="60dp"
+        android:paddingLeft ="10dp"/>
 
     <EditText
         android:id="@+id/etFirstName"
@@ -107,7 +110,8 @@
         android:background="#E0E0E0"
         android:ems="10"
         android:hint="  Ім'я"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingLeft ="10dp" />
 
     <EditText
         android:id="@+id/etLastName"
@@ -123,7 +127,8 @@
         android:background="#E0E0E0"
         android:ems="10"
         android:hint="  Прізвище"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingLeft ="10dp"/>
 
     <EditText
         android:id="@+id/etMiddleName"
@@ -140,7 +145,8 @@
         android:background="#E0E0E0"
         android:ems="10"
         android:hint="  По-батькові"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingLeft ="10dp"/>
 
     <com.lamudi.phonefield.PhoneInputLayout
         android:id="@+id/phone_input_layout"
