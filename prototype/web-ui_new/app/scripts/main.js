@@ -1,17 +1,16 @@
 var admin_id = localStorage.getItem('admin_id');
 var znap_id = localStorage.getItem('znap_id');
 var users_response;
-console.log(admin_id, znap_id);
 
 function getUsers() {
+  getRates();
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://znap.pythonanywhere.com/api/v1.0/web_user/', false);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send();
   users_response = JSON.parse(xhr.response);
-  users = users_response.results;
-  users_count = users_response.count;
-  var rates_count = 0;
+  var users_count = users_response.count;
+  var users = users_response.results;
   for (var i = 0; i < users.length; i++) {
     $('#list').append('<tr class=\'user\'><th class=\'id\' scope=\'row\'></th><th class=\'name\'></th><' +
         'th class=\'last_name\'></th><th class=\'email\'></th><th  class=\'phone\'></th><' +
@@ -22,7 +21,6 @@ function getUsers() {
     var email = users[i].email;
     var phone = users[i].phone;
     var open_rates = false;
-    rates_count += users[i].rates.length;
     if (users[i].rates.length > 0) {
       for (var j = 0; j < users[i].rates.length; j++) {
         if (users[i].rates[j].is_closed) {
@@ -50,7 +48,16 @@ function getUsers() {
     }
   }
   $('#users_count').text(users_count);
-  $('#rates_count').text(rates_count);
+
+}
+
+function getRates() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://znap.pythonanywhere.com/api/v1.0/rate/', false);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send();
+  var rates = JSON.parse(xhr.response);
+  $('#rates_count').text(rates.length);
 }
 
 function getUser(id) {
