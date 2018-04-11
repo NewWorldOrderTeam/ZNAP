@@ -56,7 +56,14 @@ public class Validations {
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
+    public static boolean isValidPhoneNumber(final String phone_number) {
+        Pattern pattern;
+        Matcher matcher;
+        final String PHONE_NUMBER_PATTERN = "\\+[0-9]{12}";
+        pattern = Pattern.compile(PHONE_NUMBER_PATTERN);
+        matcher = pattern.matcher(phone_number);
+        return matcher.matches();
+    }
 
 
     public static boolean isConnected(Context context) {

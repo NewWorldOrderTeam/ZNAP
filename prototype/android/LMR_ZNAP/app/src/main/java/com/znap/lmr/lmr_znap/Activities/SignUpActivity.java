@@ -1,7 +1,7 @@
 package com.znap.lmr.lmr_znap.Activities;
 
 /**
- * Created by Andy Blyzniuk on 01.11.2017.
+ * Created by Andy ne Blyzniuk on 01.11.2017.
  */
 
 import android.Manifest;
@@ -90,7 +90,6 @@ public class SignUpActivity extends AppCompatActivity {
         bSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean valid = true;
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
                 firstName = etFirstName.getText().toString();
@@ -100,33 +99,48 @@ public class SignUpActivity extends AppCompatActivity {
                 confirmPassword = etConfirmPassword.getText().toString();
                 phoneNumber = phoneInputLayout.getPhoneNumber();
 
+
                 setErrorsForFields();
-                if (password.length() < 8 || !Validations.isValidPassword(password)){
-                    etPassword.setError("Паролі повинні містити більше 8 символів!");
-                }
-                if (!confirmPassword.equals(password)){
-                    etConfirmPassword.setError("Перевірте чи паролі співпадають");
-                }
-                if (firstName.length() < 1 || !Validations.isValidFirstName(firstName)){
-                    etFirstName.setError("Ім'я повинно містити більше 2 символів");
+                if (password.length() < 8 || !Validations.isValidPassword(password) || !confirmPassword.equals(password) || firstName.length() < 1 || !Validations.isValidFirstName(firstName) ||
+                        middleName.length() < 3 || !Validations.isValidMiddleName(middleName) || lastName.length() < 3 || !Validations.isValidLastName(lastName) ||
+                        !Validations.isValidPhoneNumber(phoneNumber) || email.length()<6 || !Validations.isValidEmail(email)) {
+                    if (password.length() < 8 || !Validations.isValidPassword(password)) {
+                        etPassword.setError("Паролі повинні містити більше 8 символів!");
 
-                }
-                if (middleName.length() < 3 || !Validations.isValidMiddleName(middleName)){
-                    etMiddleName.setError("Більше 3 символів");
-                }
-                if  (lastName.length() < 3 || !Validations.isValidLastName(lastName) ){
-                    etLastName.setError("Більше 3 символів");
-                }
-                if(!phoneInputLayout.isValid()){
-                    phoneInputLayout.setError("Перевірте чи правильно введено телефон");
+
+                    }
+                    if (!confirmPassword.equals(password)) {
+                        etConfirmPassword.setError("Перевірте чи паролі співпадають");
+
+                    }
+                    if (firstName.length() < 1 || !Validations.isValidFirstName(firstName)) {
+                        etFirstName.setError("Ім'я повинно містити більше 2 символів");
+
+
+                    }
+                    if (middleName.length() < 3 || !Validations.isValidMiddleName(middleName)) {
+                        etMiddleName.setError("Більше 3 символів");
+
+                    }
+                    if (lastName.length() < 3 || !Validations.isValidLastName(lastName)) {
+                        etLastName.setError("Більше 3 символів");
+
+                    }
+                    if (!Validations.isValidPhoneNumber(phoneNumber)) {
+                        System.out.println(phoneNumber);
+                        phoneInputLayout.setError("Перевірте чи правильно введено телефон");
+
+                    }
+
+                    if (email.length() < 6 || !Validations.isValidEmail(email)) {
+                        etEmail.setError("Неправильний емейл");
+
+                    }
                 }
 
-                if (email.length()<6 || !Validations.isValidEmail(email)){
-                    etEmail.setError("Неправильний емейл");
-                }
-
-                else {
+                else  {
                     try {
+                        emailToShow = email;
                         email = AESEncryption.encrypt_string(email);
                         firstName = AESEncryption.encrypt_string(firstName);
                         middleName = AESEncryption.encrypt_string(middleName);
@@ -149,25 +163,7 @@ public class SignUpActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    try {
-                        emailToShow = AESEncryption.decrypt_string(email);
-                    } catch (InvalidKeyException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchPaddingException e) {
-                        e.printStackTrace();
-                    } catch (InvalidAlgorithmParameterException e) {
-                        e.printStackTrace();
-                    } catch (IllegalBlockSizeException e) {
-                        e.printStackTrace();
-                    } catch (BadPaddingException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
                     new AlertDialog.Builder(context)
                             .setMessage(NonSystemMessages.activateAccount + " " + emailToShow)
                             .setCancelable(false)
