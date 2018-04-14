@@ -14,6 +14,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from znap.AES import encryption, decryption
 from znap.settings import organisationGuid
@@ -32,7 +33,7 @@ class RegistrationToZnapCreateAPIView(CreateAPIView):
     serializer_class = CreateRegistrationToZnapSerializer
     queryset = RegistrationToZnap.objects.all()
 
-class RegistrationToZnapViewSet(viewsets.ModelViewSet):
+class RegistrationToZnapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     queryset = RegistrationToZnap.objects.all()
     serializer_class = RegistrationToZnapSerializer
@@ -170,7 +171,7 @@ class QlogicQueueStateViewSet(APIView):
             color = service_center['Color']
             json_queue.append({'name':name,
                               'count':count,
-                               'color':color})
+                              'color':color})
 
         return Response(json_queue)
 

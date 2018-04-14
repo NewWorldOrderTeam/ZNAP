@@ -39,7 +39,6 @@ class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
     pass
 
 router = NestedDefaultRouter()
-router.register(r'user_register', RegistrationToZnapViewSet)
 
 dialog_router = router.register('rate', RateViewSet)
 dialog_router.register('dialog', DialogViewSet,
@@ -48,6 +47,9 @@ dialog_router.register('dialog', DialogViewSet,
 user_router = router.register('user', UserViewSet)
 user_router.register('rate', RateViewSet,
                      base_name='user-rate',
+                     parents_query_lookups=['user'])
+user_router.register('history', RegistrationToZnapViewSet,
+                     base_name='user-cnap',
                      parents_query_lookups=['user'])
 admin_router= router.register('admin', AdminViewSet)
 admin_router.register('rate', WebRateViewSet,

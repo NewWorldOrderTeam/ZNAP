@@ -27,7 +27,7 @@ class ZnapSerialezer(serializers.ModelSerializer):
 class RegistrationToZnapSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegistrationToZnap
-        fields = ('id', 'user_id', 'znap_id', 'service', 'date', 'time')
+        fields = ('id', 'user_id', 'date', 'time', 'html')
 
 
 class CreateRegistrationToZnapSerializer(serializers.HyperlinkedModelSerializer):
@@ -89,7 +89,10 @@ class QlogicFinishRegistrationToZnapSerializer(serializers.Serializer):
         service_id = validated_data['service_id']
         day = validated_data['day']
         hour = validated_data['hour']
-        user_obj = UserProfile.objects.get(id=user_id)
+        try:
+            user_obj = UserProfile.objects.get(id=user_id)
+        except:
+            raise serializers.ValidationError('This user has not already registered')
         first_name = user_obj.first_name
         midle_name = user_obj.middle_name
         last_name = user_obj.last_name
@@ -119,6 +122,18 @@ class QlogicFinishRegistrationToZnapSerializer(serializers.Serializer):
             email.content_subtype ='html'
             email.send()
 
+            registration_to_cnap = RegistrationToZnap (
+                user_id=user_id,
+                znap=cnap_id,
+                service=service_id,
+                date=day,
+                time=hour,
+                html=registration_check
+            )
+            registration_to_cnap.save()
+
             return validated_data
         except:
             raise serializers.ValidationError('Bad registration to CNAP')
+
+

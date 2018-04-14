@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib.auth.tokens import default_token_generator
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 
 from django.contrib.auth.models import User
+from django.template.loader import get_template
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from django.views.generic import FormView
@@ -123,7 +124,6 @@ class UserSetPasswordView(FormView):
                 return self.form_invalid(form)
         else:
             return self.form_invalid(form)
-
 
 def activate(request, uidb64, token):
     uid = force_text(urlsafe_base64_decode(uidb64))

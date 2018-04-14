@@ -13,7 +13,7 @@ class Znap(models.Model):
 
 class RegistrationToZnap(models.Model):
     user = models.ForeignKey(UserProfile)
-    znap = models.ForeignKey(Znap)
+    znap = models.CharField(max_length=124)
     date = models.CharField(max_length=124)
     time = models.CharField(max_length=124)
     service = models.CharField(max_length=226)
