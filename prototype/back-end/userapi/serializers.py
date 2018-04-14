@@ -68,7 +68,7 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         email = data['email']
         user_qs = UserProfile.objects.filter(email=email)
         if user_qs.exists():
-            raise serializers.ValidationError("This user has already registered")
+            raise serializers.ValidationError('Цей користувач уже зарреєстрований')
         return data
 
     def create(self, validated_data):
@@ -127,12 +127,12 @@ class UserLoginSerializer(serializers.ModelSerializer):
         if user.exists() and user.count()==1:
             user_obj = user.first()
         else:
-            raise serializers.ValidationError('This email is not valid')
+            raise serializers.ValidationError('Цей емейл є невалідний')
         if user_obj:
             if not user_obj.check_password(password):
-                raise serializers.ValidationError('Incorrect password')
+                raise serializers.ValidationError('Неправильний пароль')
             elif (user_obj.is_active!=True):
-                raise serializers.ValidationError('This account is not activated')
+                raise serializers.ValidationError('Цей аккаунт не активований. Активуйте його за посиланням на пошті')
             elif not IMEI.objects.filter(user_id=user_obj.id).filter(name=imei).exists():
                 imei_obj = IMEI(
                     user_id=user_obj.id,
@@ -150,7 +150,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
                     mail_subject, message, to=[to_email]
                 )
                 email.send()
-                raise serializers.ValidationError('Login from not activated phone')
+                raise serializers.ValidationError('Цей телефон не активований. Активуйте його за посиланням на пошті')
             elif not IMEI.objects.filter(user_id=user_obj.id).get(name=imei).is_active:
                 imei_obj = IMEI.objects.filter(user_id=user_obj.id).get(name=imei)
                 mail_subject = 'Активація пристрою - ЦНАП'
@@ -163,7 +163,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
                     mail_subject, message, to=[to_email]
                 )
                 email.send()
-                raise serializers.ValidationError('This IMEI is not activated')
+                raise serializers.ValidationError('Цей телефон не активований. Активуйте його за посиланням на пошті')
             else:
                 data['id'] = user_obj.id
         return data
