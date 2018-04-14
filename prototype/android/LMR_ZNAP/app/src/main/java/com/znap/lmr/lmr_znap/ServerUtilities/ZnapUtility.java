@@ -32,13 +32,5 @@ public class ZnapUtility {
         return request;
     }
 
-    public static Request QueueStateRequest(){
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://qlogic.net.ua:8081/")
-                .addConverterFactory(new GsonPConverterFactory(new Gson()))
-                .build();
-        request = retrofit.create(Request.class);
-        return request;
-    }
 }
 

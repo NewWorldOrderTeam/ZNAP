@@ -56,7 +56,7 @@ public interface Request {
     @GET("/api/v1.0/znap")
     Call<List<ZnapName>> getZnapNames();
 
-    @GET("/Chart/ChartByNow?orgKey=28c94bad-f024-4289-a986-f9d79c9d8102")
+    @GET("/api/v1.0/queue/")
     Call<List<QueueStateAPI>> getQueue();
 
     @GET("/api/v1.0/cnap/")

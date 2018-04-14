@@ -50,10 +50,11 @@ public class QueueStateActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         queueStateList = new ArrayList<>();
         queues = new ArrayList<>();
-        request = ZnapUtility.QueueStateRequest();
+        request = ZnapUtility.generateRetroRequest();
         QueueStateActivity.getApi().getQueue().enqueue(new Callback<List<QueueStateAPI>>() {
             @Override
             public void onResponse(Call<List<QueueStateAPI>> call, Response<List<QueueStateAPI>> response) {
+                System.out.println(response.body());
                 queueStateList.addAll(response.body());
                 GraphLabelInitializer graphLabelInitializer = new GraphLabelInitializer();
                 graphLabelInitializer.initializeGraphic(graph,queueStateList);
