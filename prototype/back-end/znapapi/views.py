@@ -1,3 +1,4 @@
+# coding=utf-8
 import base64
 import json, urllib
 import datetime
@@ -164,9 +165,12 @@ class QlogicQueueStateViewSet(APIView):
 
         for service_center in queue_list:
             name = service_center['SrvCenterDescription']
+            name = name.replace(u'Центр надання адміністративних послуг ', '').replace(u'ЦНАП ', '').replace(u'м.Львова ', '').replace(u'на ', '')
             count = service_center['CountOfWaitingJobs']
+            color = service_center['Color']
             json_queue.append({'name':name,
-                              'count':count})
+                              'count':count,
+                               'color':color})
 
         return Response(json_queue)
 
