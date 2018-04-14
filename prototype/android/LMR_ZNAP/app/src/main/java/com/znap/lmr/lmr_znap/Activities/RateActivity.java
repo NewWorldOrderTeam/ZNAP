@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.znap.lmr.lmr_znap.Security.AESEncryption;
 import com.znap.lmr.lmr_znap.ClientUtilities.NonSystemMessages;
@@ -53,6 +54,8 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
     int quality;
     int znap_id;
     int pushed_user_id;
+    private boolean isPressedForGood = false;
+    private boolean isPressedForBad = false;
     Button btBad;
     Button btGood;
     Button btLeaveReview;
@@ -78,8 +81,8 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
         etDescription = (EditText) findViewById(R.id.etDescription);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
         labelForQuality = (TextView) findViewById(R.id.labelForQuality);
-        btGood = (Button) findViewById(R.id.btGood);
-        btBad = (Button) findViewById(R.id.btBad);
+        btGood = (ToggleButton) findViewById(R.id.btGood);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             assert bundle != null;
@@ -111,23 +114,28 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
             finish();
             }
 
-        btGood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btGood.setPressed(true);
-                goodButtonClickedStatus = true;
-                badButtonClickedStatus = false;
-            }
-        });
-        btBad.setOnClickListener(new View.OnClickListener() {
+
+
+
+        btGood.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View view) {
-                btBad.setSelected(true);
-                goodButtonClickedStatus = false;
-                badButtonClickedStatus = true;
+                if(isPressedForGood==false){
+                    goodButtonClickedStatus = false;
+                    badButtonClickedStatus = true;
+                    isPressedForGood=true;
 
+                }else if(isPressedForGood==true){
+                    goodButtonClickedStatus = true;
+                    badButtonClickedStatus = false;
+                    isPressedForGood=true;
+
+                }
             }
+
         });
+
 
         btLeaveReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,9 +163,9 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
                     return;
                 }
                 if (goodButtonClickedStatus) {
-                    quality = Integer.parseInt(btGood.getText().toString());
+                    quality = 0;
                 } else if (badButtonClickedStatus) {
-                    quality = Integer.parseInt(btBad.getText().toString());
+                    quality = 1;
                 }
                 new AlertDialog.Builder(context)
                         .setMessage(NonSystemMessages.rateSuccessful)

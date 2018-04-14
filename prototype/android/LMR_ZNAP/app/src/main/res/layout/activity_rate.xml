@@ -65,25 +65,22 @@
                 android:layout_marginTop="45dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btGood"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_selector"
-                    android:drawableTop="@drawable/happy"
-                    android:text="0"
-                    android:textColor="@color/bg" />
 
-                <Button
-                    android:id="@+id/btBad"
-                    android:layout_width="match_parent"
+                <ToggleButton
+                    android:id="@+id/btGood"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_selector"
-                    android:drawableTop="@drawable/sad"
-                    android:text="1"
-                    android:textColor="@color/bg" />
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/check"
+                    android:focusable="false"
+                    android:layout_weight="0.1"
+                    android:focusableInTouchMode="false"
+                    android:textOff=""
+                    android:textOn="" />
+
+
+
             </LinearLayout>
 
             <Button
