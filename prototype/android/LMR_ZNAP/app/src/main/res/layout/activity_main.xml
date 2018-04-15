@@ -13,13 +13,13 @@
         android:layout_weight="1.75"
         android:orientation="horizontal"
         android:weightSum="1" >
+
         <ImageView
             android:id="@+id/znap_logo"
             android:layout_width="300dp"
-            android:layout_weight="1"
-
             android:layout_height="90dp"
-            android:src ="@drawable/znap_logo" />
+            android:layout_weight="1"
+            android:src="@drawable/znap_logo" />
     </LinearLayout>
 
     <LinearLayout

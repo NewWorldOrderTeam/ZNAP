@@ -163,7 +163,7 @@
         android:layout_alignStart="@+id/textView2"
         android:text="Не маєте облікового запису ?" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iot"
         android:layout_width="52dp"
         android:layout_height="59dp"

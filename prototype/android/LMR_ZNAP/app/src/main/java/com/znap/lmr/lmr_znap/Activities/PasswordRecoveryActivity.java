@@ -108,7 +108,7 @@ public class PasswordRecoveryActivity extends AppCompatActivity {
         Request request = new Request();
         request.execute();
         Pattern pattern = Pattern.compile("message=.*,");
-        Intent recoveryIntent = new Intent(PasswordRecoveryActivity.this, MainActivity.class);
+        Intent recoveryIntent = new Intent(PasswordRecoveryActivity.this, SignInActivity.class);
         PasswordRecoveryActivity.this.startActivity(recoveryIntent);
         try {
             Matcher matcher = pattern.matcher(request.get());
