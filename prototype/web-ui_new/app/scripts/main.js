@@ -98,7 +98,7 @@ var pages_count;
 
 $('#btnApply').click(function () {
     limit_count = $('#pglmt').val();
-    document.getElementById('buttons').innerHTML = "";
+    document.getElementById('buttons').innerHTML = '';
     changeLimit(limit_count);
     document.getElementById('id1').setAttribute('class', 'active');
 });
