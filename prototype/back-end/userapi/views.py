@@ -131,7 +131,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return render_to_response('Email Confirmation/index.html')
     else:
         return HttpResponse('Activation link is invalid!')
 
@@ -142,10 +142,6 @@ def imei_activate(request, uidb64, token):
     if imei is not None:
         imei.is_active = True
         imei.save()
-        return HttpResponse('Thank you for your phone confirmation. Now you can login your account.')
+        return render_to_response('Phone Confirmation/index.html')
     else:
         return HttpResponse('Activation link is invalid!')
-
-def lol(request):
-    a =render_to_response('Email Confirmation/index.html')
-    return a

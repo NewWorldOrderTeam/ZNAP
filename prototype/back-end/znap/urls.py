@@ -25,7 +25,7 @@ from adminapi.views import AdminLoginAPIView, AdminViewSet
 from queueapi.views import QueueViewSet, QueueCreateAPIView
 from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView, DialogViewSet, WebRateViewSet
 from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet, WebUserViewSet, UserForgotPasswordAPIView, \
-    UserSetPasswordView, lol
+    UserSetPasswordView
 
 from rest_framework_extensions.routers import NestedRouterMixin
 
@@ -96,6 +96,5 @@ urlpatterns = [
     url(r'^api/v1.0/cnap/', QlogicCnapViewSet.as_view(), name='cnap'),
     url(r'^api/v1.0/queue/', QlogicQueueStateViewSet.as_view(), name='queue'),
     url(r'^api/v1.0/reset_password/', UserForgotPasswordAPIView.as_view(), name='reset password'),
-    url(r'^reset_password/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/', UserSetPasswordView.as_view(), name='set password'),
-    url(r'^lol/', lol, name='lol')
+    url(r'^reset_password/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/', UserSetPasswordView.as_view(), name='set password')
 ]
