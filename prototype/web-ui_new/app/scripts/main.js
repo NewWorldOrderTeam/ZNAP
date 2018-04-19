@@ -181,7 +181,16 @@ function sortUsers(limit_count, page_number, order_by, vector) {
     displayUsers(users);
 }
 
-
+function searchUsers(sWord) {
+    var xhr = new XMLHttpRequest();
+    var url = 'http://znap.pythonanywhere.com/api/v1.0/web_user/?search='+ sWord;
+    xhr.open('GET', url, false);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    users_response = JSON.parse(xhr.response);
+    var users = users_response.results;
+    displayUsers(users);
+}
 
 function getUser(id) {
     var xhr = new XMLHttpRequest();
