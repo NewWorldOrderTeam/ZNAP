@@ -42,7 +42,7 @@
       <form>
         <input type="text" id="username" name="user" placeholder="Username" required>
         <input type="password" id="password" name="pass" placeholder="Password" required>
-        <input class="btn" type="button" name="login" value="Login" onclick="adminLogin()">
+        <input type="button" id="lgbutton" class="btn" name="login" value="Login" onclick="adminLogin()">
       </form>
     </div>
   </div>
@@ -101,12 +101,17 @@
   <script src="scripts/login.js"></script>
   <script src="./scripts/custom.js"></script>
   <script src="./scripts/metisMenu.min.js"></script>
-
-  <!-- endbuild -->
-
-
   <!-- build:js scripts/main.js -->
   <script src="scripts/main.js"></script>
+  <!-- Press Enter to log in function -->
+  <script>
+  $(document).ready(function(){
+    $('#password').keypress(function(e){
+      if(e.keyCode==13)
+      $('#lgbutton').click();
+    });
+  });
+  </script>
   <!-- endbuild -->
 </body>
 

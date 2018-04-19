@@ -15,6 +15,7 @@ public class SystemMessages {
     public static final String REG_TO_QUEUE_TITLE = "Реєстрація у чергу";
     public static final String OK = "OK";
     public static final String BAD_REQUEST = "Bad Request";
+    public static final String CREATED = "Created";
     public static final String PROFILE_TITLE = "Профіль користувача";
     public static final String ORGANISATION_ID = "{28c94bad-f024-4289-a986-f9d79c9d8102}";
     public static final String OFFICIAL_PERSON_TITLE = "Запис до посадовця";

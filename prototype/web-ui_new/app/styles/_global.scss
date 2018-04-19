@@ -1,35 +1,21 @@
-* {
-  margin: 0;
-  padding: 0;
-  text-align:center;
+#buttons {
+    text-align: center;
 }
 
-body {
-  background-color: #fafafa;
+#btnApply {
+    margin-left: 10px;
 }
 
-table {
-  color: #333;
-  font-size: .9em;
-  font-weight: 300;
-  line-height: 40px;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 2px solid #ed1c40;
-  width: 500px;
-  margin: 50px auto;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,.16);
-  border-radius: 2px;
+input, 
+button, 
+input:active, 
+input:focus,
+button:active, 
+button:focus {
+    outline: none !important;
 }
 
-th {
-  background: #ed1c40;
-  color: #fff;
-  border: none;
-}
-
-tr:hover:not(th) {background-color: rgba(237,28,64,.1);}
-
+tr:hover:not(th) {background-color: rgba(9,36,136,0.1);}
 
 input[type="button"] {
 	transition: all .3s;
@@ -44,8 +30,8 @@ input[type="button"]:not(.active) {
 	background-color:transparent;
 }
 
-.active {
-	background-color: #ff4d4d;
+input.active {
+	background-color: #00C383;
 	color :#fff;
 }
 

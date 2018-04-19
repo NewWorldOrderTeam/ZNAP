@@ -42,7 +42,7 @@ function displayUsers(users) {
     }
 }
 
-function getUsers(limit_count) {
+function getUsers() {
     getRates();
     var xhr = new XMLHttpRequest();
     var url = 'https://znap.pythonanywhere.com/api/v1.0/web_user/';
@@ -52,14 +52,23 @@ function getUsers(limit_count) {
     users_response = JSON.parse(xhr.response);
     var users_count = users_response.count;
     var users = users_response.results;
-    var pages_count = Math.ceil(users_count / limit_count);
+    pages_count = Math.ceil(users_count / limit_count);
     var table = document.getElementById('user_table');
     table.insertAdjacentHTML('afterend', '<div id=\'buttons\'></div');
+    
+    var	prevDis = (1 == 1)?'disabled':'';
+    var nextDis = (i == pages_count)?'disabled':'';
+        
+    var prevButton = '<input type=\'button\' value=\'&lt;&lt; Prev\'  ' + prevDis + '>';
+    document.getElementById('buttons').insertAdjacentHTML('beforeend', prevButton);
     for (var i = 1; i <= pages_count; i++) {
         console.log(i);
-        var pageButtons = '<input type=\'button\' id=\'id' + i + '\'value=\'' + i + '\' onclick=\'changePage(limit_count,'+i+' )\'>';
+        var pageButtons = '<input type=\'button\' id=\'id' + i + '\'value=\'' + i + '\' onclick=\'changePage(limit_count,' + i + ' )\'>';
         document.getElementById('buttons').insertAdjacentHTML('beforeend', pageButtons);
     }
+    var nextButton = '<input type=\'button\' value=\'Next &gt;&gt;\' onclick=\'changePage(limit_count,' + 2 + ')\' ' + nextDis + '>';
+    document.getElementById('buttons').insertAdjacentHTML('beforeend', nextButton);
+    document.getElementById('id1').setAttribute('class', 'active');
     $('#users_count').text(users_count);
     displayUsers(users);
 }
@@ -73,44 +82,6 @@ function getUsers(limit_count) {
 //    $firstRow = table.rows[0].firstElementChild.tagName,
 //    $rowCount = 10;
 
-
-
-
-// ($p) is the selected page number. it will be generated when a user clicks a button
-//function sort($p) {
-//    var users_count = users_response.count;
-//    var users = users_response.results;
-//    /* create ($rows) a variable to hold the group of rows
-//     ** to be displayed on the selected page,
-//     ** ($s) the start point .. the first row in each page, Do The Math
-//     */
-//    var $rows = $th,
-//        $s = ((users_count * $p) - users_count);
-//    for ($i = $s; $i < ($s + users_count) && $i < $tr.length; $i++)
-//        $rows += $tr[$i];
-//
-//    // create the pagination buttons
-//    document.getElementById('buttons').innerHTML = pageButtons(pages_count, $p);
-//    // CSS Stuff
-//    document.getElementById('id1').setAttribute('class', 'active');
-//}
-
-// ($pCount) : number of pages,($cur) : current page, the selected one ..
-//function pageButtons(pages_count, $cur) {
-//    /* this variables will disable the "Prev" button on 1st page
-//       and "next" button on the last one */
-//    var $prevDis = ($cur == 1) ? 'disabled' : '',
-//        $nextDis = ($cur == pages_count) ? 'disabled' : '',
-//        /* this ($buttons) will hold every single button needed
-//         ** it will creates each button and sets the onclick attribute
-//         ** to the "sort" function with a special ($p) number..
-//         */
-//        $buttons = '<input type=\'button\' value=\'&lt;&lt; Prev\' onclick=\'sort(' + ($cur - 1) + ')\' ' + $prevDis + '>';
-//    for ($i = 1; $i <= pages_count; $i++)
-//        $buttons += '<input type=\'button\' id=\'id' + $i + '\'value=\'' + $i + '\' onclick=\'sort(' + $i + ')\'>';
-//    $buttons += '<input type=\'button\' value=\'Next &gt;&gt;\' onclick=\'sort(' + ($cur + 1) + ')\' ' + $nextDis + '>';
-//    return $buttons;
-//}
 
 function getRates() {
     var xhr = new XMLHttpRequest();
@@ -127,8 +98,9 @@ var pages_count;
 
 $('#btnApply').click(function () {
     limit_count = $('#pglmt').val();
+    document.getElementById('buttons').innerHTML = '';
     changeLimit(limit_count);
-    getUsers();
+    document.getElementById('id1').setAttribute('class', 'active');
 });
 
 
@@ -143,6 +115,8 @@ function changeLimit(limit_count) {
     pages_count = Math.ceil(users_count / limit_count);
     for (var i = 1; i <= pages_count; i++) {
         console.log(i);
+        var pageButtons = '<input type=\'button\' id=\'id' + i + '\'value=\'' + i + '\' onclick=\'changePage(limit_count,' + i + ' )\'>';
+        document.getElementById('buttons').insertAdjacentHTML('beforeend', pageButtons);
     }
     var users = users_response.results;
     displayUsers(users);
@@ -157,6 +131,10 @@ function changePage(limit_count, page_number) {
     xhr.send();
     users_response = JSON.parse(xhr.response);
     var users = users_response.results;
+    for (var i = 1; i <= pages_count; i++) {
+        document.getElementById('id' + i).setAttribute('class', 'unactive');
+    }
+    document.getElementById('id' + page_number).setAttribute('class', 'active');
     displayUsers(users);
 }
 
@@ -254,6 +232,7 @@ function putAdmin(admin_id, rate_id) {
 }
 
 function openRates(id) {
+    var users = users_response.results;
     for (var i = 0; i < users.length; i++) {
         if (users[i].id == id) {
             for (var j = 0; j < users[i].rates.length; j++) {
