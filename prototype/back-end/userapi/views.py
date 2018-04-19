@@ -30,7 +30,8 @@ class WebUserViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = WebUserSerializer
     pagination_class = LimitOffsetPagination
-    filter_backends = (filters.OrderingFilter,)
+    filter_backends = (filters.OrderingFilter, filters.SearchFilter,)
+    search_fields = ('=first_name', '=last_name', '=middle_name', '=email', '=phone')
 
 
 class UserViewSet(viewsets.ModelViewSet):
