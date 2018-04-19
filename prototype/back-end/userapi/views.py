@@ -145,3 +145,7 @@ def imei_activate(request, uidb64, token):
         return HttpResponse('Thank you for your phone confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+def lol(request):
+    a =render_to_response('Email Confirmation/index.html')
+    return a
