@@ -101,10 +101,12 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                 setErrorsForFields();
-                if (password.length() < 8 || !Validations.isValidPassword(password) || !confirmPassword.equals(password) || firstName.length() < 1 || !Validations.isValidFirstName(firstName) ||
-                        middleName.length() < 3 || !Validations.isValidMiddleName(middleName) || lastName.length() < 3 || !Validations.isValidLastName(lastName) ||
-                        !Validations.isValidPhoneNumber(phoneNumber) || email.length()<6 || !Validations.isValidEmail(email)) {
-                    if (password.length() < 8 || !Validations.isValidPassword(password)) {
+
+                System.out.println(Validations.isValidPassword("dasd"));
+                if (!Validations.isValidPassword(password) || !confirmPassword.equals(password) || !Validations.isValidFirstName(firstName) ||
+                        !Validations.isValidMiddleName(middleName) || !Validations.isValidLastName(lastName) ||
+                        !Validations.isValidPhoneNumber(phoneNumber) || !Validations.isValidEmail(email)) {
+                    if (!Validations.isValidPassword(password)) {
                         etPassword.setError("Паролі повинні містити більше 8 символів!");
 
 
@@ -113,16 +115,16 @@ public class SignUpActivity extends AppCompatActivity {
                         etConfirmPassword.setError("Перевірте чи паролі співпадають");
 
                     }
-                    if (firstName.length() < 1 || !Validations.isValidFirstName(firstName)) {
+                    if (!Validations.isValidFirstName(firstName)) {
                         etFirstName.setError("Ім'я повинно містити більше 2 символів");
 
 
                     }
-                    if (middleName.length() < 3 || !Validations.isValidMiddleName(middleName)) {
+                    if (!Validations.isValidMiddleName(middleName)) {
                         etMiddleName.setError("Більше 3 символів");
 
                     }
-                    if (lastName.length() < 3 || !Validations.isValidLastName(lastName)) {
+                    if (!Validations.isValidLastName(lastName)) {
                         etLastName.setError("Більше 3 символів");
 
                     }
@@ -132,48 +134,37 @@ public class SignUpActivity extends AppCompatActivity {
 
                     }
 
-                    if (email.length() < 6 || !Validations.isValidEmail(email)) {
+                    if (!Validations.isValidEmail(email)) {
                         etEmail.setError("Неправильний емейл");
 
                     }
-                }
+                }else {
 
-                else  {
-                    try {
-                        emailToShow = email;
-                        email = AESEncryption.encrypt_string(email);
-                        firstName = AESEncryption.encrypt_string(firstName);
-                        middleName = AESEncryption.encrypt_string(middleName);
-                        lastName = AESEncryption.encrypt_string(lastName);
-                        phoneNumber = AESEncryption.encrypt_string(phoneNumber);
-                        password = AESEncryption.encrypt_string(password);
-                        imei = AESEncryption.encrypt_string(imei);
-                    } catch (InvalidKeyException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    } catch (NoSuchPaddingException e) {
-                        e.printStackTrace();
-                    } catch (InvalidAlgorithmParameterException e) {
-                        e.printStackTrace();
-                    } catch (IllegalBlockSizeException e) {
-                        e.printStackTrace();
-                    } catch (BadPaddingException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    new AlertDialog.Builder(context)
-                            .setMessage(NonSystemMessages.activateAccount + " " + emailToShow)
-                            .setCancelable(false)
-                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    requestPatternValidation();
-                                    finish();
-                                }
-                            })
-                            .show();
+                        try {
+                            emailToShow = email;
+                            email = AESEncryption.encrypt_string(email);
+                            firstName = AESEncryption.encrypt_string(firstName);
+                            middleName = AESEncryption.encrypt_string(middleName);
+                            lastName = AESEncryption.encrypt_string(lastName);
+                            phoneNumber = AESEncryption.encrypt_string(phoneNumber);
+                            password = AESEncryption.encrypt_string(password);
+                            imei = AESEncryption.encrypt_string(imei);
+                        } catch (InvalidKeyException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchAlgorithmException e) {
+                            e.printStackTrace();
+                        } catch (NoSuchPaddingException e) {
+                            e.printStackTrace();
+                        } catch (InvalidAlgorithmParameterException e) {
+                            e.printStackTrace();
+                        } catch (IllegalBlockSizeException e) {
+                            e.printStackTrace();
+                        } catch (BadPaddingException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    requestPatternValidation();
 
                 }
             }
@@ -273,8 +264,6 @@ public class SignUpActivity extends AppCompatActivity {
         Request request = new Request();
         request.execute();
         Pattern pattern = Pattern.compile("message=.*,");
-        Intent signInIntent = new Intent(SignUpActivity.this, SignInActivity.class);
-        SignUpActivity.this.startActivity(signInIntent);
         try {
             Matcher matcher = pattern.matcher(request.get());
             while (matcher.find()) {
@@ -286,9 +275,18 @@ public class SignUpActivity extends AppCompatActivity {
                     match = error;
                     Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
                 }
-                if (match.equals(SystemMessages.OK)) {
-                    Intent mainIntent = new Intent(SignUpActivity.this, SignInActivity.class);
-                    SignUpActivity.this.startActivity(mainIntent);
+                if (match.equals(SystemMessages.CREATED)) {
+                    new AlertDialog.Builder(context)
+                            .setMessage(NonSystemMessages.activateAccount + " " + emailToShow)
+                            .setCancelable(false)
+                            .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent mainIntent = new Intent(SignUpActivity.this, SignInActivity.class);
+                                    SignUpActivity.this.startActivity(mainIntent);
+                                }
+                            })
+                            .show();
+
                 }
                 Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
             }
@@ -374,10 +372,10 @@ public class SignUpActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             Services services = new Services();
             Response response = services.SignUp(firstName, lastName, middleName, phoneNumber, email, password, imei);
-            if (response.isSuccessful()) {
-            } else {
+            if (!response.isSuccessful()) {
                 try {
                     error = response.errorBody().string();
+                    error = error.split("\\[\"")[1].split("\"\\]")[0];
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

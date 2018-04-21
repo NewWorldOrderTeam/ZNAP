@@ -1,3 +1,45 @@
+#buttons {
+    text-align: center;
+}
+
+#btnApply {
+    margin-left: 10px;
+}
+
+input, 
+button, 
+input:active, 
+input:focus,
+button:active, 
+button:focus {
+    outline: none !important;
+}
+
+tr:hover:not(th) {background-color: rgba(9,36,136,0.1);}
+
+input[type="button"] {
+	transition: all .3s;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+	font-size: 15px;
+}
+
+input[type="button"]:not(.active) {
+	background-color:transparent;
+}
+
+input.active {
+	background-color: #00C383;
+	color :#fff;
+}
+
+input[type="button"]:hover:not(.active) {
+	background-color: #ddd;
+}
+
+
 h4,
 h5,
 h6,
@@ -38,6 +80,11 @@ body a {
   margin-bottom: 15px;
   display: block;
   display: inline-block;
+}
+
+.rows-count {
+    width: auto;
+    display: inline-block;
 }
 
 td.headerSortUp {
@@ -329,7 +376,7 @@ small {
 }
 
 .navbar-default.sidebar {
-  height: calc(100vh - 51px);
+  height: 675px;
   box-sizing: border-box;
   background-color: #000;
   font-family: 'Roboto', sans-serif;
@@ -3250,6 +3297,9 @@ ul.new li.new_right {
   .navbar-default .navbar-form {
     border-color: rgb(6, 217, 149);
   }
+    .navbar-form {
+        display: inline-block !important;
+    }
   form.navbar-form.navbar-right {
     margin: 0;
   }

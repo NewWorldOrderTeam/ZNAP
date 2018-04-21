@@ -12,6 +12,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.znap.lmr.lmr_znap.Security.AESEncryption;
@@ -41,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView firstNameText;
     TextView lastNameText;
     TextView emailText, phoneText, emailText1;
+    ImageView chat;
     private static Request request;
     private int user_id;
     List<User> users;
@@ -58,7 +60,16 @@ public class ProfileActivity extends AppCompatActivity {
         emailText = (TextView) findViewById(R.id.email);
         emailText1 = (TextView) findViewById(R.id.email1);
         phoneText = (TextView) findViewById(R.id.phone);
+        chat = (ImageView) findViewById(R.id.chat);
         Bundle bundle = getIntent().getExtras();
+
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openMessageListActivity = new Intent(ProfileActivity.this, MessageListActivity.class);
+                startActivity(openMessageListActivity);
+            }
+        });
 
 
 

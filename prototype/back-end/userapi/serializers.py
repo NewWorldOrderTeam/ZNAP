@@ -65,7 +65,7 @@ class UserCreateSerializer(serializers.HyperlinkedModelSerializer):
         extra_kwargs = {"password" : {"write_only": True}}
 
     def validate(self, data):
-        email = data['email']
+        email = decryption(data['email'])
         user_qs = UserProfile.objects.filter(email=email)
         if user_qs.exists():
             raise serializers.ValidationError('Цей користувач уже зарреєстрований')

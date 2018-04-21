@@ -27,6 +27,8 @@
             android:scaleType="centerCrop"
             android:src="@drawable/avatar" />
 
+
+
         <RelativeLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
@@ -50,6 +52,25 @@
                 android:layout_marginRight="59dp"
                 android:layout_marginTop="17dp"
                 android:src="@drawable/add_user" />
+
+            <ImageView
+                android:id="@+id/chat"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/myreviews"
+                android:layout_alignStart="@+id/myreviews"
+                android:layout_centerVertical="true"
+                android:src="@drawable/envelope" />
+
+            <ImageView
+                android:id="@+id/history"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/add_friend"
+                android:layout_alignStart="@+id/add_friend"
+                android:layout_centerVertical="true"
+                android:src="@drawable/history" />
+
 
             <ImageView
                 android:id="@+id/myreviews"

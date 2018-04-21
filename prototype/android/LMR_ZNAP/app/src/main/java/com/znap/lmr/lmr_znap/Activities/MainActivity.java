@@ -107,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://city-adm.lviv.ua/services/directory-services/lvivska-miska-rada")));
             }
         });
+        findViewById(R.id.ibtPayment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://city-adm.lviv.ua/services/directory-services/pay")));
+            }
+        });
 
 
 

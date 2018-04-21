@@ -13,6 +13,9 @@ import java.util.regex.Pattern;
 
 public class Validations {
     public static boolean isValidPassword(final String password) {
+        if (password.length() < 8){
+            return false;
+        }
         Pattern pattern;
         Matcher matcher;
         final String PASSWORD_PATTERN = "[a-zA-Z0-9]{8,24}";
@@ -22,33 +25,45 @@ public class Validations {
     }
 
     public static boolean isValidFirstName(final String first_name) {
+        if (first_name.length() < 1){
+            return false;
+        }
         Pattern pattern;
         Matcher matcher;
-        final String FIRST_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z0-9]+";
+        final String FIRST_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z]+";
         pattern = Pattern.compile(FIRST_NAME_PATTERN);
         matcher = pattern.matcher(first_name);
         return matcher.matches();
     }
 
     public static boolean isValidMiddleName(final String middle_name) {
+        if (middle_name.length() < 3 ){
+            return false;
+        }
         Pattern pattern;
         Matcher matcher;
-        final String MIDDLE_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z0-9]+";
+        final String MIDDLE_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z]+";
         pattern = Pattern.compile(MIDDLE_NAME_PATTERN);
         matcher = pattern.matcher(middle_name);
         return matcher.matches();
     }
 
     public static boolean isValidLastName(final String last_name) {
+        if (last_name.length() < 3 ){
+            return false;
+        }
         Pattern pattern;
         Matcher matcher;
-        final String LAST_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z0-9]+";
+        final String LAST_NAME_PATTERN = "[А-Яа-я]+|[a-zA-Z]+";
         pattern = Pattern.compile(LAST_NAME_PATTERN);
         matcher = pattern.matcher(last_name);
         return matcher.matches();
     }
 
     public static boolean isValidEmail(final String email) {
+        if (email.length() < 6 ){
+            return false;
+        }
         Pattern pattern;
         Matcher matcher;
         final String EMAIL_PATTERN = "[a-zA-Z0-9]+@[a-zA-Z]+\\.[A-Za-z]{2,4}";
