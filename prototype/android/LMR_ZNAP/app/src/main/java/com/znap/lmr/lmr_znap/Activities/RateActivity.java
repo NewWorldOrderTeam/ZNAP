@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -45,6 +46,7 @@ import javax.crypto.NoSuchPaddingException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import tr.xip.widget.simpleratingview.SimpleRatingView;
 
 /**
  * Created by Andy Blyzniuk on 13.11.2017.
@@ -54,15 +56,12 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
     int quality;
     int znap_id;
     int pushed_user_id;
-    private boolean isPressedForGood = false;
-    private boolean isPressedForBad = false;
-    Button btBad;
-    Button btGood;
     Button btLeaveReview;
     String description;
     Spinner spinnerForZnaps;
     EditText etDescription;
     TextView labelForQuality;
+    TextView rating;
     boolean badButtonClickedStatus = false;
     boolean goodButtonClickedStatus = true;
     Context context = this;
@@ -80,8 +79,8 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
         spinnerForZnaps.setOnItemSelectedListener(this);
         etDescription = (EditText) findViewById(R.id.etDescription);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
-        labelForQuality = (TextView) findViewById(R.id.labelForQuality);
-        btGood = (ToggleButton) findViewById(R.id.btGood);
+        rating = (TextView) findViewById(R.id.rating);
+        final SimpleRatingView mSimpleRatingView = (SimpleRatingView) findViewById(R.id.simple_rating_view);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -110,30 +109,34 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
                 public void onFailure(Call<List<ZnapName>> call, Throwable t) {
                 }
             });
-            } else {
+        } else {
             finish();
-            }
+        }
 
-
-
-
-        btGood.setOnClickListener(new View.OnClickListener(){
-
+        mSimpleRatingView.setOnRatingChangedListener(new SimpleRatingView.OnRatingChangeListener() {
             @Override
-            public void onClick(View view) {
-                if(isPressedForGood==false){
-                    goodButtonClickedStatus = false;
-                    badButtonClickedStatus = true;
-                    isPressedForGood=true;
-
-                }else if(isPressedForGood==true){
-                    goodButtonClickedStatus = true;
-                    badButtonClickedStatus = false;
-                    isPressedForGood=true;
-
+            public void onRatingChanged(SimpleRatingView.Rating ratingType) {
+                if (mSimpleRatingView.getSelectedRating() == SimpleRatingView.Rating.NEGATIVE) {
+                    rating.setText("Я незадоволений");
+                }
+                if (mSimpleRatingView.getSelectedRating() == SimpleRatingView.Rating.POSITIVE) {
+                    rating.setText("Я задоволений");
+                }
+                if (mSimpleRatingView.getSelectedRating() == SimpleRatingView.Rating.NEUTRAL) {
+                    rating.setText("Нейтрально");
+                }
+                switch (ratingType) {
+                    case POSITIVE:
+                        goodButtonClickedStatus = true;
+                        break;
+                    case NEUTRAL:
+                        badButtonClickedStatus = false;
+                        break;
+                    case NEGATIVE:
+                        badButtonClickedStatus = false;
+                        break;
                 }
             }
-
         });
 
 
@@ -163,9 +166,9 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
                     return;
                 }
                 if (goodButtonClickedStatus) {
-                    quality = 0;
-                } else if (badButtonClickedStatus) {
                     quality = 1;
+                } else if (badButtonClickedStatus) {
+                    quality = 0;
                 }
                 new AlertDialog.Builder(context)
                         .setMessage(NonSystemMessages.rateSuccessful)
@@ -191,14 +194,14 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
         String sp1 = String.valueOf(spinnerForZnaps.getSelectedItem());
         znap_id = (int) spinnerForZnaps.getItemIdAtPosition(arg2);
         Toast.makeText(this, sp1, Toast.LENGTH_SHORT).show();
-        znap_id+=1;
+        znap_id += 1;
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
-    public void requestPatternValidation(){
+    public void requestPatternValidation() {
         RateActivity.RequestForServer request = new RateActivity.RequestForServer();
         request.execute();
         Pattern pattern = Pattern.compile("message=.*,");

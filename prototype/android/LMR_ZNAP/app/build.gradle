@@ -23,6 +23,9 @@ repositories {
     google()
 }
 dependencies {
+
+    compile 'com.github.xiprox.simpleratingview:library:+'
+
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.sendbird.sdk:sendbird-android-sdk:3.0.54'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'

@@ -45,7 +45,7 @@
 
                 android:background="#E0E0E0"
                 android:ems="10"
-                android:hint=" Ваш відгук"
+                android:hint=" Розкажіть нам про це"
                 android:padding="10dp"
 
                 android:textSize="20dp" />
@@ -63,25 +63,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="45dp"
+                android:gravity="center_horizontal"
+                android:background="@color/color"
                 android:orientation="horizontal">
 
 
-                <ToggleButton
-                    android:id="@+id/btGood"
+
+                <tr.xip.widget.simpleratingview.SimpleRatingView xmlns:srv="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/simple_rating_view"
+                    android:background="@color/color"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/check"
-                    android:focusable="false"
-                    android:layout_weight="0.1"
-                    android:focusableInTouchMode="false"
-                    android:textOff=""
-                    android:textOn="" />
-
-
-
+                    android:layout_height="wrap_content" />
             </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:background="@color/color"/>
 
             <Button
                 android:id="@+id/btLeaveReview"
