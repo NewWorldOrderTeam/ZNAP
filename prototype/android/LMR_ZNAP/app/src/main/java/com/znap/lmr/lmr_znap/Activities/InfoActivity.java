@@ -2,6 +2,7 @@ package com.znap.lmr.lmr_znap.Activities;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -50,6 +51,15 @@ public class InfoActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(hvylyovogo).title("Територіальний підрозділ ЦНАП м. Львова на вул. М. Хвильового, 14а").snippet("вул. Хвильового, 14а"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(shevchenka));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(downTown,10));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

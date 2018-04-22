@@ -144,7 +144,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MessageListActivity"
+            android:name=".Activities.ChatActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />

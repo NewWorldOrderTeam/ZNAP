@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openMessageListActivity = new Intent(ProfileActivity.this, MessageListActivity.class);
+                Intent openMessageListActivity = new Intent(ProfileActivity.this, ChatActivity.class);
                 startActivity(openMessageListActivity);
             }
         });
