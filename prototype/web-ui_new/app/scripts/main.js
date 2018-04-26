@@ -97,12 +97,13 @@ var pages_count;
 var current = 1;
 
 
-$('#btnApply').click(function () {
+function optionSelected() {
+    console.log(5);
     limit_count = $('#pglmt').val();
     document.getElementById('buttons').innerHTML = '';
     changeLimit(limit_count);
     document.getElementById('id1').setAttribute('class', 'active');
-});
+}
 
 
 function changeLimit(limit_count) {
