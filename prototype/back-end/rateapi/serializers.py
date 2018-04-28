@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.fields import CharField, IntegerField, SerializerMethodField, BooleanField
 from rest_framework_encrypted_lookup.serializers import EncryptedLookupModelSerializer
-from rateapi.models import Rate, Dialog
+from rateapi.models import Rate
 from userapi.models import UserProfile
 from znap.AES import encryption, decryption
 from znapapi.models import Znap
@@ -26,7 +26,6 @@ class WebRateSerializer(serializers.ModelSerializer):
             ret['last_name'] = UserProfile.objects.filter(id=instance.user_id)[0].last_name
         except:
             pass
-        ret['timestamp'] = Dialog.objects.filter(dialog_id=instance.id)[0].timeStamp
         return ret
 
 class RateSerializer(serializers.ModelSerializer):
@@ -41,19 +40,6 @@ class RateSerializer(serializers.ModelSerializer):
         ret = super(RateSerializer, self).to_representation(instance)
         ret['description'] = encryption(ret['description'])
         return ret
-
-
-class ChoicesField(serializers.Field):
-    def __init__(self, choices, **kwargs):
-        self._choices = choices
-        super(ChoicesField, self).__init__(**kwargs)
-
-    def to_representation(self, obj):
-        return self._choices[obj]
-
-    def to_internal_value(self, data):
-        return getattr(self._choices, data)
-
 
 class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
     user_id = IntegerField()
@@ -84,48 +70,6 @@ class RateCreateSerializer(serializers.HyperlinkedModelSerializer):
             is_closed=False
         )
         rate_obj.save()
-
-        chat_obj = Dialog(
-            dialog_id=rate_obj.id,
-            message=description,
-            is_admin=False
-        )
-
-        chat_obj.save()
-        return validated_data
-
-
-class DialogSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Dialog
-        fields = ('message', 'timeStamp', 'is_admin')
-
-
-class AddMessageSerializer(serializers.HyperlinkedModelSerializer):
-    dialog_id = IntegerField()
-    message = CharField(allow_blank=True)
-    is_admin = BooleanField()
-    class Meta:
-        model = Dialog
-        fields = ('dialog_id', 'message', 'is_admin')
-
-    def validate(self, data):
-        dialog_id = data['dialog_id']
-        dialog_qs = Rate.objects.filter(id=dialog_id)
-        if not dialog_qs.exists():
-            raise serializers.ValidationError("This dialog has not already created")
-        return data
-
-    def create(self, validated_data):
-        dialog_id= validated_data['dialog_id']
-        message = validated_data['message']
-        is_admin = validated_data['is_admin']
-        dialog_obj = Dialog(
-            dialog_id=dialog_id,
-            message=message,
-            is_admin=is_admin
-        )
-        dialog_obj.save()
 
         return validated_data
 

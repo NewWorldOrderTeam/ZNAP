@@ -16,16 +16,6 @@ class Rate(models.Model):
     admin = models.ForeignKey(Admin,default=None, null=True)
     znap = models.ForeignKey(Znap)
     quality = models.IntegerField()
-    TYPE = Choices(
-        ('1', '1')
-    )
     description = models.CharField(max_length=200)
     numOfTicket = models.IntegerField(null=True)
-    type = models.CharField(max_length=1, choices=TYPE)
     is_closed = models.BooleanField()
-
-class Dialog(models.Model):
-    dialog = models.ForeignKey(Rate)
-    message = models.CharField(max_length=200)
-    is_admin = models.BooleanField()
-    timeStamp = models.DateTimeField(default=datetime.datetime.now())
