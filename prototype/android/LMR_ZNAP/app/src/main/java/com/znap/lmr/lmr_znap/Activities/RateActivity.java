@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -62,6 +63,8 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
     EditText etDescription;
     TextView labelForQuality;
     TextView rating;
+    TextView appearance,goodmood,proffesionality,rate;
+    RatingBar ratingBar,ratingBar2,ratingBar3,ratingBar4;
     boolean badButtonClickedStatus = false;
     boolean goodButtonClickedStatus = true;
     Context context = this;
@@ -80,6 +83,19 @@ public class RateActivity extends AppCompatActivity implements OnItemSelectedLis
         etDescription = (EditText) findViewById(R.id.etDescription);
         btLeaveReview = (Button) findViewById(R.id.btLeaveReview);
         rating = (TextView) findViewById(R.id.rating);
+        appearance=(TextView) findViewById(R.id.appearance);
+        goodmood=(TextView) findViewById(R.id.goodmood);
+        proffesionality=(TextView) findViewById(R.id.proffesionality);
+        rate=(TextView) findViewById(R.id.rate);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar1);
+        ratingBar2=(RatingBar) findViewById(R.id.ratingBar2);
+        ratingBar3=(RatingBar) findViewById(R.id.ratingBar3);
+        ratingBar4=(RatingBar) findViewById(R.id.ratingBar4);
+        ratingBar.setNumStars(5);
+        ratingBar2.setNumStars(5);
+        ratingBar3.setNumStars(5);
+        ratingBar4.setNumStars(5);
+        rate=(TextView) findViewById(R.id.rate);
         final SimpleRatingView mSimpleRatingView = (SimpleRatingView) findViewById(R.id.simple_rating_view);
 
         Bundle bundle = getIntent().getExtras();

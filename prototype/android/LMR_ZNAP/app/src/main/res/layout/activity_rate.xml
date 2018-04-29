@@ -63,17 +63,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="45dp"
-                android:gravity="center_horizontal"
                 android:background="@color/color"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
-
 
 
                 <tr.xip.widget.simpleratingview.SimpleRatingView xmlns:srv="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/simple_rating_view"
-                    android:background="@color/color"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/color" />
             </LinearLayout>
 
 
@@ -81,8 +80,72 @@
                 android:id="@+id/rating"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:background="@color/color"/>
+                android:background="@color/color"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/appearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Зовнішній вигляд"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:numStars="5" />
+
+            <TextView
+                android:id="@+id/goodmood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Привітність"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:numStars="5" />
+
+            <TextView
+                android:id="@+id/proffesionality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Консультація професіонала"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:numStars="5" />
+
+            <TextView
+                android:id="@+id/rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Загальне враження"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="18dp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:numStars="5" />
 
             <Button
                 android:id="@+id/btLeaveReview"
