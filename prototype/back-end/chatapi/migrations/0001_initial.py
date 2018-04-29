@@ -18,15 +18,24 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Rate',
+            name='Chat',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quality', models.IntegerField()),
-                ('description', models.CharField(max_length=200)),
-                ('numOfTicket', models.IntegerField(null=True)),
-                ('is_closed', models.BooleanField()),
+                ('is_closed', models.BooleanField(default=False)),
+                ('timestamp', models.DateTimeField(auto_now_add=True)),
                 ('admin', models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to='adminapi.Admin')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Message',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('message', models.CharField(max_length=1200)),
+                ('is_read', models.BooleanField(default=False)),
+                ('is_admin', models.BooleanField(default=False)),
+                ('timestamp', models.DateTimeField(auto_now_add=True)),
+                ('chat', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chatapi.Chat')),
             ],
         ),
     ]

@@ -144,7 +144,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MessageListActivity"
+            android:name=".Activities.ChatActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.STATE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.PhoneNumberChangingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />

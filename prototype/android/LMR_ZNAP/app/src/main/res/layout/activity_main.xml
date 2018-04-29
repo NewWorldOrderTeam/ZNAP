@@ -76,13 +76,13 @@
             android:textColor="#fcfff5" />
         <Button
 
-            android:id="@+id/bCheck"
+            android:id="@+id/bChat"
             android:layout_width="290dp"
             android:layout_height="75dp"
             android:textAlignment="center"
             android:layout_weight="1"
             android:layout_marginTop="-9dp"
-            android:text="Перевірити стан виконання звернення"
+            android:text="Чат з адміністратором"
 
             android:theme="@style/test"
             android:textColor="#fcfff5" />

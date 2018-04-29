@@ -1,15 +1,8 @@
 package com.znap.lmr.lmr_znap.Activities;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     private int user_id;
     List<User> users;
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 999;
-    private TelephonyManager mTelephonyManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +51,6 @@ public class ProfileActivity extends AppCompatActivity {
         firstNameText = (TextView) findViewById(R.id.user_profile_name);
         lastNameText = (TextView) findViewById(R.id.user_profile_surname);
         emailText = (TextView) findViewById(R.id.email);
-        emailText1 = (TextView) findViewById(R.id.email1);
         phoneText = (TextView) findViewById(R.id.phone);
         chat = (ImageView) findViewById(R.id.chat);
         Bundle bundle = getIntent().getExtras();
@@ -66,10 +58,12 @@ public class ProfileActivity extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openMessageListActivity = new Intent(ProfileActivity.this, MessageListActivity.class);
+                Intent openMessageListActivity = new Intent(ProfileActivity.this, ChatActivity.class);
                 startActivity(openMessageListActivity);
             }
         });
+
+
 
 
 
@@ -84,6 +78,14 @@ public class ProfileActivity extends AppCompatActivity {
                     Intent openMyReviewsActivity = new Intent(ProfileActivity.this, MyReviewsActivity.class);
                     openMyReviewsActivity.putExtra(SystemMessages.USER_ID, user_id);
                     startActivity(openMyReviewsActivity);
+                }
+            });
+            findViewById(R.id.add_friend).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent openPhoneChangingActivity = new Intent(ProfileActivity.this, PhoneNumberChangingActivity.class);
+                    openPhoneChangingActivity.putExtra(SystemMessages.USER_ID, user_id);
+                    startActivity(openPhoneChangingActivity);
                 }
             });
             request = ZnapUtility.generateRetroRequest();
@@ -120,8 +122,7 @@ public class ProfileActivity extends AppCompatActivity {
                     firstNameText.setText(String.valueOf(firstName));
                     lastNameText.setText(String.valueOf(lastName));
                     emailText.setText(String.valueOf("Email : " + email));
-                    emailText1.setText(String.valueOf("Phone : " + phone));
-                    phoneText.setText(String.valueOf(phone));
+                    phoneText.setText(String.valueOf("Phone : " + phone));
                 }
 
                 @Override

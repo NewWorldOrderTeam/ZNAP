@@ -11,25 +11,20 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.znap.lmr.lmr_znap.Pojo.DateChooserAPI;
-import com.znap.lmr.lmr_znap.ServerUtilities.GsonPConverterFactory;
 import com.znap.lmr.lmr_znap.R;
 import com.znap.lmr.lmr_znap.ServerUtilities.Request;
 import com.znap.lmr.lmr_znap.ClientUtilities.SystemMessages;
 import com.znap.lmr.lmr_znap.ServerUtilities.ZnapUtility;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
+
 
 /**
  * Created by Zava on 01.12.2017.

@@ -22,16 +22,16 @@ from rest_framework.routers import DefaultRouter
 
 import userapi
 from adminapi.views import AdminLoginAPIView, AdminViewSet
-from queueapi.views import QueueViewSet, QueueCreateAPIView
-from rateapi.views import RateViewSet, RateCreateAPIView, AddMessageAPIView, DialogViewSet, WebRateViewSet
+from chatapi.views import ChatViewSet, MessageViewSet, AddMessageAPIView, ChatCreateAPIView
+from queueapi.views import QlogicQueueStateViewSet
+from rateapi.views import RateViewSet, RateCreateAPIView, WebRateViewSet
 from userapi.views import UserCreateAPIView, UserLoginAPIView, UserViewSet, WebUserViewSet, UserForgotPasswordAPIView, \
     UserSetPasswordView
 
 from rest_framework_extensions.routers import NestedRouterMixin
 
-from znap import settings
-from znapapi.views import ZnapViewSet, RegistrationToZnapCreateAPIView, RegistrationToZnapViewSet, QlogicCnapViewSet, \
-    QlogicServicesViewSet, QlogicQueueStateViewSet, QlogicGroupViewSet, \
+from znapapi.views import ZnapViewSet, RegistrationToZnapViewSet, QlogicCnapViewSet, \
+    QlogicServicesViewSet, QlogicGroupViewSet, \
     QlogicTimeForServiceViewSet, QlogicFinishRegistration
 
 
@@ -40,10 +40,11 @@ class NestedDefaultRouter(NestedRouterMixin, DefaultRouter):
 
 router = NestedDefaultRouter()
 
-dialog_router = router.register('rate', RateViewSet)
-dialog_router.register('dialog', DialogViewSet,
-                       base_name='rate-dialog',
-                       parents_query_lookups=['dialog'])
+router.register('rate', RateViewSet)
+chat_router = router.register('chat', ChatViewSet)
+chat_router.register('message', MessageViewSet,
+                       base_name='chat-message',
+                       parents_query_lookups=['chat'])
 user_router = router.register('user', UserViewSet)
 user_router.register('rate', RateViewSet,
                      base_name='user-rate',
@@ -86,7 +87,6 @@ urlpatterns = [
     url(r'^api/v1.0/adminlogin/', AdminLoginAPIView.as_view(), name='adminlogin'),
     url(r'^api/v1.0/addrate/', RateCreateAPIView.as_view(), name='create rate'),
     url(r'^api/v1.0/addmessage/', AddMessageAPIView.as_view(), name='add message'),
-    url(r'^api/v1.0/registerToQueue/',RegistrationToZnapCreateAPIView.as_view(), name='register to queue'),
     url(r'^activate-gadget/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',userapi.views.imei_activate, name='imei-activate'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', userapi.views.activate, name='activate'),
     url(r'^api/v1.0/cnap/(?P<service_center>[0-9]+)/service/(?P<service>[0-9]+)/time/', QlogicTimeForServiceViewSet.as_view(), name='time for registration'),
@@ -96,5 +96,7 @@ urlpatterns = [
     url(r'^api/v1.0/cnap/', QlogicCnapViewSet.as_view(), name='cnap'),
     url(r'^api/v1.0/queue/', QlogicQueueStateViewSet.as_view(), name='queue'),
     url(r'^api/v1.0/reset_password/', UserForgotPasswordAPIView.as_view(), name='reset password'),
-    url(r'^reset_password/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/', UserSetPasswordView.as_view(), name='set password')
+    url(r'^reset_password/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/', UserSetPasswordView.as_view(), name='set password'),
+    url(r'^api/v1.0/createchat', ChatCreateAPIView.as_view(), name='chat')
 ]
+

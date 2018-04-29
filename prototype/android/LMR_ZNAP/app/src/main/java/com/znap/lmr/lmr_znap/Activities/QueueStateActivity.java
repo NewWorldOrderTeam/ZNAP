@@ -78,6 +78,7 @@ public class QueueStateActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     public static Request getApi() {
         return request;
     }
