@@ -144,18 +144,6 @@
                 android:padding="20dp"
                 android:text="Some info" />
 
-            <TextView
-                android:id="@+id/email1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
-                android:background="#fff"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:padding="20dp"
-                android:text="Birthdate" />
 
             <TextView
                 android:id="@+id/phone"

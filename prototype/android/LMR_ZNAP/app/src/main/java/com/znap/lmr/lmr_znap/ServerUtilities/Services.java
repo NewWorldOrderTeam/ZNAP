@@ -67,8 +67,9 @@ public class Services {
         return null;
     }
 
-    public Response SignToOfficialPerson(int user_id, String address, String yourProblem ) {
-        Call<User> call = serviceR.signToOfficialPerson(user_id, address, yourProblem);
+
+    public Response PasswordRecovery(String email) {
+        Call<User> call = serviceR.passwordRecovery(email);
         try {
             Response response = call.execute();
             return response;
@@ -81,9 +82,8 @@ public class Services {
 
         return null;
     }
-
-    public Response PasswordRecovery(String email) {
-        Call<User> call = serviceR.passwordRecovery(email);
+    public Response NumberChanging(int user_id, String OldPhoneNumber, String NewPhoneNumber) {
+        Call<User> call = serviceR.changePhone(OldPhoneNumber, NewPhoneNumber, user_id);
         try {
             Response response = call.execute();
             return response;

@@ -45,7 +45,11 @@ public interface Request {
 
     @FormUrlEncoded
     @POST("/api/v1.0/cnap/register/")
-    Call<SuccessRegistrationAPI> regToQueue(@Field("user_id") int user_id,@Field("cnap_id") int znap_id,@Field("service_id") int service_id,@Field("day") String day, @Field("hour") String hour);
+    Call<SuccessRegistrationAPI> regToQueue(@Field("user_id") int user_id, @Field("cnap_id") int znap_id,@Field("service_id") int service_id,@Field("day") String day, @Field("hour") String hour);
+
+    @FormUrlEncoded
+    @POST("/api/v1.0/")
+    Call<User> changePhone(@Field("old_phone_number") String OldPhoneNumber, @Field("new_phone_number") String NewPhoneNumber, @Field("user_id") int pushed_user_id);
 
     @GET("/api/v1.0/user/{user}/")
     Call<User> getInfo(@Path("user") int userid);

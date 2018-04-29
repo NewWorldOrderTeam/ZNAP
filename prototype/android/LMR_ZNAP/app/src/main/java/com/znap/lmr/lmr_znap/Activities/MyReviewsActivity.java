@@ -46,7 +46,6 @@ public class MyReviewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_my_reviews);
         list = (ListView) findViewById(R.id.ReviewsList);
         Bundle bundle = getIntent().getExtras();
