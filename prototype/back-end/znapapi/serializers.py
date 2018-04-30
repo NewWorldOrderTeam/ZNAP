@@ -55,7 +55,7 @@ class QlogicFinishRegistrationToZnapSerializer(serializers.Serializer):
             url = 'http://qlogic.net.ua:8084/QueueService.svc/json_pre_reg/RegCustomerEx?organisationGuid=' + organisationGuid + \
                   '&serviceCenterId=' + str(cnap_id) + '&serviceId=' + str(
                 service_id) + '&LangId=1&phone=' + phone + '&email=' + email + \
-                  '&name=' + last_name + ' ' + first_name + ' ' + unicode(midle_name) + '&date=' + day + ' ' + hour
+                  '&name=' + unicode(last_name) + ' ' + unicode(first_name) + ' ' + unicode(midle_name) + '&date=' + day + ' ' + hour
             url = url.encode('utf8')
             r = urllib.urlopen(url).read()
             cnap_registration = json.loads(r)['d']

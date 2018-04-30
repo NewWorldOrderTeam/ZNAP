@@ -121,14 +121,14 @@
                 <div style="padding: 15px;" data-example-id="contextual-table">
                     <div class="upper-table">
                         <form class="navbar-form" style="display: inline-block" id="form">
-                            <input type="text" class="form-control" id="myInput" value="Пошук по імені..." onfocus="this.value = '';" onblur="if (this.value == '')  {this.value = 'Search...';}">
+                            <input type="text" class="form-control" id="myInput" value="Пошук по імені..." oninput=searchUsers() onfocus="this.value = '';" onblur="if (this.value == '')  {this.value = 'Search...';}">
                         </form>
                         <select class="form-control rows-count" id="pglmt" onchange="optionSelected()" >
                           <option value="10">10</option>
                           <option value="20">20</option>
                           <option value="30">30</option>
                         </select>
-                       
+
 
                     </div>
 
@@ -212,14 +212,6 @@
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
-    <script>
-        $("#form").submit(function(e) {
-            e.preventDefault();
-            var a = document.getElementById('myInput').value;
-            searchUsers(a);
-        });
-
-    </script>
 
     <!-- endbuild -->
 </body>
