@@ -21,4 +21,6 @@ public class SystemMessages {
     public static final String PASSWORD_RECOVERY_TITLE = "Відновлення паролю";
     public static final String INTERNAL_SERVER_ERROR = "Internal Server Error";
     public static final String PHONE_TITLE = "Зміна номера телефону";
+    public static final String ABOUT_US_TITLE = "Про нас";
+    public static final String MY_REVIEWS = "Мої відгуки";
 }
