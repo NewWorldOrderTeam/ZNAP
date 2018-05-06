@@ -10,6 +10,19 @@ class ChatSerializer(serializers.ModelSerializer):
         model = Chat
         fields = ('id', 'user_id', 'admin_id', 'is_closed', 'timestamp')
 
+    def to_representation(self, instance):
+        ret = super(ChatSerializer, self).to_representation(instance)
+        try:
+            last_obj = Message.objects.filter(chat_id=instance.id).last()
+            ret['last_message'] = last_obj.message
+            ret['is_admin'] = last_obj.is_admin
+            ret['last_timestamp'] = last_obj.timestamp
+        except:
+            ret['last_message'] = ''
+            ret['is_admin'] = ''
+            ret['last_timestamp'] = ''
+        return ret
+
 class ChatCreateSerializer(serializers.HyperlinkedModelSerializer):
     user_id = IntegerField()
     class Meta:
@@ -50,7 +63,12 @@ class AddMessageSerializer(serializers.HyperlinkedModelSerializer):
         chat_id = data['chat_id']
         chat_qs = Chat.objects.filter(id=chat_id)
         if not chat_qs.exists():
-            raise serializers.ValidationError("This dialog has not already created")
+            raise serializers.ValidationError('This dialog has not already created')
+        else:
+            chat_obj = chat_qs.first()
+            is_admin = data['is_admin']
+            if is_admin and chat_obj.admin_id==None:
+                raise serializers.ValidationError('Incorrect field is_admin')
         return data
 
     def create(self, validated_data):
