@@ -16,10 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.znap.lmr.lmr_znap.Security.AESEncryption;
 import com.znap.lmr.lmr_znap.ClientUtilities.NonSystemMessages;
@@ -49,9 +47,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import tr.xip.widget.simpleratingview.SimpleRatingView;
 
-/**
- * Created by Andy Blyzniuk on 13.11.2017.
- */
+
 
 public class RateActivity extends AppCompatActivity implements OnItemSelectedListener {
     int quality;

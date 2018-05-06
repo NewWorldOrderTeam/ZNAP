@@ -9,14 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.znap.lmr.lmr_znap.R;
-/**
- * Created by Andy Blyzniuk on 22.04.2018.
- */
 
-public class MessageAdapter  extends BaseAdapter {
+import com.znap.lmr.lmr_znap.R;
+
+
+public class MessageAdapter extends BaseAdapter {
 
     List<Message> messages = new ArrayList<Message>();
     Context context;
@@ -80,6 +80,7 @@ public class MessageAdapter  extends BaseAdapter {
     }
 
 }
+
 class MessageViewHolder {
     public View avatar;
     public TextView name;

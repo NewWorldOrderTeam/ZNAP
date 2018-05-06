@@ -33,9 +33,6 @@ import javax.crypto.NoSuchPaddingException;
 
 import retrofit2.Response;
 
-/**
- * Created by Andy Blyzniuk on 29.04.2018.
- */
 
 public class PhoneNumberChangingActivity extends AppCompatActivity {
     String OldPhoneNumber;
@@ -45,6 +42,7 @@ public class PhoneNumberChangingActivity extends AppCompatActivity {
     EditText etNewPhoneNumber, etConfirmNewPhoneNumber;
     Button bSend;
     int pushed_user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +79,7 @@ public class PhoneNumberChangingActivity extends AppCompatActivity {
                         etOldPhoneNumber.setError("Перевірте чи правильно введено телефон");
                     }
 
-                }else {
+                } else {
                     try {
                         OldPhoneNumber = AESEncryption.encrypt_string(OldPhoneNumber);
                         NewPhoneNumber = AESEncryption.encrypt_string(NewPhoneNumber);

@@ -1,8 +1,5 @@
 package com.znap.lmr.lmr_znap.Activities;
 
-/**
- * Created by Andy Blyzniuk on 01.11.2017.
- */
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -115,9 +112,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

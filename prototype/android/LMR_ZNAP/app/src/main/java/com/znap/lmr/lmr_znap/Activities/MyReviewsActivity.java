@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -30,11 +29,9 @@ import javax.crypto.NoSuchPaddingException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class MyReviewsActivity extends AppCompatActivity {
-    private Retrofit retrofit;
     private static Request request;
     List<Rate> rates;
     private int userid;

@@ -19,13 +19,9 @@ import com.znap.lmr.lmr_znap.R;
 
 import java.util.Random;
 
-/**
- * Created by Andy Blyzniuk on 22.04.2018.
- */
 
 public class ChatActivity extends AppCompatActivity implements RoomListener {
 
-    // replace this with a real channelID from Scaledrone dashboard
     private String channelID = "ZaAQYiucheksa401";
     private String roomName = "observable-room";
     private EditText editText;
@@ -52,6 +48,7 @@ public class ChatActivity extends AppCompatActivity implements RoomListener {
                 System.out.println("Scaledrone connection open");
                 scaledrone.subscribe(roomName, ChatActivity.this);
             }
+
             @Override
             public void onOpenFailure(Exception ex) {
                 System.err.println(ex);
@@ -122,7 +119,7 @@ public class ChatActivity extends AppCompatActivity implements RoomListener {
     private String getRandomColor() {
         Random r = new Random();
         StringBuffer sb = new StringBuffer("#");
-        while(sb.length() < 7){
+        while (sb.length() < 7) {
             sb.append(Integer.toHexString(r.nextInt()));
         }
         return sb.toString().substring(0, 7);
@@ -141,13 +138,13 @@ public class ChatActivity extends AppCompatActivity implements RoomListener {
 class MemberData {
     private String name;
     private String color;
+
     public MemberData(String name, String color) {
         this.name = name;
         this.color = color;
     }
-    public MemberData() {
 
-    }
+
     public String getName() {
         return name;
 
@@ -157,6 +154,7 @@ class MemberData {
         return color;
 
     }
+
     @Override
 
     public String toString() {

@@ -1,8 +1,6 @@
 package com.znap.lmr.lmr_znap.Activities;
 
-/**
- * Created by Andy Blyzniuk on 22.04.2018.
- */
+
 
 public class Message {
     private String text;

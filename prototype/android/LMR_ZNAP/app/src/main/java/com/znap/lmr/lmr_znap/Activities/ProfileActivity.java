@@ -64,9 +64,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-
-
-
         users = new ArrayList<>();
 
         if (bundle != null) {

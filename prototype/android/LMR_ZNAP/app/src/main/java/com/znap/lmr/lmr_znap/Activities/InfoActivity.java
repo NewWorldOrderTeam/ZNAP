@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,7 +16,7 @@ import com.znap.lmr.lmr_znap.R;
 public class InfoActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    TextView description,title;
+    TextView description, title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,6 @@ public class InfoActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
 
     @Override
@@ -50,7 +48,7 @@ public class InfoActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(syhiv).title("Територіальний підрозділ ЦНАП м. Львова на пр. Червоної Калини, 72а").snippet("пр. Червоної Калини, 72а"));
         mMap.addMarker(new MarkerOptions().position(hvylyovogo).title("Територіальний підрозділ ЦНАП м. Львова на вул. М. Хвильового, 14а").snippet("вул. Хвильового, 14а"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(shevchenka));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(downTown,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(downTown, 10));
     }
 
     @Override

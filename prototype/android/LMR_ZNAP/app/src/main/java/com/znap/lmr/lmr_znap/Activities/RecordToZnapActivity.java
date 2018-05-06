@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.znap.lmr.lmr_znap.ServerUtilities.GsonPConverterFactory;
 import com.znap.lmr.lmr_znap.R;
 import com.znap.lmr.lmr_znap.Pojo.RecordToZnapAPI;
 import com.znap.lmr.lmr_znap.ServerUtilities.Request;
@@ -28,7 +26,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class RecordToZnapActivity extends AppCompatActivity implements OnItemSelectedListener {
     Spinner spinnerForZnap;
@@ -108,7 +105,7 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
         return request;
     }
 
-    public void getBundles(){
+    public void getBundles() {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         user_id = bundle.getInt(SystemMessages.USER_ID);

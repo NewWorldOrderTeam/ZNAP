@@ -1,21 +1,17 @@
 package com.znap.lmr.lmr_znap.Activities;
 
-import android.graphics.Color;
+
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.google.gson.Gson;
+
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.LegendRenderer;
-import com.jjoe64.graphview.ValueDependentColor;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
-import com.jjoe64.graphview.series.BarGraphSeries;
-import com.jjoe64.graphview.series.DataPoint;
 import com.znap.lmr.lmr_znap.ClientUtilities.GraphLabelInitializer;
-import com.znap.lmr.lmr_znap.ServerUtilities.GsonPConverterFactory;
+import com.znap.lmr.lmr_znap.ClientUtilities.NonSystemMessages;
 import com.znap.lmr.lmr_znap.Pojo.QueueStateAPI;
 import com.znap.lmr.lmr_znap.R;
 import com.znap.lmr.lmr_znap.ServerUtilities.Request;
@@ -30,16 +26,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-/**
- * Created by ne andy on 14.11.2017.
- */
 
 public class QueueStateActivity extends AppCompatActivity {
-    private static Retrofit retrofit;
     private static Request request;
     List<QueueStateAPI> queueStateList;
     List<String> queues;
     GraphView graph;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +49,22 @@ public class QueueStateActivity extends AppCompatActivity {
             public void onResponse(Call<List<QueueStateAPI>> call, Response<List<QueueStateAPI>> response) {
                 System.out.println(response.body());
                 queueStateList.addAll(response.body());
-                GraphLabelInitializer graphLabelInitializer = new GraphLabelInitializer();
-                graphLabelInitializer.initializeGraphic(graph,queueStateList);
-                graphLabelInitializer.setScalingForGraphic(graph);
-                graphLabelInitializer.getNamesForLabels(graph);
+                if (response.body().isEmpty()) {
+                    new AlertDialog.Builder(context)
+                            .setMessage("На жаль, стан черги недоступний")
+                            .setCancelable(false)
+                            .setNegativeButton("Ок", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            })
+                            .show();
+                } else {
+                    GraphLabelInitializer graphLabelInitializer = new GraphLabelInitializer();
+                    graphLabelInitializer.initializeGraphic(graph, queueStateList);
+                    graphLabelInitializer.setScalingForGraphic(graph);
+                    graphLabelInitializer.getNamesForLabels(graph);
+                }
             }
 
             @Override

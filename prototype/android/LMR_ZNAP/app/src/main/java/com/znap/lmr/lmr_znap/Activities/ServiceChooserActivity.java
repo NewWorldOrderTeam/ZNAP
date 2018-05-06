@@ -11,8 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.znap.lmr.lmr_znap.ServerUtilities.GsonPConverterFactory;
+
 import com.znap.lmr.lmr_znap.R;
 import com.znap.lmr.lmr_znap.ServerUtilities.Request;
 import com.znap.lmr.lmr_znap.Pojo.ServiceChooserAPI;
@@ -26,11 +25,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-
-/**
- * Created by Zava on 01.12.2017.
- */
 
 public class ServiceChooserActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinnerForService;
@@ -39,12 +33,11 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
     int znap_id;
     int service_id;
     int group_id;
-    String organisationID = SystemMessages.ORGANISATION_ID;
-    private static Retrofit retrofit;
+
     private static Request request;
     List<ServiceChooserAPI> services;
     List<String> servicesList;
-    HashMap<Integer,Integer> servicesMap;
+    HashMap<Integer, Integer> servicesMap;
 
 
     @Override
@@ -64,8 +57,8 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
                         DateChooserActivity.class);
                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
                 myIntent.putExtra("znap_id", znap_id);
-                myIntent.putExtra("service_id",service_id);
-                myIntent.putExtra("group_id",group_id);
+                myIntent.putExtra("service_id", service_id);
+                myIntent.putExtra("group_id", group_id);
                 startActivity(myIntent);
             }
         });
@@ -73,7 +66,7 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
         servicesList = new ArrayList<>();
         servicesMap = new HashMap<Integer, Integer>();
         request = ZnapUtility.QLogicRequest();
-        ServiceChooserActivity.getApi().getServices(znap_id,group_id).enqueue(new Callback<List<ServiceChooserAPI>>() {
+        ServiceChooserActivity.getApi().getServices(znap_id, group_id).enqueue(new Callback<List<ServiceChooserAPI>>() {
             @Override
             public void onResponse(Call<List<ServiceChooserAPI>> call, Response<List<ServiceChooserAPI>> response) {
                 services.addAll(response.body());
@@ -85,6 +78,7 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
                 a.setDropDownViewResource(R.layout.spinner_item);
                 spinnerForService.setAdapter(a);
             }
+
             @Override
             public void onFailure(Call<List<ServiceChooserAPI>> call, Throwable t) {
             }
@@ -109,11 +103,12 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
         Toast.makeText(this, "Select something", Toast.LENGTH_SHORT).show();
 
     }
+
     public static Request getApi() {
         return request;
     }
 
-    public void getBundles(){
+    public void getBundles() {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         user_id = bundle.getInt(SystemMessages.USER_ID);

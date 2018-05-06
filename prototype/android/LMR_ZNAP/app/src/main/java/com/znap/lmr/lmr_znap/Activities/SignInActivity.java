@@ -15,17 +15,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -161,7 +157,7 @@ public class SignInActivity extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public  void getPermission(){
+    public void getPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -208,8 +204,7 @@ public class SignInActivity extends AppCompatActivity {
                     match = error;
                     Toast.makeText(getApplicationContext(), match, Toast.LENGTH_LONG).show();
 
-                }
-                else if (match.equals(SystemMessages.OK)) {
+                } else if (match.equals(SystemMessages.OK)) {
                     checkInternetConnection();
                     Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
                     mainIntent.putExtra(SystemMessages.USER_ID, userid);
@@ -318,8 +313,8 @@ public class SignInActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             Services services = new Services();
-            Response response = services.SignIn(email, password,imei);
-            if(response.isSuccessful()) {
+            Response response = services.SignIn(email, password, imei);
+            if (response.isSuccessful()) {
                 User user = (User) response.body();
                 if (user == null) {
                     return response.toString();
@@ -328,8 +323,8 @@ public class SignInActivity extends AppCompatActivity {
                 }
             } else {
                 try {
-                        error = response.errorBody().string();
-                        error = error.split("\\[\"")[1].split("\"\\]")[0];
+                    error = response.errorBody().string();
+                    error = error.split("\\[\"")[1].split("\"\\]")[0];
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -340,14 +335,13 @@ public class SignInActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            if(progDailog.isShowing()){
+            if (progDailog.isShowing()) {
                 progDailog.dismiss();
             }
 
         }
 
     }
-
 
 
 }

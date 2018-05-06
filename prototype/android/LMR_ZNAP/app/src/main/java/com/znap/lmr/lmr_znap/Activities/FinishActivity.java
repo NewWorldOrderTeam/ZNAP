@@ -9,12 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.gson.Gson;
 import com.znap.lmr.lmr_znap.Pojo.SuccessRegistrationAPI;
 import com.znap.lmr.lmr_znap.Pojo.User;
 import com.znap.lmr.lmr_znap.R;
 import com.znap.lmr.lmr_znap.Security.AESEncryption;
-import com.znap.lmr.lmr_znap.ServerUtilities.GsonPConverterFactory;
 import com.znap.lmr.lmr_znap.ServerUtilities.Request;
 import com.znap.lmr.lmr_znap.ServerUtilities.ZnapUtility;
 import com.znap.lmr.lmr_znap.ClientUtilities.SystemMessages;
@@ -32,20 +30,16 @@ import javax.crypto.NoSuchPaddingException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
-/**
- * Created by Zava on 18.02.2018.
- */
 
 public class FinishActivity extends AppCompatActivity {
     Button bFinish;
-    int user_id,cnap_id,service_id;
-    String hour,day;
+    int user_id, cnap_id, service_id;
+    String hour, day;
     String firstName, lastName, phone, email;
     final Context context = this;
+    private static Request request;
 
-    private static Request request;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +97,6 @@ public class FinishActivity extends AppCompatActivity {
         });
 
 
-
-
         bFinish = (Button) findViewById(R.id.finish);
         bFinish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +109,7 @@ public class FinishActivity extends AppCompatActivity {
                 alertDialogBuilder
                         .setMessage("Ви дійсно хочете зареєструватись у чергу ?")
                         .setCancelable(false)
-                        .setPositiveButton("Так",new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                             public void onClick(final DialogInterface dialog, int id) {
                                 Intent myIntent = new Intent(FinishActivity.this,
                                         MainActivity.class);
@@ -125,11 +117,12 @@ public class FinishActivity extends AppCompatActivity {
                                 myIntent.putExtra("znap_id", cnap_id);
                                 myIntent.putExtra("service_id", service_id);
                                 request = ZnapUtility.QLogicRequest();
-                                FinishActivity.getApi().regToQueue(user_id, cnap_id,service_id, day, hour).enqueue(new Callback<SuccessRegistrationAPI>() {
+                                FinishActivity.getApi().regToQueue(user_id, cnap_id, service_id, day, hour).enqueue(new Callback<SuccessRegistrationAPI>() {
                                     @Override
                                     public void onResponse(Call<SuccessRegistrationAPI> call, Response<SuccessRegistrationAPI> response) {
 
                                     }
+
                                     @Override
                                     public void onFailure(Call<SuccessRegistrationAPI> call, Throwable t) {
 
@@ -138,22 +131,15 @@ public class FinishActivity extends AppCompatActivity {
                                 startActivity(myIntent);
                             }
                         })
-                        .setNegativeButton("Ні",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
+                        .setNegativeButton("Ні", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                             }
                         });
-
                 AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
                 alertDialog.show();
-
             }
         });
-
-
-
     }
 
     public static Request getApi() {

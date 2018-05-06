@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.znap.lmr.lmr_znap.ServerUtilities.GsonPConverterFactory;
 import com.znap.lmr.lmr_znap.Pojo.TypeOfServiceAPI;
 import com.znap.lmr.lmr_znap.R;
 import com.znap.lmr.lmr_znap.ServerUtilities.Request;
@@ -28,9 +26,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-/**
- * Created by Zava on 01.12.2017.
- */
 
 public class RegisteredToZnap extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinnerForTypeOfService;
@@ -39,7 +34,6 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
     int znap_id;
     int group_id;
     String organisationID = SystemMessages.ORGANISATION_ID;
-    private static Retrofit retrofit;
     private static Request request;
     List<TypeOfServiceAPI> typeOfServices;
     List<String> services;

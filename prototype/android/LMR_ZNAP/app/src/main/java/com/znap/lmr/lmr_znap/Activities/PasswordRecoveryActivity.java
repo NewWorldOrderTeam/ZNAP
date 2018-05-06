@@ -1,6 +1,5 @@
 package com.znap.lmr.lmr_znap.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,9 +33,6 @@ import javax.crypto.NoSuchPaddingException;
 
 import retrofit2.Response;
 
-/**
- * Created by Andy Blyzniuk on 22.03.2018.
- */
 
 public class PasswordRecoveryActivity extends AppCompatActivity {
     EditText etEmail;
