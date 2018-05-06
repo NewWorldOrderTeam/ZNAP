@@ -54,7 +54,7 @@ function getUsers() {
     var users = users_response.results;
     pages_count = Math.ceil(users_count / limit_count);
     var table = document.getElementById('user_table');
-    table.insertAdjacentHTML('afterend', '<div id=\'buttons\'></div');
+    table.insertAdjacentHTML('afterend', '<div id=\'buttons\'></div>');
 
     var prevDis = (current == 1) ? 'disabled' : '';
     var nextDis = (i == pages_count) ? 'disabled' : '';
@@ -182,7 +182,8 @@ function sortUsers(limit_count, page_number, order_by, vector) {
     displayUsers(users);
 }
 
-function searchUsers(sWord) {
+function searchUsers() {
+    var sWord = document.getElementById('myInput').value;
     var xhr = new XMLHttpRequest();
     var url = 'http://znap.pythonanywhere.com/api/v1.0/web_user/?search='+ sWord;
     xhr.open('GET', url, false);

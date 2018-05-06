@@ -2,7 +2,9 @@ package com.znap.lmr.lmr_znap.Activities;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,6 +13,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.znap.lmr.lmr_znap.ClientUtilities.SystemMessages;
 import com.znap.lmr.lmr_znap.R;
 
 public class InfoActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -23,6 +26,7 @@ public class InfoActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         description = (TextView) findViewById(R.id.description);
+
         title = (TextView) findViewById(R.id.title);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

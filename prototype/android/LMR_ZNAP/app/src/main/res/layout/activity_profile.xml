@@ -28,7 +28,6 @@
             android:src="@drawable/avatar" />
 
 
-
         <RelativeLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
@@ -42,33 +41,27 @@
 
 
             <ImageView
-                android:id="@+id/add_friend"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/changephnumber"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="59dp"
-                android:layout_marginRight="59dp"
-                android:layout_marginTop="17dp"
-                android:src="@drawable/add_user" />
-
-            <ImageView
-                android:id="@+id/chat"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignLeft="@+id/myreviews"
-                android:layout_alignStart="@+id/myreviews"
-                android:layout_centerVertical="true"
-                android:src="@drawable/envelope" />
+                android:layout_marginEnd="57dp"
+                android:layout_marginRight="57dp"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/shuffle" />
 
             <ImageView
                 android:id="@+id/history"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignLeft="@+id/add_friend"
-                android:layout_alignStart="@+id/add_friend"
-                android:layout_centerVertical="true"
+
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/changephnumber"
+                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
                 android:src="@drawable/history" />
 
 
@@ -76,18 +69,16 @@
                 android:id="@+id/myreviews"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/add_friend"
-                android:layout_marginEnd="12dp"
-                android:layout_marginRight="12dp"
-                android:src="@drawable/controls" />
+                android:layout_alignBottom="@+id/user_profile_name"
+                android:layout_alignLeft="@+id/history"
+                android:layout_alignStart="@+id/history"
+                android:src="@drawable/review" />
 
             <TextView
                 android:id="@+id/user_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/add_friend"
+                android:layout_below="@+id/changephnumber"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="27dp"
@@ -102,12 +93,9 @@
                 android:id="@+id/user_profile_surname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/user_profile_name"
-                android:layout_alignBottom="@+id/user_profile_name"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_toLeftOf="@+id/add_friend"
-                android:layout_toStartOf="@+id/add_friend"
+                android:layout_alignTop="@+id/myreviews"
+                android:layout_toLeftOf="@+id/changephone"
+                android:layout_toStartOf="@+id/changephone"
                 android:text="Popovych"
                 android:textColor="#fff"
                 android:textSize="24sp"
@@ -123,6 +111,37 @@
                 android:text=""
                 android:textColor="#fff"
                 android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/changephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/changephnumber"
+                android:layout_alignStart="@+id/changephnumber"
+                android:layout_below="@+id/changephnumber"
+                android:text="Змінити номер мобільного"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/historyofrecords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/history"
+                android:layout_alignStart="@+id/history"
+                android:layout_below="@+id/changephnumber"
+                android:text="Історія записів"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/yourreviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/myreviews"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/myreviews"
+                android:text="Мої відгуки"
+                android:textStyle="bold" />
+
         </RelativeLayout>
 
 

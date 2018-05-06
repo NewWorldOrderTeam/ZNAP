@@ -34,8 +34,8 @@ import retrofit2.Response;
 public class ProfileActivity extends AppCompatActivity {
     TextView firstNameText;
     TextView lastNameText;
-    TextView emailText, phoneText, emailText1;
-    ImageView chat;
+    TextView emailText, phoneText;
+    ImageView shuffle;
     private static Request request;
     private int user_id;
     List<User> users;
@@ -52,7 +52,6 @@ public class ProfileActivity extends AppCompatActivity {
         lastNameText = (TextView) findViewById(R.id.user_profile_surname);
         emailText = (TextView) findViewById(R.id.email);
         phoneText = (TextView) findViewById(R.id.phone);
-        chat = (ImageView) findViewById(R.id.chat);
         Bundle bundle = getIntent().getExtras();
 
         chat.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(openMyReviewsActivity);
                 }
             });
-            findViewById(R.id.add_friend).setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.changephnumber).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent openPhoneChangingActivity = new Intent(ProfileActivity.this, PhoneNumberChangingActivity.class);
