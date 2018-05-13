@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.znap.lmr.lmr_znap">
+    package="ua.lviv.iot.lmr_cnap">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity
-            android:name=".Activities.SignInActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.SignInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden">
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.SignUpActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.SignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MainActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.RateActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.RateActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -62,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.RecordToZnapActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.RecordToZnapActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -71,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.QueueStateActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.QueueStateActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -80,7 +80,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.ProfileActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.ProfileActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -89,7 +89,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.RegisteredToZnap"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.RegisteredToZnap"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -98,7 +98,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MyReviewsActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.MyReviewsActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -107,7 +107,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.ServiceChooserActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.ServiceChooserActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -116,7 +116,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.DateChooserActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.DateChooserActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -125,7 +125,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.FinishActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.FinishActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -135,7 +135,7 @@
         </activity>
 
         <activity
-            android:name=".Activities.PasswordRecoveryActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.PasswordRecoveryActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -144,7 +144,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.ChatActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.ChatActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -153,7 +153,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.PhoneNumberChangingActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.PhoneNumberChangingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.STATE" />
@@ -175,7 +175,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Activities.InfoActivity"
+            android:name="ua.lviv.iot.lmr_cnap.Activities.InfoActivity"
             android:label="@string/title_activity_info"></activity>
     </application>
 

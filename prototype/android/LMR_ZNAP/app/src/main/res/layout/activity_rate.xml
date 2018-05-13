@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg"
     android:padding="15dp"
-    tools:context="com.znap.lmr.lmr_znap.Activities.RateActivity">
+    tools:context="ua.lviv.iot.lmr_cnap.Activities.RateActivity">
 
 
     <ScrollView

@@ -8,7 +8,7 @@
     android:clickable="true"
     android:focusableInTouchMode="true"
     android:padding="15dp"
-    tools:context="com.znap.lmr.lmr_znap.Activities.SignInActivity">
+    tools:context="ua.lviv.iot.lmr_cnap.Activities.SignInActivity">
 
     <ProgressBar
         android:id="@+id/progressBar1"
