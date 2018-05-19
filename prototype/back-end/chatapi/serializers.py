@@ -12,6 +12,9 @@ class ChatSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         ret = super(ChatSerializer, self).to_representation(instance)
+        user_obj = User.objects.get(id=instance.user_id)
+        ret['first_name'] = user_obj.first_name
+        ret['last_name'] = user_obj.last_name
         try:
             last_obj = Message.objects.filter(chat_id=instance.id).last()
             ret['last_message'] = last_obj.message

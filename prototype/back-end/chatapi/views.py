@@ -10,6 +10,8 @@ from chatapi.models import Chat, Message
 from chatapi.serializers import ChatSerializer, ChatCreateSerializer, AddMessageSerializer, MessageSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 
+from znap.AES import encryption
+
 
 class ChatViewSet(NestedViewSetMixin, viewsets.ModelViewSet ):
     permission_classes = [AllowAny]
