@@ -2,6 +2,28 @@ var admin_id = localStorage.getItem('admin_id');
 var znap_id = localStorage.getItem('znap_id');
 var users_response;
 
+function getOpenedChats(){
+  var xhr = new XMLHttpRequest();
+  var url = 'https://znap.pythonanywhere.com/api/v1.0/chat/?is_closed=false&admin_id=';
+  xhr.open('GET', url, false);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send();
+  var open_chat_response = JSON.parse(xhr.response);
+  for (var i=0; i<open_chat_response.length; i++){
+    if (open_chat_response[i].last_timestamp===''){
+      var timestamp = open_chat_response[i].timestamp;
+    }
+    else {
+      var timestamp = open_chat_response[i].last_timestamp;
+    }
+    var last_message = open_chat_response[i].last_message;
+    var id = open_chat_response[i].id;
+    console.log(id);
+    console.log(timestamp);
+    console.log(last_message);
+  }
+}
+
 function displayUsers(users) {
     $('#list').empty();
     for (var i = 0; i < users.length; i++) {
@@ -44,6 +66,7 @@ function displayUsers(users) {
 
 function getUsers() {
     getRates();
+    getOpenedChats();
     var xhr = new XMLHttpRequest();
     var url = 'https://znap.pythonanywhere.com/api/v1.0/web_user/';
     xhr.open('GET', url, false);
