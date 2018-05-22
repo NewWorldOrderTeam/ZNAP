@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/etOldSurname"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_above="@+id/etNewSurname"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="29dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint=" Старе прізвище"
+        android:paddingLeft="10dp" />
+
+    <EditText
+        android:id="@+id/etNewSurname"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_above="@+id/bSend"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="157dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:ems="10"
+        android:hint=" Нове прізвище"
+        android:paddingLeft="10dp" />
+
+
+    <Button
+        android:id="@+id/bSend"
+        android:layout_width="250dp"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="76dp"
+        android:layout_weight="1"
+        android:text="Відправити"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColorHint="#fcfff5"
+        android:theme="@style/mainActButton" />
+</RelativeLayout>

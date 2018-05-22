@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bServices).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://city-adm.lviv.ua/services/directory-services/lvivska-miska-rada")));
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://city-adm.lviv.ua/services/directory-services")));
             }
         });
         findViewById(R.id.ibtPayment).setOnClickListener(new View.OnClickListener() {
@@ -127,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit?")
+                .setMessage("Ви впевнені, що хочете вийти?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Так", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         System.exit(0);
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton("Ні", null)
                 .show();
     }
 

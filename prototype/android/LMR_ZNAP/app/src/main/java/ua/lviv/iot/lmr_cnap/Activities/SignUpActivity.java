@@ -102,8 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
                 setErrorsForFields();
 
                 System.out.println(Validations.isValidPassword("dasd"));
-                if (!Validations.isValidPassword(password) || !confirmPassword.equals(password) || !Validations.isValidFirstName(firstName) ||
-                        !Validations.isValidMiddleName(middleName) || !Validations.isValidLastName(lastName) ||
+                if (!Validations.isValidPassword(password) || !confirmPassword.equals(password) ||
                         !Validations.isValidPhoneNumber(phoneNumber) || !Validations.isValidEmail(email)) {
                     if (!Validations.isValidPassword(password)) {
                         etPassword.setError("Паролі повинні містити більше 8 символів!");
@@ -114,25 +113,11 @@ public class SignUpActivity extends AppCompatActivity {
                         etConfirmPassword.setError("Перевірте чи паролі співпадають");
 
                     }
-                    if (!Validations.isValidFirstName(firstName)) {
-                        etFirstName.setError("Ім'я повинно містити більше 2 символів");
-
-
-                    }
-                    if (!Validations.isValidMiddleName(middleName)) {
-                        etMiddleName.setError("Більше 3 символів");
-
-                    }
-                    if (!Validations.isValidLastName(lastName)) {
-                        etLastName.setError("Більше 3 символів");
-
-                    }
                     if (!Validations.isValidPhoneNumber(phoneNumber)) {
                         System.out.println(phoneNumber);
                         phoneInputLayout.setError("Перевірте чи правильно введено телефон");
 
                     }
-
                     if (!Validations.isValidEmail(email)) {
                         etEmail.setError("Неправильний емейл");
 

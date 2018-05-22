@@ -7,9 +7,7 @@ import android.net.NetworkInfo;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Zava on 12.12.2017.
- */
+
 
 public class Validations {
     public static boolean isValidPassword(final String password) {
@@ -66,7 +64,7 @@ public class Validations {
         }
         Pattern pattern;
         Matcher matcher;
-        final String EMAIL_PATTERN = "[a-zA-Z0-9]+@[a-zA-Z]+\\.[A-Za-z]{2,4}";
+        final String EMAIL_PATTERN = "[a-zA-Z0-9+_.-]+@[a-zA-Z]+\\.[A-Za-z]{2,4}";
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
         return matcher.matches();
@@ -92,8 +90,7 @@ public class Validations {
             if ((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting()))
                 return true;
             else return false;
-        } else
-            return false;
+        } else return false;
     }
 
 

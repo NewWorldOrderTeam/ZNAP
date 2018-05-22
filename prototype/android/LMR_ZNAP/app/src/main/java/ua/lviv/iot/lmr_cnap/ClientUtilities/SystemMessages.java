@@ -1,8 +1,6 @@
 package ua.lviv.iot.lmr_cnap.ClientUtilities;
 
-/**
- * Created by Zava on 12.12.2017.
- */
+
 
 public class SystemMessages {
     public static final String NO_INERNET_CONNECTION = "Немає з`єднання";
@@ -23,4 +21,6 @@ public class SystemMessages {
     public static final String PHONE_TITLE = "Зміна номера телефону";
     public static final String ABOUT_US_TITLE = "Про нас";
     public static final String MY_REVIEWS = "Мої відгуки";
+    public static final String SETTINGS = "Налаштування профілю";
+    public static final String SURNAME = "Зміна прізвища";
 }

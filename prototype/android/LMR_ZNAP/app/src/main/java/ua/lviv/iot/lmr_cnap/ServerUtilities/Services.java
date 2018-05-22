@@ -1,8 +1,5 @@
 package ua.lviv.iot.lmr_cnap.ServerUtilities;
 
-/**
- * Created by Andy Blyzniuk on 01.11.2017.
- */
 
 import ua.lviv.iot.lmr_cnap.Pojo.User;
 
@@ -83,6 +80,21 @@ public class Services {
     }
     public Response NumberChanging(int user_id, String OldPhoneNumber, String NewPhoneNumber) {
         Call<User> call = serviceR.changePhone(OldPhoneNumber, NewPhoneNumber, user_id);
+        try {
+            Response response = call.execute();
+            return response;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public Response SurnameChange(int user_id, String OldSurname, String NewSurname) {
+        Call<User> call = serviceR.changeSurname(OldSurname, NewSurname, user_id);
         try {
             Response response = call.execute();
             return response;

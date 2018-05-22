@@ -26,9 +26,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-/**
- * Created by Zava on 01.12.2017.
- */
 
 public class DateChooserActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinnerForDate, getSpinnerForTime;

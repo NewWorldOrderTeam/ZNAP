@@ -11,9 +11,7 @@ import ua.lviv.iot.lmr_cnap.Pojo.QueueStateAPI;
 
 import java.util.List;
 
-/**
- * Created by Zava on 28.02.2018.
- */
+
 
 public class GraphLabelInitializer {
 
@@ -95,7 +93,7 @@ public class GraphLabelInitializer {
         fourthLabel.setTitle("Хвильового");
         fifthLabel.setTitle("Виговського");
         sixthLabel.setTitle("Чупринки");
-        seventhLabel.setTitle("РЯСНЕ");
+        seventhLabel.setTitle("Шевченка");
     }
 
     public void setScalingForGraphic(GraphView graph){

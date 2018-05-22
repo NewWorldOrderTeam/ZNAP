@@ -5,9 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Zava on 18.12.2017.
- */
+
 
 public class ActivatedAccountRespone {
 

@@ -68,12 +68,12 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(openMyReviewsActivity);
                 }
             });
-            findViewById(R.id.changephnumber).setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.profilesettings).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent openPhoneChangingActivity = new Intent(ProfileActivity.this, PhoneNumberChangingActivity.class);
-                    openPhoneChangingActivity.putExtra(SystemMessages.USER_ID, user_id);
-                    startActivity(openPhoneChangingActivity);
+                    Intent openSettingsActivity = new Intent(ProfileActivity.this, SettingsActivity.class);
+                    openSettingsActivity.putExtra(SystemMessages.USER_ID, user_id);
+                    startActivity(openSettingsActivity);
                 }
             });
             request = ZnapUtility.generateRetroRequest();

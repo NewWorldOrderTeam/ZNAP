@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
-/**
- * Created by Zava on 12.12.2017.
- */
+
 
 public class NonSystemMessages {
     public static final String FIELD_MUST_BE_NOT_EMPTY = "Поле має бути заповнене";

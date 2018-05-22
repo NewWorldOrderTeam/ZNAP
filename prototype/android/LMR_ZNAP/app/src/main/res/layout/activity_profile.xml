@@ -41,25 +41,24 @@
 
 
             <ImageView
-                android:id="@+id/changephnumber"
+                android:id="@+id/profilesettings"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_alignEnd="@+id/settings"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="57dp"
-                android:layout_marginRight="57dp"
-                android:layout_marginTop="14dp"
-                android:src="@drawable/shuffle" />
+                android:layout_alignRight="@+id/settings"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="19dp"
+                android:src="@drawable/profile_settings" />
 
             <ImageView
                 android:id="@+id/history"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/changephnumber"
+                android:layout_alignTop="@+id/profilesettings"
                 android:layout_marginLeft="23dp"
                 android:layout_marginStart="23dp"
                 android:src="@drawable/history" />
@@ -78,7 +77,7 @@
                 android:id="@+id/user_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/changephnumber"
+                android:layout_below="@+id/profilesettings"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="27dp"
@@ -94,8 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/myreviews"
-                android:layout_toLeftOf="@+id/changephone"
-                android:layout_toStartOf="@+id/changephone"
+                android:layout_toLeftOf="@+id/settings"
+                android:layout_toStartOf="@+id/settings"
                 android:text="Popovych"
                 android:textColor="#fff"
                 android:textSize="24sp"
@@ -113,13 +112,15 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/changephone"
+                android:id="@+id/settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/changephnumber"
-                android:layout_alignStart="@+id/changephnumber"
-                android:layout_below="@+id/changephnumber"
-                android:text="Змінити номер мобільного"
+                android:layout_above="@+id/user_profile_surname"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Налаштування"
                 android:textStyle="bold" />
 
             <TextView
@@ -128,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/history"
                 android:layout_alignStart="@+id/history"
-                android:layout_below="@+id/changephnumber"
+                android:layout_below="@+id/profilesettings"
                 android:text="Історія записів"
                 android:textStyle="bold" />
 

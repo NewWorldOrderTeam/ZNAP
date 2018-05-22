@@ -1,8 +1,6 @@
 package ua.lviv.iot.lmr_cnap.Pojo;
 
-/**
- * Created by Zava on 11.12.2017.
- */
+
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

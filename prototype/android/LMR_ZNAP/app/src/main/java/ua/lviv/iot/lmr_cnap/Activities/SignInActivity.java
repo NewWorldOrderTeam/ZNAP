@@ -59,6 +59,7 @@ public class SignInActivity extends AppCompatActivity {
     String imei;
     String error;
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE = 999;
+    Context context = this;
 
 
     @Override
@@ -141,7 +142,15 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.tPrivacyPolicyLink).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://docs.google.com/document/d/1Cf1kgM_yBfmMkgbyX4GYN6FVrwRNfsmKNSg3wXNOSK4")));
+
+            }
+        });
     }
+
 
     @Override
     public void onDestroy() {

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/bSurnameChange"
+        android:layout_width="290dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        android:text="Змінити прізвище"
+        android:textAlignment="center"
+        android:textColor="#fcfff5"
+        android:theme="@style/test"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="35dp" />
+
+    <Button
+        android:id="@+id/bPhoneChange"
+        android:layout_width="290dp"
+        android:layout_height="75dp"
+        android:layout_alignLeft="@+id/bSurnameChange"
+        android:layout_alignStart="@+id/bSurnameChange"
+        android:layout_below="@+id/bSurnameChange"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:text="Змінити номер телефону"
+        android:textAlignment="center"
+        android:textColor="#fcfff5"
+        android:theme="@style/test"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="134dp" />
+</RelativeLayout>

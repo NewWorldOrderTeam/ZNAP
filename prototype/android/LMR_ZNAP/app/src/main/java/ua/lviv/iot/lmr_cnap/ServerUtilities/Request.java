@@ -50,6 +50,10 @@ public interface Request {
     @POST("/api/v1.0/")
     Call<User> changePhone(@Field("old_phone_number") String OldPhoneNumber, @Field("new_phone_number") String NewPhoneNumber, @Field("user_id") int pushed_user_id);
 
+    @FormUrlEncoded
+    @POST("/api/v1.0/")
+    Call<User> changeSurname(@Field("old_surname") String OldSurname, @Field("new_surname") String NewSurname, @Field("user_id") int pushed_user_id);
+
     @GET("/api/v1.0/user/{user}/")
     Call<User> getInfo(@Path("user") int userid);
 
