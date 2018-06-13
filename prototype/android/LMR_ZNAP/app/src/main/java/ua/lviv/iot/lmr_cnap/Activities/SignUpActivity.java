@@ -286,7 +286,7 @@ public class SignUpActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
         etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
         etFirstName = (EditText) findViewById(R.id.etFirstName);
-        etLastName = (EditText) findViewById(R.id.etLastName);
+        etLastName = (EditText) findViewById(R.id.etFirstName);
         etMiddleName = (EditText) findViewById(R.id.etMiddleName);
         bSignUp = (Button) findViewById(R.id.bSignUp);
         tSignOnLink = (TextView) findViewById(R.id.tSignUpLink);

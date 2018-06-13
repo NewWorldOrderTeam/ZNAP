@@ -46,7 +46,7 @@
                 android:layout_height="85dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="140dp"
-                android:text="Зареєструватись "
+                android:text="Далі"
                 android:theme="@style/mainActButton" />
         </LinearLayout>
 

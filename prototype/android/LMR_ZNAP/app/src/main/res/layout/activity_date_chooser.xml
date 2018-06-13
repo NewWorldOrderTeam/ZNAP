@@ -45,7 +45,7 @@
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:text="Зареєструвати мене"
+                android:text="Далі"
                 android:theme="@style/mainActButton" />
         </LinearLayout>
     </ScrollView>
