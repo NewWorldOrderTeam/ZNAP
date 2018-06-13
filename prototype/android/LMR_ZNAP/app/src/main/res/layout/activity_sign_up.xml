@@ -117,6 +117,10 @@
         android:ems="10"
         android:hint="  Прізвище"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        android:inputType="textCapSentences"
+>>>>>>> a67ffdda1534b8de1708308009cc9986ff691fcf
 =======
         android:inputType="textCapSentences"
 >>>>>>> a67ffdda1534b8de1708308009cc9986ff691fcf
