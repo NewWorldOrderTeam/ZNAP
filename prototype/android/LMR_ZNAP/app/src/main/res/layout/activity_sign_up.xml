@@ -69,18 +69,16 @@
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:layout_above="@+id/etConfirmPassword"
-        android:layout_alignLeft="@+id/etEmail"
-        android:layout_alignStart="@+id/etEmail"
-        android:layout_marginBottom="9dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="9dp"
         android:layout_weight="1"
         android:background="#E0E0E0"
         android:ems="10"
         android:hint=" Пароль"
         android:inputType="textPassword"
-        android:paddingLeft="10dp"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="60dp" />
+        tools:layout_editor_absoluteY="60dp"
+        android:paddingLeft ="10dp"/>
 
     <EditText
         android:id="@+id/etConfirmPassword"
@@ -88,17 +86,15 @@
         android:layout_height="45dp"
         android:layout_above="@+id/bSignUp"
         android:layout_alignEnd="@+id/etPassword"
-        android:layout_alignLeft="@+id/etPassword"
         android:layout_alignRight="@+id/etPassword"
-        android:layout_alignStart="@+id/etPassword"
         android:layout_weight="1"
         android:background="#E0E0E0"
         android:ems="10"
         android:hint=" Підтвердіть пароль"
         android:inputType="textPassword"
-        android:paddingLeft="10dp"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="60dp" />
+        tools:layout_editor_absoluteY="60dp"
+        android:paddingLeft ="10dp"/>
 
     <EditText
         android:id="@+id/etLastName"

@@ -35,7 +35,6 @@ public class ProfileActivity extends AppCompatActivity {
     TextView firstNameText;
     TextView lastNameText;
     TextView emailText, phoneText;
-    ImageView shuffle;
     private static Request request;
     private int user_id;
     List<User> users;

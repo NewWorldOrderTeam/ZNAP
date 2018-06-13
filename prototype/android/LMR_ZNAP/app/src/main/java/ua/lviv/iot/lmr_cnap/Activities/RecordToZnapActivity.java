@@ -36,6 +36,7 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
     List<RecordToZnapAPI> znapNames;
     List<String> znaps;
     HashMap<Integer, Integer> znapsMap;
+    String znap_name;
 
 
     @Override
@@ -55,6 +56,7 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
                         RegisteredToZnap.class);
                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
                 myIntent.putExtra("znap_id", znap_id);
+                myIntent.putExtra("znap_name", znap_name);
                 startActivity(myIntent);
             }
         });
@@ -92,7 +94,7 @@ public class RecordToZnapActivity extends AppCompatActivity implements OnItemSel
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         znap_id = znapsMap.get(spinnerForZnap.getSelectedItemPosition());
-
+        znap_name = spinnerForZnap.getSelectedItem().toString();
     }
 
     @Override

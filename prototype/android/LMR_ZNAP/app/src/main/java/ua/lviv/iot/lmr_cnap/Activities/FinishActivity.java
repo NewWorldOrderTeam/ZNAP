@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import ua.lviv.iot.lmr_cnap.Pojo.SuccessRegistrationAPI;
 import ua.lviv.iot.lmr_cnap.Pojo.User;
@@ -36,11 +37,12 @@ import retrofit2.Response;
 public class FinishActivity extends AppCompatActivity {
     Button bFinish;
     int user_id, cnap_id, service_id;
+    String group_name, znap_name, service_name;
     String hour, day;
     String firstName, lastName, phone, email;
     final Context context = this;
     private static Request request;
-
+    TextView group_text, znap_text, service_text, day_text, hour_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,20 @@ public class FinishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_success_registration);
         getSupportActionBar().setTitle(SystemMessages.REG_TO_QUEUE_TITLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        group_text = (TextView) findViewById(R.id.group_text);
+        znap_text = (TextView) findViewById(R.id.znap_text);
+        service_text = (TextView) findViewById(R.id.service_text);
+        day_text = (TextView) findViewById(R.id.day_text);
+        hour_text = (TextView) findViewById(R.id.hour_text);
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
         user_id = bundle.getInt(SystemMessages.USER_ID);
         cnap_id = bundle.getInt(SystemMessages.ZNAP_ID);
         service_id = bundle.getInt(SystemMessages.SERVICE_ID);
+
+        znap_name = bundle.getString("znap_name");
+        group_name = bundle.getString("group_name");
+        service_name = bundle.getString("service_name");
         day = bundle.getString("day");
         hour = bundle.getString("hour");
         request = ZnapUtility.generateRetroRequest();
@@ -88,6 +99,11 @@ public class FinishActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                znap_text.setText(String.valueOf("Адреса ЦНАП: "+znap_name));
+                hour_text.setText(String.valueOf("Час реєстрації: "+hour));
+                day_text.setText(String.valueOf("День реєстрації: "+day));
+                group_text.setText(String.valueOf("Тип послуги: "+group_name));
+                service_text.setText(String.valueOf("Послуга: "+ service_name));
 
             }
 

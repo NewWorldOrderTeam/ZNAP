@@ -32,6 +32,7 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
     int user_id;
     int znap_id;
     int group_id;
+    String znap_name, group_name;
     String organisationID = SystemMessages.ORGANISATION_ID;
     private static Request request;
     List<TypeOfServiceAPI> typeOfServices;
@@ -57,6 +58,8 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
                 myIntent.putExtra(SystemMessages.USER_ID, user_id);
                 myIntent.putExtra("znap_id", znap_id);
                 myIntent.putExtra("group_id", group_id);
+                myIntent.putExtra("znap_name", znap_name);
+                myIntent.putExtra("group_name", group_name);
                 startActivity(myIntent);
             }
         });
@@ -95,6 +98,7 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         group_id = servicesMap.get(spinnerForTypeOfService.getSelectedItemPosition());
+        group_name = spinnerForTypeOfService.getSelectedItem().toString();
 
     }
 
@@ -113,6 +117,7 @@ public class RegisteredToZnap extends AppCompatActivity implements AdapterView.O
         assert bundle != null;
         user_id = bundle.getInt(SystemMessages.USER_ID);
         znap_id = bundle.getInt(SystemMessages.ZNAP_ID);
+        znap_name = bundle.getString("znap_name");
     }
 
 }

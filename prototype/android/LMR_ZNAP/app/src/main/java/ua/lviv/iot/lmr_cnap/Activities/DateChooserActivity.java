@@ -17,6 +17,7 @@ import ua.lviv.iot.lmr_cnap.ServerUtilities.Request;
 import ua.lviv.iot.lmr_cnap.ClientUtilities.SystemMessages;
 import ua.lviv.iot.lmr_cnap.ServerUtilities.ZnapUtility;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
     Button bTreg;
     int user_id;
     int znap_id;
+    String group_name, znap_name, service_name;
     int service_id;
     int group_id;
     int date_id;
@@ -51,6 +53,7 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
         spinnerForDate = (Spinner) findViewById(R.id.spinnerForDate);
         getSpinnerForTime = (Spinner) findViewById(R.id.spinnerForTime);
         spinnerForDate.setOnItemSelectedListener(this);
+        getSpinnerForTime.setOnItemSelectedListener(this);
         bTreg = (Button) findViewById(R.id.buttonTOReg);
         bTreg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,9 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
                 myIntent.putExtra("service_id", service_id);
                 myIntent.putExtra("day", day);
                 myIntent.putExtra("hour", hour);
+                myIntent.putExtra("znap_name", znap_name);
+                myIntent.putExtra("group_name", group_name);
+                myIntent.putExtra("service_name", service_name);
                 startActivity(myIntent);
             }
         });
@@ -98,18 +104,26 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
     }
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        date_id = (int) spinnerForDate.getSelectedItemId();
-        List<String> timesList = new ArrayList<>();
-        for (int i = 0; i < dates.get(date_id).getTimes().size(); i++) {
-            timesList.add(dates.get(date_id).getTimes().get(i).getStart());
-        }
-        final ArrayAdapter<String> timeAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, timesList);
+        Spinner spinner = (Spinner) arg0;
+        if(spinner.getId() == R.id.spinnerForDate)
+        {
+            date_id = (int) spinnerForDate.getSelectedItemId();
+            List<String> timesList = new ArrayList<>();
+            for (int i = 0; i < dates.get(date_id).getTimes().size(); i++) {
+                timesList.add(dates.get(date_id).getTimes().get(i).getStart());
+            }
+            final ArrayAdapter<String> timeAdapter = new ArrayAdapter(getApplicationContext(), R.layout.spinner_item, timesList);
 
-        timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        timeAdapter.notifyDataSetChanged();
-        getSpinnerForTime.setAdapter(timeAdapter);
-        day = spinnerForDate.getSelectedItem().toString();
-        hour = getSpinnerForTime.getSelectedItem().toString();
+            timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            timeAdapter.notifyDataSetChanged();
+            getSpinnerForTime.setAdapter(timeAdapter);
+            day = spinnerForDate.getSelectedItem().toString();
+        }
+        else if(spinner.getId() == R.id.spinnerForTime)
+        {
+            hour = getSpinnerForTime.getSelectedItem().toString();
+        }
+
     }
 
     @Override
@@ -129,6 +143,10 @@ public class DateChooserActivity extends AppCompatActivity implements AdapterVie
         znap_id = bundle.getInt(SystemMessages.ZNAP_ID);
         group_id = bundle.getInt(SystemMessages.GROUP_ID);
         service_id = bundle.getInt(SystemMessages.SERVICE_ID);
+        znap_name = bundle.getString("znap_name");
+        group_name = bundle.getString("group_name");
+        service_name = bundle.getString("service_name");
+
     }
 
 }

@@ -34,6 +34,7 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
     int service_id;
     int group_id;
 
+    String group_name, znap_name, service_name;
     private static Request request;
     List<ServiceChooserAPI> services;
     List<String> servicesList;
@@ -59,6 +60,9 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
                 myIntent.putExtra("znap_id", znap_id);
                 myIntent.putExtra("service_id", service_id);
                 myIntent.putExtra("group_id", group_id);
+                myIntent.putExtra("znap_name", znap_name);
+                myIntent.putExtra("group_name", group_name);
+                myIntent.putExtra("service_name", service_name);
                 startActivity(myIntent);
             }
         });
@@ -96,6 +100,7 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
 
     public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         service_id = servicesMap.get(spinnerForService.getSelectedItemPosition());
+        service_name = spinnerForService.getSelectedItem().toString();
     }
 
     @Override
@@ -114,6 +119,8 @@ public class ServiceChooserActivity extends AppCompatActivity implements Adapter
         user_id = bundle.getInt(SystemMessages.USER_ID);
         znap_id = bundle.getInt(SystemMessages.ZNAP_ID);
         group_id = bundle.getInt(SystemMessages.GROUP_ID);
+        znap_name = bundle.getString("znap_name");
+        group_name = bundle.getString("group_name");
     }
 
 }
