@@ -110,7 +110,7 @@
         android:background="#E0E0E0"
         android:ems="10"
         android:hint="  Прізвище"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences"
         android:paddingLeft ="10dp" />
 
     <EditText
@@ -127,7 +127,7 @@
         android:background="#E0E0E0"
         android:ems="10"
         android:hint="  Ім'я"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences"
         android:paddingLeft ="10dp"/>
 
     <EditText
@@ -145,7 +145,7 @@
         android:background="#E0E0E0"
         android:ems="10"
         android:hint="  По-батькові"
-        android:inputType="textPersonName"
+        android:inputType="textCapSentences"
         android:paddingLeft ="10dp"/>
 
     <com.lamudi.phonefield.PhoneInputLayout
