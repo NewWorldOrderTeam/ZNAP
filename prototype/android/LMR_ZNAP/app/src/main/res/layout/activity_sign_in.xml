@@ -97,7 +97,7 @@
         android:layout_width="200dp"
         android:layout_height="55dp"
 
-        android:layout_above="@+id/encodedField"
+        android:layout_above="@+id/originalField"
         android:layout_centerHorizontal="true"
         android:layout_weight="1"
         android:text="Увійти"
@@ -112,8 +112,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tPrivacyPolicyLink"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/tPasswordRecoveryLink"
+        android:layout_alignStart="@+id/tPasswordRecoveryLink"
         android:layout_gravity="right"
+        android:layout_marginBottom="6dp"
         android:text="Зареєструватися"
         android:textColor="@color/colorNonActive"
         tools:layout_editor_absoluteX="169dp"
@@ -124,9 +126,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="right"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
         android:text="Privacy Policy"
         android:textColor="@color/colorNonActive"
         tools:layout_editor_absoluteX="169dp"
@@ -173,6 +174,7 @@
         android:layout_above="@+id/tSignUpLink"
         android:layout_alignEnd="@+id/bSignIn"
         android:layout_alignRight="@+id/bSignIn"
+        android:layout_marginBottom="7dp"
         android:text="Не маєте облікового запису ?" />
 
     <ImageView
