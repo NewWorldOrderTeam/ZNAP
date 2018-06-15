@@ -17,83 +17,22 @@ public class GraphLabelInitializer {
 
 
     public void initializeGraphic(GraphView graph,List<QueueStateAPI> queueStateList) {
-        BarGraphSeries<DataPoint> firstLabel = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(1, queueStateList.get(0).getCount()),
 
-        });
-        firstLabel.setColor(Color.rgb(37,201,3));
-        firstLabel.setSpacing(0);
-        firstLabel.setAnimated(true);
-        firstLabel.setDrawValuesOnTop(true);
-        firstLabel.setValuesOnTopColor(Color.BLACK);
-        graph.addSeries(firstLabel);
-        BarGraphSeries<DataPoint> secondLabel = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(2, queueStateList.get(1).getCount()),
+        for(int i=0; i<queueStateList.size(); i++){
+            BarGraphSeries<DataPoint> label = new BarGraphSeries<>(new DataPoint[]{
+                    new DataPoint(i+1, queueStateList.get(i).getCount()),
 
-        });
-        secondLabel.setColor(Color.rgb(17,123,225));
-        secondLabel.setSpacing(0);
-        secondLabel.setAnimated(true);
-        secondLabel.setDrawValuesOnTop(true);
-        secondLabel.setValuesOnTopColor(Color.BLACK);
-        graph.addSeries(secondLabel);
-        BarGraphSeries<DataPoint> thirdLabel = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(3, queueStateList.get(2).getCount()),
+            });
+            String[] rgb = queueStateList.get(i).getColor().split(",");
+            label.setColor(Color.rgb(Integer.parseInt(rgb[0]), Integer.parseInt(rgb[1]), Integer.parseInt(rgb[2])));
+            label.setSpacing(0);
+            label.setAnimated(true);
+            label.setDrawValuesOnTop(true);
+            label.setValuesOnTopColor(Color.BLACK);
+            graph.addSeries(label);
+            label.setTitle(queueStateList.get(i).getName());
 
-        });
-        thirdLabel.setColor(Color.rgb(106,110,112));
-        thirdLabel.setSpacing(0);
-        thirdLabel.setAnimated(true);
-        thirdLabel.setDrawValuesOnTop(true);
-        thirdLabel.setValuesOnTopColor(Color.BLACK);
-        graph.addSeries(thirdLabel);
-        BarGraphSeries<DataPoint> fourthLabel = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(4, queueStateList.get(3).getCount()),
-
-        });
-        fourthLabel.setColor(Color.rgb(219,87,0));
-        fourthLabel.setSpacing(0);
-        fourthLabel.setAnimated(true);
-        fourthLabel.setDrawValuesOnTop(true);
-        fourthLabel.setValuesOnTopColor(Color.BLACK);
-        graph.addSeries(fourthLabel);
-        BarGraphSeries<DataPoint> fifthLabel = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(5, queueStateList.get(4).getCount()),
-
-        });
-        fifthLabel.setColor(Color.rgb(204,51,51));
-        fifthLabel.setSpacing(0);
-        fifthLabel.setAnimated(true);
-        fifthLabel.setDrawValuesOnTop(true);
-        fifthLabel.setValuesOnTopColor(Color.BLACK);
-        graph.addSeries(fifthLabel);
-        BarGraphSeries<DataPoint> sixthLabel = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(6, queueStateList.get(5).getCount()),
-
-        });
-        sixthLabel.setColor(Color.rgb(98,4,187));
-        sixthLabel.setSpacing(0);
-        sixthLabel.setAnimated(true);
-        sixthLabel.setDrawValuesOnTop(true);
-        sixthLabel.setValuesOnTopColor(Color.BLACK);
-        graph.addSeries(sixthLabel);
-        BarGraphSeries<DataPoint> seventhLabel = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(7, queueStateList.get(6).getCount()),
-
-        });
-        seventhLabel.setColor(Color.rgb(231,117,22));
-        seventhLabel.setSpacing(0);
-        seventhLabel.setAnimated(true);
-        seventhLabel.setDrawValuesOnTop(true);
-        seventhLabel.setValuesOnTopColor(Color.BLACK);
-        graph.addSeries(seventhLabel);
-        firstLabel.setTitle("Ч.Калини");
-        secondLabel.setTitle("Левицького");
-        thirdLabel.setTitle("пл.Ринок");
-        fourthLabel.setTitle("Хвильового");
-        fifthLabel.setTitle("Виговського");
-        sixthLabel.setTitle("Чупринки");
-        seventhLabel.setTitle("Шевченка");
+        }
     }
 
     public void setScalingForGraphic(GraphView graph){
