@@ -4,6 +4,7 @@ import ua.lviv.iot.lmr_cnap.Pojo.DateChooserAPI;
 import ua.lviv.iot.lmr_cnap.Pojo.QueueStateAPI;
 import ua.lviv.iot.lmr_cnap.Pojo.Rate;
 import ua.lviv.iot.lmr_cnap.Pojo.RecordToZnapAPI;
+import ua.lviv.iot.lmr_cnap.Pojo.RegistrationToCnap;
 import ua.lviv.iot.lmr_cnap.Pojo.ServiceChooserAPI;
 import ua.lviv.iot.lmr_cnap.Pojo.SuccessRegistrationAPI;
 import ua.lviv.iot.lmr_cnap.Pojo.TypeOfServiceAPI;
@@ -56,6 +57,9 @@ public interface Request {
 
     @GET("/api/v1.0/user/{user}/rate")
     Call<List<Rate>> getRateForUser(@Path("user") int userid);
+
+    @GET("/api/v1.0/user/{user}/history/")
+    Call<List<RegistrationToCnap>> getHistory(@Path("user") int userid);
 
     @GET("/api/v1.0/znap")
     Call<List<ZnapName>> getZnapNames();

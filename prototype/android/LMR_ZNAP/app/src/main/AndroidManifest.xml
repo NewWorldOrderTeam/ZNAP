@@ -182,6 +182,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="ua.lviv.iot.lmr_cnap.Activities.RegistrationHistoryActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.STATE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

@@ -75,6 +75,15 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(openSettingsActivity);
                 }
             });
+            findViewById(R.id.history).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent openRegistrationHistoryActivity = new Intent(ProfileActivity.this, RegistrationHistoryActivity.class);
+                    openRegistrationHistoryActivity.putExtra(SystemMessages.USER_ID, user_id);
+                    startActivity(openRegistrationHistoryActivity);
+                }
+            });
+
             request = ZnapUtility.generateRetroRequest();
             ProfileActivity.getApi().getInfo(user_id).enqueue(new Callback<User>() {
                 @Override
